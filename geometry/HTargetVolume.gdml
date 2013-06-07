@@ -1,0 +1,42 @@
+x<?xml version="1.0" encoding="UTF-8"?>
+<gdml xmlns:gdml="http://cern.ch/2001/Schemas/GDML" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="schema/gdml.xsd">
+
+<!--
+/***********************************************************
+Programmer: Valerie Gray
+Purpose:
+
+To define the Hydrogen gas target of the simulation
+
+H gas target
+
+Entry Conditions:
+Date:05-17-2013
+Modified:
+Assisted By:
+*********************************************************/
+-->
+
+
+
+<define>
+  <position name="H Target Position" x="0.0" y="0.0" z="0.0" unit="m"/>
+</define>
+
+<materials>
+</materials>
+
+<solids>
+  <tubs name="Htarget_tube" rmin="0.5" rmax="1" z="1" deltatphi="360" startphi="0" lunit="m" aunit="deg" /> 
+  <tubs name="Htarget_tube" rmin="0.5" rmax="1" z="1" deltatphi="360" startphi="0" lunit="m" aunit="deg" />
+</solids>
+
+<structure>
+
+  <volume name="" />
+
+</structure>
+
+
+</gdml>
+
