@@ -1,1 +1,41 @@
 Add stuff here :)
+
+=====================
+      README
+=====================
+
+Package:
+=====================
+    This software package, HMollerPolSimGeant4, is the Geant4 Simulation for the 
+  Hydrogen Moller Polarimeter which is a collaboration between Jefferson Lab in 
+  Newport News, VA, USA and Johannes Gutenberg University of Mainz in Mainz, 
+  Germany.
+
+
+Compiling:
+=====================
+
+Stand by for more information
+
+Documentation:
+=====================
+
+Well here is some.  More to come.
+
+Usage:
+=====================
+
+    Well the use of this will be to run the simulation for the Hydrogen Moller
+  Polarimeter.  
+
+Authors:
+=====================
+
+  Valerie Gray, vmgray@email.wm.edu
+  
+Copyright:
+=====================
+
+  We don't have one yet.
+
+Thank you for reading me!
