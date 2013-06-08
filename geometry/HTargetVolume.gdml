@@ -1,4 +1,4 @@
-x<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <gdml xmlns:gdml="http://cern.ch/2001/Schemas/GDML" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="schema/gdml.xsd">
 
 <!--
@@ -12,23 +12,72 @@ H gas target
 
 Entry Conditions:
 Date:05-17-2013
-Modified:
+Modified: 06-08-2013
 Assisted By:
 *********************************************************/
 -->
 
-
-
 <define>
-  <position name="H Target Position" x="0.0" y="0.0" z="0.0" unit="m"/>
+
+  <!-- Define the constants for this file -->
+  <constant name="TWOPI" value="2.*pi"/>
+  
+  <!-- Define the quantities that will be used in this file -->
+  <quantity name="HTarget_MinRadius" 
+    type="length" 
+    value = "0.5" 
+    unit = "m" />
+  
+  <quantity name="HTarget_MaxRadius" 
+    type="length" 
+    value = "1.0" 
+    unit = "m" />
+  
+  <quantity name="HTarget_Z_Length" 
+    type="length" 
+     value = "10" 
+     unit = "m" />
+  
+  <quantity name="HTarget_StartPhi" 
+    type="angle" 
+    value = "0" 
+    unit = "rad"/>
+    
+  <quantity name="HTarget_EndPhi" 
+    type="angle" 
+    value = "TWOPI" 
+    unit = "rad"/>
+    
+  <quantity name="HTarget_AlCell_MaxRadius" 
+    type="length" 
+    value = "1.1" 
+    unit = "m" />
+  
+  <!-- define positions of the target in this file -->
+  <position name="H Target Position" 
+    x="0.0" 
+    y="0.0" 
+    z="0.0" 
+    unit="m"/>
 </define>
 
 <materials>
 </materials>
 
 <solids>
-  <tubs name="Htarget_tube" rmin="0.5" rmax="1" z="1" deltatphi="360" startphi="0" lunit="m" aunit="deg" /> 
-  <tubs name="Htarget_tube" rmin="0.5" rmax="1" z="1" deltatphi="360" startphi="0" lunit="m" aunit="deg" />
+  <tubs name="Htarget_tube" 
+    rmin="HTarget_MinRadius" 
+    rmax="HTarget_MaxRadius"
+    z="HTarget_Z_Length" 
+    starttphi="HTarget_StartPhi" 
+    deltaphi="HTarget_EndPhi"/> 
+  
+  <tubs name="Htarget_AlCase_tube" 
+    rmin="HTarget_MaxRadius" 
+    rmax="HTarget_AlCase_MaxRadius"
+    z="HTarget_Z_Length" 
+    starttphi="HTarget_StartPhi" 
+    deltaphi="HTarget_EndPhi"/>   
 </solids>
 
 <structure>
