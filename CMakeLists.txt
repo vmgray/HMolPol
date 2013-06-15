@@ -2,7 +2,7 @@
 cmake_minimum_required(VERSION 2.6.0 FATAL_ERROR)
 
 # Name of this project
-project(QweakSimG4)
+project(HMollerPolGeant4)
 
 # Add the project include directory and put all source files in my_project_sources
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)

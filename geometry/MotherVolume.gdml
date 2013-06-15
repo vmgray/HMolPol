@@ -1,12 +1,14 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
-<gdml xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="schema/gdml.xsd">
+<?xml version="1.0" encoding="UTF-8"?>
+<gdml xmlns:gdml="http://cern.ch/2001/Schemas/GDML" <!-- include GDML namespace -->
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" <!-- XML Schema instance Namespace -->
+      xsi:noNamespaceSchemaLocation="schema/gdml.xsd">  <!-- GDML Schema Location -->
 
 <!--
 /***********************************************************
 Programmer: Valerie Gray
 Purpose:
 
-To define the constuction of mother volume an 
+To define the construction of mother volume an 
 simulation.  They include:
 
 World
@@ -14,25 +16,77 @@ H gas target
 
 Entry Conditions:
 Date:05-17-2013
-Modified: 5-22-2013
+Modified: 06-12-2013
 Assisted By:
 *********************************************************/ 
 -->
 
   <!-- All definitions: constants, positions, rotations, scales
-       etc. that will be used in this GDML file -->
+        etc. that will be used in this GDML file -->
   <define>
-       <constant name "World_X_length" value = "5" unit = "m" />
-       <constant name "World_Y_length" value = "5" unit = "m" />
-       <constant name "World_Z_length" value = "10" unit = "m" />
-       <position name="H gas target" x="0" y="0" z="0"/>
+    
+    <!-- Define the quantities that will be used in this file 
+      This might be wrong and these need to be constants... -->
+    
+    <!-- X length of the "World" or the experimental hall -->
+    <quantity name "World_X_length" 
+      value = "5" 
+      unit = "m" />
+     
+    <!-- Y length of the "World" or the experimental hall -->   
+    <quantity name "World_Y_length" 
+      value = "5" 
+      unit = "m" />
+
+    <!-- X length of the "World" or the experimental hall -->
+    <quantity name "World_Z_length" 
+      value = "10" 
+      unit = "m" />
+
+    <!-- position of the Hydrogen gas target (and all its parts) in the "World" -->
+    <position name="HGasTargetCenter" 
+      x="0" 
+      y="0" 
+      z="0"/>
+
   </define>
 
   <!-- usually define materials here ... I am hoping to do that in another way -->
+  <materials>
+    <file name="materials.gdml"/>
+    <materialref ref="Air"/>
+  </materials>
 
   <solids>
-       <box lunit="m" name="MotherVolume" x="5" y="5" z="10"/>
+
+    <box name="MotherVolumeBox" 
+      x="World_X_length" 
+      y="World_Y_length" 
+      z="World_Z_length"/>
+
   </solids>
 
-  <sturcture>
+  <structure>
+  
+    <!-- Define the logical mother volume -->
+    <volume name="logicalMotherVol">
+      <materialref ref ="Air"/>
+      <solidref ref="MotherVolumeBox"/>
+    
+      <-- Add in all the daughter geometries, these are all written in 
+          different files, so reference the files. -->
+      <physvol>
+        <file name="geometry/HTargetVolume.gdml"/>
+        <positionref ref="HGasTargetCenter"/>
+      </physvol>
+    
+    </volume>
+  </structure>
 
+  <!-- I am not sure what all this does, sets up something for the implementation
+       to the World -->
+  <setup name="ExperimentalHall" version="1.0">
+    <world ref="logicalMotherVol">
+  </setup>
+
+</gdml>

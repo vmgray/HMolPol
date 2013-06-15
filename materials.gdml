@@ -22,13 +22,15 @@ Assisted By:
 
 <materials>
 
-  <material name "Air" formula = "G4_Air">
+  <material name="Air" formula="G4_Air">
   </material>
 
-  <material name "H gas" formula = "G4_H">
+  <material name="Hgas" formula="G4_H">
   </material>
 
-  <material name "Vacuum">
+  <material name="Al" formula="G4_Al"
+  
+  <material name="Vacuum">
        <T unit="K" value="2.73"/>
        <P unit="pascal" value="3e-18"/>
        <D unit="g/cm3" value="1e-25"/>

@@ -1,5 +1,13 @@
-This is just and introduction to the general layout of a GDML document.  
+Programmer: Valerie Gray
+Purpose:
 
+This is just and introduction to the general layout of a GDML document.
+
+Date:05-17-2013
+Modified: 06-12-2013 
+-------------------------------------------
+
+A GDML is based off of the XML language.  It is developed for use in GEANT4.
 A good starting website is http://gdml.web.cern.ch/GDML/
 
 The document will start with the XML Declaration:
@@ -17,24 +25,32 @@ This will be done by using the following few lines:
 Next is the declaration of the constants, positions, rotations, scaling, 
 variables, quantities, and matrices.
     <define>
-    ...
+     ...
     </define>
     
 Followed by the materials.  Materials can be elements, materials, isotopes,
 mixtures, etc.  Materials will only be referenced by solids
     <materials>
-    ...
+     ...
     </materials>
     
 Then define all the solids that will be used in THIS geometry file.  These 
 solids can be boxes, tubs, cones, etc.
     <solids>
-    ...
+     ...
     </solids>
     
 The final section is the structure section.  This is where one places the 
-volumes.  Physical volumes are placed in logical volumes with specific 
+volumes, defines there material.  Physical volumes are placed in logical volumes with specific 
 positions, rotations, and scales.  
     <structure>
     ...
     </structure>
+
+Specify the top volume
+    <setup name="">
+     ...
+    </setup>
+    
+End the file by closing out the gdml part by
+    </gdml>

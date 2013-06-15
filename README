@@ -6,6 +6,7 @@ Add stuff here :)
 
 Package:
 =====================
+
     This software package, HMollerPolSimGeant4, is the Geant4 Simulation for the 
   Hydrogen Moller Polarimeter which is a collaboration between Jefferson Lab in 
   Newport News, VA, USA and Johannes Gutenberg University of Mainz in Mainz, 
@@ -20,7 +21,13 @@ Stand by for more information
 Documentation:
 =====================
 
-Well here is some.  More to come.
+Well here is some.  More to come.  Even more in comments :)
+
+IntroToGDMLLayout - This file is introduction to the GDML layout for geometry 
+  files.  For more information the following web pages might be useful:
+     - http://gdml.web.cern.ch/GDML/
+     - http://gdml1.web.cern.ch/gdml1/doc/g4gdml_howto.html
+     - http://www.gphysics.net/index.php/geant4/geant4-gdml-format
 
 Usage:
 =====================
@@ -31,11 +38,12 @@ Usage:
 Authors:
 =====================
 
-  Valerie Gray, vmgray@email.wm.edu
+  Valerie Gray, vmgray@email.wm.edu - College of William and Mary
   
 Copyright:
 =====================
 
   We don't have one yet.
+
 
 Thank you for reading me!
