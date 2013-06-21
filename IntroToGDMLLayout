@@ -54,3 +54,9 @@ Specify the top volume
     
 End the file by closing out the gdml part by
     </gdml>
+    
+---------------------------------------------
+A few things to keep in mind:
+  - remember to put your units in definitions, and positions
+  - with pressure you can not use Torr as a unit - gdml will break
+  - comments <!-- --> can't go inside a tag
