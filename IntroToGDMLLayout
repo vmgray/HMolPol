@@ -58,5 +58,14 @@ End the file by closing out the gdml part by
 ---------------------------------------------
 A few things to keep in mind:
   - remember to put your units in definitions, and positions
+    - you use definitions in other definitions (which is good for objects 
+      nested in other objects)  
   - with pressure you can not use Torr as a unit - gdml will break
   - comments <!-- --> can't go inside a tag
+  - to use NIST variable
+    - in the detector construction before fGDMLParser->Read(fDetFileName)
+     - fNistManager = G4NistManager::Instance();
+     - fNistManager->SetVerbose(1);
+     - fNistManager->FindOrBuildMaterial("G4_Al");
+    - however you still must have D,P,T still defined (This seams right 
+      but I am not why or it over rides what is there) 
