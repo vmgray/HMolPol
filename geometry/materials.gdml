@@ -1,0 +1,39 @@
+<!-- /***********************************************************
+Programmer: Valerie Gray
+Purpose:
+
+To define the materials that will be used in this simulation
+
+These will only be the non-NIST variables materials, the NIST variables
+are defined in the typical Geant4 way in the HMollerPolDetectorConstrution.cc
+file
+
+Entry Conditions: none
+Date: 05-21-2013
+Modified:
+Assisted By:
+********************************************************* -->
+
+<materials>
+
+ <!-- Non-NIST materials -->
+
+  <!-- Cold Atomic H gas as defined in  
+     /// as defined in Moller Polarimetry with Atomic Hydrogen Targets 
+     by E.~Chudakov and V.~Luppov(long)--> 
+  <material name="Cold_Atomic_HGas" Z="1">
+    <T unit="K" value="0.3"/>               <!-- pg 9 -->
+    <P unit="pascal" value="1.33e-13"/>     <!-- 1e-15 Torr in paper pg 15 -->
+    <D unit="1/cm3" value="3e15"/>          <!-- pg 10 -->
+    <atom unit="g/mole" value="1.01"/>
+  </material>
+
+  <!-- Not NIST variables for vacuum so I have this-->
+  <material name="Vacuum" Z="1">
+    <T unit="K" value="2.73"/>
+    <P unit="pascal" value="3e-18"/>
+    <D unit="g/cm3" value="1e-25"/>
+    <atom unit="g/mole" value="1.01"/>
+  </material>
+
+</materials>
