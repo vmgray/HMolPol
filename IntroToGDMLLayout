@@ -60,12 +60,14 @@ A few things to keep in mind:
   - remember to put your units in definitions, and positions
     - you use definitions in other definitions (which is good for objects 
       nested in other objects)  
-  - with pressure you can not use Torr as a unit - gdml will break
+  - with pressure you can not use Torr as a unit - GDML will break
   - comments <!-- --> can't go inside a tag
   - to use NIST variable
-    - in the detector construction before fGDMLParser->Read(fDetFileName)
+    - all NIST variables must be defined in the DetectorConstruction.cc 
+      before fGDMLParser->Read(fDetFileName)
      - fNistManager = G4NistManager::Instance();
      - fNistManager->SetVerbose(1);
      - fNistManager->FindOrBuildMaterial("G4_Al");
-    - however you still must have D,P,T still defined (This seams right 
-      but I am not why or it over rides what is there) 
+    - Any NIST variables defined in DetectorConstruction.cc do not need to be 
+      defined in the materials.gdml file - this file is only to the user 
+      defined materials
