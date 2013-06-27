@@ -17,6 +17,7 @@
 #
 # File :
 /gui/addMenu   file File
+/gui/addButton file Initialize "/run/initialize"
 /gui/addButton file Exit "exit"
 #
 # Run menu :
