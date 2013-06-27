@@ -28,12 +28,4 @@ Assisted By:
     <atom unit="g/mole" value="1.01"/>
   </material>
 
-  <!-- Not NIST variables for vacuum so I have this-->
-  <material name="Vacuum" Z="1">
-    <T unit="K" value="2.73"/>
-    <P unit="pascal" value="3e-18"/>
-    <D unit="g/cm3" value="1e-25"/>
-    <atom unit="g/mole" value="1.01"/>
-  </material>
-
 </materials>
