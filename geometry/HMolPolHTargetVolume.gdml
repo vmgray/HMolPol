@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<gdml xmlns:gdml="http://cern.ch/2001/Schemas/GDML" <!-- include GDML namespace -->
-      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" <!-- XML Schema instance Namespace -->
-      xsi:noNamespaceSchemaLocation="schema/gdml.xsd">  <!-- GDML Schema Location -->
+<!DOCTYPE gdml[
+<!ENTITY materials SYSTEM "materials.gdml">
+]>
+
+<gdml xmlns:gdml="http://cern.ch/2001/Schemas/GDML" 
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+      xsi:noNamespaceSchemaLocation="schema/gdml.xsd">
+      <!-- include GDML namespace -->
+      <!-- XML Schema instance Namespace -->
+      <!-- GDML Schema Location -->
 
 <!--
 /***********************************************************
@@ -15,8 +22,8 @@ Al container which is around the H target
 
 Entry Conditions:
 Date:05-17-2013
-Modified: 06-12-2013
-Assisted By:
+Modified: 06-19-2013
+Assisted By: Wouter Deconinck
 *********************************************************/
 -->
 
@@ -35,20 +42,26 @@ Assisted By:
     <!-- Minimum radius of the Hydrogen Target -->
     <quantity name="HTarget_MinRadius" 
       type="length" 
-      value = "0.5" 
+      value = "0.0" 
       unit = "m" />
   
-    <!-- Maximum radius of the Hydrogen target --> 
+    <!-- Maximum radius of the Hydrogen target 
+        /// as defined in Moller Polarimetry with Atomic Hydrogen Targets 
+        by E.~Chudakov and V.~Luppov(long)--> 
+    <!-- pg 9 -->
     <quantity name="HTarget_MaxRadius" 
       type="length" 
-      value = "1.0" 
-      unit = "m" />
+      value = "2.0"                   
+      unit = "cm" />
     
-    <!-- Length of the Hydrogen Target -->
+    <!-- Length of the Hydrogen Target 
+        /// as defined in Moller Polarimetry with Atomic Hydrogen Targets 
+        by E.~Chudakov and V.~Luppov(long)-->
+    <!-- pg 9 -->
     <quantity name="HTarget_Z_Length" 
       type="length" 
-      value = "10" 
-      unit = "m" />
+      value = "45"                   
+      unit = "cm" />
   
     <!-- Define the starting Phi angle of the Hydrogen target -->
     <quantity name="HTarget_StartPhi" 
@@ -64,50 +77,45 @@ Assisted By:
     
     <!-- The above two values make the target a complete cylinder -->
     
+    <!-- Defining the minimum radius of the Al container around the H Target -->
+    <quantity name="HTarget_AlCell_MinRadius" 
+      value = "HTarget_MaxRadius" />
+  
     <!-- Defining the maximum radius of the Al container around the H Target -->
     <quantity name="HTarget_AlCell_MaxRadius" 
       type="length" 
-      value = "1.1" 
-      unit = "m" />
-  
-    <!-- Defining the minimum radius of the Al container around the H Target -->
-    <quantity name="HTarget_AlCell_MaxRadius" 
-      type="length" 
-      value = "1.2" 
-      unit = "m" />
+      value = "3.0" 
+      unit = "cm" />
     
     <!-- define positions of the target in this file -->
-    <position name="H Target Position" 
-      x="0.0" constant
+    <position name="HTarget_Position" 
+      x="0.0"
       y="0.0" 
       z="0.0" 
       unit="m"/>
 
   </define>
 
-  <!-- usually define materials here ... I am hoping to do that in another way -->
-  <materials>
-    <file name="materials.gdml"/>
-        <materialref ref="Hgas"/>
-    <materialref ref="Al"/>
-  </materials>
+  <!-- define materials here - this with the ENTITY up top pass the materials 
+      from the materials.gdml file -->
+  &materials;
 
   <solids>
 
     <!-- Define the tube of the Hydrogen target -->
-    <tubs name="Htarget_tube" 
+    <tube name="Htarget_tube" 
       rmin="HTarget_MinRadius" 
       rmax="HTarget_MaxRadius"
       z="HTarget_Z_Length" 
-      starttphi="HTarget_StartPhi" 
+      startphi="HTarget_StartPhi" 
       deltaphi="HTarget_EndPhi"/> 
   
     <!-- Define the tube of the Al case around the H target -->
-    <tubs name="Htarget_AlCase_tube" 
-      rmin="HTarget_MaxRadius" 
-      rmax="HTarget_AlCase_MaxRadius"
+    <tube name="Htarget_AlCase_tube" 
+      rmin="HTarget_AlCell_MinRadius" 
+      rmax="HTarget_AlCell_MaxRadius"
       z="HTarget_Z_Length" 
-      starttphi="HTarget_StartPhi" 
+      startphi="HTarget_StartPhi" 
       deltaphi="HTarget_EndPhi"/>   
 
   </solids>
@@ -117,20 +125,24 @@ Assisted By:
 
     <!-- Define the Target -->
     <volume name="HTarget"> 
-      <materialref ref="HGas"/>
+      <materialref ref="Cold_Atomic_HGas"/>
       <solidref ref="Htarget_tube"/>
+      <auxiliary auxtype="Color" auxvalue="green"/>
+      <auxiliary auxtype="Alpha" auxvalue="0.3"/>
     </volume>
   
     <!-- create the logical volume -->
-    <volume name="LogicHTarget">
-      <materialref ref="Al"/>
+    <volume name="logicalHTarget">
+      <materialref ref="G4_Al"/>
       <solidref ref="Htarget_AlCase_tube"/>
       
       <!-- Define the physical volume -->
       <physvol>
         <volumeref ref="HTarget"/>
-        <positionref ref="H Target Position"/>
+        <positionref ref="HTarget_Position"/>
       </physvol>
+      
+      <auxiliary auxtype="Color" auxvalue="gray"/>
     </volume>
 
   </structure>
@@ -138,9 +150,8 @@ Assisted By:
   <!-- I am not sure what all this does, sets up something for the implementation
        to the World -->
 
-  <setup name="HTarget" version="1.0">
-    <world ref="logicalHTarget">
+  <setup name="HTargetSetup" version="1.0">
+    <world ref="logicalHTarget"/>
   </setup>
 
 </gdml>
-
