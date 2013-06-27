@@ -16,14 +16,16 @@ class HMolPolSolenoidMagField: public G4MagneticField {
 
   public:
 
+    //create the constructor and deconstructor for the detector construction
     HMolPolSolenoidMagField();
     virtual ~HMolPolSolenoidMagField() { };
 
+    //function to get the field value
     void GetFieldValue(const G4double Point[4], G4double* Bfield) const;
 
   private:
     G4double Bz; //constant magnetic field in Z direction
-    G4double rmax_sq;
-    G4double zmax;
+    G4double rmax_sq; //constant the radius of the magnetic field
+    G4double zmax;  //constant for the max z length of the magnetic field
 
 };

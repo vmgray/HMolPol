@@ -28,9 +28,11 @@ class HMolPolPrimaryGeneratorAction : public G4VUserPrimaryGeneratorAction
     HMolPolPrimaryGeneratorAction();
     ~HMolPolPrimaryGeneratorAction();
 
+    //function to generate the primary electrons
     void GeneratePrimaries(G4Event* anEvent);
 
   private:
+    //the primary generation of the primary electrons
     G4ParticleGun* ParticleGun;
 };
 

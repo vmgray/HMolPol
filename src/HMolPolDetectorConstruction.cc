@@ -22,13 +22,23 @@
 #include "HMolPolHSolenoidMagField.hh"
 
 /********************************************
- * Function:
+ * Programmer: Valerie Gray
+ * Function: Construct
  *
  * Purpose:
  *
+ * To construct the geometry of the simulation.
+ *    The world
+ *    The H target and the Al cell
  *
+ * Define the NIST materials
+ *
+ * Take any auxiliary information form the GDML files and make apply it
+ *
+ * Read in and apply the magnetic field
  *
  * Global:
+ * Entry Conditions: none
  * Return:
  * Called By:
  * Date: 06-25-2013

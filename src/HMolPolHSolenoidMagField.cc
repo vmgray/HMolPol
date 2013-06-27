@@ -18,6 +18,7 @@
 #include "HMolPolHSolenoidMagField.hh"
 
 /********************************************
+ * Programmer: Valerie Gray
  * Function: HMolPolSolenoidMagField
  *
  * Purpose:
@@ -26,6 +27,7 @@
  * Sets the limits of were the field is and how strong it is
  *
  * Global:
+ * Entry Conditions: none
  * Return: nothing
  * Called By:
  * Date: 06-25-2013
@@ -37,11 +39,12 @@ HMolPolSolenoidMagField::HMolPolSolenoidMagField ()
   //Z B field value of 8 Tesla
   //as defined in Moller Polarimetry with Atomic Hydrogen Targets
   //by E.~Chudakov and V.~Luppov(long) pg 9
-  rmax_sq = std::pow(30.0*cm,2);
+  rmax_sq = std::pow(30.0*cm,2); //square of the radius for the field
   zmax = 25.0*cm;  //this is half of the z length that the field is in
 }
 
 /********************************************
+ * Programmer: Valerie Gray
  * Function: ~HMolPolSolenoidMagField
  *
  * Purpose:
@@ -49,6 +52,7 @@ HMolPolSolenoidMagField::HMolPolSolenoidMagField ()
  * To destruct the solenoid field
  *
  * Global:
+ * Entry Conditions: none
  * Return: nothing
  * Called By:
  * Date: 06-25-2013
@@ -61,11 +65,17 @@ HMolPolSolenoidMagField::HMolPolSolenoidMagField ()
 }*/
 
 /********************************************
- * Function: HMolPolPrimaryGeneratorAction
+ * Programmer: Valerie Gray
+ * Function: GetFieldValue
  *
  * Purpose:
  *
+ * to create the magnetic field
+ *
  * Global:
+ * Entry Conditions:
+ *      point[] - the point in the mother volume in which one is located
+ *      Bfield - the magnetic filed value
  * Return:
  * Called By:
  * Date: 06-25-2013

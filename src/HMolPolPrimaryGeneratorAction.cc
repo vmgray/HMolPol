@@ -28,6 +28,7 @@
  * Construction of the HMolPolPrimaryGeneratorAction
  *
  * Global:
+ * Entry Conditions: none
  * Return: Nothing
  * Called By:
  * Date: 06-25-2013
@@ -57,6 +58,7 @@ HMolPolPrimaryGeneratorAction::HMolPolPrimaryGeneratorAction()
  * Destruction of the HMolPolPrimaryGeneratorAction
  *
  * Global:
+ * Entry Conditions: none
  * Return: nothing
  * Called By:
  * Date: 06-25-2013
@@ -76,6 +78,7 @@ HMolPolPrimaryGeneratorAction::~HMolPolPrimaryGeneratorAction()
  * Sets up and generates the primaries
  *
  * Global:
+ * Entry Conditions: none
  * Return:
  * Called By:
  * Date: 06-25-2013

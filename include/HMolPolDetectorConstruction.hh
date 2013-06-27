@@ -23,6 +23,7 @@ class HMollerPolDetectorConstruction: public G4VUserDetectorConstruction
 
   public:
 
+    //Construct and the destructor of for the Detectro construction
     HMollerPolDetectorConstruction() {
       fGDMLParser = 0;
     };
@@ -30,6 +31,7 @@ class HMollerPolDetectorConstruction: public G4VUserDetectorConstruction
 
   public:
 
+    //Construct the volume??
     G4VPhysicalVolume* Construct();
 
 };
