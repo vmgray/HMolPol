@@ -71,3 +71,4 @@ A few things to keep in mind:
     - Any NIST variables defined in DetectorConstruction.cc do not need to be 
       defined in the materials.gdml file - this file is only to the user 
       defined materials
+  - all auxiliary information must be associated with the logical volume
