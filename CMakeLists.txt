@@ -2,7 +2,7 @@
 cmake_minimum_required(VERSION 2.6.0 FATAL_ERROR)
 
 # Name of this project
-project(HMollerPol)
+project(HMolPol)
 
 # Add the project include directory and put all source files in my_project_sources
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
@@ -22,9 +22,9 @@ find_package(Geant4 REQUIRED COMPONENTS gdml qt ui_all vis_all)
 include(${Geant4_USE_FILE})
 
 # Link the ROOT and Geant4 libraries
-add_library(HMollerPol SHARED ${my_project_sources})
-target_link_libraries(HMollerPol ${Geant4_LIBRARIES} ${ROOT_LIBRARIES})
+add_library(HMolPol SHARED ${my_project_sources})
+target_link_libraries(HMolPol ${Geant4_LIBRARIES} ${ROOT_LIBRARIES})
 
 # Add the target executable
-add_executable(hmollerpol HMollerPol.cc)
-target_link_libraries(hmollerpol ${Geant4_LIBRARIES} ${ROOT_LIBRARIES} HMollerPol)
+add_executable(hmolpol HMolPol.cc)
+target_link_libraries(hmolpol ${Geant4_LIBRARIES} ${ROOT_LIBRARIES} HMolPol)
