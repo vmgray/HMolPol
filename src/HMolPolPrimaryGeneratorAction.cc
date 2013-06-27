@@ -91,7 +91,7 @@ void HMolPolPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
   ParticleGun->SetParticleDefinition(particle);
   ParticleGun->SetParticleMomentumDirection(G4ThreeVector(0.0,0.0,-1.0));
   ParticleGun->SetParticleEnergy(200.*MeV);
-  ParticleGun->SetParticlePosition(G4ThreeVector(0.0*cm,0.0*cm,4.5*m));
+  ParticleGun->SetParticlePosition(G4ThreeVector(0.0*cm,0.0*cm,10.0*m));
   ParticleGun = ParticleGun;
 
   // finally : fire !!!
