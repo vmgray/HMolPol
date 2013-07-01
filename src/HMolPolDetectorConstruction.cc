@@ -45,7 +45,7 @@
  * Modified:
 ********************************************/
 
-G4VPhysicalVolume* HMollerPolDetectorConstruction::Construct()
+G4VPhysicalVolume* HMolPolDetectorConstruction::Construct()
 {
   G4cout << "In HMollerPolDetectorConstruction::Construct()..." << G4endl;
 
@@ -94,6 +94,7 @@ G4VPhysicalVolume* HMollerPolDetectorConstruction::Construct()
   //    detector type - if it is a sensitive detector
   //==========================
 
+//Wouter broke this - he needs to fix
   //I am not sure what anything from this point on does.  HELP!!
   const G4GDMLAuxMapType* auxmap = fGDMLParser->GetAuxMap();
 
