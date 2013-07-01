@@ -15,7 +15,7 @@
 #include <G4VPhysicalVolume.hh>
 #include <G4GDMLParser.hh>
 
-class HMollerPolDetectorConstruction: public G4VUserDetectorConstruction
+class HMolPolDetectorConstruction: public G4VUserDetectorConstruction
 {
   private:
 
@@ -23,11 +23,11 @@ class HMollerPolDetectorConstruction: public G4VUserDetectorConstruction
 
   public:
 
-    //Construct and the destructor of for the Detectro construction
-    HMollerPolDetectorConstruction() {
+    //Construct and the destructor of for the Detector construction
+    HMolPolDetectorConstruction() {
       fGDMLParser = 0;
     };
-    virtual ~HMollerPolDetectorConstruction() { };
+    virtual ~HMolPolDetectorConstruction() { };
 
   public:
 
