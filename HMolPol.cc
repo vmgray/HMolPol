@@ -64,7 +64,7 @@ int main (int argc, char** argv)
   // Detector geometry
   //how?? this works I have no idea
   //pass the geometry of the HMolPol to the Geant4 class G4VUserDetectorConstruction
-  G4VUserDetectorConstruction* detector = new HMollerPolDetectorConstruction();
+  G4VUserDetectorConstruction* detector = new HMolPolDetectorConstruction();
   // give the run manager the geometry
   runManager->SetUserInitialization(detector);
 
