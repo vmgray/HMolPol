@@ -112,22 +112,61 @@ G4VPhysicalVolume* HMolPolDetectorConstruction::Construct()
       G4cout << "--> Type: " << (*vit).type
           << ", value: "   << (*vit).value << std::endl;
 
+      // Support for the auxiliary tag "Visibility" that can be
+      // "true" to show the volume
+      // "false" to hide the volume
+      // "wireframe" to show the volume as wireframe only
+      if ((*vit).type == "Visibility") {
+        G4Colour colour(1.0,1.0,1.0);
+        // get old color
+        const G4VisAttributes* visAttribute_old = ((*iter).first)->GetVisAttributes();
+        if (visAttribute_old)
+          colour = visAttribute_old->GetColour();
+        // create new visibility attributes
+        G4VisAttributes visAttribute_new(colour);
+        if ((*vit).value == "true")
+          visAttribute_new.SetVisibility(true);
+        if ((*vit).value == "false")
+          visAttribute_new.SetVisibility(false);
+        if ((*vit).value == "wireframe")
+          visAttribute_new.SetForceWireframe(false);
+        // set new visibility attributes
+        ((*iter).first)->SetVisAttributes(visAttribute_new);
+      }
+
+      // Support for the auxiliary tag "Color" that can be any of black,
+      // blue, brown, cyan, gray, green, grey, magenta, red, white, yellow
       if ((*vit).type == "Color") {
-        G4Colour colour(1.0,0.0,0.0);
+        G4Colour colour(1.0,1.0,1.0);
+        // get requested color, if it exists
         if (G4Colour::GetColour((*vit).value, colour)) {
           G4cout << "Setting color to " << (*vit).value << "." << G4endl;
-          G4VisAttributes* visAttribute = new G4VisAttributes(colour);
+          // create new visibility attributes
+          G4VisAttributes visAttribute(colour);
+          // set new visibility attributes
           ((*iter).first)->SetVisAttributes(visAttribute);
         } else {
           G4cout << "Colour " << (*vit).value << " is not known." << G4endl;
         }
       }
 
+      // Support for the auxiliary tag "Alpha" to set opacity,
+      // a value of 0.0 is fully transparent, 1.0 is fully opaque
       if ((*vit).type == "Alpha") {
+        G4Colour colour(1.0,1.0,1.0);
+        // get old color
         const G4VisAttributes* visAttribute_old = ((*iter).first)->GetVisAttributes();
-        G4Colour colour_old = visAttribute_old->GetColour();
-        G4Colour colour_new(colour_old.GetRed(), colour_old.GetGreen(), colour_old.GetBlue(), 0.5);
-        G4VisAttributes* visAttribute_new = new G4VisAttributes(colour_new);
+        if (visAttribute_old)
+          colour = visAttribute_old->GetColour();
+        // create new color with alpha channel (TODO input not checked)
+        G4Colour colour_new(
+            colour.GetRed(),
+            colour.GetGreen(),
+            colour.GetBlue(),
+            std::atof((*vit).value.c_str()));
+        // create new visibility attributes
+        G4VisAttributes visAttribute_new(colour_new);
+        // set new visibility attributes
         ((*iter).first)->SetVisAttributes(visAttribute_new);
       }
     }
