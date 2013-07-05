@@ -1,0 +1,7 @@
+/**
+
+\mainpage The mainpage documentation
+
+
+Events are generated in HMolPolPrimaryGeneratorAction::GeneratePrimaries.
+*/
