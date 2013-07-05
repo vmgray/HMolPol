@@ -1,7 +1,80 @@
 /**
 
-\mainpage The mainpage documentation
+\mainpage Welcome to \b HMolPol!
 
+\section Introduction
+
+This software package, HMollerPol, is the Geant4 Simulation for the 
+Hydrogen Moller Polarimeter which is a collaboration between Jefferson Lab in 
+Newport News, VA, USA and Johannes Gutenberg University of Mainz, Germany.
+
+Please meander at your leasure.
+
+\section sec_useage Usage 
+
+Well the use of this will be to run the simulation for the Hydrogen Moller
+  Polarimeter.
+
+\section sec_documentation Documentation
+
+\par Geometry 
+
+This simulation makes use of <b>GDML</b> (Geant4 version of XML) to white its 
+geometries.  It is quite nice.  
+
+<b> IntroToGDMLLayout:</b> This file is introduction to the GDML layout for geometry 
+files and is located in the main directory 
+For more information the following web pages might be useful:
+  <ul>
+    <li> \c http://gdml.web.cern.ch/GDML/
+    <li> \c http://gdml1.web.cern.ch/gdml1/doc/g4gdml_howto.html
+    <li> \c http://www.gphysics.net/index.php/geant4/geant4-gdml-format
+  </ul>
+ 
+\section sec_compiling Compiling and Running HMolPol 
+
+\subsection subsec_compiling Compiling
+How to compile your code
+  <ul>
+    <li> \c In your directory where you have the HMollerPol simulation make 
+    a folder called \b build.  
+    <li> \c In this directory run the command <b> cmake .. </b> 
+    <li>  \c Then run the command \b make
+    <ul>
+      <li> This will create the excitable \b hmolpol
+    </ul>
+  </ul>
+  
+\subsection subsec_running Running
+
+To run HMolPol interactively with the GUI and no macro:
+  <ul>
+    <li> in the main directory run the command <b> build/hmolpol </b>
+  </ul> 
+  
+To run HMolPol interactively with the GUI and a macro:
+  <ul>
+    <li> in the main directory run the command 
+        <b> build/hmolpol <i>/path/to/macro.mac</i> </b>
+  </ul> 
+
+\section sec_autors Authors:
+
+<ul>
+  <li>  Valerie Gray
+  <ul>
+    <li> vmgray@email.wm.edu - College of William and Mary
+  </ul>
+</ul>
+  
+\section sec_copyright Copyright:
+
+  We don't have one yet.
+
+
+\section sec_layout General layout and function
+
+Geometry is read in and constructed in HMolPolDetectorConstruction::Construct.  
 
 Events are generated in HMolPolPrimaryGeneratorAction::GeneratePrimaries.
 */
