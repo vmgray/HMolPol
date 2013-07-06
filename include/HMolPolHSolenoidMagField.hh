@@ -1,5 +1,5 @@
-/**
- * Programmer: Valerie Gray
+/********************************************
+* Programmer: Valerie Gray
  * Purpose:
  *
  * This is header file which for the Solenoid magnetic field around
@@ -7,9 +7,10 @@
  *
  * Entry Conditions:
  * Date: 06-25-2013
- * Modified:
+ * Modified: 07-06-2013
  * Assisted By: Wouter Deconinck
 ********************************************/
+
 #include <G4MagneticField.hh>
 
 class HMolPolSolenoidMagField: public G4MagneticField {
@@ -24,8 +25,8 @@ class HMolPolSolenoidMagField: public G4MagneticField {
     void GetFieldValue(const G4double Point[4], G4double* Bfield) const;
 
   private:
-    G4double Bz; //constant magnetic field in Z direction
-    G4double rmax_sq; //constant the radius of the magnetic field
-    G4double zmax;  //constant for the max z length of the magnetic field
+    G4double Bz; ///< constant magnetic field in Z direction
+    G4double rmax_sq; ///< constant the radius of the magnetic field
+    G4double zmax;  ///< constant for the max z length of the magnetic field
 
 };

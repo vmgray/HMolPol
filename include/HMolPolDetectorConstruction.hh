@@ -6,9 +6,10 @@
  *
  * Entry Conditions:
  * Date: 06-15-2013
- * Modified:
+ * Modified: 07-06-2013
  * Assisted By: Wouter Deconinck
 ********************************************/
+
 
 //Geant4 includes
 #include <G4VUserDetectorConstruction.hh>
@@ -31,7 +32,7 @@ class HMolPolDetectorConstruction: public G4VUserDetectorConstruction
 
   public:
 
-    //Construct the volume??
-    G4VPhysicalVolume* Construct();
+    /// Construct the volume??
+    G4VPhysicalVolume* Construct();  ///< construct the physical volume
 
 };

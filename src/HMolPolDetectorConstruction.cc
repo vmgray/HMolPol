@@ -1,13 +1,18 @@
 /********************************************
- * Programmer: Valerie Gray
- * Purpose:
+ * \author <b>Programmer:</b> Valerie Gray
+ * \author <b>Assisted By:</b> Wouter Deconinck
  *
- * This is the file is in charge
+ * \brief <b>Purpose:</b> This is the file is in charge reading in the geometry
+ * of the simulations and therefore the polarimeter.  This is also sets any
+ * attributes of the objects in the simulations, and any magnetic fields.
  *
- * Entry Conditions:
- * Date: 06-15-2013
- * Modified:
- * Assisted By: Wouter Deconinck
+ * \date <b>Date:</b> 06-25-2013
+ * \date <b>Modified:</b> 07-06-2013
+ *
+ * \note <b>Entry Conditions:</b>
+ *
+ * \todo comment the comment blocks to get the how this is all put together
+ *
 ********************************************/
 
 //Geant4 specific includes
@@ -52,7 +57,7 @@ G4VPhysicalVolume* HMolPolDetectorConstruction::Construct()
   G4VPhysicalVolume *worldVolume;
 
   //for getting NIST materials
-  // WTFM is the G4NistManager do, I should make the name better too
+  /// \bug G4NistManager do, I should make the name better too
   G4NistManager* NistManager = G4NistManager::Instance();
   NistManager->SetVerbose(1);
   //add all the NIST materials we want to use
@@ -68,7 +73,7 @@ G4VPhysicalVolume* HMolPolDetectorConstruction::Construct()
     //why are you deleting the G4GDMLParser right away
     delete fGDMLParser;
   }
-  //then are you recreating the G4GDMLParser - this makes no sense
+  /// \todo then are you recreating the G4GDMLParser - this makes no sense
   fGDMLParser = new G4GDMLParser();
   fGDMLParser->Clear();
   //is this to check if the geometry overlaps?? - then why are then is there
@@ -78,8 +83,8 @@ G4VPhysicalVolume* HMolPolDetectorConstruction::Construct()
   //read in the geometry - by reading the Mother Volume
   ///all of the Geometry will be read in since they are all
   //MotherVolume.gdml uses all they other ones, they will all be read
-  // *CHANGE* so that HMolPolMotherVolume is not hard-coded and other geometries
-  // can be able to read in easily
+  /// \bug *CHANGE* so that HMolPolMotherVolume is not hard-coded and
+  /// other geometries can be able to read in easily
   fGDMLParser->Read("geometry/HMolPolMotherVolume.gdml");
 
   //the world volume is set as the world volume??
@@ -105,7 +110,7 @@ G4VPhysicalVolume* HMolPolDetectorConstruction::Construct()
       iter  = auxmap->begin();
       iter != auxmap->end(); iter++) {
     G4cout << "Volume " << ((*iter).first)->GetName()
-                          << " has the following list of auxiliary information: "<< G4endl;
+        << " has the following list of auxiliary information: "<< G4endl;
     for (G4GDMLAuxListType::const_iterator
         vit  = (*iter).second.begin();
         vit != (*iter).second.end(); vit++) {
@@ -119,7 +124,9 @@ G4VPhysicalVolume* HMolPolDetectorConstruction::Construct()
       if ((*vit).type == "Visibility") {
         G4Colour colour(1.0,1.0,1.0);
         // get old color
-        const G4VisAttributes* visAttribute_old = ((*iter).first)->GetVisAttributes();
+        const G4VisAttributes* visAttribute_old =
+            ((*iter).first)->GetVisAttributes();
+
         if (visAttribute_old)
           colour = visAttribute_old->GetColour();
         // create new visibility attributes
@@ -155,7 +162,9 @@ G4VPhysicalVolume* HMolPolDetectorConstruction::Construct()
       if ((*vit).type == "Alpha") {
         G4Colour colour(1.0,1.0,1.0);
         // get old color
-        const G4VisAttributes* visAttribute_old = ((*iter).first)->GetVisAttributes();
+        const G4VisAttributes* visAttribute_old =
+            ((*iter).first)->GetVisAttributes();
+
         if (visAttribute_old)
           colour = visAttribute_old->GetColour();
         // create new color with alpha channel (TODO input not checked)
@@ -177,8 +186,11 @@ G4VPhysicalVolume* HMolPolDetectorConstruction::Construct()
   // Add in the Magnetic field to world volume
   //==========================
 
+  /// \bug this is for the *simple* magnetic field - need to be updated to
+  /// something realistic and that might effect the following code
   //get the field??
-  HMolPolSolenoidMagField* HTargetSolenoidMagField = new HMolPolSolenoidMagField;
+  HMolPolSolenoidMagField* HTargetSolenoidMagField =
+       new HMolPolSolenoidMagField;
 
   //tell Geant 4 to use this field - how??
   G4FieldManager* HTargetSolenoidMagFieldMgr =
@@ -187,8 +199,8 @@ G4VPhysicalVolume* HMolPolDetectorConstruction::Construct()
   //set the field for the HTargetSolenoidFieldMgr
   HTargetSolenoidMagFieldMgr->SetDetectorField(HTargetSolenoidMagField);
 
-  //create the Chord finder (this is responsible for moving the particles
-  //through the field
+  //create the Chord finder (this is responsible for moving
+  // the particles through the field
   HTargetSolenoidMagFieldMgr->CreateChordFinder(HTargetSolenoidMagField);
 
 
