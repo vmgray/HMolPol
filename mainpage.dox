@@ -1,6 +1,6 @@
 /**
 
-\mainpage Welcome to \b HMolPol!
+\mainpage Welcome to <b>HMolPol</b>
 
 \section Introduction
 
@@ -58,7 +58,7 @@ To run HMolPol interactively with the GUI and a macro:
         <b> build/hmolpol <i>/path/to/macro.mac</i> </b>
   </ul> 
 
-\section sec_autors Authors:
+\section sec_authors Authors:
 
 <ul>
   <li>  Valerie Gray
@@ -71,10 +71,50 @@ To run HMolPol interactively with the GUI and a macro:
 
   We don't have one yet.
 
+\section sec_bugs Bugs
+
+See the bugs under the Related Pages link on Doxygen
+
+Global bugs we have are
+\bug make the necessary changes so that we are using GEANT4 units
+
+\section sec_todo To Do list
+
+See the to do list  under the Related Pages link on Doxygen
+
+\section sec_PhysicsList Physics List
+
+Some information on the Physics list in this simulations
+
+\subsection subsec_Mainz Mainz
+use the FTFP-BERT
+<ul>
+  <li> Website references
+  <ul>
+    <li> FTFP-BERT
+    <ul>
+      <li> http://geant4.cern.ch/support/proc_mod_catalog/physics_lists/hadronic/FTFP_BERT.html
+    </ul>
+    <li> FTFP 
+    <ul>
+      <li> http://geant4.cern.ch/support/proc_mod_catalog/physics_lists/hadronic/FTFP.html
+    </ul>
+  </ul>
+</ul>
+
+<b>Important:</b> 
+<ul>
+  <li>FTRP-BERT is replacing the LHEP physics list
+  <li>Standard EM processes are include in all physics list
+</ul>
+
+\bug FTFP_BERT may be no the right physics list for Mainz energy, but probably
+will be for JLab
 
 \section sec_layout General layout and function
 
 Geometry is read in and constructed in HMolPolDetectorConstruction::Construct.  
 
 Events are generated in HMolPolPrimaryGeneratorAction::GeneratePrimaries.
+
 */
