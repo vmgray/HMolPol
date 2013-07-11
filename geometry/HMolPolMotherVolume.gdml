@@ -58,12 +58,12 @@ Assisted By: Wouter Deconinck
       unit="m"/>
       
     <!-- position of the Dummy (and all its parts) in the "World" -->
-<!--    <position name="DummyCenter" 
+    <position name="DummyCenter" 
       x="0" 
       y="0" 
       z="3.0"
       unit="m"/>
--->
+
 
   </define>
 
@@ -94,17 +94,17 @@ Assisted By: Wouter Deconinck
         <positionref ref="HGasTargetCenter"/>
       </physvol>
   
-<!--      <physvol>
+      <physvol>
         <file name="geometry/dummy.gdml"/>
         <positionref ref="DummyCenter"/>
       </physvol>
--->
+
    
     </volume>
   </structure>
 
-  <!-- I am not sure what all this does, sets up something for the implementation
-       to the World -->
+  <!-- I am not sure what all this does, sets up something for the 
+       implementation to the World -->
   <setup name="ExperimentalHall" version="1.0">
     <world ref="logicalMotherVol"/>
   </setup>

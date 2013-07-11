@@ -34,7 +34,7 @@ Assisted By: Wouter Deconinck
      
     <!-- Define the constants for this file -->
     
-    <constant name="TWOPI" value="2.*pi"/>
+    <constant name = "TWOPI" value = "2.*pi"/>
   
     <!-- Define the quantities that will be used in this file 
       This might be wrong and these need to be constants... -->
@@ -147,8 +147,8 @@ Assisted By: Wouter Deconinck
 
   </structure>
 
-  <!-- I am not sure what all this does, sets up something for the implementation
-       to the World -->
+  <!-- I am not sure what all this does, sets up something for the 
+       implementation to the World -->
 
   <setup name="HTargetSetup" version="1.0">
     <world ref="logicalHTarget"/>
