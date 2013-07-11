@@ -28,3 +28,7 @@ target_link_libraries(HMolPol ${Geant4_LIBRARIES} ${ROOT_LIBRARIES})
 # Add the target executable
 add_executable(hmolpol HMolPol.cc)
 target_link_libraries(hmolpol ${Geant4_LIBRARIES} ${ROOT_LIBRARIES} HMolPol)
+
+# Update header file
+add_custom_command( OUTPUT  ${PROJECT_SOURCE_DIR}/include/gitinfo.hh always COMMAND ${PROJECT_SOURCE_DIR}/pullgitinfo.py ${PROJECT_SOURCE_DIR} )
+add_custom_target( gitinfo ALL DEPENDS ${PROJECT_SOURCE_DIR}/include/gitinfo.hh )
