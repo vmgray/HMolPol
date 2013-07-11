@@ -21,10 +21,21 @@
 #include <G4NistManager.hh>
 #include <G4FieldManager.hh>
 #include <G4TransportationManager.hh>
+#include <G4SDManager.hh>
+
+#include <fstream>
+/// \bug what is the above and what is a singleton?? it is everywhere and I
+/// can't heads or tails of it.
 
 //HMolPol includes
 #include "HMolPolDetectorConstruction.hh"
 #include "HMolPolHSolenoidMagField.hh"
+#include "HMolPolGenericDetector.hh"
+
+/// \bug what are these for and why are they defined here, how do they get
+/// there values of 200 and 500 respectively
+#define __DET_STRLEN 200  //maximum length of string of the detector name
+#define __MAX_DETS 500  //maximum number of sensitive detectors
 
 /********************************************
  * Programmer: Valerie Gray
@@ -60,11 +71,32 @@ G4VPhysicalVolume* HMolPolDetectorConstruction::Construct()
   /// \bug G4NistManager do, I should make the name better too
   G4NistManager* NistManager = G4NistManager::Instance();
   NistManager->SetVerbose(1);
-  //add all the NIST materials we want to use
-  NistManager->FindOrBuildMaterial("G4_Al");
-  NistManager->FindOrBuildMaterial("G4_AIR");
-  //this is vacuum
-  NistManager->FindOrBuildMaterial("G4_Galactic");
+
+  // Open file with NIST materials
+  std::ifstream nist_materials;
+  nist_materials.open("nist_materials.txt");
+  // Check whether materials file could be opened correctly
+  if (nist_materials.good()) {
+    //add all the NIST materials we want to use
+    std::string material;
+    // Loop over all lines in the file
+    while (! nist_materials.eof()) {
+      nist_materials >> material;
+      // Try to load the NIST material
+      G4bool success = NistManager->FindOrBuildMaterial(material);
+      // And complain if we can't find the material
+      if (! success) {
+        G4cout << "Material " << material << " not found!" << G4endl;
+      }
+    }
+  } else {
+    // If the file cannot be found, load only the vacuum
+    NistManager->FindOrBuildMaterial("G4_Galactic");
+    G4cout << "File nist_materials.txt not found.  "
+           << "Only loading NIST vacuum!" << G4endl;
+  }
+  // Close the file
+  nist_materials.close();
 
   //if the simulation is using GDML
   //why don't we need #include <G4GDMLParser.hh>
@@ -101,6 +133,7 @@ G4VPhysicalVolume* HMolPolDetectorConstruction::Construct()
 
 //Wouter broke this - he needs to fix
   //I am not sure what anything from this point on does.  HELP!!
+  /// \todo have someone (Wouter) help me figure what this all does
   const G4GDMLAuxMapType* auxmap = fGDMLParser->GetAuxMap();
 
   G4cout << "Found " << auxmap->size()
@@ -136,7 +169,7 @@ G4VPhysicalVolume* HMolPolDetectorConstruction::Construct()
         if ((*vit).value == "false")
           visAttribute_new.SetVisibility(false);
         if ((*vit).value == "wireframe")
-          visAttribute_new.SetForceWireframe(false);
+          visAttribute_new.SetForceWireframe(true);
         // set new visibility attributes
         ((*iter).first)->SetVisAttributes(visAttribute_new);
       }
@@ -181,6 +214,82 @@ G4VPhysicalVolume* HMolPolDetectorConstruction::Construct()
     }
   }
   G4cout << G4endl<< G4endl;
+
+/// \todo detector numbers?? do we need them?  How do these auxiliary tags work?
+
+  //==========================
+  // Sensitive detectors
+  //==========================
+/// this is all taken from remoll since that is what WD wanted me to do it work
+  /// via magic
+  char detectorname[__DET_STRLEN];
+  int retval;
+
+  G4int k=0;
+
+  G4GDMLAuxMapType::const_iterator iter;
+  G4GDMLAuxListType::const_iterator vit, nit;
+
+  G4cout << "Beginning sensitive detector assignment" << G4endl;
+
+  G4bool useddetnums[__MAX_DETS];
+  for( k = 0; k < __MAX_DETS; k++ ){useddetnums[k] = false;}
+  k = 0;
+
+  for( iter  = auxmap->begin(); iter != auxmap->end(); iter++) {
+      G4LogicalVolume* myvol = (*iter).first;
+      G4cout << "Volume " << myvol->GetName() << G4endl;
+
+      for( vit  = (*iter).second.begin(); vit != (*iter).second.end(); vit++) {
+          if ((*vit).type == "SensDet") {
+              G4String det_type = (*vit).value;
+
+              // Also allow specification of det number ///////////////////
+              int det_no = -1;
+              for( nit  = (*iter).second.begin(); nit != (*iter).second.end(); nit++) {
+                  if ((*nit).type == "DetNo") {
+                      det_no= atoi((*nit).value.data());
+                      useddetnums[det_no] = true;
+                  }
+              }
+              if( det_no <= 0 ){
+                  k = 1;
+                  while( useddetnums[k] == true && k < __MAX_DETS ){ k++; }
+                  if( k == __MAX_DETS ){
+                      G4cerr << __FILE__ << " line " << __LINE__
+                             << ": ERROR too many detectors" << G4endl;
+                      exit(1);
+                  }
+                  det_no = k;
+                  useddetnums[k] = true;
+              }
+              /////////////////////////////////////////////////////////////
+
+              retval = snprintf(detectorname, __DET_STRLEN,
+                  "hmolpol/det_%s", det_type.c_str());
+
+              assert( 0 < retval && retval < __DET_STRLEN ); // Ensure we're writing reasonable strings
+
+              G4SDManager* SDman = G4SDManager::GetSDMpointer();
+
+              G4VSensitiveDetector* thisdet =
+                  SDman->FindSensitiveDetector(detectorname);
+
+              if( thisdet == 0 ) {
+                  thisdet = new HMolPolGenericDetector(detectorname, det_no);
+                  G4cout << "  Creating sensitive detector " << det_type
+                      << " for volume " << myvol->GetName()
+                      <<  G4endl << G4endl;
+
+                  SDman->AddNewDetector(thisdet);
+              }
+
+              myvol->SetSensitiveDetector(thisdet);
+          }
+      }
+  }
+
+  G4cout << "Completed sensitive detector assignment" << G4endl;
 
   //==========================
   // Add in the Magnetic field to world volume

@@ -2,7 +2,7 @@
  * Programmer: Valerie Gray
  * Purpose:
  *
- * This is header file which for the detector construction.
+ * This is header file for the detector construction.
  *
  * Entry Conditions:
  * Date: 06-15-2013
