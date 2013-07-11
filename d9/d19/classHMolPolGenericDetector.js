@@ -9,7 +9,7 @@ var classHMolPolGenericDetector =
     [ "fHCID", "d9/d19/classHMolPolGenericDetector.html#acdc1b85533213d3c3fc15f447169a9da", null ],
     [ "fHitColl", "d9/d19/classHMolPolGenericDetector.html#af8a2807c4ff7a36b7f0adeaf776a703b", null ],
     [ "fSCID", "d9/d19/classHMolPolGenericDetector.html#a18e18588e33c8ddbd92917242742ea7f", null ],
-    [ "fSumColl", "d9/d19/classHMolPolGenericDetector.html#a1af34d103393501a9ff9cd715529809e", null ],
+    [ "fSumColl", "d9/d19/classHMolPolGenericDetector.html#a765bca6fce72f01e069f9b7061349f12", null ],
     [ "fSumMap", "d9/d19/classHMolPolGenericDetector.html#ae2fb89ee98e475da1f30cdc03be1fe32", null ],
     [ "fTrackSecondaries", "d9/d19/classHMolPolGenericDetector.html#a18504ab13ee4c46fde0d9d711bb51772", null ]
 ];

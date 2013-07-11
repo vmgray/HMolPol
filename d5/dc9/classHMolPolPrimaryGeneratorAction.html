@@ -45,6 +45,7 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Search');
     <ul class="tablist">
       <li><a href="../../index.html"><span>Main&#160;Page</span></a></li>
       <li><a href="../../pages.html"><span>Related&#160;Pages</span></a></li>
+      <li><a href="../../modules.html"><span>Modules</span></a></li>
       <li class="current"><a href="../../annotated.html"><span>Classes</span></a></li>
       <li><a href="../../files.html"><span>Files</span></a></li>
       <li>
@@ -93,7 +94,7 @@ $(document).ready(function(){initNavTree('d5/dc9/classHMolPolPrimaryGeneratorAct
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Pages</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Groups</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Pages</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -166,11 +167,11 @@ Private Attributes</h2></td></tr>
 <dd>
 <b>Modified:</b> 07-06-2013</dd></dl>
 <dl class="section note"><dt>Note</dt><dd><b>Entry Conditions:</b></dd></dl>
-<dl class="todo"><dt><b><a class="el" href="../../dd/da0/todo.html#_todo000010">Todo:</a></b></dt><dd><p class="startdd">comment the comment blocks to get the how this is all put together </p>
+<dl class="todo"><dt><b><a class="el" href="../../dd/da0/todo.html#_todo000011">Todo:</a></b></dt><dd><p class="startdd">comment the comment blocks to get the how this is all put together </p>
 <p>break into more then one file so that it is easier to follow </p>
 <p class="enddd">add in actual <b> incoming electrons </b> not just the ones after the interaction </p>
 </dd></dl>
-<dl class="todo"><dt><b><a class="el" href="../../dd/da0/todo.html#_todo000011">Todo:</a></b></dt><dd>have someone (Wouter) help me figure what this all does </dd></dl>
+<dl class="todo"><dt><b><a class="el" href="../../dd/da0/todo.html#_todo000012">Todo:</a></b></dt><dd>have someone (Wouter) help me figure what this all does </dd></dl>
 
 <p>Definition at line <a class="el" href="../../d9/dd1/HMolPolPrimaryGeneratorAction_8cc_source.html#l00047">47</a> of file <a class="el" href="../../d9/dd1/HMolPolPrimaryGeneratorAction_8cc_source.html">HMolPolPrimaryGeneratorAction.cc</a>.</p>
 <div class="fragment"><div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;{</div>
@@ -207,7 +208,7 @@ Private Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<dl class="todo"><dt><b><a class="el" href="../../dd/da0/todo.html#_todo000012">Todo:</a></b></dt><dd>have someone (Wouter) help me figure what this all does </dd></dl>
+<dl class="todo"><dt><b><a class="el" href="../../dd/da0/todo.html#_todo000013">Todo:</a></b></dt><dd>have someone (Wouter) help me figure what this all does </dd></dl>
 <dl class="section see"><dt>See Also</dt><dd>J. Arrington et al, 1992, A Moller Polarimeter for the MIT-Bates Storage Ring </dd></dl>
 
 <p>Definition at line <a class="el" href="../../d9/dd1/HMolPolPrimaryGeneratorAction_8cc_source.html#l00100">100</a> of file <a class="el" href="../../d9/dd1/HMolPolPrimaryGeneratorAction_8cc_source.html">HMolPolPrimaryGeneratorAction.cc</a>.</p>
@@ -331,48 +332,52 @@ Private Attributes</h2></td></tr>
 <div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;  G4double interaction_vertex_z_max = +22.5 * cm; <span class="comment">//half length of H target - *MAKE GLOBAL*</span></div>
 <div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;  G4double interaction_vertex_z = interaction_vertex_z_min +</div>
 <div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;        (interaction_vertex_z_max - interaction_vertex_z_min) * G4UniformRand();</div>
-<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;  <a class="code" href="../../d5/dc9/classHMolPolPrimaryGeneratorAction.html#a81ed4263f1bb7c2c433fc5d04869a7f1" title="will be generated over">fParticleGun</a>-&gt;SetParticlePosition(G4ThreeVector(x, interaction_vertex_y , z));</div>
-<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;</div>
-<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;</div>
-<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;  <span class="comment">// First Moller electron</span></div>
-<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;  <span class="keywordtype">double</span> interaction_vertex_mom_x1 = pperp*cos(phi_com);</div>
-<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;  <span class="keywordtype">double</span> interaction_vertex_mom_y1 = pperp*sin(phi_com);</div>
-<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;  <span class="keywordtype">double</span> interaction_vertex_mom_z1 = gamma_com*(ppar + e_com*beta_com); <span class="comment">// boosted</span></div>
-<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;  <a class="code" href="../../d5/dc9/classHMolPolPrimaryGeneratorAction.html#a81ed4263f1bb7c2c433fc5d04869a7f1" title="will be generated over">fParticleGun</a>-&gt;SetParticleMomentumDirection(</div>
-<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;      G4ThreeVector(</div>
-<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;          interaction_vertex_mom_x1,</div>
-<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;          interaction_vertex_mom_y1,</div>
-<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;          interaction_vertex_mom_z1));</div>
-<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;</div>
-<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;  <span class="comment">// Kinetic energy of the particle = total energy - m = sqrt(p^2 + m^2) - m</span></div>
-<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;  <span class="keywordtype">double</span> E_kin1 = sqrt(interaction_vertex_mom_x1*interaction_vertex_mom_x1 +</div>
-<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;      interaction_vertex_mom_y1*interaction_vertex_mom_y1 +</div>
-<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;      interaction_vertex_mom_z1*interaction_vertex_mom_z1 + m_e*m_e) - m_e;</div>
-<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;  <a class="code" href="../../d5/dc9/classHMolPolPrimaryGeneratorAction.html#a81ed4263f1bb7c2c433fc5d04869a7f1" title="will be generated over">fParticleGun</a>-&gt;SetParticleEnergy(E_kin1);</div>
-<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;  <span class="comment">// finally : fire in the hole!!!</span></div>
-<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;  <a class="code" href="../../d5/dc9/classHMolPolPrimaryGeneratorAction.html#a81ed4263f1bb7c2c433fc5d04869a7f1" title="will be generated over">fParticleGun</a>-&gt;GeneratePrimaryVertex(anEvent);</div>
-<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;</div>
-<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;  <span class="comment">// Second Moller electron</span></div>
-<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;  <span class="keywordtype">double</span> interaction_vertex_mom_x2 = -pperp*cos(phi_com);</div>
-<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;  <span class="keywordtype">double</span> interaction_vertex_mom_y2 = -pperp*sin(phi_com);</div>
-<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;  <span class="keywordtype">double</span> interaction_vertex_mom_z2 = gamma_com*(-ppar + e_com*beta_com); <span class="comment">// boosted</span></div>
-<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;  <a class="code" href="../../d5/dc9/classHMolPolPrimaryGeneratorAction.html#a81ed4263f1bb7c2c433fc5d04869a7f1" title="will be generated over">fParticleGun</a>-&gt;SetParticleMomentumDirection(</div>
-<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;      G4ThreeVector(</div>
-<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;          interaction_vertex_mom_x2,</div>
-<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;          interaction_vertex_mom_y2,</div>
-<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;          interaction_vertex_mom_z2));</div>
-<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;  <span class="comment">// Kinetic energy of the particle = total energy - m = sqrt(p^2 + m^2) - m</span></div>
-<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;  <span class="keywordtype">double</span> E_kin2 = sqrt(interaction_vertex_mom_x2*interaction_vertex_mom_x2 +</div>
-<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;      interaction_vertex_mom_y2*interaction_vertex_mom_y2 +</div>
-<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;      interaction_vertex_mom_z2*interaction_vertex_mom_z2 + m_e*m_e) - m_e;</div>
-<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;  <a class="code" href="../../d5/dc9/classHMolPolPrimaryGeneratorAction.html#a81ed4263f1bb7c2c433fc5d04869a7f1" title="will be generated over">fParticleGun</a>-&gt;SetParticleEnergy(E_kin2);</div>
-<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;  <span class="comment">// finally : fire in the hole!!!</span></div>
-<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;  <a class="code" href="../../d5/dc9/classHMolPolPrimaryGeneratorAction.html#a81ed4263f1bb7c2c433fc5d04869a7f1" title="will be generated over">fParticleGun</a>-&gt;GeneratePrimaryVertex(anEvent);</div>
-<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;</div>
-<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;  G4cout &lt;&lt; <span class="stringliteral">&quot;###### Leaving QweakSimPrimaryGeneratorAction::GeneratePrimaries&quot;</span></div>
-<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;      &lt;&lt; G4endl;</div>
-<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;</div>
-<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;}</div>
+<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;  <a class="code" href="../../d5/dc9/classHMolPolPrimaryGeneratorAction.html#a81ed4263f1bb7c2c433fc5d04869a7f1" title="will be generated over">fParticleGun</a>-&gt;SetParticlePosition(</div>
+<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;      G4ThreeVector(</div>
+<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;          interaction_vertex_x,</div>
+<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;          interaction_vertex_y ,</div>
+<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;          interaction_vertex_z));</div>
+<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;</div>
+<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;</div>
+<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;  <span class="comment">// First Moller electron</span></div>
+<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;  <span class="keywordtype">double</span> interaction_vertex_mom_x1 = pperp*cos(phi_com);</div>
+<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;  <span class="keywordtype">double</span> interaction_vertex_mom_y1 = pperp*sin(phi_com);</div>
+<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;  <span class="keywordtype">double</span> interaction_vertex_mom_z1 = gamma_com*(ppar + e_com*beta_com); <span class="comment">// boosted</span></div>
+<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;  <a class="code" href="../../d5/dc9/classHMolPolPrimaryGeneratorAction.html#a81ed4263f1bb7c2c433fc5d04869a7f1" title="will be generated over">fParticleGun</a>-&gt;SetParticleMomentumDirection(</div>
+<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;      G4ThreeVector(</div>
+<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;          interaction_vertex_mom_x1,</div>
+<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;          interaction_vertex_mom_y1,</div>
+<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;          interaction_vertex_mom_z1));</div>
+<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;</div>
+<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;  <span class="comment">// Kinetic energy of the particle = total energy - m = sqrt(p^2 + m^2) - m</span></div>
+<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;  <span class="keywordtype">double</span> E_kin1 = sqrt(interaction_vertex_mom_x1*interaction_vertex_mom_x1 +</div>
+<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;      interaction_vertex_mom_y1*interaction_vertex_mom_y1 +</div>
+<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;      interaction_vertex_mom_z1*interaction_vertex_mom_z1 + m_e*m_e) - m_e;</div>
+<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;  <a class="code" href="../../d5/dc9/classHMolPolPrimaryGeneratorAction.html#a81ed4263f1bb7c2c433fc5d04869a7f1" title="will be generated over">fParticleGun</a>-&gt;SetParticleEnergy(E_kin1);</div>
+<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;  <span class="comment">// finally : fire in the hole!!!</span></div>
+<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;  <a class="code" href="../../d5/dc9/classHMolPolPrimaryGeneratorAction.html#a81ed4263f1bb7c2c433fc5d04869a7f1" title="will be generated over">fParticleGun</a>-&gt;GeneratePrimaryVertex(anEvent);</div>
+<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;</div>
+<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;  <span class="comment">// Second Moller electron</span></div>
+<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;  <span class="keywordtype">double</span> interaction_vertex_mom_x2 = -pperp*cos(phi_com);</div>
+<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;  <span class="keywordtype">double</span> interaction_vertex_mom_y2 = -pperp*sin(phi_com);</div>
+<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;  <span class="keywordtype">double</span> interaction_vertex_mom_z2 = gamma_com*(-ppar + e_com*beta_com); <span class="comment">// boosted</span></div>
+<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;  <a class="code" href="../../d5/dc9/classHMolPolPrimaryGeneratorAction.html#a81ed4263f1bb7c2c433fc5d04869a7f1" title="will be generated over">fParticleGun</a>-&gt;SetParticleMomentumDirection(</div>
+<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;      G4ThreeVector(</div>
+<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;          interaction_vertex_mom_x2,</div>
+<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;          interaction_vertex_mom_y2,</div>
+<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;          interaction_vertex_mom_z2));</div>
+<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;  <span class="comment">// Kinetic energy of the particle = total energy - m = sqrt(p^2 + m^2) - m</span></div>
+<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;  <span class="keywordtype">double</span> E_kin2 = sqrt(interaction_vertex_mom_x2*interaction_vertex_mom_x2 +</div>
+<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;      interaction_vertex_mom_y2*interaction_vertex_mom_y2 +</div>
+<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;      interaction_vertex_mom_z2*interaction_vertex_mom_z2 + m_e*m_e) - m_e;</div>
+<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;  <a class="code" href="../../d5/dc9/classHMolPolPrimaryGeneratorAction.html#a81ed4263f1bb7c2c433fc5d04869a7f1" title="will be generated over">fParticleGun</a>-&gt;SetParticleEnergy(E_kin2);</div>
+<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;  <span class="comment">// finally : fire in the hole!!!</span></div>
+<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;  <a class="code" href="../../d5/dc9/classHMolPolPrimaryGeneratorAction.html#a81ed4263f1bb7c2c433fc5d04869a7f1" title="will be generated over">fParticleGun</a>-&gt;GeneratePrimaryVertex(anEvent);</div>
+<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;</div>
+<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;  G4cout &lt;&lt; <span class="stringliteral">&quot;###### Leaving QweakSimPrimaryGeneratorAction::GeneratePrimaries&quot;</span></div>
+<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;      &lt;&lt; G4endl;</div>
+<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;</div>
+<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -397,7 +402,7 @@ Private Attributes</h2></td></tr>
 
 <p>will be generated over </p>
 <p>&lt; this is the minimum Theta that electrons</p>
-<dl class="todo"><dt><b><a class="el" href="../../dd/da0/todo.html#_todo000016">Todo:</a></b></dt><dd>why does doxygen not want this documented?? </dd></dl>
+<dl class="todo"><dt><b><a class="el" href="../../dd/da0/todo.html#_todo000017">Todo:</a></b></dt><dd>why does doxygen not want this documented?? </dd></dl>
 
 <p>Definition at line <a class="el" href="../../d2/dea/HMolPolPrimaryGeneratorAction_8hh_source.html#l00047">47</a> of file <a class="el" href="../../d2/dea/HMolPolPrimaryGeneratorAction_8hh_source.html">HMolPolPrimaryGeneratorAction.hh</a>.</p>
 
@@ -445,7 +450,7 @@ Private Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<dl class="todo"><dt><b><a class="el" href="../../dd/da0/todo.html#_todo000015">Todo:</a></b></dt><dd>make this so that they are passed and in the messenger </dd></dl>
+<dl class="todo"><dt><b><a class="el" href="../../dd/da0/todo.html#_todo000016">Todo:</a></b></dt><dd>make this so that they are passed and in the messenger </dd></dl>
 
 <p>Definition at line <a class="el" href="../../d2/dea/HMolPolPrimaryGeneratorAction_8hh_source.html#l00040">40</a> of file <a class="el" href="../../d2/dea/HMolPolPrimaryGeneratorAction_8hh_source.html">HMolPolPrimaryGeneratorAction.hh</a>.</p>
 
@@ -461,7 +466,7 @@ Private Attributes</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="../../d5/dc9/classHMolPolPrimaryGeneratorAction.html">HMolPolPrimaryGeneratorAction</a></li>
-    <li class="footer">Generated on Thu Jul 11 2013 05:23:09 for HMolPol by
+    <li class="footer">Generated on Thu Jul 11 2013 16:46:01 for HMolPol by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="../../doxygen.png" alt="doxygen"/></a> 1.8.3.1 </li>
   </ul>

@@ -45,6 +45,7 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Search');
     <ul class="tablist">
       <li><a href="../../index.html"><span>Main&#160;Page</span></a></li>
       <li class="current"><a href="../../pages.html"><span>Related&#160;Pages</span></a></li>
+      <li><a href="../../modules.html"><span>Modules</span></a></li>
       <li><a href="../../annotated.html"><span>Classes</span></a></li>
       <li><a href="../../files.html"><span>Files</span></a></li>
       <li>
@@ -85,7 +86,7 @@ $(document).ready(function(){initNavTree('dd/da0/todo.html','../../');});
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Pages</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Groups</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Pages</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -100,32 +101,31 @@ $(document).ready(function(){initNavTree('dd/da0/todo.html','../../');});
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><dl class="reflist">
-<dt><a class="anchor" id="_todo000004"></a>Member <a class="el" href="../../d1/d72/classHMolPolDetectorConstruction.html#a083f3ae17e46758a5cc673a43b444f05">HMolPolDetectorConstruction::Construct</a>  ()</dt>
+<dt><a class="anchor" id="_todo000005"></a>Member <a class="el" href="../../d1/d72/classHMolPolDetectorConstruction.html#a083f3ae17e46758a5cc673a43b444f05">HMolPolDetectorConstruction::Construct</a>  ()</dt>
 <dd><p class="startdd">then are you recreating the G4GDMLParser - this makes no sense </p>
 <p>have someone (Wouter) help me figure what this all does </p>
 <p class="enddd">detector numbers?? do we need them? How do these auxiliary tags work?  </p>
 </dd>
-<dt><a class="anchor" id="_todo000008"></a>Member <a class="el" href="../../d8/d42/classHMolPolMessenger.html#ae24ed0272fb2fe4d89e1036b862103c1">HMolPolMessenger::HMolPolMessenger</a>  ()</dt>
+<dt><a class="anchor" id="_todo000009"></a>Member <a class="el" href="../../d8/d42/classHMolPolMessenger.html#ae24ed0272fb2fe4d89e1036b862103c1">HMolPolMessenger::HMolPolMessenger</a>  ()</dt>
 <dd>have someone (Wouter) help me figure what this all does  </dd>
 <dt><a class="anchor" id="_todo000014"></a>Member <a class="el" href="../../d8/d42/classHMolPolMessenger.html#ad8efc440aed0f02b60d1d9f1d9bd658d">HMolPolMessenger::SetNewValue</a>  (G4UIcommand *cmd, G4String newValue)</dt>
-<dd><p class="startdd">What is this for?? </p>
+<dd><p class="startdd">What is this?? </p>
+<p>What is this for?? </p>
 <p class="enddd">have someone (Wouter) help me figure what this all does  </p>
 </dd>
-<dt><a class="anchor" id="_todo000013"></a>Member <a class="el" href="../../d8/d42/classHMolPolMessenger.html#a8aa8aa01c0dd74beb776e6bb99ff1342">HMolPolMessenger::SetPriGen</a>  (<a class="el" href="../../d5/dc9/classHMolPolPrimaryGeneratorAction.html">HMolPolPrimaryGeneratorAction</a> *pg)</dt>
-<dd>What is this??  </dd>
-<dt><a class="anchor" id="_todo000016"></a>Member <a class="el" href="../../d5/dc9/classHMolPolPrimaryGeneratorAction.html#a81ed4263f1bb7c2c433fc5d04869a7f1">HMolPolPrimaryGeneratorAction::fParticleGun</a>  </dt>
+<dt><a class="anchor" id="_todo000017"></a>Member <a class="el" href="../../d5/dc9/classHMolPolPrimaryGeneratorAction.html#a81ed4263f1bb7c2c433fc5d04869a7f1">HMolPolPrimaryGeneratorAction::fParticleGun</a>  </dt>
 <dd>why does doxygen not want this documented??  </dd>
-<dt><a class="anchor" id="_todo000015"></a>Member <a class="el" href="../../d5/dc9/classHMolPolPrimaryGeneratorAction.html#aec8a7397137e0c4b24f8b8615ab9fb21">HMolPolPrimaryGeneratorAction::fTheta_com_min</a>  </dt>
+<dt><a class="anchor" id="_todo000016"></a>Member <a class="el" href="../../d5/dc9/classHMolPolPrimaryGeneratorAction.html#aec8a7397137e0c4b24f8b8615ab9fb21">HMolPolPrimaryGeneratorAction::fTheta_com_min</a>  </dt>
 <dd>make this so that they are passed and in the messenger  </dd>
-<dt><a class="anchor" id="_todo000012"></a>Member <a class="el" href="../../d5/dc9/classHMolPolPrimaryGeneratorAction.html#a9777d05ea201784dd5fa03af935667b9">HMolPolPrimaryGeneratorAction::GeneratePrimaries</a>  (G4Event *anEvent)</dt>
+<dt><a class="anchor" id="_todo000013"></a>Member <a class="el" href="../../d5/dc9/classHMolPolPrimaryGeneratorAction.html#a9777d05ea201784dd5fa03af935667b9">HMolPolPrimaryGeneratorAction::GeneratePrimaries</a>  (G4Event *anEvent)</dt>
 <dd>have someone (Wouter) help me figure what this all does  </dd>
-<dt><a class="anchor" id="_todo000010"></a>Member <a class="el" href="../../d5/dc9/classHMolPolPrimaryGeneratorAction.html#aeb3cbcd9205e66cc3c2be93b658933ad">HMolPolPrimaryGeneratorAction::HMolPolPrimaryGeneratorAction</a>  ()</dt>
+<dt><a class="anchor" id="_todo000011"></a>Member <a class="el" href="../../d5/dc9/classHMolPolPrimaryGeneratorAction.html#aeb3cbcd9205e66cc3c2be93b658933ad">HMolPolPrimaryGeneratorAction::HMolPolPrimaryGeneratorAction</a>  ()</dt>
 <dd><p class="startdd">comment the comment blocks to get the how this is all put together </p>
 <p>break into more then one file so that it is easier to follow </p>
 <p>add in actual <b> incoming electrons </b> not just the ones after the interaction </p>
 <p class="enddd">have someone (Wouter) help me figure what this all does  </p>
 </dd>
-<dt><a class="anchor" id="_todo000007"></a>Member <a class="el" href="../../d5/dc4/classHMolPolSolenoidMagField.html#a17f409cdc277ceb888feda048ba59052">HMolPolSolenoidMagField::GetFieldValue</a>  (const G4double Point[4], G4double *Bfield) const </dt>
+<dt><a class="anchor" id="_todo000008"></a>Member <a class="el" href="../../d5/dc4/classHMolPolSolenoidMagField.html#a17f409cdc277ceb888feda048ba59052">HMolPolSolenoidMagField::GetFieldValue</a>  (const G4double Point[4], G4double *Bfield) const </dt>
 <dd>What if field is not located at the origin  </dd>
 <dt><a class="anchor" id="_todo000002"></a>page <a class="el" href="../../index.html">Welcome to HMolPol</a>  </dt>
 <dd><p class="startdd">look into the Physics list that will work best at JLab energies </p>
@@ -139,7 +139,7 @@ $(document).ready(function(){initNavTree('dd/da0/todo.html','../../');});
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Thu Jul 11 2013 05:23:08 for HMolPol by
+    <li class="footer">Generated on Thu Jul 11 2013 16:46:00 for HMolPol by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="../../doxygen.png" alt="doxygen"/></a> 1.8.3.1 </li>
   </ul>

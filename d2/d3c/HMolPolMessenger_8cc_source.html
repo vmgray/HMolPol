@@ -45,6 +45,7 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Search');
     <ul class="tablist">
       <li><a href="../../index.html"><span>Main&#160;Page</span></a></li>
       <li><a href="../../pages.html"><span>Related&#160;Pages</span></a></li>
+      <li><a href="../../modules.html"><span>Modules</span></a></li>
       <li><a href="../../annotated.html"><span>Classes</span></a></li>
       <li class="current"><a href="../../files.html"><span>Files</span></a></li>
       <li>
@@ -90,7 +91,7 @@ $(document).ready(function(){initNavTree('d2/d3c/HMolPolMessenger_8cc_source.htm
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Pages</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Groups</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Pages</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -188,16 +189,16 @@ $(document).ready(function(){initNavTree('d2/d3c/HMolPolMessenger_8cc_source.htm
 <div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<span class="comment"></span></div>
 <div class="line"><a name="l00083"></a><span class="lineno"><a class="code" href="../../d8/d42/classHMolPolMessenger.html#ad8efc440aed0f02b60d1d9f1d9bd658d">   83</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="../../d8/d42/classHMolPolMessenger.html#ad8efc440aed0f02b60d1d9f1d9bd658d">HMolPolMessenger::SetNewValue</a>(G4UIcommand* cmd, G4String newValue){</div>
 <div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;  <span class="comment">//raster size</span></div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;  <span class="keywordflow">if</span>( cmd == <a class="code" href="../../d8/d42/classHMolPolMessenger.html#ae0214de75f9c43f1abf1acf1983f94ff" title="raster y size">rasXCmd</a> ){</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;      G4double x = <a class="code" href="../../d8/d42/classHMolPolMessenger.html#ae0214de75f9c43f1abf1acf1983f94ff" title="raster y size">rasXCmd</a>-&gt;GetNewDoubleValue(newValue);</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;      fBeamTarg-&gt;fRasterX = x;</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;  }</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;  <span class="keywordflow">if</span>( cmd == <a class="code" href="../../d8/d42/classHMolPolMessenger.html#a5c833d0435881a20733d1008b49bb23c" title="raster x size">rasYCmd</a> ){</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;      G4double y = <a class="code" href="../../d8/d42/classHMolPolMessenger.html#a5c833d0435881a20733d1008b49bb23c" title="raster x size">rasYCmd</a>-&gt;GetNewDoubleValue(newValue);</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;      fBeamTarg-&gt;fRasterY = y;</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;  }</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;<span class="comment">//  //raster size</span></div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;<span class="comment">//  if( cmd == rasXCmd ){</span></div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;<span class="comment">//      G4double x = rasXCmd-&gt;GetNewDoubleValue(newValue);</span></div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;<span class="comment">//      fBeamTarg-&gt;fRasterX = x;</span></div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;<span class="comment">//  }</span></div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;<span class="comment">//</span></div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;<span class="comment">//  if( cmd == rasYCmd ){</span></div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;<span class="comment">//      G4double y = rasYCmd-&gt;GetNewDoubleValue(newValue);</span></div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;<span class="comment">//      fBeamTarg-&gt;fRasterY = y;</span></div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;<span class="comment">//  }</span></div>
 <div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;</div>
 <div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;}</div>
 </div><!-- fragment --></div><!-- contents -->
@@ -206,7 +207,7 @@ $(document).ready(function(){initNavTree('d2/d3c/HMolPolMessenger_8cc_source.htm
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="../../dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><b>HMolPolMessenger.cc</b></li>
-    <li class="footer">Generated on Thu Jul 11 2013 05:23:08 for HMolPol by
+    <li class="footer">Generated on Thu Jul 11 2013 16:46:00 for HMolPol by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="../../doxygen.png" alt="doxygen"/></a> 1.8.3.1 </li>
   </ul>

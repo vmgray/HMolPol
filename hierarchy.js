@@ -18,5 +18,9 @@ var hierarchy =
     ] ],
     [ "G4VUserPrimaryGeneratorAction", null, [
       [ "HMolPolPrimaryGeneratorAction", "d5/dc9/classHMolPolPrimaryGeneratorAction.html", null ]
+    ] ],
+    [ "HMolPolAnalysis", "d8/d0d/classHMolPolAnalysis.html", null ],
+    [ "TObject", null, [
+      [ "HMolPolUserMainEvent", "dd/d94/classHMolPolUserMainEvent.html", null ]
     ] ]
 ];
