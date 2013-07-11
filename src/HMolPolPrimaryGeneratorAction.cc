@@ -43,6 +43,7 @@
  * Date: 06-25-2013
  * Modified: 07-06-2013
  ********************************************/
+  /// \todo have someone (Wouter) help me figure what this all does
 HMolPolPrimaryGeneratorAction::HMolPolPrimaryGeneratorAction()
 {
   //set number of particles getting fired at a time
@@ -101,6 +102,8 @@ void HMolPolPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 
 //All the following is from remoll - I have no idea why I am using it or what
 // it does the following
+  /// \todo have someone (Wouter) help me figure what this all does
+
 
   // Generate Moller event
 
@@ -215,7 +218,11 @@ void HMolPolPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
   G4double interaction_vertex_z_max = +22.5 * cm; //half length of H target - *MAKE GLOBAL*
   G4double interaction_vertex_z = interaction_vertex_z_min +
         (interaction_vertex_z_max - interaction_vertex_z_min) * G4UniformRand();
-  fParticleGun->SetParticlePosition(G4ThreeVector(x, interaction_vertex_y , z));
+  fParticleGun->SetParticlePosition(
+      G4ThreeVector(
+          interaction_vertex_x,
+          interaction_vertex_y ,
+          interaction_vertex_z));
 
 
   // First Moller electron
