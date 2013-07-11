@@ -1,14 +1,14 @@
 /**
 
-\mainpage Welcome to <b>HMolPol</b>
+\mainpage Welcome to HMolPol
 
 \section Introduction
 
-This software package, HMollerPol, is the Geant4 Simulation for the 
+This software package, HMolPol, is the Geant4 Simulation for the 
 Hydrogen Moller Polarimeter which is a collaboration between Jefferson Lab in 
 Newport News, VA, USA and Johannes Gutenberg University of Mainz, Germany.
 
-Please meander at your leasure.
+Please meander at your leisure.
 
 \section sec_useage Usage 
 
@@ -37,11 +37,11 @@ For more information the following web pages might be useful:
 How to compile your code
   <ul>
     <li> \c In your directory where you have the HMollerPol simulation make 
-    a folder called \b build.  
+    a folder called <b>build</b>.  
     <li> \c In this directory run the command <b> cmake .. </b> 
     <li>  \c Then run the command \b make
     <ul>
-      <li> This will create the excitable \b hmolpol
+      <li> This will create the excitable <b> hmolpol </b>
     </ul>
   </ul>
   
@@ -71,16 +71,18 @@ To run HMolPol interactively with the GUI and a macro:
 
   We don't have one yet.
 
-\section sec_bugs Bugs
+\section sec_RelatedPages Related Pages
+
+\subsection subsec_bugs Bugs
 
 See the bugs under the Related Pages link on Doxygen
 
 Global bugs we have are
 \bug make the necessary changes so that we are using GEANT4 units
 
-\section sec_todo To Do list
+\subsection subsec_todo To Do list
 
-See the to do list  under the Related Pages link on Doxygen
+See the to do list under the Related Pages link on Doxygen
 
 \section sec_PhysicsList Physics List
 
@@ -111,9 +113,73 @@ use the FTFP-BERT
 \bug FTFP_BERT may be no the right physics list for Mainz energy, but probably
 will be for JLab
 
+\subsection subsec_Jlab JLab
+
+This has not been investigated yet...
+
+\todo look into the Physics list that will work best at JLab energies
+\todo make doxygen work with GitHub and make it work online
+
 \section sec_layout General layout and function
 
+\subsection subsec_DetectorCons Detector Construction 
+
 Geometry is read in and constructed in HMolPolDetectorConstruction::Construct.  
+
+\subsubsection subsubsec_Geometry Geometry 
+
+All the geometry is defined in the geometry folder.  Each element has its own 
+file, and all these files then go into the world volume.
+
+<ul>
+  <li> <b> HMolPolMotherVolume.gdml</b>
+  <ul>
+    <li> This file creates the size of the Mother volume (or the experimental 
+    hall)
+    <li> This file also placed all other apparatuses into the Mother Volume.
+  </ul>
+  <li> <b> HMolPolHTargetVolume.gdml</b>
+  <ul>
+    <li> this file creates the hydrogen gas target and the Al can it is in
+  </ul>
+  <li> <b> dummy.gdml</b>
+  <ul>
+    <li> this is a dummy detector - right now it is just taking up space and 
+    being used as a test for the simulation.  This will get replaced with 
+    something realistic and useful soon.
+  </ul>
+</ul>
+
+\subsubsection subsubsec_Materials Materials 
+
+The materials used in this simulation are defined in the <b>materials.gdml</b>
+file in the geometry folder.  The materials are defined using NIST materials 
+(materials that are defined with in the Geant4 infrastructure) are defined in
+the HMolPolDetectorConstruction::Construct() function.  These are then ready to 
+use in the GDML file.  <b>Warning:</b> Upon compiling the GDML will output 
+errors saying that it doesn't know what G4_H, or so is, but that is just the 
+GDML part of the code and the C++ part of the code miscommunicating.  This will 
+work just fine. 
+
+In the materials.gdml file materials that are made up of NIST materials are 
+defined.  This file is then used like the NIST materials, as a global way to 
+define and then grab any material you need in various files.
+
+\bug Can we define the materials in a new file outside of 
+HMolPolDetectorConstruction::Construct() it would make it less messy, and 
+it might make a little more sense. 
+ 
+
+\subsection subsec_HSolenoidMagField H Solenoid Mag Field
+
+This is where the magnetic field is constructed 
+HMolPolSolenoidMagField::HMolPolSolenoidMagField and 
+created HMolPolSolenoidMagField::GetFieldValue.
+
+\todo This needs to get a fringe field
+\todo This will have to change to measure in the filed map - when we get there
+
+\subsection subsec_PrimaryGeneratorAction Primary Generator Action
 
 Events are generated in HMolPolPrimaryGeneratorAction::GeneratePrimaries.
 
