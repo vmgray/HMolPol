@@ -34,12 +34,9 @@ Assisted By: Wouter Deconinck
 
 
 //what are these for? Again they are from Qweak
+/// \todo What vis do we need, in the vis file and here
 #ifdef G4UI_USE_QT
 #include "G4UIQt.hh"
-#endif
-
-#ifdef G4UI_USE_XM
-#include "G4UIXm.hh"
 #endif
 
 #ifdef G4VIS_USE
@@ -74,11 +71,13 @@ int main (int argc, char** argv)
   G4PhysListFactory* factory = new G4PhysListFactory;
 
   /// use the FTFP-BERT
-  ///(FTRP_BERT - http://geant4.cern.ch/support/proc_mod_catalog/physics_lists/hadronic/FTFP_BERT.html)
-  ///(FTRP - http://geant4.cern.ch/support/proc_mod_catalog/physics_lists/hadronic/FTFP.html)
-  ///physics list - FTRP-BERT is replacing the LHEP physics list
-  /// standard EM processes are include in all list
-  /// this may be no the right physics list for Mainz energy, but should be for JLab
+  ///(FTFP_BERT
+  // - http://geant4.cern.ch/support/proc_mod_catalog/physics_lists/hadronic/FTFP_BERT.html)
+  ///(FTFP - http://geant4.cern.ch/support/proc_mod_catalog/physics_lists/hadronic/FTFP.html)
+  /// \note physics list - FTRP-BERT is replacing the LHEP physics list
+  /// \note standard EM processes are include in all list
+  /// \bug FTFP_bert may be no the right physics list for Mainz energy,
+  /// but should be for JLab
   G4VModularPhysicsList* physlist = factory->GetReferencePhysList("FTFP_BERT");
   physlist->SetVerboseLevel(verbose);
   // give the run manager the physics list
@@ -89,7 +88,8 @@ int main (int argc, char** argv)
 
   // Initialize Run manager
   // we can either us this or have /run/initialize staring all out macros...
-  // I have taken it our so that different geometries configurations can be used with ease
+  // I have taken it our so that different geometries configurations
+  // can be used with ease
   //runManager->Initialize();
   G4UIsession* session = 0;
 
@@ -109,14 +109,8 @@ int main (int argc, char** argv)
     //What is a dumb terminal
     //DO I need all of these?? and what are all for and why do just 2 of
     //them have G4UIterminal in them and not all
-    #if defined(G4UI_USE_XM)
-      session = new G4UIXm(argc,argv);
-    #elif defined(G4UI_USE_WIN32)
-      session = new G4UIWin32();
-    #elif defined(G4UI_USE_QT)
+    #if defined(G4UI_USE_QT)
       session = new G4UIQt(argc,argv);
-    #elif defined(G4UI_USE_TCSH)
-      session = new G4UIterminal(new G4UItcsh);
     #else
       session = new G4UIterminal();
     #endif
@@ -153,7 +147,7 @@ int main (int argc, char** argv)
     // G4UIterminal is a (dumb) terminal.
     //UI->ApplyCommand("/control/execute myVis.mac");
 
-    #if defined(G4UI_USE_XM) || defined(G4UI_USE_WIN32) || defined(G4UI_USE_QT)
+    #if defined(G4UI_USE_QT)
       // Customize the G4UIXm,Win32 menubar with a macro file :
       UI->ApplyCommand("/control/execute gui.mac");
     #endif
@@ -171,7 +165,8 @@ int main (int argc, char** argv)
       visManager->SetVerboseLevel("quiet");
     #endif
     //these line will execute a macro without the GUI
-    //in GEANT4 a macro is executed when it is passed to the command, /control/execute
+    //in GEANT4 a macro is executed when it is passed to the command,
+    // /control/execute
     G4String command = "/control/execute ";
     G4String fileName = argv[1];
     UI->ApplyCommand(command+fileName);
