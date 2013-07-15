@@ -13,7 +13,7 @@
  *
  * \todo comment the comment blocks to get the how this is all put together
  *
-********************************************/
+ ********************************************/
 
 //Geant4 specific includes
 #include <G4Colour.hh>
@@ -59,7 +59,7 @@
  * Called By:
  * Date: 06-25-2013
  * Modified:
-********************************************/
+ ********************************************/
 
 G4VPhysicalVolume* HMolPolDetectorConstruction::Construct()
 {
@@ -76,24 +76,28 @@ G4VPhysicalVolume* HMolPolDetectorConstruction::Construct()
   std::ifstream nist_materials;
   nist_materials.open("nist_materials.txt");
   // Check whether materials file could be opened correctly
-  if (nist_materials.good()) {
+  if (nist_materials.good())
+  {
     //add all the NIST materials we want to use
     std::string material;
     // Loop over all lines in the file
-    while (! nist_materials.eof()) {
+    while (! nist_materials.eof())
+    {
       nist_materials >> material;
       // Try to load the NIST material
       G4bool success = NistManager->FindOrBuildMaterial(material);
       // And complain if we can't find the material
-      if (! success) {
+      if (! success)
+      {
         G4cout << "Material " << material << " not found!" << G4endl;
       }
     }
-  } else {
+  } else
+  {
     // If the file cannot be found, load only the vacuum
     NistManager->FindOrBuildMaterial("G4_Galactic");
     G4cout << "File nist_materials.txt not found.  "
-           << "Only loading NIST vacuum!" << G4endl;
+        << "Only loading NIST vacuum!" << G4endl;
   }
   // Close the file
   nist_materials.close();
@@ -101,7 +105,8 @@ G4VPhysicalVolume* HMolPolDetectorConstruction::Construct()
   //if the simulation is using GDML
   //why don't we need #include <G4GDMLParser.hh>
   //what's a parser
-  if (fGDMLParser) {
+  if (fGDMLParser)
+  {
     //why are you deleting the G4GDMLParser right away
     delete fGDMLParser;
   }
@@ -131,22 +136,30 @@ G4VPhysicalVolume* HMolPolDetectorConstruction::Construct()
   //    detector type - if it is a sensitive detector
   //==========================
 
-//Wouter broke this - he needs to fix
+  //Wouter broke this - he needs to fix
   //I am not sure what anything from this point on does.  HELP!!
   /// \todo have someone (Wouter) help me figure what this all does
   const G4GDMLAuxMapType* auxmap = fGDMLParser->GetAuxMap();
 
+  //if it finds auxiliary info tell us
   G4cout << "Found " << auxmap->size()
-                         << " volume(s) with auxiliary information."
-                         << G4endl << G4endl;
+                                     << " volume(s) with auxiliary information."
+                                     << G4endl << G4endl;
+
+  //this for loop iterates over all of the auxiliary info.  Starting at the
+  // first one defined till there are no more.  Then it outputs what the volume
+  // is and what type of auxiliary information it has and what the
+  // corresponding value id
   for(G4GDMLAuxMapType::const_iterator
       iter  = auxmap->begin();
-      iter != auxmap->end(); iter++) {
+      iter != auxmap->end(); iter++)
+  {
     G4cout << "Volume " << ((*iter).first)->GetName()
-        << " has the following list of auxiliary information: "<< G4endl;
+                    << " has the following list of auxiliary information: "<< G4endl;
     for (G4GDMLAuxListType::const_iterator
         vit  = (*iter).second.begin();
-        vit != (*iter).second.end(); vit++) {
+        vit != (*iter).second.end(); vit++)
+    {
       G4cout << "--> Type: " << (*vit).type
           << ", value: "   << (*vit).value << std::endl;
 
@@ -154,21 +167,25 @@ G4VPhysicalVolume* HMolPolDetectorConstruction::Construct()
       // "true" to show the volume
       // "false" to hide the volume
       // "wireframe" to show the volume as wireframe only
-      if ((*vit).type == "Visibility") {
+
+      //if there is a visibility attribute then set it
+      //The defult it to be seen with a wireframe
+      if ((*vit).type == "Visibility")
+      {
         G4Colour colour(1.0,1.0,1.0);
-        // get old color
+        // get old color (this is just the standard Geant4 color)
         const G4VisAttributes* visAttribute_old =
             ((*iter).first)->GetVisAttributes();
-
+        //get the new color that is specified by the GDML code
         if (visAttribute_old)
           colour = visAttribute_old->GetColour();
         // create new visibility attributes
         G4VisAttributes visAttribute_new(colour);
-        if ((*vit).value == "true")
+        if ((*vit).value == "true")  // if we want the object to be seen
           visAttribute_new.SetVisibility(true);
-        if ((*vit).value == "false")
+        if ((*vit).value == "false")  // if we want to hide the object
           visAttribute_new.SetVisibility(false);
-        if ((*vit).value == "wireframe")
+        if ((*vit).value == "wireframe") // if we want wireframe
           visAttribute_new.SetForceWireframe(true);
         // set new visibility attributes
         ((*iter).first)->SetVisAttributes(visAttribute_new);
@@ -176,23 +193,29 @@ G4VPhysicalVolume* HMolPolDetectorConstruction::Construct()
 
       // Support for the auxiliary tag "Color" that can be any of black,
       // blue, brown, cyan, gray, green, grey, magenta, red, white, yellow
-      if ((*vit).type == "Color") {
+      if ((*vit).type == "Color")
+      {
         G4Colour colour(1.0,1.0,1.0);
         // get requested color, if it exists
-        if (G4Colour::GetColour((*vit).value, colour)) {
+        if (G4Colour::GetColour((*vit).value, colour))
+        {
           G4cout << "Setting color to " << (*vit).value << "." << G4endl;
           // create new visibility attributes
           G4VisAttributes visAttribute(colour);
           // set new visibility attributes
           ((*iter).first)->SetVisAttributes(visAttribute);
-        } else {
+        } else
+        {
+          //if color not in the above list
           G4cout << "Colour " << (*vit).value << " is not known." << G4endl;
         }
       }
 
       // Support for the auxiliary tag "Alpha" to set opacity,
       // a value of 0.0 is fully transparent, 1.0 is fully opaque
-      if ((*vit).type == "Alpha") {
+      if ((*vit).type == "Alpha")
+      {
+        // get the old color - Geant4 standard color
         G4Colour colour(1.0,1.0,1.0);
         // get old color
         const G4VisAttributes* visAttribute_old =
@@ -200,12 +223,13 @@ G4VPhysicalVolume* HMolPolDetectorConstruction::Construct()
 
         if (visAttribute_old)
           colour = visAttribute_old->GetColour();
-        // create new color with alpha channel (TODO input not checked)
+        // create new color with alpha channel (// \bug TODO input not checked?? Wouter?)
+        // thos color is the same as the color set by color (above)
         G4Colour colour_new(
             colour.GetRed(),
             colour.GetGreen(),
             colour.GetBlue(),
-            std::atof((*vit).value.c_str()));
+            std::atof((*vit).value.c_str())); //this is the alpha value
         // create new visibility attributes
         G4VisAttributes visAttribute_new(colour_new);
         // set new visibility attributes
@@ -215,14 +239,17 @@ G4VPhysicalVolume* HMolPolDetectorConstruction::Construct()
   }
   G4cout << G4endl<< G4endl;
 
-/// \todo detector numbers?? do we need them?  How do these auxiliary tags work?
+  /// \todo detector numbers?? do we need them?  How do these auxiliary tags work?
 
   //==========================
   // Sensitive detectors
   //==========================
-/// this is all taken from remoll since that is what WD wanted me to do it work
+  /// this is all taken from remoll since that is what WD wanted me to do it work
   /// via magic
+
+  //define an array of charters that is __DET_STRLEN long
   char detectorname[__DET_STRLEN];
+  // this int does ??
   int retval;
 
   G4int k=0;
@@ -232,61 +259,89 @@ G4VPhysicalVolume* HMolPolDetectorConstruction::Construct()
 
   G4cout << "Beginning sensitive detector assignment" << G4endl;
 
+  // define an array of bools as long as the maximum number of detectors
+  // set all values to false
   G4bool useddetnums[__MAX_DETS];
-  for( k = 0; k < __MAX_DETS; k++ ){useddetnums[k] = false;}
+  for( k = 0; k < __MAX_DETS; k++ )
+  {
+    useddetnums[k] = false;
+  }
   k = 0;
 
-  for( iter  = auxmap->begin(); iter != auxmap->end(); iter++) {
-      G4LogicalVolume* myvol = (*iter).first;
-      G4cout << "Volume " << myvol->GetName() << G4endl;
+  for( iter  = auxmap->begin(); iter != auxmap->end(); iter++)
+  {
+    // get logical volumes name
+    G4LogicalVolume* myvol = (*iter).first;
+    G4cout << "Volume " << myvol->GetName() << G4endl;
 
-      for( vit  = (*iter).second.begin(); vit != (*iter).second.end(); vit++) {
-          if ((*vit).type == "SensDet") {
-              G4String det_type = (*vit).value;
+    for( vit  = (*iter).second.begin(); vit != (*iter).second.end(); vit++)
+    {
+      // if there is a Sensitive detector get its name
+      if ((*vit).type == "SensDet")
+      {
+        G4String det_type = (*vit).value;
 
-              // Also allow specification of det number ///////////////////
-              int det_no = -1;
-              for( nit  = (*iter).second.begin(); nit != (*iter).second.end(); nit++) {
-                  if ((*nit).type == "DetNo") {
-                      det_no= atoi((*nit).value.data());
-                      useddetnums[det_no] = true;
-                  }
-              }
-              if( det_no <= 0 ){
-                  k = 1;
-                  while( useddetnums[k] == true && k < __MAX_DETS ){ k++; }
-                  if( k == __MAX_DETS ){
-                      G4cerr << __FILE__ << " line " << __LINE__
-                             << ": ERROR too many detectors" << G4endl;
-                      exit(1);
-                  }
-                  det_no = k;
-                  useddetnums[k] = true;
-              }
-              /////////////////////////////////////////////////////////////
-
-              retval = snprintf(detectorname, __DET_STRLEN,
-                  "hmolpol/det_%s", det_type.c_str());
-
-              assert( 0 < retval && retval < __DET_STRLEN ); // Ensure we're writing reasonable strings
-
-              G4SDManager* SDman = G4SDManager::GetSDMpointer();
-
-              G4VSensitiveDetector* thisdet =
-                  SDman->FindSensitiveDetector(detectorname);
-
-              if( thisdet == 0 ) {
-                  thisdet = new HMolPolGenericDetector(detectorname, det_no);
-                  G4cout << "  Creating sensitive detector " << det_type
-                      << " for volume " << myvol->GetName()
-                      <<  G4endl << G4endl;
-
-                  SDman->AddNewDetector(thisdet);
-              }
-
-              myvol->SetSensitiveDetector(thisdet);
+        // Also allow specification of det number ///////////////////
+        int det_no = -1;
+        for( nit  = (*iter).second.begin(); nit != (*iter).second.end(); nit++)
+        {
+          //if there is a number associated with this detector grab it then
+          // set the value in the useddetnums array to true for
+          // this detector number
+          /// \bug why would we do this
+          if ((*nit).type == "DetNo")
+          {
+            det_no= atoi((*nit).value.data());
+            useddetnums[det_no] = true;
           }
+        }
+
+        if( det_no <= 0 ) // the is a detector number
+        {
+          k = 1;
+          while( useddetnums[k] == true && k < __MAX_DETS )
+          {
+            k++;
+          }
+          if( k == __MAX_DETS )
+          {
+            // if you have more detectors then the max number, then
+            // you are in trouble!!
+            G4cerr << __FILE__ << " line " << __LINE__
+                << ": ERROR too many detectors" << G4endl;
+            exit(1);
+          }
+          //set number of detector and its bool to true
+          det_no = k;
+          useddetnums[k] = true;
+        }
+        /////////////////////////////////////////////////////////////
+
+        /// \bug from here on out????  HELP!
+        retval = snprintf(detectorname, __DET_STRLEN,
+            "hmolpol/det_%s", det_type.c_str());
+
+        assert( 0 < retval && retval < __DET_STRLEN ); // Ensure we're writing reasonable strings
+
+        /// \bug ???
+        G4SDManager* SDman = G4SDManager::GetSDMpointer();
+
+        G4VSensitiveDetector* thisdet =
+            SDman->FindSensitiveDetector(detectorname);
+
+        if( thisdet == 0 )
+        {
+          thisdet = new HMolPolGenericDetector(detectorname, det_no);
+          G4cout << "  Creating sensitive detector " << det_type
+              << " for volume " << myvol->GetName()
+              <<  G4endl << G4endl;
+
+          SDman->AddNewDetector(thisdet);
+        }
+
+        myvol->SetSensitiveDetector(thisdet);
       }
+    }
   }
 
   G4cout << "Completed sensitive detector assignment" << G4endl;
@@ -299,11 +354,11 @@ G4VPhysicalVolume* HMolPolDetectorConstruction::Construct()
   /// something realistic and that might effect the following code
   //get the field??
   HMolPolSolenoidMagField* HTargetSolenoidMagField =
-       new HMolPolSolenoidMagField;
+      new HMolPolSolenoidMagField;
 
   //tell Geant 4 to use this field - how??
   G4FieldManager* HTargetSolenoidMagFieldMgr =
-       G4TransportationManager :: GetTransportationManager()->GetFieldManager();
+      G4TransportationManager :: GetTransportationManager()->GetFieldManager();
 
   //set the field for the HTargetSolenoidFieldMgr
   HTargetSolenoidMagFieldMgr->SetDetectorField(HTargetSolenoidMagField);

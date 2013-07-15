@@ -15,9 +15,8 @@
 #ifndef HMOLPOLGENERICDETECTOR_HH_
 #define HMOLPOLGENERICDETECTOR_HH_
 
-#include "G4VSensitiveDetector.hh"
-#include "HMolPolGenericDetectorHit.hh"
-#include "HMolPolGenericDetectorSum.hh"
+#include <G4VSensitiveDetector.hh>
+
 
 #include <map>
 
@@ -36,24 +35,17 @@ class G4HCofThisEvent;
 class G4Step;
 class G4TouchableHistory;
 
-class HMolPolGenericDetector : public G4VSensitiveDetector {
+class HMolPolGenericDetector : public G4VSensitiveDetector
+{
   public:
     HMolPolGenericDetector( G4String name, G4int detnum );
     virtual ~HMolPolGenericDetector();
 
-    virtual void Initialize(G4HCofThisEvent*);
-    virtual G4bool ProcessHits(G4Step*,G4TouchableHistory*);
-    virtual void EndOfEvent(G4HCofThisEvent*);
+    virtual void Initialize(G4HCofThisEvent* );
+    virtual G4bool ProcessHits(G4Step*,G4TouchableHistory* );
+    virtual void EndOfEvent(G4HCofThisEvent* );
 
   private:
-    HMolPolGenericDetectorHitsCollection *fHitColl;
-    HMolPolGenericDetectorSumCollection  *fSumColl;
-    G4int fHCID, fSCID;
-
-    std::map<int, HMolPolGenericDetectorSum *> fSumMap;
-
-    G4bool fTrackSecondaries;
-    G4int fDetNo;
 };
 
 #endif /* HMOLPOLGENERICDETECTOR_HH_ */

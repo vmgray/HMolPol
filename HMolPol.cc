@@ -7,7 +7,7 @@ it should put everything together...
 
 Entry Conditions:
 Date: 05-15-2013
-Modified: 06-25-2013
+Modified: 07-11-2013
 Assisted By: Wouter Deconinck
  *********************************************************/
 
@@ -31,6 +31,7 @@ Assisted By: Wouter Deconinck
 //all the HMollerPol specific includes
 #include "HMolPolDetectorConstruction.hh"
 #include "HMolPolPrimaryGeneratorAction.hh"
+#include "HMolPolMessenger.hh"
 
 
 //what are these for? Again they are from Qweak
@@ -58,12 +59,22 @@ int main (int argc, char** argv)
   G4cout << "RunManager construction starting...." << G4endl;
   G4RunManager* runManager = new G4RunManager;
 
+  // add the global messenger - this will talk with all of
+  //the files and the user
+  HMolPolMessenger* HMolPolMess = new HMolPolMessenger();
+
   // Detector geometry
-  //how?? this works I have no idea
+//how?? this works I have no idea
   //pass the geometry of the HMolPol to the Geant4 class G4VUserDetectorConstruction
   G4VUserDetectorConstruction* detector = new HMolPolDetectorConstruction();
   // give the run manager the geometry
   runManager->SetUserInitialization(detector);
+
+
+//FIX ME!!!!  do something to get the messenger involved
+//  HMolPolMess->SetDetCon( ((HMolPolDetectorConstruction *) detector) );
+//  HMolPolMess->SetMagField(
+//      ((HMolPolDetectorConstruction *) detector)->GetGlobalField() );
 
   // Physics we want to use
   G4int verbose = 0;
@@ -85,6 +96,9 @@ int main (int argc, char** argv)
 
   //beam
   runManager->SetUserAction( new HMolPolPrimaryGeneratorAction() );
+//  HMolPolMess->SetPriGen((HMolPolPrimaryGeneratorAction *)gen_action);
+//  runManager->SetUserAction(gen_action);
+//what the last 3 lines do is beyond me
 
   // Initialize Run manager
   // we can either us this or have /run/initialize staring all out macros...

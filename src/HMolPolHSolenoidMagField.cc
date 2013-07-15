@@ -76,7 +76,11 @@ void HMolPolSolenoidMagField::GetFieldValue(const G4double Point[4],
   // the set the B field to Bz otherwise leave it be.
   if(std::abs(Point[2])<zmax &&
       (std::pow(Point[0],2) + std::pow(Point[1],2))<rmax_sq)
-  { Bfield[2] = Bz; }
+  {
+    Bfield[2] = Bz;
+  }
   else
-  { Bfield[2] = 0.; }
+  {
+    Bfield[2] = 0.;
+  }
 }

@@ -25,7 +25,8 @@ class HMolPolDetectorConstruction: public G4VUserDetectorConstruction
   public:
 
     //Construct and the destructor of for the Detector construction
-    HMolPolDetectorConstruction() {
+    HMolPolDetectorConstruction()
+    {
       fGDMLParser = 0;
     };
     virtual ~HMolPolDetectorConstruction() { };
