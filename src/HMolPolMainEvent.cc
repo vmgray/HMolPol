@@ -17,6 +17,7 @@
 #include "HMolPolUserMainEvent.hh"
 
 HMolPolMainEvent::HMolPolMainEvent()
+: run_number(0), event_number(0)
 {
 
 }
