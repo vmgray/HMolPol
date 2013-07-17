@@ -24,7 +24,17 @@ ClassImp(HMolPolEvent)
 
 HMolPolEvent::HMolPolEvent()
 : mm(CLHEP::mm),
+  cm(CLHEP::cm),
+  m(CLHEP::m),
+  mm2(CLHEP::mm2),
+  cm2(CLHEP::cm2),
+  m2(CLHEP::m2),
+  mm3(CLHEP::mm3),
+  cm3(CLHEP::cm3),
+  m3(CLHEP::m3),
+  keV(CLHEP::keV),
   MeV(CLHEP::MeV),
+  GeV(CLHEP::GeV),
   rad(CLHEP::rad),
   deg(CLHEP::deg)
 {
