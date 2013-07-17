@@ -14,7 +14,7 @@
  ********************************************/
 
 //HMolPol includes
-#include "HMolPolUserMainEvent.hh"
+#include "HMolPolMainEvent.hh"
 
 HMolPolMainEvent::HMolPolMainEvent()
 : run_number(0), event_number(0)

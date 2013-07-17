@@ -30,7 +30,7 @@
 #include <TObject.h>
 
 // HMolPol includes
-//#include "HMolPolUserPrimaryEvent.hh"
+//#include "HMolPolPrimaryEvent.hh"
 
 class HMolPolMainEvent : public TObject
 {
