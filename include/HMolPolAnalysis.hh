@@ -18,11 +18,13 @@
 #include <TTree.h>
 #include <TBranch.h>
 
+// HMolPol includes
+#include "HMolPolEvent.hh"
+
 // geant4 classes
 class G4Run;
 
 //HMolPol classes
-class HMolPolMainEvent;
 class HMolPolRunInformation;
 
 class HMolPolAnalysis {
@@ -54,9 +56,16 @@ class HMolPolAnalysis {
     G4String fRootFileName;
 
   public:
-    HMolPolMainEvent* fRootEvent;
+
+    // ROOT variables that are common for all events in the ROOT tree
+    // for example, the run number, beam energy, etc.
+    Int_t fRunNumber;           ///< Run number
+    Double_t fBeamEnergy;       ///< Beam energy
+
+    HMolPolEvent* fEvent;       ///< Main event structure
 
   private:
+
     HMolPolRunInformation* pUserRunInformation;
 };
 

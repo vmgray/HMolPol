@@ -13,16 +13,30 @@
  *
  ********************************************/
 
+// geant4 includes
+#include <G4SystemOfUnits.hh>
+
 //HMolPol includes
-#include "HMolPolMainEvent.hh"
+#include "HMolPolEvent.hh"
 
-HMolPolMainEvent::HMolPolMainEvent()
-: run_number(0), event_number(0)
+ClassImp(HMolPolEvent)
+
+
+HMolPolEvent::HMolPolEvent()
+: mm(CLHEP::mm),
+  MeV(CLHEP::MeV),
+  rad(CLHEP::rad),
+  deg(CLHEP::deg)
 {
+  // Create primary vertex information object
+  fPrimary = new HMolPolPrimaryEvent();
 
+  // Initialization
+  fEventNumber = 0;
 }
 
-HMolPolMainEvent::~HMolPolMainEvent()
+HMolPolEvent::~HMolPolEvent()
 {
-
+  // Delete objects
+  if (fPrimary) delete fPrimary;
 }

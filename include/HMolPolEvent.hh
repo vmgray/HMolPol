@@ -14,7 +14,7 @@
 //  | Doxygen Class Information |
 //  ---------------------------
 /**
-   \class HMolPolMainEvent
+   \class HMolPolEvent
 
    \brief Defines Top ROOT Tree structure of the ROOT file for each event.
 
@@ -23,38 +23,39 @@
  */
 //=============================================================================
 
-#ifndef HMOLPOLMAINEVENT_HH_
-#define HMOLPOLMAINEVENT_HH_
+#ifndef HMOLPOLEVENT_HH_
+#define HMOLPOLEVENT_HH_
 
 // root include
 #include <TObject.h>
 
 // HMolPol includes
-//#include "HMolPolPrimaryEvent.hh"
+#include "HMolPolPrimaryEvent.hh"
 
-class HMolPolMainEvent : public TObject
+class HMolPolEvent : public TObject
 {
   public:
 
-    //HMolPolPrimaryEvent Primary;  ///< object containing primary particle info
-
     // Constructor
-    HMolPolMainEvent(){};
+    HMolPolEvent();
     // Destructor
-    virtual ~HMolPolMainEvent(){};
+    virtual ~HMolPolEvent();
 
-    // HMolPolPrimaryEvent            Primary;
+    HMolPolPrimaryEvent* fPrimary;
     ///< object containing primary particle info
 
-    Int_t run_number;   ///< run number
-    Int_t event_number; ///< event number
+    const Double_t mm;
+    const Double_t MeV;
+    const Double_t rad;
+    const Double_t deg;
 
+    Int_t fEventNumber; ///< event number
 
     // define a new Class known to ROOT? Huh?
-    ClassDef(HMolPolMainEvent,1)
+    ClassDef(HMolPolEvent,1)
 
   private:
 
 };
 
-#endif /* HMOLPOLMAINEVENT_HH_ */
+#endif /* HMOLPOLEVENT_HH_ */

@@ -19,7 +19,6 @@ Assisted By: Wouter Deconinck
 #include <G4VModularPhysicsList.hh>
 
 #include <G4VisManager.hh>
-#include <G4VisExecutive.hh>
 #include <G4UImanager.hh>
 #include <G4UIExecutive.hh>
 #include <G4UIQt.hh>
@@ -33,7 +32,7 @@ Assisted By: Wouter Deconinck
 #include "HMolPolRunAction.hh"
 
 #ifdef G4VIS_USE
-#include "G4VisExecutive.hh"
+#include <G4VisExecutive.hh>
 #endif
 
 //why is this not a void function? Why is it getting passed anything?
@@ -107,7 +106,7 @@ int main (int argc, char** argv)
   runManager->SetUserAction(myHMolPolRunAction);
 
 
-//FIX ME!!!!  do something to get the messenger involved
+/// \todo FIX ME!!!!  do something to get the messenger involved
 //  HMolPolMess->SetDetCon( ((HMolPolDetectorConstruction *) detector) );
 //  HMolPolMess->SetMagField(
 //      ((HMolPolDetectorConstruction *) detector)->GetGlobalField() );
@@ -115,7 +114,7 @@ int main (int argc, char** argv)
 
   //beam
   G4VUserPrimaryGeneratorAction* myHMolPolPrimaryGeneratorAction =
-      new HMolPolPrimaryGeneratorAction();
+      new HMolPolPrimaryGeneratorAction(myHMolPolAnalysis);
   runManager->SetUserAction(myHMolPolPrimaryGeneratorAction);
 //  HMolPolMess->SetPriGen(primaryGeneratorAction);
 
@@ -148,7 +147,7 @@ int main (int argc, char** argv)
   if (session)   // Define UI session for interactive mode.
   {
 
-    // Customize the G4UIQt menubar with a macro file :
+    // Customize the G4UIQt menu-bar with a macro file :
     UI->ApplyCommand("/control/execute gui.mac");
 
     session->SessionStart();

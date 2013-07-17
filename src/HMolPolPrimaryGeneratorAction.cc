@@ -44,7 +44,8 @@
  * Modified: 07-06-2013
  ********************************************/
   /// \todo have someone (Wouter) help me figure what this all does
-HMolPolPrimaryGeneratorAction::HMolPolPrimaryGeneratorAction()
+HMolPolPrimaryGeneratorAction::HMolPolPrimaryGeneratorAction(HMolPolAnalysis* a)
+: fAnalysis(a)
 {
   //set number of particles getting fired at a time
   G4int NubofParticles = 1;
@@ -229,6 +230,7 @@ void HMolPolPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
   double interaction_vertex_mom_x1 = pperp*cos(phi_com);
   double interaction_vertex_mom_y1 = pperp*sin(phi_com);
   double interaction_vertex_mom_z1 = gamma_com*(ppar + e_com*beta_com); // boosted
+  double theta_lab1 = std::atan2(interaction_vertex_mom_z1,pperp);
   fParticleGun->SetParticleMomentumDirection(
       G4ThreeVector(
           interaction_vertex_mom_x1,
@@ -247,6 +249,7 @@ void HMolPolPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
   double interaction_vertex_mom_x2 = -pperp*cos(phi_com);
   double interaction_vertex_mom_y2 = -pperp*sin(phi_com);
   double interaction_vertex_mom_z2 = gamma_com*(-ppar + e_com*beta_com); // boosted
+  double theta_lab2 = std::atan2(interaction_vertex_mom_z2,pperp);
   fParticleGun->SetParticleMomentumDirection(
       G4ThreeVector(
           interaction_vertex_mom_x2,
@@ -260,7 +263,24 @@ void HMolPolPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
   // finally : fire in the hole!!!
   fParticleGun->GeneratePrimaryVertex(anEvent);
 
+
+  // Store cross section in ROOT file
+  /// \todo actually write the cross section
+  fAnalysis->fEvent->fPrimary->fOriginVertexPositionX = interaction_vertex_x;
+  fAnalysis->fEvent->fPrimary->fOriginVertexPositionY = interaction_vertex_y;
+  fAnalysis->fEvent->fPrimary->fOriginVertexPositionZ = interaction_vertex_z;
+  fAnalysis->fEvent->fPrimary->fOriginVertexMomentumX = interaction_vertex_mom_x1;
+  fAnalysis->fEvent->fPrimary->fOriginVertexMomentumY = interaction_vertex_mom_y1;
+  fAnalysis->fEvent->fPrimary->fOriginVertexMomentumZ = interaction_vertex_mom_z1;
+  fAnalysis->fEvent->fPrimary->fThetaCenterOfMass = theta_com;
+  fAnalysis->fEvent->fPrimary->fPhiCenterOfMass = phi_com;
+  fAnalysis->fEvent->fPrimary->fThetaLab1 = theta_lab1;
+  fAnalysis->fEvent->fPrimary->fThetaLab2 = theta_lab2;
+  fAnalysis->fEvent->fPrimary->fPhiLab = phi_com;
+  fAnalysis->fEvent->fPrimary->fCrossSection = 1.0;
+
+
+
   G4cout << "###### Leaving QweakSimPrimaryGeneratorAction::GeneratePrimaries"
       << G4endl;
-
 }

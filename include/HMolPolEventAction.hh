@@ -30,7 +30,7 @@ class HMolPolEventAction : public G4UserEventAction
   public:
 
     //!Constructor
-    HMolPolEventAction(HMolPolAnalysis* AN);
+    HMolPolEventAction(HMolPolAnalysis* a);
 
     //!Destructor
     ~HMolPolEventAction();
@@ -41,7 +41,7 @@ class HMolPolEventAction : public G4UserEventAction
   private:
     void Initialize();
 
-    HMolPolAnalysis* analysis;
+    HMolPolAnalysis* fAnalysis;
 
     G4int CollID;
 };

@@ -35,7 +35,7 @@
 ********************************************/
 HMolPolSolenoidMagField::HMolPolSolenoidMagField ()
 {
-  Bz = 8.0*tesla;  // this is the stenght of the magnetic
+  Bz = 0.0*tesla;  // this is the stenght of the magnetic
   /** \ingroup see
    * /\brief Z B field value of 8 Tesla
    * as defined in Moller Polarimetry with Atomic Hydrogen Targets

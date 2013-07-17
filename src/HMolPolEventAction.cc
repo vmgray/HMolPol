@@ -13,12 +13,12 @@
 
 // HMolPol includes
 #include "HMolPolAnalysis.hh"
-#include "HMolPolMainEvent.hh"
+#include "HMolPolEvent.hh"
 #include "HMolPolEventAction.hh"
 #include "HMolPolGenericDetectorHit.hh"
 
-HMolPolEventAction::HMolPolEventAction (HMolPolAnalysis* AN)
-: analysis(AN)
+HMolPolEventAction::HMolPolEventAction (HMolPolAnalysis* a)
+: fAnalysis(a)
 {
 
 }
@@ -45,5 +45,12 @@ void HMolPolEventAction::EndOfEventAction(const G4Event* evt)
   G4cout << "At end of event" << G4endl;
 
   // Get the event number
-  analysis->fRootEvent->event_number = evt->GetEventID();
+  fAnalysis->fEvent->fEventNumber = evt->GetEventID();
+
+  // Fill the tree
+  fAnalysis->FillRootTree();
+
+  // Print some progress information
+  if (evt->GetEventID() % 1000 == 0)
+      fAnalysis->AutoSaveRootTree();
 }

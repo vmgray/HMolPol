@@ -13,8 +13,8 @@
 // HMolPol includes
 #include "HMolPolAnalysis.hh"
 
-HMolPolRunAction::HMolPolRunAction(HMolPolAnalysis* AN)
-: runID(0), analysis(AN)
+HMolPolRunAction::HMolPolRunAction(HMolPolAnalysis* a)
+: fAnalysis(a),runID(0)
 {
 
 }
@@ -33,7 +33,7 @@ void HMolPolRunAction::BeginOfRunAction(const G4Run* aRun)
   G4cout << "### Start of Run " << runID << G4endl;
 
   // Start analysis at begin of run
-  analysis->BeginOfRun(aRun);
+  fAnalysis->BeginOfRun(aRun);
 }
 
 void HMolPolRunAction::EndOfRunAction(const G4Run* aRun)
@@ -42,5 +42,5 @@ void HMolPolRunAction::EndOfRunAction(const G4Run* aRun)
   G4cout << "### End of Run " << runID << G4endl;
 
   // End analysis procedure at end of run
-  analysis->EndOfRun(aRun);
+  fAnalysis->EndOfRun(aRun);
 }

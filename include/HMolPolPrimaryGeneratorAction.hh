@@ -18,6 +18,9 @@
 #include <G4ParticleTable.hh>
 #include <G4VUserPrimaryGeneratorAction.hh>
 
+// HMolPol includes
+#include "HMolPolAnalysis.hh"
+
 //Geant4 classes
 class G4ParticleGun;
 
@@ -26,7 +29,7 @@ class HMolPolPrimaryGeneratorAction : public G4VUserPrimaryGeneratorAction
 
   public:
     //create the constructor and destructor for the primary particle generator
-    HMolPolPrimaryGeneratorAction();
+    HMolPolPrimaryGeneratorAction(HMolPolAnalysis* AN);
     virtual ~HMolPolPrimaryGeneratorAction();
 
     //function to generate the primary electrons
@@ -46,6 +49,7 @@ class HMolPolPrimaryGeneratorAction : public G4VUserPrimaryGeneratorAction
     /// \todo why does doxygen not want this documented??
     G4ParticleGun* fParticleGun;
 
+    HMolPolAnalysis* fAnalysis;
 };
 
 #endif

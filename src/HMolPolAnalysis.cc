@@ -19,7 +19,7 @@
 
 // HMolPol includes
 #include "HMolPolAnalysis.hh"
-#include "HMolPolMainEvent.hh"
+#include "HMolPolEvent.hh"
 #include "HMolPolRunInformation.hh"
 
 /// \todo make this so the file names can change with things like generator etc
@@ -44,12 +44,12 @@ HMolPolAnalysis::HMolPolAnalysis(): fRootFileStem("HMolPol"),fRootFileName("")
   G4cout << "###### Calling HMolPolAnalysis::HMolPolAnalysis()" << G4endl;
 
   // Initialize everything to nothing
-  fRootEvent  = NULL;
   fRootTree   = NULL;
   fRootBranch = NULL;
   fRootFile   = NULL;
 
-
+  // Create event structure
+  fEvent = new HMolPolEvent();
 }
 
 /********************************************
@@ -61,7 +61,7 @@ HMolPolAnalysis::HMolPolAnalysis(): fRootFileStem("HMolPol"),fRootFileName("")
  *
  *
  * Global:
- * Entry Conditions: none
+ * Entry Conditions:
  * Return:
  * Called By:
  * Date: 07-11-2013
@@ -69,13 +69,11 @@ HMolPolAnalysis::HMolPolAnalysis(): fRootFileStem("HMolPol"),fRootFileName("")
  ********************************************/
 HMolPolAnalysis::~HMolPolAnalysis()
 {
-
   // Delete ROOT objects
-  if (fRootEvent)    delete fRootEvent;
+  if (fEvent)        delete fEvent;
   if (fRootTree)     delete fRootTree;
   if (fRootBranch)   delete fRootBranch;
   if (fRootFile)     delete fRootFile;
-
 }
 
 /********************************************
@@ -130,6 +128,15 @@ void HMolPolAnalysis::BeginOfRun(const G4Run* aRun)
 void HMolPolAnalysis::EndOfRun(const G4Run* aRun)
 {
   G4cout << "At end of run" << G4endl;
+
+  // Autosave one last time
+  AutoSaveRootTree();
+
+  // Write the data to the ROOT file
+  G4cout << "###### Analysis: closing ROOT file " << fRootFileName << G4endl;
+  fRootFile->Write(0,TObject::kOverwrite);
+  fRootFile->Close();
+  fRootFileName = "";
 }
 
 /********************************************
@@ -157,13 +164,14 @@ void HMolPolAnalysis::ConstructRootTree()
 
 // \todo I have no idea what the next lines means (till end)
   // Instance of data structure to be written into ROOT file
-  fRootEvent  = new HMolPolMainEvent();
+  //fRootEvent  = new HMolPolEvent();
 
   // Create a branch with the data structure defined by fRootEvent
+  // THE QWEAK WAY OF LIFE
   int bufsize = 64000;
   int split   = 99;
-  fRootBranch = fRootTree->Branch("HMolPolMainEvent",
-      "HMolPolMainEvent", &fRootEvent, bufsize, split);
+  fRootBranch = fRootTree->Branch("HMolPolEvent",
+      "HMolPolEvent", &fEvent, bufsize, split);
 
   // Write run data
   //pUserRunInformation->Write();

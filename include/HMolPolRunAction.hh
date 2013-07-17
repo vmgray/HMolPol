@@ -20,15 +20,15 @@ class HMolPolAnalysis;
 class HMolPolRunAction : public G4UserRunAction
 {
   public:
-    HMolPolRunAction(HMolPolAnalysis* AN);
-    ~HMolPolRunAction();
+    HMolPolRunAction(HMolPolAnalysis* a);
+    virtual ~HMolPolRunAction();
 
   public:
     void BeginOfRunAction(const G4Run*);
     void EndOfRunAction(const G4Run*);
 
   private:
-    HMolPolAnalysis* analysis;
+    HMolPolAnalysis* fAnalysis;
     G4int runID;
 };
 
