@@ -32,6 +32,9 @@ Assisted By: Wouter Deconinck
 #include "HMolPolDetectorConstruction.hh"
 #include "HMolPolPrimaryGeneratorAction.hh"
 #include "HMolPolMessenger.hh"
+#include "HMolPolAnalysis.hh"
+#include "HMolPolEventAction.hh"
+#include "HMolPolRunAction.hh"
 
 
 //what are these for? Again they are from Qweak
@@ -48,6 +51,18 @@ Assisted By: Wouter Deconinck
 //what is the point of whatever it is getting passed
 //if this is the number of things passed and the commands, then how does it work
 //
+
+/** \defgroup root Variables include in the ROOT file
+     *
+     *  This group contains all variables that are included in the ROOT file.
+*/
+
+/** \defgroup see References to where things are found, papers and such
+     *
+     *  This contains all references in the code to papers and other important
+     *  things
+*/
+
 int main (int argc, char** argv)
 {
   //Need to put in random seed info... not the remoll way as it is not good
@@ -58,23 +73,6 @@ int main (int argc, char** argv)
   //-------------------------------
   G4cout << "RunManager construction starting...." << G4endl;
   G4RunManager* runManager = new G4RunManager;
-
-  // add the global messenger - this will talk with all of
-  //the files and the user
-  HMolPolMessenger* HMolPolMess = new HMolPolMessenger();
-
-  // Detector geometry
-//how?? this works I have no idea
-  //pass the geometry of the HMolPol to the Geant4 class G4VUserDetectorConstruction
-  G4VUserDetectorConstruction* detector = new HMolPolDetectorConstruction();
-  // give the run manager the geometry
-  runManager->SetUserInitialization(detector);
-
-
-//FIX ME!!!!  do something to get the messenger involved
-//  HMolPolMess->SetDetCon( ((HMolPolDetectorConstruction *) detector) );
-//  HMolPolMess->SetMagField(
-//      ((HMolPolDetectorConstruction *) detector)->GetGlobalField() );
 
   // Physics we want to use
   G4int verbose = 0;
@@ -93,6 +91,29 @@ int main (int argc, char** argv)
   physlist->SetVerboseLevel(verbose);
   // give the run manager the physics list
   runManager->SetUserInitialization(physlist);
+
+  // add the global messenger - this will talk with all of
+  //the files and the user
+  HMolPolMessenger* HMolPolMess = new HMolPolMessenger();
+
+  // Detector geometry
+//how?? this works I have no idea
+  //pass the geometry of the HMolPol to the Geant4 class G4VUserDetectorConstruction
+  G4VUserDetectorConstruction* detector = new HMolPolDetectorConstruction();
+  HMolPolAnalysis* myHMolPolAnalysis  = new HMolPolAnalysis();
+
+  // give the run manager the geometry
+  runManager->SetUserInitialization(detector);
+  //give run manager the stuff that is done at every event (write to rootfile)
+  runManager->SetUserAction( new HMolPolEventAction(myHMolPolAnalysis) );
+  // give the run manager stuff that is done in each run (save rootfile)
+  runManager->SetUserAction( new HMolPolRunAction(myHMolPolAnalysis) );
+
+
+//FIX ME!!!!  do something to get the messenger involved
+//  HMolPolMess->SetDetCon( ((HMolPolDetectorConstruction *) detector) );
+//  HMolPolMess->SetMagField(
+//      ((HMolPolDetectorConstruction *) detector)->GetGlobalField() );
 
   //beam
   runManager->SetUserAction( new HMolPolPrimaryGeneratorAction() );
