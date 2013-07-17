@@ -41,6 +41,8 @@ Assisted By: Wouter Deconinck
 /// \todo What vis do we need, in the vis file and here
 #ifdef G4UI_USE_QT
 #include "G4UIQt.hh"
+#else
+#include "G4UIterminal.hh"
 #endif
 
 #ifdef G4VIS_USE
