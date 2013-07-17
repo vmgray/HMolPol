@@ -20,13 +20,9 @@ Assisted By: Wouter Deconinck
 
 #include <G4VisManager.hh>
 #include <G4VisExecutive.hh>
-
 #include <G4UImanager.hh>
 #include <G4UIExecutive.hh>
-//I do NOT need all of these?? what are they for?  I got then for the Qweak and
-//what they do is beyond me
-//#include <G4UIterminal.hh>
-//#include <G4UItcsh.hh>
+#include <G4UIQt.hh>
 
 //all the HMollerPol specific includes
 #include "HMolPolDetectorConstruction.hh"
@@ -35,15 +31,6 @@ Assisted By: Wouter Deconinck
 #include "HMolPolAnalysis.hh"
 #include "HMolPolEventAction.hh"
 #include "HMolPolRunAction.hh"
-
-
-//what are these for? Again they are from Qweak
-/// \todo What vis do we need, in the vis file and here
-#ifdef G4UI_USE_QT
-#include "G4UIQt.hh"
-#else
-#include "G4UIterminal.hh"
-#endif
 
 #ifdef G4VIS_USE
 #include "G4VisExecutive.hh"
@@ -98,18 +85,26 @@ int main (int argc, char** argv)
   //the files and the user
   HMolPolMessenger* HMolPolMess = new HMolPolMessenger();
 
+
   // Detector geometry
-//how?? this works I have no idea
   //pass the geometry of the HMolPol to the Geant4 class G4VUserDetectorConstruction
-  G4VUserDetectorConstruction* detector = new HMolPolDetectorConstruction();
+  G4VUserDetectorConstruction* myHMolPolDetector =
+      new HMolPolDetectorConstruction();
+  // give the run manager the geometry
+  runManager->SetUserInitialization(myHMolPolDetector);
+
+
+  // Analysis (interface with ROOT file)
   HMolPolAnalysis* myHMolPolAnalysis  = new HMolPolAnalysis();
 
-  // give the run manager the geometry
-  runManager->SetUserInitialization(detector);
   //give run manager the stuff that is done at every event (write to rootfile)
-  runManager->SetUserAction( new HMolPolEventAction(myHMolPolAnalysis) );
+  G4UserEventAction* myHMolPolEventAction =
+      new HMolPolEventAction(myHMolPolAnalysis);
+  runManager->SetUserAction(myHMolPolEventAction);
   // give the run manager stuff that is done in each run (save rootfile)
-  runManager->SetUserAction( new HMolPolRunAction(myHMolPolAnalysis) );
+  G4UserRunAction* myHMolPolRunAction =
+      new HMolPolRunAction(myHMolPolAnalysis);
+  runManager->SetUserAction(myHMolPolRunAction);
 
 
 //FIX ME!!!!  do something to get the messenger involved
@@ -117,81 +112,44 @@ int main (int argc, char** argv)
 //  HMolPolMess->SetMagField(
 //      ((HMolPolDetectorConstruction *) detector)->GetGlobalField() );
 
+
   //beam
-  runManager->SetUserAction( new HMolPolPrimaryGeneratorAction() );
-//  HMolPolMess->SetPriGen((HMolPolPrimaryGeneratorAction *)gen_action);
-//  runManager->SetUserAction(gen_action);
-//what the last 3 lines do is beyond me
+  G4VUserPrimaryGeneratorAction* myHMolPolPrimaryGeneratorAction =
+      new HMolPolPrimaryGeneratorAction();
+  runManager->SetUserAction(myHMolPolPrimaryGeneratorAction);
+//  HMolPolMess->SetPriGen(primaryGeneratorAction);
+
 
   // Initialize Run manager
   // we can either us this or have /run/initialize staring all out macros...
   // I have taken it our so that different geometries configurations
   // can be used with ease
   //runManager->Initialize();
-  G4UIsession* session = 0;
 
   //----------------
   // Visualization:
   //----------------
 
-  //I have no idea what any of this does... so please don't ask :-)
-
-  // WHAT is argc and what does it value have to do with getting a GUI??
+  G4UIsession* session = 0;
   if (argc==1)   // Define UI session for interactive mode.
   {
-
-    // G4UIterminal is a (dumb) terminal.
-
-    //Val's comments
-    //What is a dumb terminal
-    //DO I need all of these?? and what are all for and why do just 2 of
-    //them have G4UIterminal in them and not all
-    #if defined(G4UI_USE_QT)
-      session = new G4UIQt(argc,argv);
-    #else
-      session = new G4UIterminal();
-    #endif
-
+    session = new G4UIQt(argc,argv);
   }
 
   #ifdef G4VIS_USE
-    // Visualization, if you choose to have it!
-    //
-    // Simple graded message scheme - give first letter or a digit:
-    //  0) quiet,         // Nothing is printed.
-    //  1) startup,       // Startup and endup messages are printed...
-    //  2) errors,        // ...and errors...
-    //  3) warnings,      // ...and warnings...
-    //  4) confirmations, // ...and confirming messages...
-    //  5) parameters,    // ...and parameters of scenes and views...
-    //  6) all            // ...and everything available.
-
-    //this is the initializing the run manager?? Right?
+    //this is the initializing the visualization manager
     G4VisManager* visManager = new G4VisExecutive;
-    //visManager -> SetVerboseLevel (1);
     visManager ->Initialize();
   #endif
-  //(above) this ifdef if G4VIS_USE (what is that) is being used then
-  //it will start up the visualization manager and initialize it
-  //if not it will skip that.  (so it only happens iff we run interactively?? - but maybe not :(
 
-  //not sure what this does??? explain please*********************************
   //get the pointer to the User Interface manager
   G4UImanager * UI = G4UImanager::GetUIpointer();
 
   if (session)   // Define UI session for interactive mode.
   {
-    // G4UIterminal is a (dumb) terminal.
-    //UI->ApplyCommand("/control/execute myVis.mac");
 
-    #if defined(G4UI_USE_QT)
-      // Customize the G4UIXm,Win32 menubar with a macro file :
-      UI->ApplyCommand("/control/execute gui.mac");
-    #endif
-
-    //If this is one is using the GUI?? I am not following, but if so then
-    // it starts it and deletes it??
-    //WHAT is up with the create and then right away delete something
+    // Customize the G4UIQt menubar with a macro file :
+    UI->ApplyCommand("/control/execute gui.mac");
 
     session->SessionStart();
     delete session;
