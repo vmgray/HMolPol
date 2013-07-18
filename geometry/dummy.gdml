@@ -95,9 +95,7 @@ Assisted By: Wouter Deconinck
       <solidref ref="Dummy_tube"/>
       <auxiliary auxtype="Color" auxvalue="yellow"/>
       <auxiliary auxtype="Alpha" auxvalue="0.5"/>
-      <auxiliary auxtype="SensDet" auxvalue="DummyDet"/>
-      <auxiliary auxtype="DetNo" auxvalue="1"/>           <!-- Why do I need 
-            this what does it do? -->
+      <auxiliary auxtype="SensDet" auxvalue="DummyDet"/> 
     </volume>
   </structure>
 
