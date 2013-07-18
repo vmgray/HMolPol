@@ -36,7 +36,13 @@ HMolPolEvent::HMolPolEvent()
   MeV(CLHEP::MeV),
   GeV(CLHEP::GeV),
   rad(CLHEP::rad),
-  deg(CLHEP::deg)
+  deg(CLHEP::deg),
+  sr(CLHEP::sr),
+  mbarn(CLHEP::millibarn),
+  nsec(CLHEP::ns),
+  msec(CLHEP::ms),
+  sec(CLHEP::s),
+  tesla(CLHEP::tesla)
 {
   // Create primary vertex information object
   fPrimary = new HMolPolPrimaryEvent();
