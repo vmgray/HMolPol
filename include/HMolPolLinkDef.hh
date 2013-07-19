@@ -17,7 +17,9 @@
 #pragma link C++ class HMolPolRunInformation+;
 
 #pragma link C++ class HMolPolEvent+;
-#pragma link C++ class HMolPolPrimaryEvent+;
+#pragma link C++ class HMolPolEventPrimary+;
+#pragma link C++ class HMolPolEventGenericDetector+;
+#pragma link C++ class HMolPolEventGenericDetectorHit+;
 
 #endif
 
