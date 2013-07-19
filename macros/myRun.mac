@@ -1,0 +1,29 @@
+#This is to initialize the run manager. This is needed IFF the lines
+# runManager->Initialize(); is not in HMollerPol.cc
+/run/initialize
+
+#start the viewer
+#/control/execute vis/Qt.mac
+
+#set viewer to solid
+#/vis/viewer/set/style solid
+
+#set viewer to wire
+#/vis/viewer/set/style wire
+
+# blah blah a lot
+#/control/verbose 1
+#/tracking/verbose 1
+#/run/verbose 1
+
+# This turns off processes for all particles
+#/process/inactivate msc
+#/process/inactivate eBrem
+#/process/inactivate compt
+#/process/inactivate eIoni
+/process/inactivate phot
+#/process/inactivate Cerenkov
+
+#run beam
+/run/beamOn 210
+
