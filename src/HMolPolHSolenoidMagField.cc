@@ -35,13 +35,13 @@
 ********************************************/
 HMolPolSolenoidMagField::HMolPolSolenoidMagField ()
 {
-  Bz = 0.0*tesla;  // this is the stenght of the magnetic
+  Bz = 8.0*tesla;  // this is the strength of the magnetic
   /** \ingroup see
    * /\brief Z B field value of 8 Tesla
    * as defined in Moller Polarimetry with Atomic Hydrogen Targets
    * by E.~Chudakov and V.~Luppov(long) pg 9
    */
-  rmax_sq = std::pow(30.0*cm,2); // square of the radius for the field
+  rmax_sq = std::pow(3.0*cm,2); // square of the radius for the field
   zmax = 25.0*cm;  // this is half of the z length that the field is in
 }
 
