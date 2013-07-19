@@ -32,11 +32,6 @@
 #include "HMolPolHSolenoidMagField.hh"
 #include "HMolPolGenericDetector.hh"
 
-/// \bug what are these for and why are they defined here, how do they get
-/// there values of 200 and 500 respectively
-#define __DET_STRLEN 200  //maximum length of string of the detector name
-#define __MAX_DETS 500  //maximum number of sensitive detectors
-
 /********************************************
  * Programmer: Valerie Gray
  * Function: Construct
@@ -224,7 +219,7 @@ G4VPhysicalVolume* HMolPolDetectorConstruction::Construct()
         if (visAttribute_old)
           colour = visAttribute_old->GetColour();
         // create new color with alpha channel (// \bug TODO input not checked?? Wouter?)
-        // thos color is the same as the color set by color (above)
+        // those color is the same as the color set by color (above)
         G4Colour colour_new(
             colour.GetRed(),
             colour.GetGreen(),
@@ -235,116 +230,44 @@ G4VPhysicalVolume* HMolPolDetectorConstruction::Construct()
         // set new visibility attributes
         ((*iter).first)->SetVisAttributes(visAttribute_new);
       }
-    }
-  }
-  G4cout << G4endl<< G4endl;
 
-  /// \todo detector numbers?? do we need them?  How do these auxiliary tags work?
-
-  //==========================
-  // Sensitive detectors
-  //==========================
-  /// this is all taken from remoll since that is what WD wanted me to do it work
-  /// via magic
-
-  //define an array of charters that is __DET_STRLEN long
-  char detectorname[__DET_STRLEN];
-  // this int does ??
-  int retval;
-
-  G4int k=0;
-
-  G4GDMLAuxMapType::const_iterator iter;
-  G4GDMLAuxListType::const_iterator vit, nit;
-
-  G4cout << "Beginning sensitive detector assignment" << G4endl;
-
-  // define an array of bools as long as the maximum number of detectors
-  // set all values to false
-  G4bool useddetnums[__MAX_DETS];
-  for( k = 0; k < __MAX_DETS; k++ )
-  {
-    useddetnums[k] = false;
-  }
-  k = 0;
-
-  for( iter  = auxmap->begin(); iter != auxmap->end(); iter++)
-  {
-    // get logical volumes name
-    G4LogicalVolume* myvol = (*iter).first;
-    G4cout << "Volume " << myvol->GetName() << G4endl;
-
-    for( vit  = (*iter).second.begin(); vit != (*iter).second.end(); vit++)
-    {
-      // if there is a Sensitive detector get its name
+      // Support for the auxiliary tag "SensDet" to set sensitive detector type
       if ((*vit).type == "SensDet")
       {
-        G4String det_type = (*vit).value;
+        // Get specified sensitive detector type
+        G4String detectortype = (*vit).value;
 
-        // Also allow specification of det number ///////////////////
-        int det_no = -1;
-        for( nit  = (*iter).second.begin(); nit != (*iter).second.end(); nit++)
-        {
-          //if there is a number associated with this detector grab it then
-          // set the value in the useddetnums array to true for
-          // this detector number
-          /// \bug why would we do this
-          if ((*nit).type == "DetNo")
-          {
-            det_no= atoi((*nit).value.data());
-            useddetnums[det_no] = true;
-          }
-        }
+        // Form name of sensitive detector
+        G4String detectorname = "hmolpol/det_" + detectortype;
 
-        if( det_no <= 0 ) // the is a detector number
-        {
-          k = 1;
-          while( useddetnums[k] == true && k < __MAX_DETS )
-          {
-            k++;
-          }
-          if( k == __MAX_DETS )
-          {
-            // if you have more detectors then the max number, then
-            // you are in trouble!!
-            G4cerr << __FILE__ << " line " << __LINE__
-                << ": ERROR too many detectors" << G4endl;
-            exit(1);
-          }
-          //set number of detector and its bool to true
-          det_no = k;
-          useddetnums[k] = true;
-        }
-        /////////////////////////////////////////////////////////////
-
-        /// \bug from here on out????  HELP!
-        retval = snprintf(detectorname, __DET_STRLEN,
-            "hmolpol/det_%s", det_type.c_str());
-
-        assert( 0 < retval && retval < __DET_STRLEN ); // Ensure we're writing reasonable strings
-
-        /// \bug ???
+        // Get pointer to sensitive detector manager
         G4SDManager* SDman = G4SDManager::GetSDMpointer();
 
-        G4VSensitiveDetector* thisdet =
+        // Find pointer to current sensitive detector of that name
+        G4VSensitiveDetector* sensitivedetector =
             SDman->FindSensitiveDetector(detectorname);
 
-        if( thisdet == 0 )
+        // Check whether the sensitive detector was found
+        if (sensitivedetector == 0)
         {
-          thisdet = new HMolPolGenericDetector(detectorname, det_no);
-          G4cout << "  Creating sensitive detector " << det_type
-              << " for volume " << myvol->GetName()
-              <<  G4endl << G4endl;
+          // Sensitive detector doesn't exist yet, so create a new one
+          /// \todo let HMolPolGenericDetector keep track of number using static
+          /// (ask wdc for help if necessary)
+          sensitivedetector = new HMolPolGenericDetector(detectorname);
+          G4cout << "Creating sensitive detector " << detectortype
+                 << " for volume " << ((*iter).first)->GetName()
+                 <<  G4endl;
 
-          SDman->AddNewDetector(thisdet);
+          // Add sensitive detector to manager
+          SDman->AddNewDetector(sensitivedetector);
         }
 
-        myvol->SetSensitiveDetector(thisdet);
+        // Set sensitive detector for the physical volume
+        ((*iter).first)->SetSensitiveDetector(sensitivedetector);
       }
     }
   }
-
-  G4cout << "Completed sensitive detector assignment" << G4endl;
+  G4cout << G4endl << G4endl;
 
   //==========================
   // Add in the Magnetic field to world volume
@@ -366,7 +289,6 @@ G4VPhysicalVolume* HMolPolDetectorConstruction::Construct()
   //create the Chord finder (this is responsible for moving
   // the particles through the field
   HTargetSolenoidMagFieldMgr->CreateChordFinder(HTargetSolenoidMagField);
-
 
   //==========================
   // Return world volume
