@@ -21,7 +21,21 @@
 
 ClassImp(HMolPolEvent)
 
-
+/********************************************
+ * Programmer: Valerie Gray
+ * Function: HMolPolEvent
+ *
+ * Purpose: to construct the HMolPolEvent
+ *
+ * \bug Somehow I think it makes the units for the ROOT tree
+ *
+ * Global:
+ * Entry Conditions:
+ * Return:
+ * Called By:
+ * Date: 07-11-2013
+ * Modified:
+ ********************************************/
 HMolPolEvent::HMolPolEvent()
 : mm(CLHEP::mm),
   cm(CLHEP::cm),
@@ -42,17 +56,26 @@ HMolPolEvent::HMolPolEvent()
   nsec(CLHEP::ns),
   msec(CLHEP::ms),
   sec(CLHEP::s),
-  tesla(CLHEP::tesla)
+  Tesla(CLHEP::tesla)
 {
-  // Create primary vertex information object
-  fPrimary = new HMolPolPrimaryEvent();
-
   // Initialization
   fEventNumber = 0;
 }
 
+/********************************************
+ * Programmer: Valerie Gray
+ * Function: ~HMolPolEvent
+ *
+ * Purpose: to destruct the HMolPolEvent
+ *
+ * Global:
+ * Entry Conditions:
+ * Return:
+ * Called By:
+ * Date: 07-11-2013
+ * Modified:
+ ********************************************/
 HMolPolEvent::~HMolPolEvent()
 {
-  // Delete objects
-  if (fPrimary) delete fPrimary;
+
 }

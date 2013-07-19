@@ -30,7 +30,8 @@
 #include <TObject.h>
 
 // HMolPol includes
-#include "HMolPolPrimaryEvent.hh"
+#include "HMolPolEventPrimary.hh"
+#include "HMolPolEventGenericDetector.hh"
 
 class HMolPolEvent : public TObject
 {
@@ -41,8 +42,11 @@ class HMolPolEvent : public TObject
     // Destructor
     virtual ~HMolPolEvent();
 
-    HMolPolPrimaryEvent* fPrimary;
+    HMolPolEventPrimary fPrimary;
     ///< object containing primary particle info
+
+    HMolPolEventGenericDetector fGenericDetector;
+    ///< object containing hits in generic detector
 
     // Distance
     const Double_t mm;        /// \ingroup root Units of mm
@@ -71,7 +75,7 @@ class HMolPolEvent : public TObject
     const Double_t msec;      /// \ingroup root Units of millisec
     const Double_t sec;       /// \ingroup root Units of sec
     // Magnetic Field
-    const Double_t tesla;     /// \ingroup root Units of tesla
+    const Double_t Tesla;     /// \ingroup root Units of tesla
 
 
     Int_t fEventNumber; ///< event number
