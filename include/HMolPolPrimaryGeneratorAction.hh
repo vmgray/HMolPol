@@ -29,11 +29,15 @@ class HMolPolPrimaryGeneratorAction : public G4VUserPrimaryGeneratorAction
 
   public:
     //create the constructor and destructor for the primary particle generator
-    HMolPolPrimaryGeneratorAction(HMolPolAnalysis* AN);
-    virtual ~HMolPolPrimaryGeneratorAction();
+    HMolPolPrimaryGeneratorAction(HMolPolAnalysis* AN); ///< The constructor
+    // for the HMolPolPrimaryGeneratorAction class - it gets passed the
+    // HMolPolAnalysis class so that the histogram will get filled
+    virtual ~HMolPolPrimaryGeneratorAction();   ///< The destructor
+    // for the HMolPolPrimaryGeneratorAction class
 
     //function to generate the primary electrons
-    void GeneratePrimaries(G4Event* anEvent);
+    void GeneratePrimaries(G4Event* anEvent);  ///< function to generate
+    // primary electrons
 
 
   private:
@@ -46,10 +50,10 @@ class HMolPolPrimaryGeneratorAction : public G4VUserPrimaryGeneratorAction
     /// will be generated over
 
     //the primary generation of the primary electrons
-    /// \todo why does doxygen not want this documented??
-    G4ParticleGun* fParticleGun;
+    /// \todo why does doxygen not want this documented?? and are these right?
+    G4ParticleGun* fParticleGun; ///< the ParticleGun class
 
-    HMolPolAnalysis* fAnalysis;
+    HMolPolAnalysis* fAnalysis;  ///< the analysis class
 };
 
 #endif

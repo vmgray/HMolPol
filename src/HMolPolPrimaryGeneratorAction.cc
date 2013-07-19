@@ -37,7 +37,7 @@
  * Construction of the HMolPolPrimaryGeneratorAction
  *
  * Global:
- * Entry Conditions: none
+ * Entry Conditions: HMolPolAnalysis function
  * Return: Nothing
  * Called By:
  * Date: 06-25-2013
@@ -57,7 +57,7 @@ HMolPolPrimaryGeneratorAction::HMolPolPrimaryGeneratorAction(HMolPolAnalysis* a)
   fTheta_com_max = 180.0 * degree;
 
   //set particle type
-  // *ADD* in functionality for other particles as incoming ones later
+  // \todo *ADD* in functionality for other particles as incoming ones later
   //SetParticleType("e-");
 
   //set the beam energy
@@ -92,7 +92,7 @@ HMolPolPrimaryGeneratorAction::~HMolPolPrimaryGeneratorAction()
  * Sets up and generates the primaries
  *
  * Global:
- * Entry Conditions: none
+ * Entry Conditions: a G4Event
  * Return:
  * Called By:
  * Date: 06-25-2013
@@ -115,8 +115,8 @@ void HMolPolPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
   double beamE = 200.0 * MeV;
   // mass of Electron
   double m_e = electron_mass_c2;
-  double Ecm = sqrt(2*pow(m_e,2) + 2*m_e*beamE);
-  double Pcm = sqrt(pow(Ecm,2) - 4*pow(m_e,2));
+  double Ecm = sqrt(2*pow(m_e,2) + 2*m_e*beamE); //Energy in the CM frame
+  double Pcm = sqrt(pow(Ecm,2) - 4*pow(m_e,2));  // mometum in the CM frame
 
   //find the beta and gamma value in Center of Mass
   double beta_com  = std::sqrt((beamE - m_e)/(beamE + m_e));
@@ -204,13 +204,13 @@ void HMolPolPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 
 // **ALL** of these need better variable names and ability to get passed
   // determine x,y position of event (ie raster??)
-  G4double interaction_vertex_x_min = -2.0 * cm; //size of H Target radius - *MAKE GLOBAL*
-  G4double interaction_vertex_x_max = +2.0 * cm; //size of H Target radius - *MAKE GLOBAL*
+  G4double interaction_vertex_x_min = -2.0 * mm; //*MAKE GLOBAL*
+  G4double interaction_vertex_x_max = +2.0 * mm; //*MAKE GLOBAL*
   G4double interaction_vertex_x = interaction_vertex_x_min +
         (interaction_vertex_x_max - interaction_vertex_x_min) * G4UniformRand();
 
-  G4double interaction_vertex_y_min = -2.0 * cm; //size of H Target radius - *MAKE GLOBAL*
-  G4double interaction_vertex_y_max = +2.0 * cm; //size of H Target radius - *MAKE GLOBAL*
+  G4double interaction_vertex_y_min = -2.0 * mm; //*MAKE GLOBAL*
+  G4double interaction_vertex_y_max = +2.0 * mm; //*MAKE GLOBAL*
   G4double interaction_vertex_y = interaction_vertex_y_min +
         (interaction_vertex_y_max - interaction_vertex_y_min) * G4UniformRand();
 
@@ -260,24 +260,37 @@ void HMolPolPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
       interaction_vertex_mom_y2*interaction_vertex_mom_y2 +
       interaction_vertex_mom_z2*interaction_vertex_mom_z2 + m_e*m_e) - m_e;
   fParticleGun->SetParticleEnergy(E_kin2);
+
   // finally : fire in the hole!!!
   fParticleGun->GeneratePrimaryVertex(anEvent);
 
 
   // Store cross section in ROOT file
   /// \todo actually write the cross section
-  fAnalysis->fEvent->fPrimary->fOriginVertexPositionX = interaction_vertex_x;
-  fAnalysis->fEvent->fPrimary->fOriginVertexPositionY = interaction_vertex_y;
-  fAnalysis->fEvent->fPrimary->fOriginVertexPositionZ = interaction_vertex_z;
-  fAnalysis->fEvent->fPrimary->fOriginVertexMomentumX = interaction_vertex_mom_x1;
-  fAnalysis->fEvent->fPrimary->fOriginVertexMomentumY = interaction_vertex_mom_y1;
-  fAnalysis->fEvent->fPrimary->fOriginVertexMomentumZ = interaction_vertex_mom_z1;
-  fAnalysis->fEvent->fPrimary->fThetaCenterOfMass = theta_com;
-  fAnalysis->fEvent->fPrimary->fPhiCenterOfMass = phi_com;
-  fAnalysis->fEvent->fPrimary->fThetaLab1 = theta_lab1;
-  fAnalysis->fEvent->fPrimary->fThetaLab2 = theta_lab2;
-  fAnalysis->fEvent->fPrimary->fPhiLab = phi_com;
-  fAnalysis->fEvent->fPrimary->fCrossSection = 1.0;
+  fAnalysis->fEvent->fPrimary.fInteractionVertexPositionX
+    = interaction_vertex_x;
+  fAnalysis->fEvent->fPrimary.fInteractionVertexPositionY
+    = interaction_vertex_y;
+  fAnalysis->fEvent->fPrimary.fInteractionVertexPositionZ
+    = interaction_vertex_z;
+  fAnalysis->fEvent->fPrimary.fInteractionVertexMomentumX
+    = interaction_vertex_mom_x1;
+  fAnalysis->fEvent->fPrimary.fInteractionVertexMomentumY
+    = interaction_vertex_mom_y1;
+  fAnalysis->fEvent->fPrimary.fInteractionVertexMomentumZ
+    = interaction_vertex_mom_z1;
+  fAnalysis->fEvent->fPrimary.fInteractionVertexMomentumX
+    = interaction_vertex_mom_x2;
+  fAnalysis->fEvent->fPrimary.fInteractionVertexMomentumY
+    = interaction_vertex_mom_y2;
+  fAnalysis->fEvent->fPrimary.fInteractionVertexMomentumZ
+    = interaction_vertex_mom_z2;
+  fAnalysis->fEvent->fPrimary.fThetaCenterOfMass = theta_com;
+  fAnalysis->fEvent->fPrimary.fPhiCenterOfMass = phi_com;
+  fAnalysis->fEvent->fPrimary.fThetaLab1 = theta_lab1;
+  fAnalysis->fEvent->fPrimary.fThetaLab2 = theta_lab2;
+  fAnalysis->fEvent->fPrimary.fPhiLab = phi_com;
+  fAnalysis->fEvent->fPrimary.fCrossSection = D_sigma;
 
 
 
