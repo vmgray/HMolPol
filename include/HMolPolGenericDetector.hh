@@ -15,10 +15,14 @@
 #ifndef HMOLPOLGENERICDETECTOR_HH_
 #define HMOLPOLGENERICDETECTOR_HH_
 
+// System includes
+#include <map>
+
+// Geant4 includes
 #include <G4VSensitiveDetector.hh>
 
-
-#include <map>
+// HMolPol include
+#include "HMolPolGenericDetectorHit.hh"
 
 /*! 
       Default detector class.  This will record information on:
@@ -38,7 +42,7 @@ class G4TouchableHistory;
 class HMolPolGenericDetector : public G4VSensitiveDetector
 {
   public:
-    HMolPolGenericDetector( G4String name, G4int detnum );
+    HMolPolGenericDetector( G4String name);
     virtual ~HMolPolGenericDetector();
 
     virtual void Initialize(G4HCofThisEvent* );
@@ -46,6 +50,12 @@ class HMolPolGenericDetector : public G4VSensitiveDetector
     virtual void EndOfEvent(G4HCofThisEvent* );
 
   private:
+
+    static G4int fNumberOfDetectors;
+
+    HMolPolGenericDetectorHitsCollection *fHitColl;     ///< Hit collection
+    G4int fHitCollID;                                   ///< Hit collection ID
+
 };
 
 #endif /* HMOLPOLGENERICDETECTOR_HH_ */
