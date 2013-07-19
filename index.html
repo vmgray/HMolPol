@@ -248,17 +248,28 @@ Materials</h3>
 <dl class="bug"><dt><b><a class="el" href="de/da5/bug.html#_bug000004">Bug:</a></b></dt><dd>Can we define the materials in a new file outside of <a class="el" href="d1/d72/classHMolPolDetectorConstruction.html#a083f3ae17e46758a5cc673a43b444f05" title="Construct the volume??">HMolPolDetectorConstruction::Construct()</a> it would make it less messy, and it might make a little more sense. </dd></dl>
 <h2><a class="anchor" id="subsec_HSolenoidMagField"></a>
 H Solenoid Mag Field</h2>
-<p>This is where the magnetic field is constructed <a class="el" href="d5/dc4/classHMolPolSolenoidMagField.html#aac3a876fcebddbc284c63053db80ca1e">HMolPolSolenoidMagField::HMolPolSolenoidMagField</a> and created <a class="el" href="d5/dc4/classHMolPolSolenoidMagField.html#a17f409cdc277ceb888feda048ba59052">HMolPolSolenoidMagField::GetFieldValue</a>.</p>
+<p>This is where the magnetic field is constructed <a class="el" href="d0/d3f/group__see.html#gaac3a876fcebddbc284c63053db80ca1e">HMolPolSolenoidMagField::HMolPolSolenoidMagField</a> and created <a class="el" href="d5/dc4/classHMolPolSolenoidMagField.html#a17f409cdc277ceb888feda048ba59052">HMolPolSolenoidMagField::GetFieldValue</a>.</p>
 <dl class="todo"><dt><b><a class="el" href="dd/da0/todo.html#_todo000003">Todo:</a></b></dt><dd>This needs to get a fringe field </dd></dl>
 <h2><a class="anchor" id="subsec_PrimaryGeneratorAction"></a>
 Primary Generator Action</h2>
-<p>Events are generated in <a class="el" href="d5/dc9/classHMolPolPrimaryGeneratorAction.html#a9777d05ea201784dd5fa03af935667b9">HMolPolPrimaryGeneratorAction::GeneratePrimaries</a>. </p>
+<p>Events are generated in <a class="el" href="d5/dc9/classHMolPolPrimaryGeneratorAction.html#a9777d05ea201784dd5fa03af935667b9" title="function to generate">HMolPolPrimaryGeneratorAction::GeneratePrimaries</a>.</p>
+<h1><a class="anchor" id="sec_Root"></a>
+Root</h1>
+<h2><a class="anchor" id="subsec_hmolpolroot"></a>
+hmolpolroot</h2>
+<p>This upon comiling this simulation in ones build folder there will be a exicutable called <b>hmolpolroot</b> this is the HMolPol version of ROOT. This is so that ROOT will understand the stucture that we have created.</p>
+<p>One will notice in the ROOT tree, <b>HMolPol_Tree</b> there are a bunch of leaves with names that look oddly like units. These are units that are part of Geant4. These have been added so that one can make a graph and know exactly what the units are with ease. However to keep this functianlity, one must always work in only internal Geant4 units in the code.</p>
+<p>To get out the units you want in a HMolPol ROOT file all you need to do is divide by the unit you would like the variable to be in. For example if I would like to look at the Theta Center of Mass angle in degrees the I would use:</p>
+<p><b>HMolPol_Tree-&gt;Draw("fPrimary.fThetaCenterOfMass/deg")</b></p>
+<p>but if I wanted to see the same thing, but in radians, I would change this to:</p>
+<p><b>HMolPol_Tree-&gt;Draw("fPrimary.fThetaCenterOfMass/deg")</b></p>
+<p>If there are units that one needs in the hmolpolroot, but are not there, they can be added in the begining of HMolPolEvent::HMolPolEvent. </p>
 </div></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Thu Jul 11 2013 16:46:01 for HMolPol by
+    <li class="footer">Generated on Thu Jul 18 2013 17:37:53 for HMolPol by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.3.1 </li>
   </ul>

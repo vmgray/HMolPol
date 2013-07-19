@@ -125,44 +125,52 @@ $(document).ready(function(){initNavTree('d2/dea/HMolPolPrimaryGeneratorAction_8
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#include &lt;G4ParticleTable.hh&gt;</span></div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">#include &lt;G4VUserPrimaryGeneratorAction.hh&gt;</span></div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="comment">//Geant4 classes</span></div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="keyword">class </span>G4ParticleGun;</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="comment">// HMolPol includes</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor">#include &quot;HMolPolAnalysis.hh&quot;</span></div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;</div>
-<div class="line"><a name="l00024"></a><span class="lineno"><a class="code" href="../../d5/dc9/classHMolPolPrimaryGeneratorAction.html">   24</a></span>&#160;<span class="keyword">class </span><a class="code" href="../../d5/dc9/classHMolPolPrimaryGeneratorAction.html">HMolPolPrimaryGeneratorAction</a> : <span class="keyword">public</span> G4VUserPrimaryGeneratorAction</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;{</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="comment">//Geant4 classes</span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="keyword">class </span>G4ParticleGun;</div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;  <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <span class="comment">//create the constructor and destructor for the primary particle generator</span></div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    <a class="code" href="../../d5/dc9/classHMolPolPrimaryGeneratorAction.html#aeb3cbcd9205e66cc3c2be93b658933ad" title="Purpose: This file is to create the primary generator action. This means that the this generates the ...">HMolPolPrimaryGeneratorAction</a>();</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <span class="keyword">virtual</span> ~<a class="code" href="../../d5/dc9/classHMolPolPrimaryGeneratorAction.html">HMolPolPrimaryGeneratorAction</a>();</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <span class="comment">//function to generate the primary electrons</span></div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="../../d5/dc9/classHMolPolPrimaryGeneratorAction.html#a9777d05ea201784dd5fa03af935667b9">GeneratePrimaries</a>(G4Event* anEvent);</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;  <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00027"></a><span class="lineno"><a class="code" href="../../d5/dc9/classHMolPolPrimaryGeneratorAction.html">   27</a></span>&#160;<span class="keyword">class </span><a class="code" href="../../d5/dc9/classHMolPolPrimaryGeneratorAction.html">HMolPolPrimaryGeneratorAction</a> : <span class="keyword">public</span> G4VUserPrimaryGeneratorAction</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;{</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;  <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    <span class="comment">//create the constructor and destructor for the primary particle generator</span></div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <a class="code" href="../../d5/dc9/classHMolPolPrimaryGeneratorAction.html#ac2cf1709d2102d57918e6f17d12283b5" title="The constructor.">HMolPolPrimaryGeneratorAction</a>(<a class="code" href="../../d8/d0d/classHMolPolAnalysis.html">HMolPolAnalysis</a>* AN); <span class="comment">///&lt; The constructor</span></div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="comment"></span>    <span class="comment">// for the HMolPolPrimaryGeneratorAction class - it gets passed the</span></div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    <span class="comment">// HMolPolAnalysis class so that the histogram will get filled</span></div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    <span class="keyword">virtual</span> <a class="code" href="../../d5/dc9/classHMolPolPrimaryGeneratorAction.html#ac63cf8a6ecdf7c56ce169476fff40956" title="The destructor.">~HMolPolPrimaryGeneratorAction</a>();   <span class="comment">///&lt; The destructor</span></div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="comment"></span>    <span class="comment">// for the HMolPolPrimaryGeneratorAction class</span></div>
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <span class="comment">// Center of mass angles to generate particles between</span><span class="comment"></span></div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="comment">    /// \todo make this so that they are passed and in the messenger</span></div>
-<div class="line"><a name="l00040"></a><span class="lineno"><a class="code" href="../../d5/dc9/classHMolPolPrimaryGeneratorAction.html#aec8a7397137e0c4b24f8b8615ab9fb21">   40</a></span>&#160;<span class="comment"></span>    <span class="keywordtype">double</span> <a class="code" href="../../d5/dc9/classHMolPolPrimaryGeneratorAction.html#aec8a7397137e0c4b24f8b8615ab9fb21">fTheta_com_min</a>; <span class="comment">/// &lt; this is the minimum Theta that electrons</span></div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="comment"></span><span class="comment">    /// will be generated over</span></div>
-<div class="line"><a name="l00042"></a><span class="lineno"><a class="code" href="../../d5/dc9/classHMolPolPrimaryGeneratorAction.html#a017b4c7e9f6ce0feb1934330e4a34ada">   42</a></span>&#160;<span class="comment"></span>    <span class="keywordtype">double</span> <a class="code" href="../../d5/dc9/classHMolPolPrimaryGeneratorAction.html#a017b4c7e9f6ce0feb1934330e4a34ada" title="will be generated over">fTheta_com_max</a>; <span class="comment">/// &lt; this is the minimum Theta that electrons</span></div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="comment"></span><span class="comment">    /// will be generated over</span></div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="comment"></span></div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <span class="comment">//the primary generation of the primary electrons</span><span class="comment"></span></div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="comment">    /// \todo why does doxygen not want this documented??</span></div>
-<div class="line"><a name="l00047"></a><span class="lineno"><a class="code" href="../../d5/dc9/classHMolPolPrimaryGeneratorAction.html#a81ed4263f1bb7c2c433fc5d04869a7f1">   47</a></span>&#160;<span class="comment"></span>    G4ParticleGun* <a class="code" href="../../d5/dc9/classHMolPolPrimaryGeneratorAction.html#a81ed4263f1bb7c2c433fc5d04869a7f1" title="will be generated over">fParticleGun</a>;</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;};</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <span class="comment">//function to generate the primary electrons</span></div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="../../d5/dc9/classHMolPolPrimaryGeneratorAction.html#a9777d05ea201784dd5fa03af935667b9" title="function to generate">GeneratePrimaries</a>(G4Event* anEvent);  <span class="comment">///&lt; function to generate</span></div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="comment"></span>    <span class="comment">// primary electrons</span></div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;  <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <span class="comment">// Center of mass angles to generate particles between</span><span class="comment"></span></div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="comment">    /// \todo make this so that they are passed and in the messenger</span></div>
+<div class="line"><a name="l00047"></a><span class="lineno"><a class="code" href="../../d5/dc9/classHMolPolPrimaryGeneratorAction.html#aec8a7397137e0c4b24f8b8615ab9fb21">   47</a></span>&#160;<span class="comment"></span>    <span class="keywordtype">double</span> <a class="code" href="../../d5/dc9/classHMolPolPrimaryGeneratorAction.html#aec8a7397137e0c4b24f8b8615ab9fb21">fTheta_com_min</a>; <span class="comment">/// &lt; this is the minimum Theta that electrons</span></div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="comment"></span><span class="comment">    /// will be generated over</span></div>
+<div class="line"><a name="l00049"></a><span class="lineno"><a class="code" href="../../d5/dc9/classHMolPolPrimaryGeneratorAction.html#a017b4c7e9f6ce0feb1934330e4a34ada">   49</a></span>&#160;<span class="comment"></span>    <span class="keywordtype">double</span> <a class="code" href="../../d5/dc9/classHMolPolPrimaryGeneratorAction.html#a017b4c7e9f6ce0feb1934330e4a34ada" title="will be generated over">fTheta_com_max</a>; <span class="comment">/// &lt; this is the minimum Theta that electrons</span></div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="comment"></span><span class="comment">    /// will be generated over</span></div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    <span class="comment">//the primary generation of the primary electrons</span><span class="comment"></span></div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="comment">    /// \todo why does doxygen not want this documented?? and are these right?</span></div>
+<div class="line"><a name="l00054"></a><span class="lineno"><a class="code" href="../../d5/dc9/classHMolPolPrimaryGeneratorAction.html#a81ed4263f1bb7c2c433fc5d04869a7f1">   54</a></span>&#160;<span class="comment"></span>    G4ParticleGun* <a class="code" href="../../d5/dc9/classHMolPolPrimaryGeneratorAction.html#a81ed4263f1bb7c2c433fc5d04869a7f1" title="will be generated over">fParticleGun</a>; <span class="comment">///&lt; the ParticleGun class</span></div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00056"></a><span class="lineno"><a class="code" href="../../d5/dc9/classHMolPolPrimaryGeneratorAction.html#ab54cd7e73b83ae2f22420c81661daf3c">   56</a></span>&#160;    <a class="code" href="../../d8/d0d/classHMolPolAnalysis.html">HMolPolAnalysis</a>* <a class="code" href="../../d5/dc9/classHMolPolPrimaryGeneratorAction.html#ab54cd7e73b83ae2f22420c81661daf3c" title="the analysis class">fAnalysis</a>;  <span class="comment">///&lt; the analysis class</span></div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="comment"></span>};</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="preprocessor">#endif</span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="../../dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><b>HMolPolPrimaryGeneratorAction.hh</b></li>
-    <li class="footer">Generated on Thu Jul 11 2013 16:46:00 for HMolPol by
+    <li class="footer">Generated on Thu Jul 18 2013 17:37:52 for HMolPol by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="../../doxygen.png" alt="doxygen"/></a> 1.8.3.1 </li>
   </ul>

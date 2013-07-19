@@ -1,7 +1,26 @@
 var searchData=
 [
+  ['fanalysis',['fAnalysis',['../d5/dc9/classHMolPolPrimaryGeneratorAction.html#ab54cd7e73b83ae2f22420c81661daf3c',1,'HMolPolPrimaryGeneratorAction']]],
+  ['fbeamenergy',['fBeamEnergy',['../d8/d0d/classHMolPolAnalysis.html#a8127640edb3aafac1b7f26f4ccdea75e',1,'HMolPolAnalysis']]],
+  ['fcrosssection',['fCrossSection',['../d1/d40/classHMolPolPrimaryEvent.html#abf09a5d33ef6aa8a4157f684e511241e',1,'HMolPolPrimaryEvent']]],
+  ['fevent',['fEvent',['../d8/d0d/classHMolPolAnalysis.html#ad0ba4156f3e3b6e0f051b9a02c25e6d9',1,'HMolPolAnalysis']]],
+  ['feventnumber',['fEventNumber',['../dd/dd3/group__root.html#ga19940d64b74dd08d10fc7173e1fdb4a1',1,'HMolPolEvent']]],
+  ['fexists',['fExists',['../db/da5/classHMolPolRint.html#ac2674f7a6f59346637e119d2b15faa79',1,'HMolPolRint']]],
   ['fgdmlparser',['fGDMLParser',['../d1/d72/classHMolPolDetectorConstruction.html#a2000c253bfba234d86806b672c483fc2',1,'HMolPolDetectorConstruction']]],
+  ['finteractionvertexmomentumx',['fInteractionVertexMomentumX',['../d1/d40/classHMolPolPrimaryEvent.html#aa9e12beef6fed6524b1fbee6b9cf8f52',1,'HMolPolPrimaryEvent']]],
+  ['finteractionvertexmomentumy',['fInteractionVertexMomentumY',['../d1/d40/classHMolPolPrimaryEvent.html#adcd72bf8912465e10855df06a9ee766f',1,'HMolPolPrimaryEvent']]],
+  ['finteractionvertexmomentumz',['fInteractionVertexMomentumZ',['../d1/d40/classHMolPolPrimaryEvent.html#a512ec0b739d564ed23d383dc9a0f96c0',1,'HMolPolPrimaryEvent']]],
+  ['finteractionvertexpositionx',['fInteractionVertexPositionX',['../d1/d40/classHMolPolPrimaryEvent.html#a061f911385bb85cbf5e805896931753c',1,'HMolPolPrimaryEvent']]],
+  ['finteractionvertexpositiony',['fInteractionVertexPositionY',['../d1/d40/classHMolPolPrimaryEvent.html#addfd510e83d73694c99779624c4a7ee0',1,'HMolPolPrimaryEvent']]],
+  ['finteractionvertexpositionz',['fInteractionVertexPositionZ',['../d1/d40/classHMolPolPrimaryEvent.html#a6a6a910815654fe243003056080f8038',1,'HMolPolPrimaryEvent']]],
   ['fparticlegun',['fParticleGun',['../d5/dc9/classHMolPolPrimaryGeneratorAction.html#a81ed4263f1bb7c2c433fc5d04869a7f1',1,'HMolPolPrimaryGeneratorAction']]],
+  ['fphicenterofmass',['fPhiCenterOfMass',['../d1/d40/classHMolPolPrimaryEvent.html#a8563ce22c15d7ad18b6f463839f2da97',1,'HMolPolPrimaryEvent']]],
+  ['fphilab',['fPhiLab',['../d1/d40/classHMolPolPrimaryEvent.html#ace25fd84ebd1ed810b4843930d6a9d97',1,'HMolPolPrimaryEvent']]],
+  ['fprimary',['fPrimary',['../db/da0/classHMolPolEvent.html#af504b9e26d959109cd7125574a2fec1d',1,'HMolPolEvent']]],
+  ['frunnumber',['fRunNumber',['../d8/d0d/classHMolPolAnalysis.html#ab4554a5e88203a005dd5ea2a136bed7e',1,'HMolPolAnalysis']]],
   ['ftheta_5fcom_5fmax',['fTheta_com_max',['../d5/dc9/classHMolPolPrimaryGeneratorAction.html#a017b4c7e9f6ce0feb1934330e4a34ada',1,'HMolPolPrimaryGeneratorAction']]],
-  ['ftheta_5fcom_5fmin',['fTheta_com_min',['../d5/dc9/classHMolPolPrimaryGeneratorAction.html#aec8a7397137e0c4b24f8b8615ab9fb21',1,'HMolPolPrimaryGeneratorAction']]]
+  ['ftheta_5fcom_5fmin',['fTheta_com_min',['../d5/dc9/classHMolPolPrimaryGeneratorAction.html#aec8a7397137e0c4b24f8b8615ab9fb21',1,'HMolPolPrimaryGeneratorAction']]],
+  ['fthetacenterofmass',['fThetaCenterOfMass',['../d1/d40/classHMolPolPrimaryEvent.html#aff1d7684dc348ac990ffc30ddcc6b83b',1,'HMolPolPrimaryEvent']]],
+  ['fthetalab1',['fThetaLab1',['../d1/d40/classHMolPolPrimaryEvent.html#a5516f82e88137deedd35a6824e8baf59',1,'HMolPolPrimaryEvent']]],
+  ['fthetalab2',['fThetaLab2',['../d1/d40/classHMolPolPrimaryEvent.html#a07e7b50416b2735e29fe718450a26e3b',1,'HMolPolPrimaryEvent']]]
 ];

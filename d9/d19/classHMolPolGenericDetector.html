@@ -106,7 +106,7 @@ $(document).ready(function(){initNavTree('d9/d19/classHMolPolGenericDetector.htm
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="#pri-attribs">Private Attributes</a> &#124;
+<a href="#pri-static-attribs">Static Private Attributes</a> &#124;
 <a href="../../de/d32/classHMolPolGenericDetector-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">HMolPolGenericDetector Class Reference</div>  </div>
@@ -123,9 +123,9 @@ Inheritance diagram for HMolPolGenericDetector:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a7b50e8dac1f8b496dacc2e3a9568c4fe"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a7b50e8dac1f8b496dacc2e3a9568c4fe"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>HMolPolGenericDetector</b> (G4String name, G4int detnum)</td></tr>
-<tr class="separator:a7b50e8dac1f8b496dacc2e3a9568c4fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad8b5111569fa52fba83b2137bad0092c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad8b5111569fa52fba83b2137bad0092c"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>HMolPolGenericDetector</b> (G4String name)</td></tr>
+<tr class="separator:ad8b5111569fa52fba83b2137bad0092c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab97a525150d8e41a7847eb076066782d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab97a525150d8e41a7847eb076066782d"></a>
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>Initialize</b> (G4HCofThisEvent *)</td></tr>
 <tr class="separator:ab97a525150d8e41a7847eb076066782d"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -136,34 +136,15 @@ virtual G4bool&#160;</td><td class="memItemRight" valign="bottom"><b>ProcessHits
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>EndOfEvent</b> (G4HCofThisEvent *)</td></tr>
 <tr class="separator:a309fbc15a7cbf69aba0c6104efebfcb7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
-Private Attributes</h2></td></tr>
-<tr class="memitem:af8a2807c4ff7a36b7f0adeaf776a703b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af8a2807c4ff7a36b7f0adeaf776a703b"></a>
-HMolPolGenericDetectorHitsCollection *&#160;</td><td class="memItemRight" valign="bottom"><b>fHitColl</b></td></tr>
-<tr class="separator:af8a2807c4ff7a36b7f0adeaf776a703b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a765bca6fce72f01e069f9b7061349f12"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a765bca6fce72f01e069f9b7061349f12"></a>
-HMolPolGenericDetectorSumCollection *&#160;</td><td class="memItemRight" valign="bottom"><b>fSumColl</b></td></tr>
-<tr class="separator:a765bca6fce72f01e069f9b7061349f12"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acdc1b85533213d3c3fc15f447169a9da"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="acdc1b85533213d3c3fc15f447169a9da"></a>
-G4int&#160;</td><td class="memItemRight" valign="bottom"><b>fHCID</b></td></tr>
-<tr class="separator:acdc1b85533213d3c3fc15f447169a9da"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a18e18588e33c8ddbd92917242742ea7f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a18e18588e33c8ddbd92917242742ea7f"></a>
-G4int&#160;</td><td class="memItemRight" valign="bottom"><b>fSCID</b></td></tr>
-<tr class="separator:a18e18588e33c8ddbd92917242742ea7f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae2fb89ee98e475da1f30cdc03be1fe32"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae2fb89ee98e475da1f30cdc03be1fe32"></a>
-std::map&lt; int, <br class="typebreak"/>
-<a class="el" href="../../d6/d3b/classHMolPolGenericDetectorSum.html">HMolPolGenericDetectorSum</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>fSumMap</b></td></tr>
-<tr class="separator:ae2fb89ee98e475da1f30cdc03be1fe32"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a18504ab13ee4c46fde0d9d711bb51772"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a18504ab13ee4c46fde0d9d711bb51772"></a>
-G4bool&#160;</td><td class="memItemRight" valign="bottom"><b>fTrackSecondaries</b></td></tr>
-<tr class="separator:a18504ab13ee4c46fde0d9d711bb51772"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6cf37e17ce935cbac41e303f40b253e3"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6cf37e17ce935cbac41e303f40b253e3"></a>
-G4int&#160;</td><td class="memItemRight" valign="bottom"><b>fDetNo</b></td></tr>
-<tr class="separator:a6cf37e17ce935cbac41e303f40b253e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-static-attribs"></a>
+Static Private Attributes</h2></td></tr>
+<tr class="memitem:a08bafc966d1fb95e65b2ce533bdd7207"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a08bafc966d1fb95e65b2ce533bdd7207"></a>
+static G4int&#160;</td><td class="memItemRight" valign="bottom"><b>fNumberOfDetectors</b> = 0</td></tr>
+<tr class="separator:a08bafc966d1fb95e65b2ce533bdd7207"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock">
-<p>Definition at line <a class="el" href="../../de/df3/HMolPolGenericDetector_8hh_source.html#l00039">39</a> of file <a class="el" href="../../de/df3/HMolPolGenericDetector_8hh_source.html">HMolPolGenericDetector.hh</a>.</p>
+<p>Definition at line <a class="el" href="../../de/df3/HMolPolGenericDetector_8hh_source.html#l00038">38</a> of file <a class="el" href="../../de/df3/HMolPolGenericDetector_8hh_source.html">HMolPolGenericDetector.hh</a>.</p>
 </div><hr/>The documentation for this class was generated from the following files:<ul>
 <li>include/<a class="el" href="../../de/df3/HMolPolGenericDetector_8hh_source.html">HMolPolGenericDetector.hh</a></li>
 <li>src/<a class="el" href="../../dc/d3e/HMolPolGenericDetector_8cc_source.html">HMolPolGenericDetector.cc</a></li>
@@ -174,7 +155,7 @@ G4int&#160;</td><td class="memItemRight" valign="bottom"><b>fDetNo</b></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="../../d9/d19/classHMolPolGenericDetector.html">HMolPolGenericDetector</a></li>
-    <li class="footer">Generated on Thu Jul 11 2013 16:46:01 for HMolPol by
+    <li class="footer">Generated on Thu Jul 18 2013 17:37:53 for HMolPol by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="../../doxygen.png" alt="doxygen"/></a> 1.8.3.1 </li>
   </ul>

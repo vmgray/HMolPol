@@ -123,8 +123,8 @@ Inheritance diagram for HMolPolSolenoidMagField:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:aac3a876fcebddbc284c63053db80ca1e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/dc4/classHMolPolSolenoidMagField.html#aac3a876fcebddbc284c63053db80ca1e">HMolPolSolenoidMagField</a> ()</td></tr>
-<tr class="separator:aac3a876fcebddbc284c63053db80ca1e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaac3a876fcebddbc284c63053db80ca1e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/d3f/group__see.html#gaac3a876fcebddbc284c63053db80ca1e">HMolPolSolenoidMagField</a> ()</td></tr>
+<tr class="separator:gaac3a876fcebddbc284c63053db80ca1e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a17f409cdc277ceb888feda048ba59052"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/dc4/classHMolPolSolenoidMagField.html#a17f409cdc277ceb888feda048ba59052">GetFieldValue</a> (const G4double Point[4], G4double *Bfield) const </td></tr>
 <tr class="separator:a17f409cdc277ceb888feda048ba59052"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -146,34 +146,7 @@ G4double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock">
 <p>Definition at line <a class="el" href="../../de/d33/HMolPolHSolenoidMagField_8hh_source.html#l00016">16</a> of file <a class="el" href="../../de/d33/HMolPolHSolenoidMagField_8hh_source.html">HMolPolHSolenoidMagField.hh</a>.</p>
-</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a class="anchor" id="aac3a876fcebddbc284c63053db80ca1e"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">HMolPolSolenoidMagField::HMolPolSolenoidMagField </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<dl class="section see"><dt>See Also</dt><dd>as defined in Moller Polarimetry with Atomic Hydrogen Targets by E.~Chudakov and V.~Luppov(long) pg 9 </dd></dl>
-
-<p>Definition at line <a class="el" href="../../d2/d77/HMolPolHSolenoidMagField_8cc_source.html#l00036">36</a> of file <a class="el" href="../../d2/d77/HMolPolHSolenoidMagField_8cc_source.html">HMolPolHSolenoidMagField.cc</a>.</p>
-<div class="fragment"><div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;{</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;  <a class="code" href="../../d5/dc4/classHMolPolSolenoidMagField.html#ab692d115cdfb901bc4978d6384c6caca" title="constant magnetic field in Z direction">Bz</a> = 8.0*tesla;  <span class="comment">// this is the stenght of the magnetic</span></div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;  <span class="comment">//Z B field value of 8 Tesla</span><span class="comment"></span></div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="comment">  /// \see as defined in Moller Polarimetry with Atomic Hydrogen Targets</span></div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="comment">  /// by E.~Chudakov and V.~Luppov(long) pg 9</span></div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="comment"></span>  <a class="code" href="../../d5/dc4/classHMolPolSolenoidMagField.html#a848d5947591a127febc4ff62570bf678" title="constant the radius of the magnetic field">rmax_sq</a> = std::pow(30.0*cm,2); <span class="comment">// square of the radius for the field</span></div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;  <a class="code" href="../../d5/dc4/classHMolPolSolenoidMagField.html#a8927b0d66c85861a0a9792f0b1f2ed36" title="constant for the max z length of the magnetic field">zmax</a> = 25.0*cm;  <span class="comment">// this is half of the z length that the field is in</span></div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;}</div>
-</div><!-- fragment -->
-</div>
-</div>
-<h2 class="groupheader">Member Function Documentation</h2>
+</div><h2 class="groupheader">Member Function Documentation</h2>
 <a class="anchor" id="a17f409cdc277ceb888feda048ba59052"></a>
 <div class="memitem">
 <div class="memproto">
@@ -197,24 +170,28 @@ G4double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="
         </tr>
       </table>
 </div><div class="memdoc">
-<dl class="todo"><dt><b><a class="el" href="../../dd/da0/todo.html#_todo000008">Todo:</a></b></dt><dd>What if field is not located at the origin </dd></dl>
+<dl class="todo"><dt><b><a class="el" href="../../dd/da0/todo.html#_todo000009">Todo:</a></b></dt><dd>What if field is not located at the origin </dd></dl>
 
-<p>Definition at line <a class="el" href="../../d2/d77/HMolPolHSolenoidMagField_8cc_source.html#l00066">66</a> of file <a class="el" href="../../d2/d77/HMolPolHSolenoidMagField_8cc_source.html">HMolPolHSolenoidMagField.cc</a>.</p>
-<div class="fragment"><div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;{</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;  Bfield[0] = 0.0;  <span class="comment">//x direction of B field</span></div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;  Bfield[1] = 0.0;  <span class="comment">//y direction of B field</span></div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;  <span class="comment">//Where is point[i] set?</span><span class="comment"></span></div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<span class="comment">  /// \todo What if field is not located at the origin</span></div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<span class="comment"></span></div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;  <span class="comment">//if you are in with in +/- zmax AND you are located</span></div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;  <span class="comment">// a radius of X^2 + y^2 or less from the z axis where the filed is placed</span></div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;  <span class="comment">// the set the B field to Bz otherwise leave it be.</span></div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;  <span class="keywordflow">if</span>(std::abs(Point[2])&lt;<a class="code" href="../../d5/dc4/classHMolPolSolenoidMagField.html#a8927b0d66c85861a0a9792f0b1f2ed36" title="constant for the max z length of the magnetic field">zmax</a> &amp;&amp;</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;      (std::pow(Point[0],2) + std::pow(Point[1],2))&lt;<a class="code" href="../../d5/dc4/classHMolPolSolenoidMagField.html#a848d5947591a127febc4ff62570bf678" title="constant the radius of the magnetic field">rmax_sq</a>)</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;  { Bfield[2] = <a class="code" href="../../d5/dc4/classHMolPolSolenoidMagField.html#ab692d115cdfb901bc4978d6384c6caca" title="constant magnetic field in Z direction">Bz</a>; }</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;  <span class="keywordflow">else</span></div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;  { Bfield[2] = 0.; }</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;}</div>
+<p>Definition at line <a class="el" href="../../d2/d77/HMolPolHSolenoidMagField_8cc_source.html#l00068">68</a> of file <a class="el" href="../../d2/d77/HMolPolHSolenoidMagField_8cc_source.html">HMolPolHSolenoidMagField.cc</a>.</p>
+<div class="fragment"><div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;{</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;  Bfield[0] = 0.0;  <span class="comment">//x direction of B field</span></div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;  Bfield[1] = 0.0;  <span class="comment">//y direction of B field</span></div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;  <span class="comment">//Where is point[i] set?</span><span class="comment"></span></div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="comment">  /// \todo What if field is not located at the origin</span></div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;  <span class="comment">//if you are in with in +/- zmax AND you are located</span></div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;  <span class="comment">// a radius of X^2 + y^2 or less from the z axis where the filed is placed</span></div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;  <span class="comment">// the set the B field to Bz otherwise leave it be.</span></div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;  <span class="keywordflow">if</span>(std::abs(Point[2])&lt;<a class="code" href="../../d5/dc4/classHMolPolSolenoidMagField.html#a8927b0d66c85861a0a9792f0b1f2ed36" title="constant for the max z length of the magnetic field">zmax</a> &amp;&amp;</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;      (std::pow(Point[0],2) + std::pow(Point[1],2))&lt;<a class="code" href="../../d5/dc4/classHMolPolSolenoidMagField.html#a848d5947591a127febc4ff62570bf678" title="constant the radius of the magnetic field">rmax_sq</a>)</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;  {</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    Bfield[2] = <a class="code" href="../../d5/dc4/classHMolPolSolenoidMagField.html#ab692d115cdfb901bc4978d6384c6caca" title="constant magnetic field in Z direction">Bz</a>;</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;  }</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;  <span class="keywordflow">else</span></div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;  {</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    Bfield[2] = 0.;</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;  }</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -228,7 +205,7 @@ G4double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="../../d5/dc4/classHMolPolSolenoidMagField.html">HMolPolSolenoidMagField</a></li>
-    <li class="footer">Generated on Thu Jul 11 2013 16:46:01 for HMolPol by
+    <li class="footer">Generated on Thu Jul 18 2013 17:37:53 for HMolPol by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="../../doxygen.png" alt="doxygen"/></a> 1.8.3.1 </li>
   </ul>

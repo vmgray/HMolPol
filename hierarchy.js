@@ -6,9 +6,14 @@ var hierarchy =
     [ "G4UImessenger", null, [
       [ "HMolPolMessenger", "d8/d42/classHMolPolMessenger.html", null ]
     ] ],
+    [ "G4UserEventAction", null, [
+      [ "HMolPolEventAction", "dc/d3f/classHMolPolEventAction.html", null ]
+    ] ],
+    [ "G4UserRunAction", null, [
+      [ "HMolPolRunAction", "de/d45/classHMolPolRunAction.html", null ]
+    ] ],
     [ "G4VHit", null, [
-      [ "HMolPolGenericDetectorHit", "d4/dce/classHMolPolGenericDetectorHit.html", null ],
-      [ "HMolPolGenericDetectorSum", "d6/d3b/classHMolPolGenericDetectorSum.html", null ]
+      [ "HMolPolGenericDetectorHit", "d4/dce/classHMolPolGenericDetectorHit.html", null ]
     ] ],
     [ "G4VSensitiveDetector", null, [
       [ "HMolPolGenericDetector", "d9/d19/classHMolPolGenericDetector.html", null ]
@@ -21,6 +26,11 @@ var hierarchy =
     ] ],
     [ "HMolPolAnalysis", "d8/d0d/classHMolPolAnalysis.html", null ],
     [ "TObject", null, [
-      [ "HMolPolUserMainEvent", "dd/d94/classHMolPolUserMainEvent.html", null ]
+      [ "HMolPolEvent", "db/da0/classHMolPolEvent.html", null ],
+      [ "HMolPolPrimaryEvent", "d1/d40/classHMolPolPrimaryEvent.html", null ],
+      [ "HMolPolRunInformation", "dc/ddf/classHMolPolRunInformation.html", null ]
+    ] ],
+    [ "TRint", null, [
+      [ "HMolPolRint", "db/da5/classHMolPolRint.html", null ]
     ] ]
 ];

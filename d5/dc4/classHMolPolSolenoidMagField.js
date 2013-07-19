@@ -1,6 +1,6 @@
 var classHMolPolSolenoidMagField =
 [
-    [ "HMolPolSolenoidMagField", "d5/dc4/classHMolPolSolenoidMagField.html#aac3a876fcebddbc284c63053db80ca1e", null ],
+    [ "HMolPolSolenoidMagField", "d0/d3f/group__see.html#gaac3a876fcebddbc284c63053db80ca1e", null ],
     [ "~HMolPolSolenoidMagField", "d5/dc4/classHMolPolSolenoidMagField.html#a1a71bfcc655d1791707a91b6616fb1a5", null ],
     [ "GetFieldValue", "d5/dc4/classHMolPolSolenoidMagField.html#a17f409cdc277ceb888feda048ba59052", null ],
     [ "Bz", "d5/dc4/classHMolPolSolenoidMagField.html#ab692d115cdfb901bc4978d6384c6caca", null ],

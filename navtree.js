@@ -26,6 +26,9 @@ var NAVTREE =
         ] ],
         [ "H Solenoid Mag Field", "index.html#subsec_HSolenoidMagField", null ],
         [ "Primary Generator Action", "index.html#subsec_PrimaryGeneratorAction", null ]
+      ] ],
+      [ "Root", "index.html#sec_Root", [
+        [ "hmolpolroot", "index.html#subsec_hmolpolroot", null ]
       ] ]
     ] ],
     [ "Todo List", "dd/da0/todo.html", null ],
