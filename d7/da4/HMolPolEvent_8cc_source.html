@@ -163,40 +163,36 @@ $(document).ready(function(){initNavTree('d7/da4/HMolPolEvent_8cc_source.html','
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;  nsec(CLHEP::ns),</div>
 <div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;  msec(CLHEP::ms),</div>
 <div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;  sec(CLHEP::s),</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;  tesla(CLHEP::tesla)</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;  Tesla(CLHEP::tesla)</div>
 <div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;{</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;  <span class="comment">// Create primary vertex information object</span></div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;  fPrimary = <span class="keyword">new</span> <a class="code" href="../../d1/d40/classHMolPolPrimaryEvent.html">HMolPolPrimaryEvent</a>();</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;  <span class="comment">// Initialization</span></div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;  fEventNumber = 0;</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;}</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="comment">/********************************************</span></div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="comment"> * Programmer: Valerie Gray</span></div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="comment"> * Function: ~HMolPolEvent</span></div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="comment"> *</span></div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<span class="comment"> * Purpose: to destruct the HMolPolEvent</span></div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<span class="comment"> *</span></div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="comment"> * Global:</span></div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="comment"> * Entry Conditions:</span></div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="comment"> * Return:</span></div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="comment"> * Called By:</span></div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="comment"> * Date: 07-11-2013</span></div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;<span class="comment"> * Modified:</span></div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;<span class="comment"> ********************************************/</span></div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;HMolPolEvent::~HMolPolEvent()</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;{</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;  <span class="comment">// Delete objects</span></div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;  <span class="keywordflow">if</span> (<a class="code" href="../../db/da0/classHMolPolEvent.html#af504b9e26d959109cd7125574a2fec1d" title="object containing primary particle info">fPrimary</a>) <span class="keyword">delete</span> <a class="code" href="../../db/da0/classHMolPolEvent.html#af504b9e26d959109cd7125574a2fec1d" title="object containing primary particle info">fPrimary</a>;</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;}</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;  <span class="comment">// Initialization</span></div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;  fEventNumber = 0;</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;}</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="comment">/********************************************</span></div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="comment"> * Programmer: Valerie Gray</span></div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="comment"> * Function: ~HMolPolEvent</span></div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="comment"> * Purpose: to destruct the HMolPolEvent</span></div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="comment"> * Global:</span></div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<span class="comment"> * Entry Conditions:</span></div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<span class="comment"> * Return:</span></div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="comment"> * Called By:</span></div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="comment"> * Date: 07-11-2013</span></div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="comment"> * Modified:</span></div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="comment"> ********************************************/</span></div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;HMolPolEvent::~HMolPolEvent()</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;{</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;}</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="../../dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><b>HMolPolEvent.cc</b></li>
-    <li class="footer">Generated on Thu Jul 18 2013 17:37:52 for HMolPol by
+    <li class="footer">Generated on Tue Jul 23 2013 09:26:17 for HMolPol by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="../../doxygen.png" alt="doxygen"/></a> 1.8.3.1 </li>
   </ul>

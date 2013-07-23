@@ -181,147 +181,149 @@ $(document).ready(function(){initNavTree('d5/d84/HMolPolAnalysis_8cc_source.html
 <div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;  <span class="keywordflow">if</span> (fRootTree)     <span class="keyword">delete</span> fRootTree;</div>
 <div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;  <span class="keywordflow">if</span> (fRootBranch)   <span class="keyword">delete</span> fRootBranch;</div>
 <div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;  <span class="keywordflow">if</span> (fRootFile)     <span class="keyword">delete</span> fRootFile;</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;}</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;<span class="comment">/********************************************</span></div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;<span class="comment"> * Programmer: Valerie Gray</span></div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;<span class="comment"> * Function: BeginOfRun</span></div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<span class="comment"> *</span></div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;<span class="comment"> * Purpose:  Set up what should be done at the beginning of a run.</span></div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;<span class="comment"> *</span></div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;<span class="comment"> * \define run is a set of events for which a whole root file is produced.</span></div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;<span class="comment"> *      i.e. if one has /run/beamOn/ 1000 then a run is 100 fired electrons</span></div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;}</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;<span class="comment">/********************************************</span></div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;<span class="comment"> * Programmer: Valerie Gray</span></div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<span class="comment"> * Function: BeginOfRun</span></div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;<span class="comment"> * Purpose:  Set up what should be done at the beginning of a run.</span></div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;<span class="comment"> * \define run is a set of events for which a whole root file is produced.</span></div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;<span class="comment"> *      i.e. if one has /run/beamOn/ 1000 then a run is 100 fired electrons</span></div>
 <div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;<span class="comment"> *</span></div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;<span class="comment"> * Global:</span></div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;<span class="comment"> * Entry Conditions: const G4Run* aRun</span></div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;<span class="comment"> * Return:</span></div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;<span class="comment"> * Called By:</span></div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;<span class="comment"> * Date: 07-11-2013</span></div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;<span class="comment"> * Modified:</span></div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;<span class="comment"> ********************************************/</span></div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;<span class="keywordtype">void</span> HMolPolAnalysis::BeginOfRun(<span class="keyword">const</span> G4Run* aRun)</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;{</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;  G4cout &lt;&lt; <span class="stringliteral">&quot;At begin of run&quot;</span> &lt;&lt; G4endl;</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;  <span class="comment">// Get run number</span></div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;  G4int runID = aRun-&gt;GetRunID();</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;  <span class="comment">// Construct file name if not set explicitly</span></div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;  <span class="comment">// This is from the default name and the number of times one had</span></div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;  <span class="comment">// simulated a run in the present session of HMolPol (starting with 0)</span></div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;  <span class="keywordflow">if</span> (fRootFileName.size() == 0)</div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;    fRootFileName = fRootFileStem + <span class="stringliteral">&quot;_&quot;</span> + Form(<span class="stringliteral">&quot;%d&quot;</span>,runID) + <span class="stringliteral">&quot;.root&quot;</span>;</div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;</div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;  <span class="comment">// Create ROOT file</span></div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;  G4cout &lt;&lt; <span class="stringliteral">&quot;###### Analysis: creating ROOT file &quot;</span> &lt;&lt; fRootFileName &lt;&lt; G4endl;</div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;  fRootFile = <span class="keyword">new</span> TFile(fRootFileName,<span class="stringliteral">&quot;RECREATE&quot;</span>,<span class="stringliteral">&quot;HMolPol ROOT file&quot;</span>);</div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;  ConstructRootTree();</div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;}</div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;</div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;<span class="comment">/********************************************</span></div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;<span class="comment"> * Programmer: Valerie Gray</span></div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;<span class="comment"> * Function: EndOfRun</span></div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;<span class="comment"> *</span></div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;<span class="comment"> * Purpose:  Say you are at the end of a run</span></div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;<span class="comment"> *</span></div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;<span class="comment"> * Global:</span></div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;<span class="comment"> * Entry Conditions: const G4Run* aRun</span></div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;<span class="comment"> * Return:</span></div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;<span class="comment"> * Called By:</span></div>
-<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;<span class="comment"> * Date: 07-11-2013</span></div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;<span class="comment"> * Modified:</span></div>
-<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;<span class="comment"> ********************************************/</span></div>
-<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;<span class="keywordtype">void</span> HMolPolAnalysis::EndOfRun(<span class="keyword">const</span> G4Run* aRun)</div>
-<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;{</div>
-<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;  G4cout &lt;&lt; <span class="stringliteral">&quot;At end of run&quot;</span> &lt;&lt; G4endl;</div>
-<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;</div>
-<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;  <span class="comment">// Autosave one last time</span></div>
-<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;  <a class="code" href="../../d8/d0d/classHMolPolAnalysis.html#a820010f3c501b42985600364a33fca0c">AutoSaveRootTree</a>();</div>
-<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;</div>
-<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;  <span class="comment">// Write the data to the ROOT file</span></div>
-<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;  G4cout &lt;&lt; <span class="stringliteral">&quot;###### Analysis: closing ROOT file &quot;</span> &lt;&lt; fRootFileName &lt;&lt; G4endl;</div>
-<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;  fRootFile-&gt;Write(0,TObject::kOverwrite);</div>
-<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;  fRootFile-&gt;Close();</div>
-<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;  fRootFileName = <span class="stringliteral">&quot;&quot;</span>;</div>
-<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;}</div>
-<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;</div>
-<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;<span class="comment">/********************************************</span></div>
-<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;<span class="comment"> * Programmer: Valerie Gray</span></div>
-<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;<span class="comment"> * Function: ConstructRootTree</span></div>
-<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;<span class="comment"> *</span></div>
-<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;<span class="comment"> * Purpose:  Construct the actual ROOT tree in the ROOT file that</span></div>
-<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;<span class="comment"> *      was created earlier</span></div>
-<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;<span class="comment"> *</span></div>
-<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;<span class="comment"> * Global:</span></div>
-<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;<span class="comment"> * Entry Conditions:</span></div>
-<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;<span class="comment"> * Return:</span></div>
-<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;<span class="comment"> * Called By:</span></div>
-<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;<span class="comment"> * Date: 07-11-2013</span></div>
-<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;<span class="comment"> * Modified:</span></div>
-<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;<span class="comment"> ********************************************/</span></div>
-<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;<span class="keywordtype">void</span> HMolPolAnalysis::ConstructRootTree()</div>
-<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;{</div>
-<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;  <span class="comment">// Create ROOT tree and give it a name</span></div>
-<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;  <span class="comment">// the tree name will be HMolPol_Tree in the ROOT file</span></div>
-<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;  fRootTree = <span class="keyword">new</span> TTree(<span class="stringliteral">&quot;HMolPol_Tree&quot;</span>,<span class="stringliteral">&quot;HMolPol Simulation Tree&quot;</span>);</div>
-<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;</div>
-<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;  <span class="comment">// Save the file after so many bytes. Avoids complete data loss after crash</span></div>
-<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;  <span class="comment">//fRootTree -&gt;SetAutoSave(1000000);  //AutoSave after every 1 Mbyte written to disk</span></div>
-<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;</div>
-<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;<span class="comment">// \todo I have no idea what the next lines means (till end)</span></div>
-<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;  <span class="comment">// Instance of data structure to be written into ROOT file</span></div>
-<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;  <span class="comment">//fRootEvent  = new HMolPolEvent();</span></div>
-<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;</div>
-<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;  <span class="comment">// Create a branch with the data structure defined by fRootEvent</span></div>
-<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;  <span class="comment">// THE QWEAK WAY OF LIFE</span></div>
-<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;  <span class="keywordtype">int</span> bufsize = 64000;</div>
-<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;  <span class="keywordtype">int</span> split   = 99;</div>
-<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;  fRootBranch = fRootTree-&gt;Branch(<span class="stringliteral">&quot;HMolPolEvent&quot;</span>,</div>
-<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;      <span class="stringliteral">&quot;HMolPolEvent&quot;</span>, &amp;<a class="code" href="../../d8/d0d/classHMolPolAnalysis.html#ad0ba4156f3e3b6e0f051b9a02c25e6d9" title="Main event structure.">fEvent</a>, bufsize, split);</div>
-<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;</div>
-<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;  <span class="comment">// Write run data</span></div>
-<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;  <span class="comment">//pUserRunInformation-&gt;Write();</span></div>
-<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;}</div>
-<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;<span class="comment">/********************************************</span></div>
-<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;<span class="comment"> * Programmer: Valerie Gray</span></div>
-<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;<span class="comment"> * Function: AutoSaveRootTree</span></div>
-<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;<span class="comment"> *</span></div>
-<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;<span class="comment"> * Purpose:  To Auto Save the root tree as writing too it goes along</span></div>
-<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;<span class="comment"> *      Then take all the &quot;small&quot; trees and combine it into one large one.</span></div>
-<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;<span class="comment"> *</span></div>
-<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;<span class="comment"> * Global:</span></div>
-<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;<span class="comment"> * Entry Conditions:</span></div>
-<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;<span class="comment"> * Return:</span></div>
-<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;<span class="comment"> * Called By:</span></div>
-<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;<span class="comment"> * Date: 07-11-2013</span></div>
-<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;<span class="comment"> * Modified:</span></div>
-<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;<span class="comment"> ********************************************/</span></div>
-<div class="line"><a name="l00193"></a><span class="lineno"><a class="code" href="../../d8/d0d/classHMolPolAnalysis.html#a820010f3c501b42985600364a33fca0c">  193</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="../../d8/d0d/classHMolPolAnalysis.html#a820010f3c501b42985600364a33fca0c">HMolPolAnalysis::AutoSaveRootTree</a>()</div>
-<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;{</div>
-<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;  <span class="comment">// save the current ROOT Tree:</span></div>
-<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;  <span class="comment">// In case your program crashes before closing the file holding this tree,</span></div>
-<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;  <span class="comment">// the file will be automatically recovered when you will connect the file</span></div>
-<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;  <span class="comment">// in UPDATE mode.</span></div>
-<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;  <span class="comment">// The Tree will be recovered at the status corresponding to the last AutoSave.</span></div>
-<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;  <span class="comment">//</span></div>
-<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;  <span class="comment">// if option contains &quot;SaveSelf&quot;, gDirectory-&gt;SaveSelf() is called.</span></div>
-<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;  <span class="comment">// This allows another process to analyze the Tree while the Tree is being filled.</span></div>
-<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;  <span class="comment">//</span><span class="comment"></span></div>
-<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;<span class="comment">  /// \see http://root.cern.ch/root/html/TTree.html#TTree:AutoSave</span></div>
-<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;<span class="comment"></span></div>
-<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;  <span class="comment">// fRootTree -&gt; AutoSave(&quot;SaveSelf&quot;);</span></div>
-<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;  fRootTree -&gt; AutoSave();</div>
-<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;  gDirectory -&gt; Purge(); <span class="comment">//Purge old trees</span></div>
-<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;</div>
-<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;}</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;<span class="comment"> * Global:</span></div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;<span class="comment"> * Entry Conditions: const G4Run* aRun</span></div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;<span class="comment"> * Return:</span></div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;<span class="comment"> * Called By:</span></div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;<span class="comment"> * Date: 07-11-2013</span></div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;<span class="comment"> * Modified:</span></div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;<span class="comment"> ********************************************/</span></div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;<span class="keywordtype">void</span> HMolPolAnalysis::BeginOfRun(<span class="keyword">const</span> G4Run* aRun)</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;{</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;  G4cout &lt;&lt; <span class="stringliteral">&quot;At begin of run&quot;</span> &lt;&lt; G4endl;</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;  <span class="comment">// Get run number</span></div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;  G4int runID = aRun-&gt;GetRunID();</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;  <span class="comment">// Construct file name if not set explicitly</span></div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;  <span class="comment">// This is from the default name and the number of times one had</span></div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;  <span class="comment">// simulated a run in the present session of HMolPol (starting with 0)</span></div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;  <span class="keywordflow">if</span> (<a class="code" href="../../d8/d0d/classHMolPolAnalysis.html#a38175dc89b4e0ebecea4273a29576f6e" title="Root file name (if changing it)">fRootFileName</a>.size() == 0)</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;    <a class="code" href="../../d8/d0d/classHMolPolAnalysis.html#a38175dc89b4e0ebecea4273a29576f6e" title="Root file name (if changing it)">fRootFileName</a> = <a class="code" href="../../d8/d0d/classHMolPolAnalysis.html#ad890e8537146054a745967a96bb27138" title="Root file stem.">fRootFileStem</a> + <span class="stringliteral">&quot;_&quot;</span> + Form(<span class="stringliteral">&quot;%d&quot;</span>,runID) + <span class="stringliteral">&quot;.root&quot;</span>;</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;  <span class="comment">// Create ROOT file</span></div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;  G4cout &lt;&lt; <span class="stringliteral">&quot;###### Analysis: creating ROOT file &quot;</span> &lt;&lt; <a class="code" href="../../d8/d0d/classHMolPolAnalysis.html#a38175dc89b4e0ebecea4273a29576f6e" title="Root file name (if changing it)">fRootFileName</a> &lt;&lt; G4endl;</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;  fRootFile = <span class="keyword">new</span> TFile(<a class="code" href="../../d8/d0d/classHMolPolAnalysis.html#a38175dc89b4e0ebecea4273a29576f6e" title="Root file name (if changing it)">fRootFileName</a>,<span class="stringliteral">&quot;RECREATE&quot;</span>,<span class="stringliteral">&quot;HMolPol ROOT file&quot;</span>);</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;  ConstructRootTree();</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;}</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;<span class="comment">/********************************************</span></div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;<span class="comment"> * Programmer: Valerie Gray</span></div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;<span class="comment"> * Function: EndOfRun</span></div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;<span class="comment"> * Purpose:  Say you are at the end of a run</span></div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;<span class="comment"> * Global:</span></div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;<span class="comment"> * Entry Conditions: const G4Run* aRun</span></div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;<span class="comment"> * Return:</span></div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;<span class="comment"> * Called By:</span></div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;<span class="comment"> * Date: 07-11-2013</span></div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;<span class="comment"> * Modified:</span></div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;<span class="comment"> ********************************************/</span></div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;<span class="keywordtype">void</span> HMolPolAnalysis::EndOfRun(<span class="keyword">const</span> G4Run* aRun)</div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;{</div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;  G4cout &lt;&lt; <span class="stringliteral">&quot;At end of run&quot;</span> &lt;&lt; G4endl;</div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;</div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;  <span class="comment">// Autosave one last time</span></div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;  <a class="code" href="../../d8/d0d/classHMolPolAnalysis.html#a820010f3c501b42985600364a33fca0c">AutoSaveRootTree</a>();</div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;</div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;  <span class="comment">// Write the data to the ROOT file</span></div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;  G4cout &lt;&lt; <span class="stringliteral">&quot;###### Analysis: closing ROOT file &quot;</span> &lt;&lt; <a class="code" href="../../d8/d0d/classHMolPolAnalysis.html#a38175dc89b4e0ebecea4273a29576f6e" title="Root file name (if changing it)">fRootFileName</a> &lt;&lt; G4endl;</div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;  fRootFile-&gt;Write(0,TObject::kOverwrite);</div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;  fRootFile-&gt;Close();</div>
+<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;  <a class="code" href="../../d8/d0d/classHMolPolAnalysis.html#a38175dc89b4e0ebecea4273a29576f6e" title="Root file name (if changing it)">fRootFileName</a> = <span class="stringliteral">&quot;&quot;</span>;</div>
+<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;}</div>
+<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;</div>
+<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;<span class="comment">/********************************************</span></div>
+<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;<span class="comment"> * Programmer: Valerie Gray</span></div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;<span class="comment"> * Function: ConstructRootTree</span></div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;<span class="comment"> * Purpose:  Construct the actual ROOT tree in the ROOT file that</span></div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;<span class="comment"> *      was created earlier</span></div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;<span class="comment"> * Global:</span></div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;<span class="comment"> * Entry Conditions:</span></div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;<span class="comment"> * Return:</span></div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;<span class="comment"> * Called By:</span></div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;<span class="comment"> * Date: 07-11-2013</span></div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;<span class="comment"> * Modified:</span></div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;<span class="comment"> ********************************************/</span></div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;<span class="keywordtype">void</span> HMolPolAnalysis::ConstructRootTree()</div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;{</div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;  <span class="comment">// Create ROOT tree and give it a name</span></div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;  <span class="comment">// the tree name will be HMolPol_Tree in the ROOT file</span></div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;  fRootTree = <span class="keyword">new</span> TTree(<span class="stringliteral">&quot;HMolPol_Tree&quot;</span>,<span class="stringliteral">&quot;HMolPol Simulation Tree&quot;</span>);</div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;</div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;  <span class="comment">// Save the file after so many bytes. Avoids complete data loss after crash</span></div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;  <span class="comment">//fRootTree -&gt;SetAutoSave(1000000);</span></div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;  <span class="comment">//AutoSave after every 1 Mbyte written to disk</span></div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;</div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;<span class="comment">// \todo I have no idea what the next lines means (till end)</span></div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;  <span class="comment">// Instance of data structure to be written into ROOT file</span></div>
+<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;  <span class="comment">//fRootEvent  = new HMolPolEvent();</span></div>
+<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;</div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;  <span class="comment">// Create a branch with the data structure defined by fRootEvent</span></div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;  <span class="comment">// THE QWEAK WAY OF LIFE</span></div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;  <span class="keywordtype">int</span> bufsize = 64000;</div>
+<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;  <span class="keywordtype">int</span> split   = 99;</div>
+<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;  fRootBranch = fRootTree-&gt;Branch(<span class="stringliteral">&quot;HMolPolEvent&quot;</span>,</div>
+<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;      <span class="stringliteral">&quot;HMolPolEvent&quot;</span>, &amp;<a class="code" href="../../d8/d0d/classHMolPolAnalysis.html#ad0ba4156f3e3b6e0f051b9a02c25e6d9" title="Main event structure.">fEvent</a>, bufsize, split);</div>
+<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;</div>
+<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;  <span class="comment">// Write run data</span></div>
+<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;  <span class="comment">//pUserRunInformation-&gt;Write();</span></div>
+<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;}</div>
+<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;<span class="comment">/********************************************</span></div>
+<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;<span class="comment"> * Programmer: Valerie Gray</span></div>
+<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;<span class="comment"> * Function: AutoSaveRootTree</span></div>
+<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;<span class="comment"> * Purpose:  To Auto Save the root tree as writing too it goes along</span></div>
+<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;<span class="comment"> *      Then take all the &quot;small&quot; trees and combine it into one large one.</span></div>
+<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;<span class="comment"> * Global:</span></div>
+<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;<span class="comment"> * Entry Conditions:</span></div>
+<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;<span class="comment"> * Return:</span></div>
+<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;<span class="comment"> * Called By:</span></div>
+<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;<span class="comment"> * Date: 07-11-2013</span></div>
+<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;<span class="comment"> * Modified:</span></div>
+<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;<span class="comment"> ********************************************/</span></div>
+<div class="line"><a name="l00195"></a><span class="lineno"><a class="code" href="../../d8/d0d/classHMolPolAnalysis.html#a820010f3c501b42985600364a33fca0c">  195</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="../../d8/d0d/classHMolPolAnalysis.html#a820010f3c501b42985600364a33fca0c">HMolPolAnalysis::AutoSaveRootTree</a>()</div>
+<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;{</div>
+<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;  <span class="comment">// save the current ROOT Tree:</span></div>
+<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;  <span class="comment">// In case your program crashes before closing the file holding this tree,</span></div>
+<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;  <span class="comment">// the file will be automatically recovered when you will connect the file</span></div>
+<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;  <span class="comment">// in UPDATE mode.</span></div>
+<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;  <span class="comment">// The Tree will be recovered at the status corresponding to the last AutoSave.</span></div>
+<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;  <span class="comment">//</span></div>
+<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;  <span class="comment">// if option contains &quot;SaveSelf&quot;, gDirectory-&gt;SaveSelf() is called.</span></div>
+<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;  <span class="comment">// This allows another process to analyze the Tree while the Tree is being filled.</span></div>
+<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;  <span class="comment">//</span><span class="comment"></span></div>
+<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;<span class="comment">  /// \see http://root.cern.ch/root/html/TTree.html#TTree:AutoSave</span></div>
+<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;  <span class="comment">// fRootTree -&gt; AutoSave(&quot;SaveSelf&quot;);</span></div>
+<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;  fRootTree -&gt; AutoSave();</div>
+<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;  gDirectory -&gt; Purge(); <span class="comment">//Purge old trees</span></div>
+<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;</div>
+<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;}</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="../../dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><b>HMolPolAnalysis.cc</b></li>
-    <li class="footer">Generated on Thu Jul 18 2013 17:37:52 for HMolPol by
+    <li class="footer">Generated on Tue Jul 23 2013 09:26:17 for HMolPol by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="../../doxygen.png" alt="doxygen"/></a> 1.8.3.1 </li>
   </ul>

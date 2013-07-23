@@ -136,68 +136,72 @@ $(document).ready(function(){initNavTree('d9/d38/HMolPolEvent_8hh_source.html','
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="comment">// root include</span></div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="preprocessor">#include &lt;TObject.h&gt;</span></div>
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="comment">// HMolPol includes</span></div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="preprocessor">#include &quot;HMolPolPrimaryEvent.hh&quot;</span></div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;</div>
-<div class="line"><a name="l00035"></a><span class="lineno"><a class="code" href="../../db/da0/classHMolPolEvent.html">   35</a></span>&#160;<span class="keyword">class </span><a class="code" href="../../db/da0/classHMolPolEvent.html" title="Defines Top ROOT Tree structure of the ROOT file for each event.">HMolPolEvent</a> : <span class="keyword">public</span> TObject</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;{</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;  <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <span class="comment">// Constructor</span></div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <a class="code" href="../../db/da0/classHMolPolEvent.html" title="Defines Top ROOT Tree structure of the ROOT file for each event.">HMolPolEvent</a>();</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <span class="comment">// Destructor</span></div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <span class="keyword">virtual</span> ~<a class="code" href="../../db/da0/classHMolPolEvent.html" title="Defines Top ROOT Tree structure of the ROOT file for each event.">HMolPolEvent</a>();</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <a class="code" href="../../d1/d40/classHMolPolPrimaryEvent.html">HMolPolPrimaryEvent</a>* <a class="code" href="../../db/da0/classHMolPolEvent.html#af504b9e26d959109cd7125574a2fec1d" title="object containing primary particle info">fPrimary</a>;<span class="comment"></span></div>
-<div class="line"><a name="l00045"></a><span class="lineno"><a class="code" href="../../db/da0/classHMolPolEvent.html#af504b9e26d959109cd7125574a2fec1d">   45</a></span>&#160;<span class="comment">    ///&lt; object containing primary particle info</span></div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="comment"></span></div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <span class="comment">// Distance</span></div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <span class="keyword">const</span> Double_t mm;        <span class="comment">/// \ingroup root Units of mm</span></div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="comment"></span>    <span class="keyword">const</span> Double_t cm;        <span class="comment">/// \ingroup root Units of cm</span></div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="comment"></span>    <span class="keyword">const</span> Double_t m;         <span class="comment">/// \ingroup root Units of m</span></div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="comment"></span>    <span class="comment">// Area</span></div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    <span class="keyword">const</span> Double_t mm2;       <span class="comment">/// \ingroup root Units of mm^2</span></div>
-<div class="line"><a name="l00053"></a><span class="lineno"><a class="code" href="../../dd/dd3/group__root.html#gae20e20a58ab618d536642cd82fcc87e4">   53</a></span>&#160;<span class="comment"></span>    <span class="keyword">const</span> Double_t <a class="code" href="../../dd/dd3/group__root.html#gae20e20a58ab618d536642cd82fcc87e4" title="^2">cm2</a>;       <span class="comment">/// \ingroup root Units of cm^2</span></div>
-<div class="line"><a name="l00054"></a><span class="lineno"><a class="code" href="../../dd/dd3/group__root.html#ga9c8fe9c99b42f54c7c36a69de81764f8">   54</a></span>&#160;<span class="comment"></span>    <span class="keyword">const</span> Double_t <a class="code" href="../../dd/dd3/group__root.html#ga9c8fe9c99b42f54c7c36a69de81764f8" title="^2">m2</a>;        <span class="comment">/// \ingroup root Units of m^2</span></div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="comment"></span>    <span class="comment">// Volume</span></div>
-<div class="line"><a name="l00056"></a><span class="lineno"><a class="code" href="../../dd/dd3/group__root.html#gaf01bc6785784886a67e2cd0979e804be">   56</a></span>&#160;    <span class="keyword">const</span> Double_t <a class="code" href="../../dd/dd3/group__root.html#gaf01bc6785784886a67e2cd0979e804be" title="^2">mm3</a>;       <span class="comment">/// \ingroup root Units of mm^3</span></div>
-<div class="line"><a name="l00057"></a><span class="lineno"><a class="code" href="../../dd/dd3/group__root.html#ga20dede655c340c948dd33d322558b91a">   57</a></span>&#160;<span class="comment"></span>    <span class="keyword">const</span> Double_t <a class="code" href="../../dd/dd3/group__root.html#ga20dede655c340c948dd33d322558b91a" title="^3">cm3</a>;       <span class="comment">/// \ingroup root Units of cm^3</span></div>
-<div class="line"><a name="l00058"></a><span class="lineno"><a class="code" href="../../dd/dd3/group__root.html#ga91121a048e6fbd8cb93fab169b9b5dab">   58</a></span>&#160;<span class="comment"></span>    <span class="keyword">const</span> Double_t <a class="code" href="../../dd/dd3/group__root.html#ga91121a048e6fbd8cb93fab169b9b5dab" title="^3">m3</a>;        <span class="comment">/// \ingroup root Units of m^3</span></div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="comment"></span>    <span class="comment">// Energy</span></div>
-<div class="line"><a name="l00060"></a><span class="lineno"><a class="code" href="../../dd/dd3/group__root.html#gaf146fb33912c254551b1da3a429c39dd">   60</a></span>&#160;    <span class="keyword">const</span> Double_t <a class="code" href="../../dd/dd3/group__root.html#gaf146fb33912c254551b1da3a429c39dd" title="^3">keV</a>;       <span class="comment">/// \ingroup root Units of keV</span></div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="comment"></span>    <span class="keyword">const</span> Double_t MeV;       <span class="comment">/// \ingroup root Units of MeV</span></div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="comment"></span>    <span class="keyword">const</span> Double_t GeV;       <span class="comment">/// \ingroup root Units of GeV</span></div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="comment"></span>    <span class="comment">// Angle</span></div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    <span class="keyword">const</span> Double_t rad;       <span class="comment">/// \ingroup root Units of rad</span></div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="comment"></span>    <span class="keyword">const</span> Double_t deg;       <span class="comment">/// \ingroup root Units of deg</span></div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="comment"></span>    <span class="keyword">const</span> Double_t sr;        <span class="comment">/// \ingroup root Units of steradian</span></div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="comment"></span>    <span class="comment">// Cross Section</span></div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    <span class="keyword">const</span> Double_t mbarn;     <span class="comment">/// \ingroup root Units of millibarn</span></div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="comment"></span>    <span class="comment">// Time</span></div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    <span class="keyword">const</span> Double_t nsec;      <span class="comment">/// \ingroup root Units of nanosec</span></div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="comment"></span>    <span class="keyword">const</span> Double_t msec;      <span class="comment">/// \ingroup root Units of millisec</span></div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<span class="comment"></span>    <span class="keyword">const</span> Double_t sec;       <span class="comment">/// \ingroup root Units of sec</span></div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<span class="comment"></span>    <span class="comment">// Magnetic Field</span></div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    <span class="keyword">const</span> Double_t tesla;     <span class="comment">/// \ingroup root Units of tesla</span></div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="comment"></span></div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;</div>
-<div class="line"><a name="l00077"></a><span class="lineno"><a class="code" href="../../dd/dd3/group__root.html#ga19940d64b74dd08d10fc7173e1fdb4a1">   77</a></span>&#160;    Int_t <a class="code" href="../../dd/dd3/group__root.html#ga19940d64b74dd08d10fc7173e1fdb4a1">fEventNumber</a>; <span class="comment">///&lt; event number</span></div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="comment"></span></div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    <span class="comment">// define a new Class known to ROOT? Huh?</span></div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    ClassDef(<a class="code" href="../../db/da0/classHMolPolEvent.html" title="Defines Top ROOT Tree structure of the ROOT file for each event.">HMolPolEvent</a>,1)</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;  private:</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;};</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="comment">// HMolPol classes</span></div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="keyword">class </span><a class="code" href="../../d5/d4c/classHMolPolEventPrimary.html">HMolPolEventPrimary</a>;</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="keyword">class </span><a class="code" href="../../d7/d31/classHMolPolEventGenericDetector.html">HMolPolEventGenericDetector</a>;</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;</div>
+<div class="line"><a name="l00036"></a><span class="lineno"><a class="code" href="../../db/da0/classHMolPolEvent.html">   36</a></span>&#160;<span class="keyword">class </span><a class="code" href="../../db/da0/classHMolPolEvent.html" title="Defines Top ROOT Tree structure of the ROOT file for each event.">HMolPolEvent</a> : <span class="keyword">public</span> TObject</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;{</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;  <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <span class="comment">// Constructor</span></div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <a class="code" href="../../db/da0/classHMolPolEvent.html" title="Defines Top ROOT Tree structure of the ROOT file for each event.">HMolPolEvent</a>();</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <span class="comment">// Destructor</span></div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <span class="keyword">virtual</span> ~<a class="code" href="../../db/da0/classHMolPolEvent.html" title="Defines Top ROOT Tree structure of the ROOT file for each event.">HMolPolEvent</a>();</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <a class="code" href="../../d5/d4c/classHMolPolEventPrimary.html">HMolPolEventPrimary</a> <a class="code" href="../../db/da0/classHMolPolEvent.html#ae1b71c56874603090f94612e1c7b652e" title="object containing primary particle info">fPrimary</a>;<span class="comment"></span></div>
+<div class="line"><a name="l00046"></a><span class="lineno"><a class="code" href="../../db/da0/classHMolPolEvent.html#ae1b71c56874603090f94612e1c7b652e">   46</a></span>&#160;<span class="comment">    ///&lt; object containing primary particle info</span></div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <a class="code" href="../../d7/d31/classHMolPolEventGenericDetector.html">HMolPolEventGenericDetector</a> <a class="code" href="../../db/da0/classHMolPolEvent.html#ae437f4714806cc8b9a7436ad8913139e" title="object containing hits in generic detector">fGenericDetector</a>;<span class="comment"></span></div>
+<div class="line"><a name="l00049"></a><span class="lineno"><a class="code" href="../../db/da0/classHMolPolEvent.html#ae437f4714806cc8b9a7436ad8913139e">   49</a></span>&#160;<span class="comment">    ///&lt; object containing hits in generic detector</span></div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <span class="comment">// Distance</span></div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    <span class="keyword">const</span> Double_t mm;        <span class="comment">/// \ingroup root Units of mm</span></div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="comment"></span>    <span class="keyword">const</span> Double_t cm;        <span class="comment">/// \ingroup root Units of cm</span></div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="comment"></span>    <span class="keyword">const</span> Double_t m;         <span class="comment">/// \ingroup root Units of m</span></div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="comment"></span>    <span class="comment">// Area</span></div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    <span class="keyword">const</span> Double_t mm2;       <span class="comment">/// \ingroup root Units of mm^2</span></div>
+<div class="line"><a name="l00057"></a><span class="lineno"><a class="code" href="../../dd/dd3/group__root.html#gae20e20a58ab618d536642cd82fcc87e4">   57</a></span>&#160;<span class="comment"></span>    <span class="keyword">const</span> Double_t <a class="code" href="../../dd/dd3/group__root.html#gae20e20a58ab618d536642cd82fcc87e4" title="^2">cm2</a>;       <span class="comment">/// \ingroup root Units of cm^2</span></div>
+<div class="line"><a name="l00058"></a><span class="lineno"><a class="code" href="../../dd/dd3/group__root.html#ga9c8fe9c99b42f54c7c36a69de81764f8">   58</a></span>&#160;<span class="comment"></span>    <span class="keyword">const</span> Double_t <a class="code" href="../../dd/dd3/group__root.html#ga9c8fe9c99b42f54c7c36a69de81764f8" title="^2">m2</a>;        <span class="comment">/// \ingroup root Units of m^2</span></div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="comment"></span>    <span class="comment">// Volume</span></div>
+<div class="line"><a name="l00060"></a><span class="lineno"><a class="code" href="../../dd/dd3/group__root.html#gaf01bc6785784886a67e2cd0979e804be">   60</a></span>&#160;    <span class="keyword">const</span> Double_t <a class="code" href="../../dd/dd3/group__root.html#gaf01bc6785784886a67e2cd0979e804be" title="^2">mm3</a>;       <span class="comment">/// \ingroup root Units of mm^3</span></div>
+<div class="line"><a name="l00061"></a><span class="lineno"><a class="code" href="../../dd/dd3/group__root.html#ga20dede655c340c948dd33d322558b91a">   61</a></span>&#160;<span class="comment"></span>    <span class="keyword">const</span> Double_t <a class="code" href="../../dd/dd3/group__root.html#ga20dede655c340c948dd33d322558b91a" title="^3">cm3</a>;       <span class="comment">/// \ingroup root Units of cm^3</span></div>
+<div class="line"><a name="l00062"></a><span class="lineno"><a class="code" href="../../dd/dd3/group__root.html#ga91121a048e6fbd8cb93fab169b9b5dab">   62</a></span>&#160;<span class="comment"></span>    <span class="keyword">const</span> Double_t <a class="code" href="../../dd/dd3/group__root.html#ga91121a048e6fbd8cb93fab169b9b5dab" title="^3">m3</a>;        <span class="comment">/// \ingroup root Units of m^3</span></div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="comment"></span>    <span class="comment">// Energy</span></div>
+<div class="line"><a name="l00064"></a><span class="lineno"><a class="code" href="../../dd/dd3/group__root.html#gaf146fb33912c254551b1da3a429c39dd">   64</a></span>&#160;    <span class="keyword">const</span> Double_t <a class="code" href="../../dd/dd3/group__root.html#gaf146fb33912c254551b1da3a429c39dd" title="^3">keV</a>;       <span class="comment">/// \ingroup root Units of keV</span></div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="comment"></span>    <span class="keyword">const</span> Double_t MeV;       <span class="comment">/// \ingroup root Units of MeV</span></div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="comment"></span>    <span class="keyword">const</span> Double_t GeV;       <span class="comment">/// \ingroup root Units of GeV</span></div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="comment"></span>    <span class="comment">// Angle</span></div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    <span class="keyword">const</span> Double_t rad;       <span class="comment">/// \ingroup root Units of rad</span></div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="comment"></span>    <span class="keyword">const</span> Double_t deg;       <span class="comment">/// \ingroup root Units of deg</span></div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="comment"></span>    <span class="keyword">const</span> Double_t sr;        <span class="comment">/// \ingroup root Units of steradian</span></div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="comment"></span>    <span class="comment">// Cross Section</span></div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    <span class="keyword">const</span> Double_t mbarn;     <span class="comment">/// \ingroup root Units of millibarn</span></div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<span class="comment"></span>    <span class="comment">// Time</span></div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    <span class="keyword">const</span> Double_t nsec;      <span class="comment">/// \ingroup root Units of nanosec</span></div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="comment"></span>    <span class="keyword">const</span> Double_t msec;      <span class="comment">/// \ingroup root Units of millisec</span></div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="comment"></span>    <span class="keyword">const</span> Double_t sec;       <span class="comment">/// \ingroup root Units of sec</span></div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="comment"></span>    <span class="comment">// Magnetic Field</span></div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    <span class="keyword">const</span> Double_t Tesla;     <span class="comment">/// \ingroup root Units of tesla</span></div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;</div>
+<div class="line"><a name="l00081"></a><span class="lineno"><a class="code" href="../../dd/dd3/group__root.html#ga19940d64b74dd08d10fc7173e1fdb4a1">   81</a></span>&#160;    Int_t <a class="code" href="../../dd/dd3/group__root.html#ga19940d64b74dd08d10fc7173e1fdb4a1">fEventNumber</a>; <span class="comment">///&lt; event number</span></div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    <span class="comment">// define a new Class known to ROOT? Huh?</span></div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    ClassDef(<a class="code" href="../../db/da0/classHMolPolEvent.html" title="Defines Top ROOT Tree structure of the ROOT file for each event.">HMolPolEvent</a>,1)</div>
 <div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* HMOLPOLEVENT_HH_ */</span><span class="preprocessor"></span></div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;  private:</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;};</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* HMOLPOLEVENT_HH_ */</span><span class="preprocessor"></span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="../../dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><b>HMolPolEvent.hh</b></li>
-    <li class="footer">Generated on Thu Jul 18 2013 17:37:52 for HMolPol by
+    <li class="footer">Generated on Tue Jul 23 2013 09:26:17 for HMolPol by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="../../doxygen.png" alt="doxygen"/></a> 1.8.3.1 </li>
   </ul>

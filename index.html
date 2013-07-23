@@ -260,16 +260,16 @@ hmolpolroot</h2>
 <p>This upon comiling this simulation in ones build folder there will be a exicutable called <b>hmolpolroot</b> this is the HMolPol version of ROOT. This is so that ROOT will understand the stucture that we have created.</p>
 <p>One will notice in the ROOT tree, <b>HMolPol_Tree</b> there are a bunch of leaves with names that look oddly like units. These are units that are part of Geant4. These have been added so that one can make a graph and know exactly what the units are with ease. However to keep this functianlity, one must always work in only internal Geant4 units in the code.</p>
 <p>To get out the units you want in a HMolPol ROOT file all you need to do is divide by the unit you would like the variable to be in. For example if I would like to look at the Theta Center of Mass angle in degrees the I would use:</p>
-<p><b>HMolPol_Tree-&gt;Draw("fPrimary.fThetaCenterOfMass/deg")</b></p>
+<p><b><em>HMolPol_Tree-&gt;Draw("fPrimary.fThetaCenterOfMass/deg")</em></b></p>
 <p>but if I wanted to see the same thing, but in radians, I would change this to:</p>
-<p><b>HMolPol_Tree-&gt;Draw("fPrimary.fThetaCenterOfMass/deg")</b></p>
+<p><b><em>HMolPol_Tree-&gt;Draw("fPrimary.fThetaCenterOfMass/rad")</em></b></p>
 <p>If there are units that one needs in the hmolpolroot, but are not there, they can be added in the begining of HMolPolEvent::HMolPolEvent. </p>
 </div></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Thu Jul 18 2013 17:37:53 for HMolPol by
+    <li class="footer">Generated on Tue Jul 23 2013 09:26:19 for HMolPol by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.3.1 </li>
   </ul>

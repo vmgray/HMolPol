@@ -125,65 +125,67 @@ $(document).ready(function(){initNavTree('d1/d2e/HMolPolAnalysis_8hh_source.html
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#include &lt;TTree.h&gt;</span></div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">#include &lt;TBranch.h&gt;</span></div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="comment">// HMolPol includes</span></div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor">#include &quot;HMolPolEvent.hh&quot;</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="comment">// geant4 classes</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="keyword">class </span>G4Run;</div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="comment">// geant4 classes</span></div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="keyword">class </span>G4Run;</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="comment">//HMolPol classes</span></div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="keyword">class </span><a class="code" href="../../dc/ddf/classHMolPolRunInformation.html">HMolPolRunInformation</a>;</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="comment">//HMolPol classes</span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="keyword">class </span><a class="code" href="../../dc/ddf/classHMolPolRunInformation.html">HMolPolRunInformation</a>;</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="keyword">class </span><a class="code" href="../../d8/d42/classHMolPolMessenger.html">HMolPolMessenger</a>;</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="keyword">class </span><a class="code" href="../../db/da0/classHMolPolEvent.html" title="Defines Top ROOT Tree structure of the ROOT file for each event.">HMolPolEvent</a>;</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;</div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;</div>
-<div class="line"><a name="l00030"></a><span class="lineno"><a class="code" href="../../d8/d0d/classHMolPolAnalysis.html">   30</a></span>&#160;<span class="keyword">class </span><a class="code" href="../../d8/d0d/classHMolPolAnalysis.html">HMolPolAnalysis</a> {</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;  <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <a class="code" href="../../d8/d0d/classHMolPolAnalysis.html#a417ea9497b5c9fbc7de24aac29e52a4d">HMolPolAnalysis</a>();</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    <span class="keyword">virtual</span> ~<a class="code" href="../../d8/d0d/classHMolPolAnalysis.html">HMolPolAnalysis</a>();</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    <span class="keywordtype">void</span> BeginOfRun(<span class="keyword">const</span> G4Run* aRun);</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <span class="keywordtype">void</span> EndOfRun(<span class="keyword">const</span> G4Run* aRun);</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <span class="keywordtype">void</span> EndOfEvent(G4int flag);</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <span class="comment">// Set ROOT file stem or name</span></div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <span class="keywordtype">void</span> SetRootFileStem(<span class="keyword">const</span> G4String&amp; stem) { fRootFileStem = stem; }</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <span class="keywordtype">void</span> SetRootFileName(<span class="keyword">const</span> G4String&amp; name) { fRootFileName = name; }</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <span class="keywordtype">void</span> FillRootTree() { fRootTree-&gt;Fill(); }</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="../../d8/d0d/classHMolPolAnalysis.html#a820010f3c501b42985600364a33fca0c">AutoSaveRootTree</a>();</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;  <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00030"></a><span class="lineno"><a class="code" href="../../d8/d0d/classHMolPolAnalysis.html">   30</a></span>&#160;<span class="keyword">class </span><a class="code" href="../../d8/d0d/classHMolPolAnalysis.html">HMolPolAnalysis</a></div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;{</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;  <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    <a class="code" href="../../d8/d0d/classHMolPolAnalysis.html#a417ea9497b5c9fbc7de24aac29e52a4d">HMolPolAnalysis</a>();</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    <span class="keyword">virtual</span> ~<a class="code" href="../../d8/d0d/classHMolPolAnalysis.html">HMolPolAnalysis</a>();</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <span class="keywordtype">void</span> BeginOfRun(<span class="keyword">const</span> G4Run* aRun);</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <span class="keywordtype">void</span> EndOfRun(<span class="keyword">const</span> G4Run* aRun);</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="../../d8/d0d/classHMolPolAnalysis.html#afdd30885f712a1d8c75e80f72c62764e" title="Set ROOT file stem or name.">EndOfEvent</a>(G4int flag);</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="comment">    ///&lt;  Set ROOT file stem or name</span></div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="comment"></span>    <span class="keywordtype">void</span> SetRootFileStem(<span class="keyword">const</span> G4String&amp; stem) { <a class="code" href="../../d8/d0d/classHMolPolAnalysis.html#ad890e8537146054a745967a96bb27138" title="Root file stem.">fRootFileStem</a> = stem; }</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <span class="keywordtype">void</span> SetRootFileName(<span class="keyword">const</span> G4String&amp; name) { <a class="code" href="../../d8/d0d/classHMolPolAnalysis.html#a38175dc89b4e0ebecea4273a29576f6e" title="Root file name (if changing it)">fRootFileName</a> = name; }</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <span class="keywordtype">void</span> FillRootTree() { fRootTree-&gt;Fill(); }</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="../../d8/d0d/classHMolPolAnalysis.html#a820010f3c501b42985600364a33fca0c">AutoSaveRootTree</a>();</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;</div>
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <span class="keywordtype">void</span> ConstructRootTree();</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;  <span class="keyword">private</span>:</div>
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    TTree*   fRootTree;</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    TBranch* fRootBranch;</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    TFile*   fRootFile;</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    G4String fRootFileStem;</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    G4String fRootFileName;</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;  <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    <span class="comment">// ROOT variables that are common for all events in the ROOT tree</span></div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    <span class="comment">// for example, the run number, beam energy, etc.</span></div>
-<div class="line"><a name="l00062"></a><span class="lineno"><a class="code" href="../../d8/d0d/classHMolPolAnalysis.html#ab4554a5e88203a005dd5ea2a136bed7e">   62</a></span>&#160;    Int_t <a class="code" href="../../d8/d0d/classHMolPolAnalysis.html#ab4554a5e88203a005dd5ea2a136bed7e" title="Run number.">fRunNumber</a>;           <span class="comment">///&lt; Run number</span></div>
-<div class="line"><a name="l00063"></a><span class="lineno"><a class="code" href="../../d8/d0d/classHMolPolAnalysis.html#a8127640edb3aafac1b7f26f4ccdea75e">   63</a></span>&#160;<span class="comment"></span>    Double_t <a class="code" href="../../d8/d0d/classHMolPolAnalysis.html#a8127640edb3aafac1b7f26f4ccdea75e" title="Beam energy.">fBeamEnergy</a>;       <span class="comment">///&lt; Beam energy</span></div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="comment"></span></div>
-<div class="line"><a name="l00065"></a><span class="lineno"><a class="code" href="../../d8/d0d/classHMolPolAnalysis.html#ad0ba4156f3e3b6e0f051b9a02c25e6d9">   65</a></span>&#160;    <a class="code" href="../../db/da0/classHMolPolEvent.html" title="Defines Top ROOT Tree structure of the ROOT file for each event.">HMolPolEvent</a>* <a class="code" href="../../d8/d0d/classHMolPolAnalysis.html#ad0ba4156f3e3b6e0f051b9a02c25e6d9" title="Main event structure.">fEvent</a>;       <span class="comment">///&lt; Main event structure</span></div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <span class="keywordtype">void</span> ConstructRootTree();</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    TTree*   fRootTree;</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    TBranch* fRootBranch;</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    TFile*   fRootFile;</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;</div>
+<div class="line"><a name="l00057"></a><span class="lineno"><a class="code" href="../../d8/d0d/classHMolPolAnalysis.html#ad890e8537146054a745967a96bb27138">   57</a></span>&#160;    G4String <a class="code" href="../../d8/d0d/classHMolPolAnalysis.html#ad890e8537146054a745967a96bb27138" title="Root file stem.">fRootFileStem</a>;     <span class="comment">///&lt; Root file stem</span></div>
+<div class="line"><a name="l00058"></a><span class="lineno"><a class="code" href="../../d8/d0d/classHMolPolAnalysis.html#a38175dc89b4e0ebecea4273a29576f6e">   58</a></span>&#160;<span class="comment"></span>    G4String <a class="code" href="../../d8/d0d/classHMolPolAnalysis.html#a38175dc89b4e0ebecea4273a29576f6e" title="Root file name (if changing it)">fRootFileName</a>;     <span class="comment">///&lt; Root file name (if changing it)</span></div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;  <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    <span class="comment">// ROOT variables that are common for all events in the ROOT tree</span></div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    <span class="comment">// for example, the run number, beam energy, etc.</span></div>
+<div class="line"><a name="l00064"></a><span class="lineno"><a class="code" href="../../d8/d0d/classHMolPolAnalysis.html#ab4554a5e88203a005dd5ea2a136bed7e">   64</a></span>&#160;    Int_t <a class="code" href="../../d8/d0d/classHMolPolAnalysis.html#ab4554a5e88203a005dd5ea2a136bed7e" title="Run number.">fRunNumber</a>;           <span class="comment">///&lt; Run number</span></div>
+<div class="line"><a name="l00065"></a><span class="lineno"><a class="code" href="../../d8/d0d/classHMolPolAnalysis.html#a8127640edb3aafac1b7f26f4ccdea75e">   65</a></span>&#160;<span class="comment"></span>    Double_t <a class="code" href="../../d8/d0d/classHMolPolAnalysis.html#a8127640edb3aafac1b7f26f4ccdea75e" title="Beam energy.">fBeamEnergy</a>;       <span class="comment">///&lt; Beam energy</span></div>
 <div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="comment"></span></div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;  <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    <a class="code" href="../../dc/ddf/classHMolPolRunInformation.html">HMolPolRunInformation</a>* pUserRunInformation;</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;};</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* HMOLPOLANALYSIS_HH_ */</span><span class="preprocessor"></span></div>
+<div class="line"><a name="l00067"></a><span class="lineno"><a class="code" href="../../d8/d0d/classHMolPolAnalysis.html#ad0ba4156f3e3b6e0f051b9a02c25e6d9">   67</a></span>&#160;    <a class="code" href="../../db/da0/classHMolPolEvent.html" title="Defines Top ROOT Tree structure of the ROOT file for each event.">HMolPolEvent</a>* <a class="code" href="../../d8/d0d/classHMolPolAnalysis.html#ad0ba4156f3e3b6e0f051b9a02c25e6d9" title="Main event structure.">fEvent</a>;       <span class="comment">///&lt; Main event structure</span></div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;  <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    <a class="code" href="../../dc/ddf/classHMolPolRunInformation.html">HMolPolRunInformation</a>* pUserRunInformation;</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;};</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* HMOLPOLANALYSIS_HH_ */</span><span class="preprocessor"></span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="../../dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><b>HMolPolAnalysis.hh</b></li>
-    <li class="footer">Generated on Thu Jul 18 2013 17:37:52 for HMolPol by
+    <li class="footer">Generated on Tue Jul 23 2013 09:26:17 for HMolPol by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="../../doxygen.png" alt="doxygen"/></a> 1.8.3.1 </li>
   </ul>

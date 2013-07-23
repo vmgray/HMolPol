@@ -7,7 +7,8 @@ var classHMolPolEvent =
     [ "cm3", "dd/dd3/group__root.html#ga20dede655c340c948dd33d322558b91a", null ],
     [ "deg", "dd/dd3/group__root.html#gabd0a4401ad8d3d1c60d62cd7517b87e8", null ],
     [ "fEventNumber", "dd/dd3/group__root.html#ga19940d64b74dd08d10fc7173e1fdb4a1", null ],
-    [ "fPrimary", "db/da0/classHMolPolEvent.html#af504b9e26d959109cd7125574a2fec1d", null ],
+    [ "fGenericDetector", "db/da0/classHMolPolEvent.html#ae437f4714806cc8b9a7436ad8913139e", null ],
+    [ "fPrimary", "db/da0/classHMolPolEvent.html#ae1b71c56874603090f94612e1c7b652e", null ],
     [ "GeV", "dd/dd3/group__root.html#ga7cd8d3913e94934a349ed6a987a7e925", null ],
     [ "keV", "dd/dd3/group__root.html#gaf146fb33912c254551b1da3a429c39dd", null ],
     [ "m", "dd/dd3/group__root.html#gad5315b5385f829b9f489dc9750caaf7e", null ],
@@ -23,5 +24,5 @@ var classHMolPolEvent =
     [ "rad", "dd/dd3/group__root.html#ga9ecf09420efb7080daf4e258c9f27487", null ],
     [ "sec", "dd/dd3/group__root.html#ga6a07ce28b94ec82a9f44a64fa064e808", null ],
     [ "sr", "dd/dd3/group__root.html#gaa212efc421c2cb6020789f418695e599", null ],
-    [ "tesla", "dd/dd3/group__root.html#ga5ea14743dcd68b5d0470d0b2fbf48ea7", null ]
+    [ "Tesla", "dd/dd3/group__root.html#ga7b41db7036f7463746778e23c0f2bf8b", null ]
 ];

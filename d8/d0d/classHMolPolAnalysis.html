@@ -126,7 +126,8 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>BeginOfRun</b> (const
 void&#160;</td><td class="memItemRight" valign="bottom"><b>EndOfRun</b> (const G4Run *aRun)</td></tr>
 <tr class="separator:a7d32553ade82cbebbad7cf092d32fed8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afdd30885f712a1d8c75e80f72c62764e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="afdd30885f712a1d8c75e80f72c62764e"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>EndOfEvent</b> (G4int flag)</td></tr>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/d0d/classHMolPolAnalysis.html#afdd30885f712a1d8c75e80f72c62764e">EndOfEvent</a> (G4int flag)</td></tr>
+<tr class="memdesc:afdd30885f712a1d8c75e80f72c62764e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set ROOT file stem or name. <br/></td></tr>
 <tr class="separator:afdd30885f712a1d8c75e80f72c62764e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0d1d85a86e14d9b7911733c75ef1ae03"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0d1d85a86e14d9b7911733c75ef1ae03"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>SetRootFileStem</b> (const G4String &amp;stem)</td></tr>
@@ -173,10 +174,12 @@ TBranch *&#160;</td><td class="memItemRight" valign="bottom"><b>fRootBranch</b><
 TFile *&#160;</td><td class="memItemRight" valign="bottom"><b>fRootFile</b></td></tr>
 <tr class="separator:a260cea80d743d04cd3d2f927ef4bfa4f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad890e8537146054a745967a96bb27138"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad890e8537146054a745967a96bb27138"></a>
-G4String&#160;</td><td class="memItemRight" valign="bottom"><b>fRootFileStem</b></td></tr>
+G4String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/d0d/classHMolPolAnalysis.html#ad890e8537146054a745967a96bb27138">fRootFileStem</a></td></tr>
+<tr class="memdesc:ad890e8537146054a745967a96bb27138"><td class="mdescLeft">&#160;</td><td class="mdescRight">Root file stem. <br/></td></tr>
 <tr class="separator:ad890e8537146054a745967a96bb27138"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a38175dc89b4e0ebecea4273a29576f6e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a38175dc89b4e0ebecea4273a29576f6e"></a>
-G4String&#160;</td><td class="memItemRight" valign="bottom"><b>fRootFileName</b></td></tr>
+G4String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/d0d/classHMolPolAnalysis.html#a38175dc89b4e0ebecea4273a29576f6e">fRootFileName</a></td></tr>
+<tr class="memdesc:a38175dc89b4e0ebecea4273a29576f6e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Root file name (if changing it) <br/></td></tr>
 <tr class="separator:a38175dc89b4e0ebecea4273a29576f6e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a796887231ac22f3ed52f9ba3cd322e22"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a796887231ac22f3ed52f9ba3cd322e22"></a>
 <a class="el" href="../../dc/ddf/classHMolPolRunInformation.html">HMolPolRunInformation</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>pUserRunInformation</b></td></tr>
@@ -201,7 +204,7 @@ G4String&#160;</td><td class="memItemRight" valign="bottom"><b>fRootFileName</b>
 <dl class="todo"><dt><b><a class="el" href="../../dd/da0/todo.html#_todo000004">Todo:</a></b></dt><dd>make this so the file names can change with things like generator etc ie HMolPol_eleastic HMolPol_Moller, etc </dd></dl>
 
 <p>Definition at line <a class="el" href="../../d5/d84/HMolPolAnalysis_8cc_source.html#l00042">42</a> of file <a class="el" href="../../d5/d84/HMolPolAnalysis_8cc_source.html">HMolPolAnalysis.cc</a>.</p>
-<div class="fragment"><div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;                                : fRootFileStem(<span class="stringliteral">&quot;HMolPol&quot;</span>),fRootFileName(<span class="stringliteral">&quot;&quot;</span>)</div>
+<div class="fragment"><div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;                                : <a class="code" href="../../d8/d0d/classHMolPolAnalysis.html#ad890e8537146054a745967a96bb27138" title="Root file stem.">fRootFileStem</a>(<span class="stringliteral">&quot;HMolPol&quot;</span>),<a class="code" href="../../d8/d0d/classHMolPolAnalysis.html#a38175dc89b4e0ebecea4273a29576f6e" title="Root file name (if changing it)">fRootFileName</a>(<span class="stringliteral">&quot;&quot;</span>)</div>
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;{</div>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;  G4cout &lt;&lt; <span class="stringliteral">&quot;###### Calling HMolPolAnalysis::HMolPolAnalysis()&quot;</span> &lt;&lt; G4endl;</div>
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;</div>
@@ -231,24 +234,24 @@ G4String&#160;</td><td class="memItemRight" valign="bottom"><b>fRootFileName</b>
 </div><div class="memdoc">
 <dl class="section see"><dt>See Also</dt><dd><a href="http://root.cern.ch/root/html/TTree.html#TTree:AutoSave">http://root.cern.ch/root/html/TTree.html#TTree:AutoSave</a> </dd></dl>
 
-<p>Definition at line <a class="el" href="../../d5/d84/HMolPolAnalysis_8cc_source.html#l00193">193</a> of file <a class="el" href="../../d5/d84/HMolPolAnalysis_8cc_source.html">HMolPolAnalysis.cc</a>.</p>
-<div class="fragment"><div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;{</div>
-<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;  <span class="comment">// save the current ROOT Tree:</span></div>
-<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;  <span class="comment">// In case your program crashes before closing the file holding this tree,</span></div>
-<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;  <span class="comment">// the file will be automatically recovered when you will connect the file</span></div>
-<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;  <span class="comment">// in UPDATE mode.</span></div>
-<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;  <span class="comment">// The Tree will be recovered at the status corresponding to the last AutoSave.</span></div>
-<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;  <span class="comment">//</span></div>
-<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;  <span class="comment">// if option contains &quot;SaveSelf&quot;, gDirectory-&gt;SaveSelf() is called.</span></div>
-<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;  <span class="comment">// This allows another process to analyze the Tree while the Tree is being filled.</span></div>
-<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;  <span class="comment">//</span><span class="comment"></span></div>
-<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;<span class="comment">  /// \see http://root.cern.ch/root/html/TTree.html#TTree:AutoSave</span></div>
-<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;<span class="comment"></span></div>
-<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;  <span class="comment">// fRootTree -&gt; AutoSave(&quot;SaveSelf&quot;);</span></div>
-<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;  fRootTree -&gt; AutoSave();</div>
-<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;  gDirectory -&gt; Purge(); <span class="comment">//Purge old trees</span></div>
-<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;</div>
-<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;}</div>
+<p>Definition at line <a class="el" href="../../d5/d84/HMolPolAnalysis_8cc_source.html#l00195">195</a> of file <a class="el" href="../../d5/d84/HMolPolAnalysis_8cc_source.html">HMolPolAnalysis.cc</a>.</p>
+<div class="fragment"><div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;{</div>
+<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;  <span class="comment">// save the current ROOT Tree:</span></div>
+<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;  <span class="comment">// In case your program crashes before closing the file holding this tree,</span></div>
+<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;  <span class="comment">// the file will be automatically recovered when you will connect the file</span></div>
+<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;  <span class="comment">// in UPDATE mode.</span></div>
+<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;  <span class="comment">// The Tree will be recovered at the status corresponding to the last AutoSave.</span></div>
+<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;  <span class="comment">//</span></div>
+<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;  <span class="comment">// if option contains &quot;SaveSelf&quot;, gDirectory-&gt;SaveSelf() is called.</span></div>
+<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;  <span class="comment">// This allows another process to analyze the Tree while the Tree is being filled.</span></div>
+<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;  <span class="comment">//</span><span class="comment"></span></div>
+<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;<span class="comment">  /// \see http://root.cern.ch/root/html/TTree.html#TTree:AutoSave</span></div>
+<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;  <span class="comment">// fRootTree -&gt; AutoSave(&quot;SaveSelf&quot;);</span></div>
+<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;  fRootTree -&gt; AutoSave();</div>
+<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;  gDirectory -&gt; Purge(); <span class="comment">//Purge old trees</span></div>
+<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;</div>
+<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -262,7 +265,7 @@ G4String&#160;</td><td class="memItemRight" valign="bottom"><b>fRootFileName</b>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="../../d8/d0d/classHMolPolAnalysis.html">HMolPolAnalysis</a></li>
-    <li class="footer">Generated on Thu Jul 18 2013 17:37:52 for HMolPol by
+    <li class="footer">Generated on Tue Jul 23 2013 09:26:17 for HMolPol by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="../../doxygen.png" alt="doxygen"/></a> 1.8.3.1 </li>
   </ul>
