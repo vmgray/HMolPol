@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE gdml[
+<!ENTITY materials SYSTEM "materials.gdml">
+]>
+
+<gdml xmlns:gdml="http://cern.ch/2001/Schemas/GDML" 
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+      xsi:noNamespaceSchemaLocation="schema/gdml.xsd">
+      <!-- include GDML namespace -->
+      <!-- XML Schema instance Namespace -->
+      <!-- GDML Schema Location -->
+
+<!--
+/***********************************************************
+Programmer: Valerie Gray
+Purpose:
+
+This is a inital take at a detector that could be placed downsteam of the
+H Target. 
+
+Entry Conditions: none
+Date:07-22-2013
+Modified: 07-22-2013
+Assisted By: Wouter Deconinck
+*********************************************************/
+-->
+ <define>
+
+    <!-- NOTICE: all of these values have been pulled out of thin error, they will 
+     have to be changed to be inline with the actual experiment -->
+  
+    <!-- Define the quantities that will be used in this file 
+      This might be wrong and these need to be constants... -->
+        
+    <!-- X length of the "World" or the experimental hall -->
+    <quantity name="Detector_X_length" 
+      value = "4" 
+      unit = "cm" />
+     
+    <!-- Y length of the "World" or the experimental hall -->   
+    <quantity name="Detector_Y_length" 
+      value = "4" 
+      unit = "cm" />
+
+    <!-- X length of the "World" or the experimental hall -->
+    <quantity name="Detector_Z_length" 
+      value = "2" 
+      unit = "cm" />
+    
+    <!-- define positions of the target in this file -->
+    <position name="Detector_Position" 
+      x="0.0"
+      y="0.0" 
+      z="0.0" 
+      unit="m"/>
+
+  </define>
+  
+  &materials;
+  
+  <solids>
+    <!-- Define the tube of the Detectors -->
+    <box name="DetectorVolumeBox" 
+      x="Detector_X_length" 
+      y="Detector_Y_length" 
+      z="Detector_Z_length"/>
+ 
+  </solids>
+  
+   <structure>
+  <!-- implement the geometry - through logical volumes and physical volumes  -->
+    <volume name="LogicalDetector"> 
+      <materialref ref="BC-408_scint_dummy"/>
+      <solidref ref="DetectorVolumeBox"/>
+      <auxiliary auxtype="Color" auxvalue="cyan"/>
+      <auxiliary auxtype="Alpha" auxvalue="0.7"/>
+      <auxiliary auxtype="SensDet" auxvalue="DetectorDet"/> 
+    </volume>
+
+  </structure>
+
+  <!-- I am not sure what all this does, sets up something for the implementation
+       to the World -->
+
+  <setup name="DetectorSetup" version="1.0">
+    <world ref="LogicalDetector"/>
+  </setup>
+
+</gdml>
+  
