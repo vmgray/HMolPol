@@ -62,6 +62,20 @@ Assisted By: Wouter Deconinck
     <position name="DummyCenter" 
       x="0" 
       y="0" 
+      z="4.5"
+      unit="m"/>
+      
+    <!-- position of the Right Detector (and all its parts) in the "World" -->
+    <position name="RightDetectorCenter" 
+      x="0.2" 
+      y="0" 
+      z="3.0"
+      unit="m"/>
+    
+    <!-- position of the Left Detector (and all its parts) in the "World" -->
+    <position name="LeftDetectorCenter" 
+      x="-0.2" 
+      y="0" 
       z="3.0"
       unit="m"/>
 
@@ -99,7 +113,16 @@ Assisted By: Wouter Deconinck
         <file name="geometry/dummy.gdml"/>
         <positionref ref="DummyCenter"/>
       </physvol>
-
+ 
+      <physvol>
+        <file name="geometry/detector.gdml"/>
+        <positionref ref="RightDetectorCenter"/>
+      </physvol>
+      
+      <physvol>
+        <file name="geometry/detector.gdml"/>
+        <positionref ref="LeftDetectorCenter"/>
+      </physvol>
    
     </volume>
   </structure>
