@@ -46,7 +46,7 @@ Assisted By: Wouter Deconinck
     <!-- Maximum radius of the dummy detector --> 
     <quantity name="Dummy_MaxRadius" 
       type="length" 
-      value = "0.25" 
+      value = "2.25" 
       unit = "m" />
     
     <!-- Length of the dummy detector -->
@@ -91,10 +91,10 @@ Assisted By: Wouter Deconinck
    <structure>
   <!-- implement the geometry - through logical volumes and physical volumes  -->
     <volume name="logicalDummy"> 
-      <materialref ref="BC-408_scint_dummy"/>
+      <materialref ref="G4_AIR"/>
       <solidref ref="Dummy_tube"/>
       <auxiliary auxtype="Color" auxvalue="yellow"/>
-      <auxiliary auxtype="Alpha" auxvalue="0.5"/>
+      <auxiliary auxtype="Alpha" auxvalue="0.1"/>
       <auxiliary auxtype="SensDet" auxvalue="DummyDet"/> 
     </volume>
   </structure>
