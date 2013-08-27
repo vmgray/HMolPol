@@ -188,38 +188,38 @@ $(document).ready(function(){initNavTree('dd/df7/HMolPol_8cc_source.html','../..
 <div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;  runManager-&gt;SetUserInitialization(physlist);</div>
 <div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;</div>
 <div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;  <span class="comment">// Detector geometry</span></div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;  <span class="comment">//pass the geometry of the HMolPol to the Geant4 class G4VUserDetectorConstruction</span></div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;  G4VUserDetectorConstruction* myHMolPolDetector =</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;      <span class="keyword">new</span> <a class="code" href="../../d1/d72/classHMolPolDetectorConstruction.html">HMolPolDetectorConstruction</a>();</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;  <span class="comment">// give the run manager the geometry</span></div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;  runManager-&gt;SetUserInitialization(myHMolPolDetector);</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;  <span class="comment">// Analysis (interface with ROOT file)</span></div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;  <a class="code" href="../../d8/d0d/classHMolPolAnalysis.html">HMolPolAnalysis</a>* myHMolPolAnalysis  = <span class="keyword">new</span> <a class="code" href="../../d8/d0d/classHMolPolAnalysis.html">HMolPolAnalysis</a>();</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;  <span class="comment">// Analysis (interface with ROOT file)</span></div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;  <a class="code" href="../../d8/d0d/classHMolPolAnalysis.html">HMolPolAnalysis</a>* myHMolPolAnalysis  = <span class="keyword">new</span> <a class="code" href="../../d8/d0d/classHMolPolAnalysis.html">HMolPolAnalysis</a>();</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;  <span class="comment">// Detector geometry</span></div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;  <span class="comment">//pass the geometry of the HMolPol to the Geant4 class G4VUserDetectorConstruction</span></div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;  G4VUserDetectorConstruction* myHMolPolDetector =</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;      <span class="keyword">new</span> <a class="code" href="../../d1/d72/classHMolPolDetectorConstruction.html">HMolPolDetectorConstruction</a>(myHMolPolAnalysis);</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;  <span class="comment">// give the run manager the geometry</span></div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;  runManager-&gt;SetUserInitialization(myHMolPolDetector);</div>
 <div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;  <span class="comment">//give run manager the stuff that is done at every event (write to rootfile)</span></div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;  <a class="code" href="../../dc/d3f/classHMolPolEventAction.html">HMolPolEventAction</a>* myHMolPolEventAction =</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;      <span class="keyword">new</span> <a class="code" href="../../dc/d3f/classHMolPolEventAction.html">HMolPolEventAction</a>(myHMolPolAnalysis);</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;  runManager-&gt;SetUserAction(myHMolPolEventAction);</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;  <span class="comment">// give the run manager stuff that is done in each run (save rootfile)</span></div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;  <a class="code" href="../../de/d45/classHMolPolRunAction.html">HMolPolRunAction</a>* myHMolPolRunAction =</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;      <span class="keyword">new</span> <a class="code" href="../../de/d45/classHMolPolRunAction.html">HMolPolRunAction</a>(myHMolPolAnalysis);</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;  runManager-&gt;SetUserAction(myHMolPolRunAction);</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;</div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;<span class="comment"></span></div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;<span class="comment">/// \todo FIX ME!!!!  do something to get the messenger involved</span></div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;<span class="comment"></span><span class="comment">//  HMolPolMess-&gt;SetDetCon( ((HMolPolDetectorConstruction *) detector) );</span></div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;<span class="comment">//  HMolPolMess-&gt;SetMagField(</span></div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;<span class="comment">//      ((HMolPolDetectorConstruction *) detector)-&gt;GetGlobalField() );</span></div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;  <span class="comment">//give run manager the stuff that is done at every event (write to rootfile)</span></div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;  <a class="code" href="../../dc/d3f/classHMolPolEventAction.html">HMolPolEventAction</a>* myHMolPolEventAction =</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;      <span class="keyword">new</span> <a class="code" href="../../dc/d3f/classHMolPolEventAction.html">HMolPolEventAction</a>(myHMolPolAnalysis);</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;  runManager-&gt;SetUserAction(myHMolPolEventAction);</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;  <span class="comment">// give the run manager stuff that is done in each run (save rootfile)</span></div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;  <a class="code" href="../../de/d45/classHMolPolRunAction.html">HMolPolRunAction</a>* myHMolPolRunAction =</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;      <span class="keyword">new</span> <a class="code" href="../../de/d45/classHMolPolRunAction.html">HMolPolRunAction</a>(myHMolPolAnalysis);</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;  runManager-&gt;SetUserAction(myHMolPolRunAction);</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;<span class="comment">/// \todo FIX ME!!!!  do something to get the messenger involved</span></div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;<span class="comment"></span><span class="comment">//  HMolPolMess-&gt;SetDetCon( ((HMolPolDetectorConstruction *) detector) );</span></div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;<span class="comment">//  HMolPolMess-&gt;SetMagField(</span></div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;<span class="comment">//      ((HMolPolDetectorConstruction *) detector)-&gt;GetGlobalField() );</span></div>
 <div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;</div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;  <span class="comment">//beam</span></div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;  <a class="code" href="../../d5/dc9/classHMolPolPrimaryGeneratorAction.html">HMolPolPrimaryGeneratorAction</a>* myHMolPolPrimaryGeneratorAction =</div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;      <span class="keyword">new</span> <a class="code" href="../../d5/dc9/classHMolPolPrimaryGeneratorAction.html">HMolPolPrimaryGeneratorAction</a>(myHMolPolAnalysis);</div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;  runManager-&gt;SetUserAction(myHMolPolPrimaryGeneratorAction);</div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;<span class="comment">//  HMolPolMess-&gt;SetPriGen(primaryGeneratorAction);</span></div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;  <span class="comment">//beam</span></div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;  <a class="code" href="../../d5/dc9/classHMolPolPrimaryGeneratorAction.html">HMolPolPrimaryGeneratorAction</a>* myHMolPolPrimaryGeneratorAction =</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;      <span class="keyword">new</span> <a class="code" href="../../d5/dc9/classHMolPolPrimaryGeneratorAction.html">HMolPolPrimaryGeneratorAction</a>(myHMolPolAnalysis);</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;  runManager-&gt;SetUserAction(myHMolPolPrimaryGeneratorAction);</div>
 <div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;</div>
 <div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;</div>
 <div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;  <span class="comment">// add the global messenger - this will talk with all of</span></div>
@@ -298,7 +298,7 @@ $(document).ready(function(){initNavTree('dd/df7/HMolPol_8cc_source.html','../..
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><b>HMolPol.cc</b></li>
-    <li class="footer">Generated on Tue Jul 23 2013 09:26:17 for HMolPol by
+    <li class="footer">Generated on Tue Aug 27 2013 14:22:19 for HMolPol by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="../../doxygen.png" alt="doxygen"/></a> 1.8.3.1 </li>
   </ul>

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['primary',['Primary',['../dd/d94/classHMolPolUserMainEvent.html#a8c1a2ee992585112a2641e4b95c3425a',1,'HMolPolUserMainEvent']]]
+  ['puserruninformation',['pUserRunInformation',['../d8/d0d/classHMolPolAnalysis.html#a796887231ac22f3ed52f9ba3cd322e22',1,'HMolPolAnalysis']]]
 ];

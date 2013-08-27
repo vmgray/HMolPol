@@ -106,44 +106,46 @@ $(document).ready(function(){initNavTree('de/d33/HMolPolHSolenoidMagField_8hh_so
 </div><!--header-->
 <div class="contents">
 <div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/********************************************</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">* Programmer: Valerie Gray</span></div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment"> * Purpose:</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment"> * \author &lt;b&gt;Programmer:&lt;\b&gt; Valerie Gray</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment"> * \author &lt;b&gt;Assisted By:&lt;\b&gt; Wouter Deconinck</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment"> *</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment"> * This is header file which for the Solenoid magnetic field around</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment"> * the H Moller target.</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment"> * \brief &lt;b&gt;Purpose:&lt;/b&gt; This is header file which for the Solenoid</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment"> * magnetic field around the H Moller target.</span></div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment"> *</span></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment"> * Entry Conditions:</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment"> * Date: 06-25-2013</span></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment"> * Modified: 07-06-2013</span></div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment"> * Assisted By: Wouter Deconinck</span></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment">********************************************/</span></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &lt;G4MagneticField.hh&gt;</span></div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;</div>
-<div class="line"><a name="l00016"></a><span class="lineno"><a class="code" href="../../d5/dc4/classHMolPolSolenoidMagField.html">   16</a></span>&#160;<span class="keyword">class </span><a class="code" href="../../d5/dc4/classHMolPolSolenoidMagField.html">HMolPolSolenoidMagField</a>: <span class="keyword">public</span> G4MagneticField {</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;  <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    <span class="comment">//create the constructor and deconstructor for the detector construction</span></div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    <a class="code" href="../../d0/d3f/group__see.html#gaac3a876fcebddbc284c63053db80ca1e">HMolPolSolenoidMagField</a>();</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    <span class="keyword">virtual</span> ~<a class="code" href="../../d5/dc4/classHMolPolSolenoidMagField.html">HMolPolSolenoidMagField</a>() { };</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <span class="comment">//function to get the field value</span></div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="../../d5/dc4/classHMolPolSolenoidMagField.html#a17f409cdc277ceb888feda048ba59052">GetFieldValue</a>(<span class="keyword">const</span> G4double Point[4], G4double* Bfield) <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;  <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00028"></a><span class="lineno"><a class="code" href="../../d5/dc4/classHMolPolSolenoidMagField.html#ab692d115cdfb901bc4978d6384c6caca">   28</a></span>&#160;    G4double <a class="code" href="../../d5/dc4/classHMolPolSolenoidMagField.html#ab692d115cdfb901bc4978d6384c6caca" title="constant magnetic field in Z direction">Bz</a>; <span class="comment">///&lt; constant magnetic field in Z direction</span></div>
-<div class="line"><a name="l00029"></a><span class="lineno"><a class="code" href="../../d5/dc4/classHMolPolSolenoidMagField.html#a848d5947591a127febc4ff62570bf678">   29</a></span>&#160;<span class="comment"></span>    G4double <a class="code" href="../../d5/dc4/classHMolPolSolenoidMagField.html#a848d5947591a127febc4ff62570bf678" title="constant the radius of the magnetic field">rmax_sq</a>; <span class="comment">///&lt; constant the radius of the magnetic field</span></div>
-<div class="line"><a name="l00030"></a><span class="lineno"><a class="code" href="../../d5/dc4/classHMolPolSolenoidMagField.html#a8927b0d66c85861a0a9792f0b1f2ed36">   30</a></span>&#160;<span class="comment"></span>    G4double <a class="code" href="../../d5/dc4/classHMolPolSolenoidMagField.html#a8927b0d66c85861a0a9792f0b1f2ed36" title="constant for the max z length of the magnetic field">zmax</a>;  <span class="comment">///&lt; constant for the max z length of the magnetic field</span></div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="comment"></span></div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;};</div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment"> * \date &lt;b&gt;Date:&lt;/b&gt; 06-25-2013</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment"> * \date &lt;b&gt;Modified:&lt;/b&gt; 07-06-2013</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment"> * \note &lt;b&gt;Entry Conditions:&lt;/b&gt; none</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment">********************************************/</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#include &lt;G4MagneticField.hh&gt;</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;</div>
+<div class="line"><a name="l00017"></a><span class="lineno"><a class="code" href="../../d5/dc4/classHMolPolSolenoidMagField.html">   17</a></span>&#160;<span class="keyword">class </span><a class="code" href="../../d5/dc4/classHMolPolSolenoidMagField.html">HMolPolSolenoidMagField</a>: <span class="keyword">public</span> G4MagneticField {</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;  <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    <a class="code" href="../../d0/d3f/group__see.html#gaac3a876fcebddbc284c63053db80ca1e">HMolPolSolenoidMagField</a>();   <span class="comment">///&lt; constructor for the HMolPolSolenoidMagField</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="comment"></span><span class="comment">      /// function</span></div>
+<div class="line"><a name="l00023"></a><span class="lineno"><a class="code" href="../../d5/dc4/classHMolPolSolenoidMagField.html#a1a71bfcc655d1791707a91b6616fb1a5">   23</a></span>&#160;<span class="comment"></span>    <span class="keyword">virtual</span> <a class="code" href="../../d5/dc4/classHMolPolSolenoidMagField.html#a1a71bfcc655d1791707a91b6616fb1a5" title="function">~HMolPolSolenoidMagField</a>() { };  <span class="comment">///&lt; destructor for the</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="comment"></span><span class="comment">      /// HMolPolSolenoidMagField function</span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="../../d5/dc4/classHMolPolSolenoidMagField.html#a17f409cdc277ceb888feda048ba59052" title="HMolPolSolenoidMagField function.">GetFieldValue</a>(<span class="keyword">const</span> G4double Point[4], G4double* Bfield) <span class="keyword">const</span>; <span class="comment">///&lt; function</span></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="comment"></span><span class="comment">      /// to get the field value</span></div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;  <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00030"></a><span class="lineno"><a class="code" href="../../d5/dc4/classHMolPolSolenoidMagField.html#ab692d115cdfb901bc4978d6384c6caca">   30</a></span>&#160;    G4double <a class="code" href="../../d5/dc4/classHMolPolSolenoidMagField.html#ab692d115cdfb901bc4978d6384c6caca" title="to get the field value">Bz</a>; <span class="comment">///&lt; constant magnetic field in Z direction</span></div>
+<div class="line"><a name="l00031"></a><span class="lineno"><a class="code" href="../../d5/dc4/classHMolPolSolenoidMagField.html#a848d5947591a127febc4ff62570bf678">   31</a></span>&#160;<span class="comment"></span>    G4double <a class="code" href="../../d5/dc4/classHMolPolSolenoidMagField.html#a848d5947591a127febc4ff62570bf678" title="constant the radius of the magnetic field">rmax_sq</a>; <span class="comment">///&lt; constant the radius of the magnetic field</span></div>
+<div class="line"><a name="l00032"></a><span class="lineno"><a class="code" href="../../d5/dc4/classHMolPolSolenoidMagField.html#a8927b0d66c85861a0a9792f0b1f2ed36">   32</a></span>&#160;<span class="comment"></span>    G4double <a class="code" href="../../d5/dc4/classHMolPolSolenoidMagField.html#a8927b0d66c85861a0a9792f0b1f2ed36" title="constant for the max z length of the magnetic field">zmax</a>;  <span class="comment">///&lt; constant for the max z length of the magnetic field</span></div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;};</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="../../dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><b>HMolPolHSolenoidMagField.hh</b></li>
-    <li class="footer">Generated on Tue Jul 23 2013 09:26:17 for HMolPol by
+    <li class="footer">Generated on Tue Aug 27 2013 14:22:19 for HMolPol by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="../../doxygen.png" alt="doxygen"/></a> 1.8.3.1 </li>
   </ul>

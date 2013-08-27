@@ -105,87 +105,142 @@ $(document).ready(function(){initNavTree('d9/d89/HMolPolGenericDetectorHit_8hh_s
 <div class="title">HMolPolGenericDetectorHit.hh</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/*</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment"> * HMolPolGenericDetectorHit.hh</span></div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment"> *</span></div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment"> *  Created on: Jul 15, 2013</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment"> *      Author: vmgray</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment"> */</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;</div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#ifndef HMolPolGenericDetectorHit_h</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define HMolPolGenericDetectorHit_h</span></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor"></span></div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment">//Geant4 includes</span></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &lt;G4VHit.hh&gt;</span></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &lt;G4THitsCollection.hh&gt;</span></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &lt;G4ThreeVector.hh&gt;</span></div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment">// user includes</span></div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;</div>
-<div class="line"><a name="l00018"></a><span class="lineno"><a class="code" href="../../d4/dce/classHMolPolGenericDetectorHit.html">   18</a></span>&#160;<span class="keyword">class </span><a class="code" href="../../d4/dce/classHMolPolGenericDetectorHit.html">HMolPolGenericDetectorHit</a> : <span class="keyword">public</span> G4VHit</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;{</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;  <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    <a class="code" href="../../d4/dce/classHMolPolGenericDetectorHit.html">HMolPolGenericDetectorHit</a>();</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    <a class="code" href="../../d4/dce/classHMolPolGenericDetectorHit.html">HMolPolGenericDetectorHit</a>(<span class="keyword">const</span> <a class="code" href="../../d4/dce/classHMolPolGenericDetectorHit.html">HMolPolGenericDetectorHit</a>&amp; right);</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <span class="keyword">virtual</span> ~<a class="code" href="../../d4/dce/classHMolPolGenericDetectorHit.html">HMolPolGenericDetectorHit</a>();</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    G4String GetDetectorID()<span class="keyword"> const </span>{</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;      <span class="keywordflow">return</span> <a class="code" href="../../d4/dce/classHMolPolGenericDetectorHit.html#a125de15ccbb56c61fe8595766ea2b863" title="the Detector ID/name">fDetectorID</a>;</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    }</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    <span class="keywordtype">void</span> SetDetectorID(G4int detectorID) {</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;      <a class="code" href="../../d4/dce/classHMolPolGenericDetectorHit.html#a125de15ccbb56c61fe8595766ea2b863" title="the Detector ID/name">fDetectorID</a> = fHitColl-&gt;GetName();</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    }</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    G4int GetTrackID()<span class="keyword"> const </span>{</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;      <span class="keywordflow">return</span> <a class="code" href="../../d4/dce/classHMolPolGenericDetectorHit.html#a43929c56c56b6d38129372c2733b3b91" title="Track ID number.">fTrackID</a>;</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    }</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <span class="keywordtype">void</span> SetTrackID(G4int trackID) {</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;      <a class="code" href="../../d4/dce/classHMolPolGenericDetectorHit.html#a43929c56c56b6d38129372c2733b3b91" title="Track ID number.">fTrackID</a> = trackID;</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    }</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <span class="keyword">const</span> G4ThreeVector&amp; GetPosition()<span class="keyword"> const </span>{</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;      <span class="keywordflow">return</span> fPosition;</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    }</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <span class="keywordtype">void</span> SetPosition(<span class="keyword">const</span> G4ThreeVector&amp; position) {</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;      fPosition = position;</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    }</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <span class="keyword">const</span> G4ThreeVector&amp; GetMomentum()<span class="keyword"> const </span>{</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;      <span class="keywordflow">return</span> fMomentum;</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    }</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <span class="keywordtype">void</span> SetMomentum(<span class="keyword">const</span> G4ThreeVector&amp; momentum) {</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;      fMomentum = momentum;</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    }</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;  <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00058"></a><span class="lineno"><a class="code" href="../../d4/dce/classHMolPolGenericDetectorHit.html#a125de15ccbb56c61fe8595766ea2b863">   58</a></span>&#160;    G4String <a class="code" href="../../d4/dce/classHMolPolGenericDetectorHit.html#a125de15ccbb56c61fe8595766ea2b863" title="the Detector ID/name">fDetectorID</a>;  <span class="comment">///&lt; the Detector ID/name \todo how to get left and right for detectors</span></div>
-<div class="line"><a name="l00059"></a><span class="lineno"><a class="code" href="../../d4/dce/classHMolPolGenericDetectorHit.html#a43929c56c56b6d38129372c2733b3b91">   59</a></span>&#160;<span class="comment"></span>    G4int <a class="code" href="../../d4/dce/classHMolPolGenericDetectorHit.html#a43929c56c56b6d38129372c2733b3b91" title="Track ID number.">fTrackID</a>;     <span class="comment">///&lt; Track ID number</span></div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="comment"></span>      <span class="comment">// - the number of the track within an Event</span></div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    G4ThreeVector fPosition;</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    G4ThreeVector fMomentum;</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;};</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="comment">// Define the hit collection type</span></div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="keyword">typedef</span> G4THitsCollection&lt;HMolPolGenericDetectorHit&gt; HMolPolGenericDetectorHitsCollection;</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="comment">// Define the hit allocator</span><span class="comment"></span></div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="comment">/// \todo Do we need this?</span></div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="comment"></span><span class="comment">//extern G4Allocator&lt;HMolPolGenericDetectorHit&gt; HMolPolGenericDetectorHitAllocator;</span></div>
+<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/********************************************</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment"> * \author &lt;b&gt;Programmer:&lt;\b&gt; Valerie Gray</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment"> * \author &lt;b&gt;Assisted By:&lt;\b&gt; Wouter Deconinck</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment"> * \brief &lt;b&gt;Purpose:&lt;/b&gt; This is header file for the HMolPolGenericDetectorHit Class</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment"> * \date &lt;b&gt;Date:&lt;/b&gt; 07-15-2013</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment"> * \date &lt;b&gt;Modified:&lt;/b&gt; 08-20-2013</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment"> * \note &lt;b&gt;Entry Conditions:&lt;/b&gt; none</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment">********************************************/</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#ifndef HMolPolGenericDetectorHit_h</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define HMolPolGenericDetectorHit_h</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor"></span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment">//Geant4 includes</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">#include &lt;CLHEP/Vector/ThreeVector.h&gt;</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">#include &lt;G4String.hh&gt;</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="preprocessor">#include &lt;G4THitsCollection.hh&gt;</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor">#include &lt;G4ThreeVector.hh&gt;</span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="preprocessor">#include &lt;G4Types.hh&gt;</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="preprocessor">#include &lt;G4VHit.hh&gt;</span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="comment">// user includes</span></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;</div>
+<div class="line"><a name="l00028"></a><span class="lineno"><a class="code" href="../../d4/dce/classHMolPolGenericDetectorHit.html">   28</a></span>&#160;<span class="keyword">class </span><a class="code" href="../../d4/dce/classHMolPolGenericDetectorHit.html">HMolPolGenericDetectorHit</a>: <span class="keyword">public</span> G4VHit {</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;  <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <a class="code" href="../../d4/dce/classHMolPolGenericDetectorHit.html#ab5bba2260eb8fd52c09cced5d3dc4614" title="constructor for HMolPolGenericDetectorHit">HMolPolGenericDetectorHit</a>();  <span class="comment">///&lt; constructor for HMolPolGenericDetectorHit</span></div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="comment"></span>    <a class="code" href="../../d4/dce/classHMolPolGenericDetectorHit.html#ab5bba2260eb8fd52c09cced5d3dc4614" title="constructor for HMolPolGenericDetectorHit">HMolPolGenericDetectorHit</a>(<span class="keyword">const</span> <a class="code" href="../../d4/dce/classHMolPolGenericDetectorHit.html">HMolPolGenericDetectorHit</a>&amp; right);</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="comment">// \bug    ///&lt; constructor for HMolPolGenericDetectorHit I think, the second one??</span></div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <span class="keyword">virtual</span> ~<a class="code" href="../../d4/dce/classHMolPolGenericDetectorHit.html">HMolPolGenericDetectorHit</a>();</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;       <span class="comment">//&lt; destructor for HMolPolGenericDetectorHit</span></div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;</div>
+<div class="line"><a name="l00036"></a><span class="lineno"><a class="code" href="../../d4/dce/classHMolPolGenericDetectorHit.html#a374613e91d0dc9ba3ae3d1150b1dac4c">   36</a></span>&#160;    G4int <a class="code" href="../../d4/dce/classHMolPolGenericDetectorHit.html#a374613e91d0dc9ba3ae3d1150b1dac4c" title="function to get the detector id number (int)">GetDetectorID</a>()<span class="keyword"> const </span>{</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;      <span class="keywordflow">return</span> <a class="code" href="../../d4/dce/classHMolPolGenericDetectorHit.html#ab87e6aa645722528830c96aca1d54df1" title="the Detector ID number (What ever this is and for?)">fDetectorID</a>;</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    } <span class="comment">///&lt; function to get the detector id number (int)</span></div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00040"></a><span class="lineno"><a class="code" href="../../d4/dce/classHMolPolGenericDetectorHit.html#adee067a578408917154536f4661aab8b">   40</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="../../d4/dce/classHMolPolGenericDetectorHit.html#adee067a578408917154536f4661aab8b" title="function to set the detector id number (int)">SetDetectorID</a>(G4int detectorID) {</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;      <a class="code" href="../../d4/dce/classHMolPolGenericDetectorHit.html#ab87e6aa645722528830c96aca1d54df1" title="the Detector ID number (What ever this is and for?)">fDetectorID</a> = detectorID;</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;      <span class="comment">//fDetectorID = fColHits-&gt;GetName(); - want something like this where this is a string not an int</span></div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    } <span class="comment">///&lt; function to set the detector id number (int)</span></div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00045"></a><span class="lineno"><a class="code" href="../../d4/dce/classHMolPolGenericDetectorHit.html#a786a60208ebcbff9f5c009cba3b87b32">   45</a></span>&#160;    G4int <a class="code" href="../../d4/dce/classHMolPolGenericDetectorHit.html#a786a60208ebcbff9f5c009cba3b87b32" title="function to get the track id number (int)">GetTrackID</a>()<span class="keyword"> const </span>{</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;      <span class="keywordflow">return</span> <a class="code" href="../../d4/dce/classHMolPolGenericDetectorHit.html#a43929c56c56b6d38129372c2733b3b91" title="Track ID number.">fTrackID</a>;</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    } <span class="comment">///&lt; function to get the track id number (int)</span></div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00049"></a><span class="lineno"><a class="code" href="../../d4/dce/classHMolPolGenericDetectorHit.html#af521da005877dfaefa0bf24599f23243">   49</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="../../d4/dce/classHMolPolGenericDetectorHit.html#af521da005877dfaefa0bf24599f23243" title="function to set the Track id number (int)">SetTrackID</a>(G4int trackID) {</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;      <a class="code" href="../../d4/dce/classHMolPolGenericDetectorHit.html#a43929c56c56b6d38129372c2733b3b91" title="Track ID number.">fTrackID</a> = trackID;</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    } <span class="comment">///&lt; function to set the Track id number (int)</span></div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00053"></a><span class="lineno"><a class="code" href="../../d4/dce/classHMolPolGenericDetectorHit.html#a8cad2cb651fa12528eba90d532411855">   53</a></span>&#160;    <span class="keyword">const</span> G4ThreeVector&amp; <a class="code" href="../../d4/dce/classHMolPolGenericDetectorHit.html#a8cad2cb651fa12528eba90d532411855" title="function to get the three vector of the position (is a constant)">GetPosition</a>()<span class="keyword"> const </span>{</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;      <span class="keywordflow">return</span> <a class="code" href="../../d4/dce/classHMolPolGenericDetectorHit.html#a5d3c098ac3559ce29d3f9e11f856653e" title="the position of the track">fPosition</a>;</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    } <span class="comment">///&lt; function to get the three vector of the position (is a constant)</span></div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="comment"></span>      <span class="comment">// of the track</span></div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;</div>
+<div class="line"><a name="l00058"></a><span class="lineno"><a class="code" href="../../d4/dce/classHMolPolGenericDetectorHit.html#adbd31b270ad192f090cd8768a0eec140">   58</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="../../d4/dce/classHMolPolGenericDetectorHit.html#adbd31b270ad192f090cd8768a0eec140" title="function to set the three vector of the position (is a constant)">SetPosition</a>(<span class="keyword">const</span> G4ThreeVector&amp; position) {</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;      <a class="code" href="../../d4/dce/classHMolPolGenericDetectorHit.html#a5d3c098ac3559ce29d3f9e11f856653e" title="the position of the track">fPosition</a> = position;</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    } <span class="comment">///&lt; function to set the three vector of the position (is a constant)</span></div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="comment"></span>    <span class="comment">// of the track</span></div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;</div>
+<div class="line"><a name="l00063"></a><span class="lineno"><a class="code" href="../../d4/dce/classHMolPolGenericDetectorHit.html#addd7f85681fcf9dea82391eebee00b1c">   63</a></span>&#160;    <span class="keyword">const</span> G4ThreeVector&amp; <a class="code" href="../../d4/dce/classHMolPolGenericDetectorHit.html#addd7f85681fcf9dea82391eebee00b1c" title="function to get the three vector of the momentum (is a constant)">GetMomentum</a>()<span class="keyword"> const </span>{</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;      <span class="keywordflow">return</span> <a class="code" href="../../d4/dce/classHMolPolGenericDetectorHit.html#adc0c0319537d27a1b77bb763c33c54dc" title="the mometum of the track">fMomentum</a>;</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    } <span class="comment">///&lt; function to get the three vector of the momentum (is a constant)</span></div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="comment"></span>    <span class="comment">// of the track</span></div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;</div>
+<div class="line"><a name="l00068"></a><span class="lineno"><a class="code" href="../../d4/dce/classHMolPolGenericDetectorHit.html#aeee7dacbbe5eb4901e615c6dba0f696f">   68</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="../../d4/dce/classHMolPolGenericDetectorHit.html#aeee7dacbbe5eb4901e615c6dba0f696f" title="function to set the three vector of the momentum (is a constant)">SetMomentum</a>(<span class="keyword">const</span> G4ThreeVector&amp; momentum) {</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;      <a class="code" href="../../d4/dce/classHMolPolGenericDetectorHit.html#adc0c0319537d27a1b77bb763c33c54dc" title="the mometum of the track">fMomentum</a> = momentum;</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    } <span class="comment">///&lt; function to set the three vector of the momentum (is a constant)</span></div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="comment"></span>    <span class="comment">// of the track</span></div>
 <div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<span class="preprocessor">#endif // HMolPolGenericDetectorHit_h</span></div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="preprocessor"></span></div>
+<div class="line"><a name="l00073"></a><span class="lineno"><a class="code" href="../../d4/dce/classHMolPolGenericDetectorHit.html#a5ca723f5f57164c34af2b37ad89f87b5">   73</a></span>&#160;    G4double <a class="code" href="../../d4/dce/classHMolPolGenericDetectorHit.html#a5ca723f5f57164c34af2b37ad89f87b5" title="function to get the Kinetic energy (double) of the track">GetKineticEnergy</a>()<span class="keyword"> const </span>{</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;      <span class="keywordflow">return</span> <a class="code" href="../../d4/dce/classHMolPolGenericDetectorHit.html#aa716ad527ec052b26d04378867a76e2d" title="the kinetic energy of the track">fKineticEnergy</a>;</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    } <span class="comment">///&lt; function to get the Kinetic energy (double) of the track</span></div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00077"></a><span class="lineno"><a class="code" href="../../d4/dce/classHMolPolGenericDetectorHit.html#a981ea33bed5b0e0c91f4a53abf90c8c1">   77</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="../../d4/dce/classHMolPolGenericDetectorHit.html#a981ea33bed5b0e0c91f4a53abf90c8c1" title="function to set the Kinetic energy (double) of the track">SetKineticEnergy</a>(G4double kineticEnergy) {</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;      <a class="code" href="../../d4/dce/classHMolPolGenericDetectorHit.html#aa716ad527ec052b26d04378867a76e2d" title="the kinetic energy of the track">fKineticEnergy</a> = kineticEnergy;</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    } <span class="comment">///&lt; function to set the Kinetic energy (double) of the track</span></div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00081"></a><span class="lineno"><a class="code" href="../../d4/dce/classHMolPolGenericDetectorHit.html#a37a549bba1b9205b695f9ebb46be6383">   81</a></span>&#160;    <span class="keyword">const</span> G4String&amp; <a class="code" href="../../d4/dce/classHMolPolGenericDetectorHit.html#a37a549bba1b9205b695f9ebb46be6383" title="function to get the particle name of the particle of the track">GetParticleName</a>()<span class="keyword"> const </span>{</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;      <span class="keywordflow">return</span> <a class="code" href="../../d4/dce/classHMolPolGenericDetectorHit.html#a6f82d7e4e1077122e9fc225e48eeee63" title="the particle name">fParticleName</a>;</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    } <span class="comment">///&lt; function to get the particle name of the particle of the track</span></div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00085"></a><span class="lineno"><a class="code" href="../../d4/dce/classHMolPolGenericDetectorHit.html#a5a92d337b0073c242edb8a9a753b88df">   85</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="../../d4/dce/classHMolPolGenericDetectorHit.html#a5a92d337b0073c242edb8a9a753b88df" title="function to set the particle name of the particle of the track">SetParticleName</a>(<span class="keyword">const</span> G4String&amp; particleName) {</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;      <a class="code" href="../../d4/dce/classHMolPolGenericDetectorHit.html#a6f82d7e4e1077122e9fc225e48eeee63" title="the particle name">fParticleName</a> = particleName;</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    } <span class="comment">///&lt; function to set the particle name of the particle of the track</span></div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00089"></a><span class="lineno"><a class="code" href="../../d4/dce/classHMolPolGenericDetectorHit.html#a685052159054bfbd3bde7bcb3d7db16d">   89</a></span>&#160;    G4int <a class="code" href="../../d4/dce/classHMolPolGenericDetectorHit.html#a685052159054bfbd3bde7bcb3d7db16d" title="function to get the particle type of the particle of the track">GetParticleType</a>()<span class="keyword"> const </span>{</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;      <span class="keywordflow">return</span> <a class="code" href="../../d4/dce/classHMolPolGenericDetectorHit.html#ad778318357239f2d389681ca31f03b95" title="the particle type (as an interger)">fParticleType</a>;</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    } <span class="comment">///&lt; function to get the particle type of the particle of the track</span></div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;<span class="comment"></span>     <span class="comment">// (this is the int value which will be in the ROOT tree</span></div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;</div>
+<div class="line"><a name="l00094"></a><span class="lineno"><a class="code" href="../../d4/dce/classHMolPolGenericDetectorHit.html#aec9b06bb03c0d5e624f7ab296e71a273">   94</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="../../d4/dce/classHMolPolGenericDetectorHit.html#aec9b06bb03c0d5e624f7ab296e71a273" title="function to set the particle type of the particle of the track">SetParticleType</a>(G4int particleType) {</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;      <a class="code" href="../../d4/dce/classHMolPolGenericDetectorHit.html#ad778318357239f2d389681ca31f03b95" title="the particle type (as an interger)">fParticleType</a> = particleType;</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    } <span class="comment">///&lt; function to set the particle type of the particle of the track</span></div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;<span class="comment"></span>    <span class="comment">// (this is the int value which will be in the ROOT tree</span></div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;</div>
+<div class="line"><a name="l00099"></a><span class="lineno"><a class="code" href="../../d4/dce/classHMolPolGenericDetectorHit.html#a7eb23894257cd5371c096a64165e88de">   99</a></span>&#160;    G4double <a class="code" href="../../d4/dce/classHMolPolGenericDetectorHit.html#a7eb23894257cd5371c096a64165e88de" title="function to get the totat energy (double) of the track">GetTotalEnergy</a>()<span class="keyword"> const </span>{</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;      <span class="keywordflow">return</span> <a class="code" href="../../d4/dce/classHMolPolGenericDetectorHit.html#af48efd4f1c7d61f1cf98969de33b9983" title="the total energy of the track">fTotalEnergy</a>;</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;    } <span class="comment">///&lt; function to get the totat energy (double) of the track</span></div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00103"></a><span class="lineno"><a class="code" href="../../d4/dce/classHMolPolGenericDetectorHit.html#a027bca615df507c03cc174aaf0aa38e8">  103</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="../../d4/dce/classHMolPolGenericDetectorHit.html#a027bca615df507c03cc174aaf0aa38e8" title="function to set the totat energy (double) of the track">SetTotalEnergy</a>(G4double totalEnergy) {</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;      <a class="code" href="../../d4/dce/classHMolPolGenericDetectorHit.html#af48efd4f1c7d61f1cf98969de33b9983" title="the total energy of the track">fTotalEnergy</a> = totalEnergy;</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;    } <span class="comment">///&lt; function to set the totat energy (double) of the track</span></div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;  <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00108"></a><span class="lineno"><a class="code" href="../../d4/dce/classHMolPolGenericDetectorHit.html#ab87e6aa645722528830c96aca1d54df1">  108</a></span>&#160;    G4int <a class="code" href="../../d4/dce/classHMolPolGenericDetectorHit.html#ab87e6aa645722528830c96aca1d54df1" title="the Detector ID number (What ever this is and for?)">fDetectorID</a>; <span class="comment">///&lt; the Detector ID number (What ever this is and for?)</span></div>
+<div class="line"><a name="l00109"></a><span class="lineno"><a class="code" href="../../d4/dce/classHMolPolGenericDetectorHit.html#a43929c56c56b6d38129372c2733b3b91">  109</a></span>&#160;<span class="comment"></span>    G4int <a class="code" href="../../d4/dce/classHMolPolGenericDetectorHit.html#a43929c56c56b6d38129372c2733b3b91" title="Track ID number.">fTrackID</a>; <span class="comment">///&lt; Track ID number</span></div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;<span class="comment"></span>    <span class="comment">// - the number of the track within an Event</span></div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;</div>
+<div class="line"><a name="l00112"></a><span class="lineno"><a class="code" href="../../d4/dce/classHMolPolGenericDetectorHit.html#a6f82d7e4e1077122e9fc225e48eeee63">  112</a></span>&#160;    G4String <a class="code" href="../../d4/dce/classHMolPolGenericDetectorHit.html#a6f82d7e4e1077122e9fc225e48eeee63" title="the particle name">fParticleName</a>; <span class="comment">///&lt; the particle name</span></div>
+<div class="line"><a name="l00113"></a><span class="lineno"><a class="code" href="../../d4/dce/classHMolPolGenericDetectorHit.html#ad778318357239f2d389681ca31f03b95">  113</a></span>&#160;<span class="comment"></span>    G4int <a class="code" href="../../d4/dce/classHMolPolGenericDetectorHit.html#ad778318357239f2d389681ca31f03b95" title="the particle type (as an interger)">fParticleType</a>;    <span class="comment">///&lt; the particle type (as an interger)</span></div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00115"></a><span class="lineno"><a class="code" href="../../d4/dce/classHMolPolGenericDetectorHit.html#af48efd4f1c7d61f1cf98969de33b9983">  115</a></span>&#160;    G4double <a class="code" href="../../d4/dce/classHMolPolGenericDetectorHit.html#af48efd4f1c7d61f1cf98969de33b9983" title="the total energy of the track">fTotalEnergy</a>;   <span class="comment">///&lt; the total energy of the track</span></div>
+<div class="line"><a name="l00116"></a><span class="lineno"><a class="code" href="../../d4/dce/classHMolPolGenericDetectorHit.html#aa716ad527ec052b26d04378867a76e2d">  116</a></span>&#160;<span class="comment"></span>    G4double <a class="code" href="../../d4/dce/classHMolPolGenericDetectorHit.html#aa716ad527ec052b26d04378867a76e2d" title="the kinetic energy of the track">fKineticEnergy</a>; <span class="comment">///&lt; the kinetic energy of the track</span></div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00118"></a><span class="lineno"><a class="code" href="../../d4/dce/classHMolPolGenericDetectorHit.html#a5d3c098ac3559ce29d3f9e11f856653e">  118</a></span>&#160;    G4ThreeVector <a class="code" href="../../d4/dce/classHMolPolGenericDetectorHit.html#a5d3c098ac3559ce29d3f9e11f856653e" title="the position of the track">fPosition</a>; <span class="comment">///&lt;the position of the track</span></div>
+<div class="line"><a name="l00119"></a><span class="lineno"><a class="code" href="../../d4/dce/classHMolPolGenericDetectorHit.html#adc0c0319537d27a1b77bb763c33c54dc">  119</a></span>&#160;<span class="comment"></span>    G4ThreeVector <a class="code" href="../../d4/dce/classHMolPolGenericDetectorHit.html#adc0c0319537d27a1b77bb763c33c54dc" title="the mometum of the track">fMomentum</a>; <span class="comment">///&lt; the mometum of the track</span></div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;};</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;<span class="comment">// Define the hit collection type - this is NOT working</span></div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;<span class="keyword">typedef</span> G4THitsCollection&lt;HMolPolGenericDetectorHit&gt; HMolPolGenericDetectorHitsCollection;</div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;<span class="comment">// Define the hit allocator</span><span class="comment"></span></div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;<span class="comment">/// \todo Do we need this?</span></div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;<span class="comment"></span><span class="comment">//extern G4Allocator&lt;HMolPolGenericDetectorHit&gt; HMolPolGenericDetectorHitAllocator;</span></div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;<span class="preprocessor">#endif // HMolPolGenericDetectorHit_h</span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="../../dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><b>HMolPolGenericDetectorHit.hh</b></li>
-    <li class="footer">Generated on Tue Jul 23 2013 09:26:17 for HMolPol by
+    <li class="footer">Generated on Tue Aug 27 2013 14:22:19 for HMolPol by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="../../doxygen.png" alt="doxygen"/></a> 1.8.3.1 </li>
   </ul>

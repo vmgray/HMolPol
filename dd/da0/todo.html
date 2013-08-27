@@ -105,32 +105,29 @@ $(document).ready(function(){initNavTree('dd/da0/todo.html','../../');});
 <dd>make this so the file names can change with things like generator etc ie HMolPol_eleastic HMolPol_Moller, etc  </dd>
 <dt><a class="anchor" id="_todo000005"></a>Member <a class="el" href="../../d1/d72/classHMolPolDetectorConstruction.html#a083f3ae17e46758a5cc673a43b444f05">HMolPolDetectorConstruction::Construct</a>  ()</dt>
 <dd><p class="startdd">then are you recreating the G4GDMLParser - this makes no sense </p>
-<p>have someone (Wouter) help me figure what this all does </p>
 <p class="enddd">let <a class="el" href="../../d9/d19/classHMolPolGenericDetector.html">HMolPolGenericDetector</a> keep track of number using static (ask wdc for help if necessary)  </p>
 </dd>
-<dt><a class="anchor" id="_todo000008"></a>Member <a class="el" href="../../dc/d3f/classHMolPolEventAction.html#aefafc663d52f4e0a414f34002bf6beac">HMolPolEventAction::BeginOfEventAction</a>  (const G4Event *evt)</dt>
+<dt><a class="anchor" id="_todo000007"></a>Member <a class="el" href="../../dc/d3f/classHMolPolEventAction.html#aefafc663d52f4e0a414f34002bf6beac">HMolPolEventAction::BeginOfEventAction</a>  (const G4Event *evt)</dt>
 <dd>reenable hit collection  </dd>
-<dt><a class="anchor" id="_todo000017"></a>Member <a class="el" href="../../d4/dce/classHMolPolGenericDetectorHit.html#a125de15ccbb56c61fe8595766ea2b863">HMolPolGenericDetectorHit::fDetectorID</a>  </dt>
-<dd>how to get left and right for detectors  </dd>
-<dt><a class="anchor" id="_todo000010"></a>Member <a class="el" href="../../d8/d42/classHMolPolMessenger.html#ad4ea41a1a8cb3a6b647e1728cfb84397">HMolPolMessenger::HMolPolMessenger</a>  (<a class="el" href="../../d5/dc9/classHMolPolPrimaryGeneratorAction.html">HMolPolPrimaryGeneratorAction</a> *, <a class="el" href="../../de/d45/classHMolPolRunAction.html">HMolPolRunAction</a> *, <a class="el" href="../../dc/d3f/classHMolPolEventAction.html">HMolPolEventAction</a> *, <a class="el" href="../../d8/d0d/classHMolPolAnalysis.html">HMolPolAnalysis</a> *)</dt>
-<dd>have someone (Wouter) help me figure what this all does  </dd>
+<dt><a class="anchor" id="_todo000008"></a>Member <a class="el" href="../../dc/d3f/classHMolPolEventAction.html#a15981e9c078c3b9ac27c8e249445ab36">HMolPolEventAction::EndOfEventAction</a>  (const G4Event *evt)</dt>
+<dd>Event number should be branch in ROOT tree  </dd>
+<dt><a class="anchor" id="_todo000009"></a>Member <a class="el" href="../../d9/d19/classHMolPolGenericDetector.html#a6419d429063287b28b1c5fafd061dcf0">HMolPolGenericDetector::ProcessHits</a>  (G4Step *, G4TouchableHistory *)</dt>
+<dd>Fix volume numbering for detector ID  </dd>
 <dt><a class="anchor" id="_todo000011"></a>Member <a class="el" href="../../d8/d42/classHMolPolMessenger.html#ad8efc440aed0f02b60d1d9f1d9bd658d">HMolPolMessenger::SetNewValue</a>  (G4UIcommand *cmd, G4String newValue)</dt>
 <dd>have someone (Wouter) help me figure what this all does  </dd>
-<dt><a class="anchor" id="_todo000019"></a>Member <a class="el" href="../../d5/dc9/classHMolPolPrimaryGeneratorAction.html#a81ed4263f1bb7c2c433fc5d04869a7f1">HMolPolPrimaryGeneratorAction::fParticleGun</a>  </dt>
+<dt><a class="anchor" id="_todo000018"></a>Member <a class="el" href="../../d5/dc9/classHMolPolPrimaryGeneratorAction.html#a81ed4263f1bb7c2c433fc5d04869a7f1">HMolPolPrimaryGeneratorAction::fParticleGun</a>  </dt>
 <dd>why does doxygen not want this documented?? and are these right?  </dd>
-<dt><a class="anchor" id="_todo000018"></a>Member <a class="el" href="../../d5/dc9/classHMolPolPrimaryGeneratorAction.html#aec8a7397137e0c4b24f8b8615ab9fb21">HMolPolPrimaryGeneratorAction::fTheta_com_min</a>  </dt>
+<dt><a class="anchor" id="_todo000017"></a>Member <a class="el" href="../../d5/dc9/classHMolPolPrimaryGeneratorAction.html#aec8a7397137e0c4b24f8b8615ab9fb21">HMolPolPrimaryGeneratorAction::fTheta_com_min</a>  </dt>
 <dd>make this so that they are passed and in the messenger  </dd>
 <dt><a class="anchor" id="_todo000014"></a>Member <a class="el" href="../../d5/dc9/classHMolPolPrimaryGeneratorAction.html#a9777d05ea201784dd5fa03af935667b9">HMolPolPrimaryGeneratorAction::GeneratePrimaries</a>  (G4Event *anEvent)</dt>
 <dd><p class="startdd">have someone (Wouter) help me figure what this all does </p>
 <p class="enddd">actually write the cross section  </p>
 </dd>
 <dt><a class="anchor" id="_todo000012"></a>Member <a class="el" href="../../d5/dc9/classHMolPolPrimaryGeneratorAction.html#ac2cf1709d2102d57918e6f17d12283b5">HMolPolPrimaryGeneratorAction::HMolPolPrimaryGeneratorAction</a>  (<a class="el" href="../../d8/d0d/classHMolPolAnalysis.html">HMolPolAnalysis</a> *AN)</dt>
-<dd><p class="startdd">comment the comment blocks to get the how this is all put together </p>
-<p>break into more then one file so that it is easier to follow </p>
-<p>add in actual <b> incoming electrons </b> not just the ones after the interaction </p>
+<dd><p class="startdd">add in actual <b> incoming electrons </b> not just the ones after the interaction </p>
 <p class="enddd">have someone (Wouter) help me figure what this all does  </p>
 </dd>
-<dt><a class="anchor" id="_todo000009"></a>Member <a class="el" href="../../d5/dc4/classHMolPolSolenoidMagField.html#a17f409cdc277ceb888feda048ba59052">HMolPolSolenoidMagField::GetFieldValue</a>  (const G4double Point[4], G4double *Bfield) const </dt>
+<dt><a class="anchor" id="_todo000010"></a>Member <a class="el" href="../../d5/dc4/classHMolPolSolenoidMagField.html#a17f409cdc277ceb888feda048ba59052">HMolPolSolenoidMagField::GetFieldValue</a>  (const G4double Point[4], G4double *Bfield) const </dt>
 <dd>What if field is not located at the origin  </dd>
 <dt><a class="anchor" id="_todo000002"></a>page <a class="el" href="../../index.html">Welcome to HMolPol</a>  </dt>
 <dd><p class="startdd">look into the Physics list that will work best at JLab energies </p>
@@ -144,7 +141,7 @@ $(document).ready(function(){initNavTree('dd/da0/todo.html','../../');});
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Tue Jul 23 2013 09:26:17 for HMolPol by
+    <li class="footer">Generated on Tue Aug 27 2013 14:22:19 for HMolPol by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="../../doxygen.png" alt="doxygen"/></a> 1.8.3.1 </li>
   </ul>

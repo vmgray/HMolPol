@@ -106,79 +106,94 @@ $(document).ready(function(){initNavTree('d9/dd6/HMolPolMessenger_8hh_source.htm
 </div><!--header-->
 <div class="contents">
 <div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/********************************************</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment"> * Programmer: Valerie Gray</span></div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment"> * Purpose:</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment"> * \author &lt;b&gt;Programmer:&lt;\b&gt; Valerie Gray</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment"> * \author &lt;b&gt;Assisted By:&lt;\b&gt; Wouter Deconinck</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment"> *</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment"> * This is header file which for the detector construction.</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment"> *</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment"> * Entry Conditions:</span></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment"> * Date: 07-06-2013</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment"> * Modified:</span></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment"> * Assisted By: Wouter Deconinck</span></div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment">********************************************/</span></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#ifndef HMOLPOLMESSENGER_HH_</span></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define HMOLPOLMESSENGER_HH_</span></div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor"></span></div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment">//geant4 includes</span></div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">#include &lt;G4UImessenger.hh&gt;</span></div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#include &lt;G4UIcommand.hh&gt;</span></div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="comment">//geant4 classes included</span></div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="keyword">class </span>G4UIcmdWithAnInteger;</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="keyword">class </span>G4UIcmdWithADoubleAndUnit;</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="keyword">class </span>G4UIcmdWithAString;</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="keyword">class </span>G4UIcmdWithABool;</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="comment">//HMolPol classes included</span></div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="keyword">class </span><a class="code" href="../../d5/dc9/classHMolPolPrimaryGeneratorAction.html">HMolPolPrimaryGeneratorAction</a>;</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="keyword">class </span><a class="code" href="../../de/d45/classHMolPolRunAction.html">HMolPolRunAction</a>;</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="keyword">class </span><a class="code" href="../../dc/d3f/classHMolPolEventAction.html">HMolPolEventAction</a>;</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="keyword">class </span><a class="code" href="../../d8/d0d/classHMolPolAnalysis.html">HMolPolAnalysis</a>;</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;</div>
-<div class="line"><a name="l00032"></a><span class="lineno"><a class="code" href="../../d8/d42/classHMolPolMessenger.html">   32</a></span>&#160;<span class="keyword">class </span><a class="code" href="../../d8/d42/classHMolPolMessenger.html">HMolPolMessenger</a> : <span class="keyword">public</span> G4UImessenger</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;{</div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment"> * \brief &lt;b&gt;Purpose:&lt;/b&gt; This is header file for the HMolPolMessenger.</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment"> *      The messenger talks to the interface (user) and changes variables</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment"> *      of the simulation</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment"> * \date &lt;b&gt;Date:&lt;/b&gt; 07-06-2013</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment"> * \date &lt;b&gt;Modified:&lt;/b&gt; 07-25-2013</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment"> * \note &lt;b&gt;Entry Conditions:&lt;/b&gt; none</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment">********************************************/</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#ifndef HMOLPOLMESSENGER_HH_</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define HMOLPOLMESSENGER_HH_</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor"></span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="comment">//geant4 includes</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">#include &lt;G4UImessenger.hh&gt;</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="preprocessor">#include &lt;G4UIcommand.hh&gt;</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="comment">//geant4 classes included</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="keyword">class </span>G4UIcmdWithAnInteger;</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="keyword">class </span>G4UIcmdWithADoubleAndUnit;</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="keyword">class </span>G4UIcmdWithAString;</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="keyword">class </span>G4UIcmdWithABool;</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="comment">//HMolPol classes included</span></div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="keyword">class </span><a class="code" href="../../d5/dc9/classHMolPolPrimaryGeneratorAction.html">HMolPolPrimaryGeneratorAction</a>;</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="keyword">class </span><a class="code" href="../../de/d45/classHMolPolRunAction.html">HMolPolRunAction</a>;</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="keyword">class </span><a class="code" href="../../dc/d3f/classHMolPolEventAction.html">HMolPolEventAction</a>;</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="keyword">class </span><a class="code" href="../../d8/d0d/classHMolPolAnalysis.html">HMolPolAnalysis</a>;</div>
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;  <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <span class="comment">//create the constructor and destructor for the messenger</span></div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <a class="code" href="../../d8/d42/classHMolPolMessenger.html#ad4ea41a1a8cb3a6b647e1728cfb84397">HMolPolMessenger</a>(<a class="code" href="../../d5/dc9/classHMolPolPrimaryGeneratorAction.html">HMolPolPrimaryGeneratorAction</a>*,</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;        <a class="code" href="../../de/d45/classHMolPolRunAction.html">HMolPolRunAction</a>*,</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;        <a class="code" href="../../dc/d3f/classHMolPolEventAction.html">HMolPolEventAction</a>*,</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;        <a class="code" href="../../d8/d0d/classHMolPolAnalysis.html">HMolPolAnalysis</a>*);</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <span class="keyword">virtual</span> ~<a class="code" href="../../d8/d42/classHMolPolMessenger.html">HMolPolMessenger</a>();</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <span class="comment">//function to set value from a command</span></div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="../../d8/d42/classHMolPolMessenger.html#ad8efc440aed0f02b60d1d9f1d9bd658d">SetNewValue</a>(G4UIcommand* cmd, G4String newValue);</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;  <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <span class="comment">// Pointers to the relevant things</span></div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <a class="code" href="../../d5/dc9/classHMolPolPrimaryGeneratorAction.html">HMolPolPrimaryGeneratorAction</a>*      fPrimaryGeneratorAction;</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <a class="code" href="../../de/d45/classHMolPolRunAction.html">HMolPolRunAction</a>*                   fRunAction;</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    <a class="code" href="../../dc/d3f/classHMolPolEventAction.html">HMolPolEventAction</a>*                 fEventAction;</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <a class="code" href="../../d8/d0d/classHMolPolAnalysis.html">HMolPolAnalysis</a>*                    fAnalysis;</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    <span class="comment">//Create different directories</span></div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    G4UIdirectory*        fAnalysisDir;</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    <span class="comment">//create unique ROOT file names in Macro/interactively</span></div>
-<div class="line"><a name="l00059"></a><span class="lineno"><a class="code" href="../../d8/d42/classHMolPolMessenger.html#a6a87de39f60dc4acc32cd11abaf1fdd3">   59</a></span>&#160;    G4UIcmdWithAString*   <a class="code" href="../../d8/d42/classHMolPolMessenger.html#a6a87de39f60dc4acc32cd11abaf1fdd3" title="Root file stem name.">fRootFileStemCmd</a>;  <span class="comment">///&lt; Root file stem name</span></div>
-<div class="line"><a name="l00060"></a><span class="lineno"><a class="code" href="../../d8/d42/classHMolPolMessenger.html#a0170835918e27937fa9205ece6ef2202">   60</a></span>&#160;<span class="comment"></span>    G4UIcmdWithAString*   <a class="code" href="../../d8/d42/classHMolPolMessenger.html#a0170835918e27937fa9205ece6ef2202" title="Root file name.">fRootFileNameCmd</a>;  <span class="comment">///&lt; Root file name</span></div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="comment"></span></div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    <span class="comment">//create the raster size for the beam</span></div>
-<div class="line"><a name="l00063"></a><span class="lineno"><a class="code" href="../../d8/d42/classHMolPolMessenger.html#a842b8acdfe459c71826fdea65e25c027">   63</a></span>&#160;    G4UIcmdWithADoubleAndUnit *<a class="code" href="../../d8/d42/classHMolPolMessenger.html#a842b8acdfe459c71826fdea65e25c027" title="raster y size">frasXCmd</a>; <span class="comment">///&lt; raster y size</span></div>
-<div class="line"><a name="l00064"></a><span class="lineno"><a class="code" href="../../d8/d42/classHMolPolMessenger.html#a5c833d0435881a20733d1008b49bb23c">   64</a></span>&#160;<span class="comment"></span>    G4UIcmdWithADoubleAndUnit *<a class="code" href="../../d8/d42/classHMolPolMessenger.html#a5c833d0435881a20733d1008b49bb23c" title="raster x size">rasYCmd</a>; <span class="comment">///&lt; raster x size</span></div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="comment"></span>};</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="preprocessor">#endif // HMOLPOLMESSENGER_HH_</span></div>
+<div class="line"><a name="l00035"></a><span class="lineno"><a class="code" href="../../d8/d42/classHMolPolMessenger.html">   35</a></span>&#160;<span class="keyword">class </span><a class="code" href="../../d8/d42/classHMolPolMessenger.html">HMolPolMessenger</a> : <span class="keyword">public</span> G4UImessenger</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;{</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;  <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <a class="code" href="../../d8/d42/classHMolPolMessenger.html#ad4ea41a1a8cb3a6b647e1728cfb84397" title="consturctor of the HMolPolMessenger">HMolPolMessenger</a>(<a class="code" href="../../d5/dc9/classHMolPolPrimaryGeneratorAction.html">HMolPolPrimaryGeneratorAction</a>*,</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;        <a class="code" href="../../de/d45/classHMolPolRunAction.html">HMolPolRunAction</a>*,</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;        <a class="code" href="../../dc/d3f/classHMolPolEventAction.html">HMolPolEventAction</a>*,</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;        <a class="code" href="../../d8/d0d/classHMolPolAnalysis.html">HMolPolAnalysis</a>*);   <span class="comment">///&lt; consturctor of the HMolPolMessenger</span></div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="comment"></span>    <span class="keyword">virtual</span> <a class="code" href="../../d8/d42/classHMolPolMessenger.html#ab0e20732731fd8eb16af954e8a68a074" title="destructor of the HMolPolMessenger">~HMolPolMessenger</a>();   <span class="comment">///&lt; destructor of the HMolPolMessenger</span></div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="../../d8/d42/classHMolPolMessenger.html#ad8efc440aed0f02b60d1d9f1d9bd658d">SetNewValue</a>(G4UIcommand* cmd, G4String newValue);   <span class="comment">///&lt; function to</span></div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="comment"></span><span class="comment">      /// set value from a command and gets its value</span></div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;  <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <span class="comment">// Pointers to the relevant classes</span></div>
+<div class="line"><a name="l00052"></a><span class="lineno"><a class="code" href="../../d8/d42/classHMolPolMessenger.html#af452191f808540c9e92284804beaaa5a">   52</a></span>&#160;    <a class="code" href="../../d5/dc9/classHMolPolPrimaryGeneratorAction.html">HMolPolPrimaryGeneratorAction</a>*      <a class="code" href="../../d8/d42/classHMolPolMessenger.html#af452191f808540c9e92284804beaaa5a" title="set value from a command and gets its value">fPrimaryGeneratorAction</a>;   <span class="comment">///&lt; pointer</span></div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="comment"></span><span class="comment">      /// to the primary Generator action class</span></div>
+<div class="line"><a name="l00054"></a><span class="lineno"><a class="code" href="../../d8/d42/classHMolPolMessenger.html#a61911d70f0ef2ce0ba26e36dabc6c488">   54</a></span>&#160;<span class="comment"></span>    <a class="code" href="../../de/d45/classHMolPolRunAction.html">HMolPolRunAction</a>*                   <a class="code" href="../../d8/d42/classHMolPolMessenger.html#a61911d70f0ef2ce0ba26e36dabc6c488" title="to the primary Generator action class">fRunAction</a>;   <span class="comment">///&lt; pointer</span></div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="comment"></span><span class="comment">      /// to the Run Action class</span></div>
+<div class="line"><a name="l00056"></a><span class="lineno"><a class="code" href="../../d8/d42/classHMolPolMessenger.html#acabc7fee78646f83d7c8188fcfaad21b">   56</a></span>&#160;<span class="comment"></span>    <a class="code" href="../../dc/d3f/classHMolPolEventAction.html">HMolPolEventAction</a>*                 <a class="code" href="../../d8/d42/classHMolPolMessenger.html#acabc7fee78646f83d7c8188fcfaad21b" title="to the Run Action class">fEventAction</a>;   <span class="comment">///&lt; pointer</span></div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="comment"></span><span class="comment">      /// to the Event Action class</span></div>
+<div class="line"><a name="l00058"></a><span class="lineno"><a class="code" href="../../d8/d42/classHMolPolMessenger.html#abf761171d0579842a335ccd85893160d">   58</a></span>&#160;<span class="comment"></span>    <a class="code" href="../../d8/d0d/classHMolPolAnalysis.html">HMolPolAnalysis</a>*                    <a class="code" href="../../d8/d42/classHMolPolMessenger.html#abf761171d0579842a335ccd85893160d" title="to the Event Action class">fAnalysis</a>;   <span class="comment">///&lt; pointer</span></div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="comment"></span><span class="comment">      /// to the Analysis class</span></div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    <span class="comment">//Create different directories</span></div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;      <span class="comment">//These directories are the</span></div>
+<div class="line"><a name="l00063"></a><span class="lineno"><a class="code" href="../../d8/d42/classHMolPolMessenger.html#ababc3a02a30233acc4a1f230ec359846">   63</a></span>&#160;    G4UIdirectory*        <a class="code" href="../../d8/d42/classHMolPolMessenger.html#ababc3a02a30233acc4a1f230ec359846" title="to the Analysis class">fAnalysisDir</a>;   <span class="comment">///&lt; create the Analysis Directory</span></div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="comment"></span><span class="comment">      /// all analysis related variables (ROOT file names)</span></div>
+<div class="line"><a name="l00065"></a><span class="lineno"><a class="code" href="../../d8/d42/classHMolPolMessenger.html#ad0053844aef583ea374996f3389cd2d3">   65</a></span>&#160;<span class="comment"></span>    G4UIdirectory*        <a class="code" href="../../d8/d42/classHMolPolMessenger.html#ad0053844aef583ea374996f3389cd2d3" title="all analysis related variables (ROOT file names)">fBeamDir</a>;       <span class="comment">///&lt; create the Beam Directory</span></div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="comment"></span><span class="comment">      /// - all beam related variables</span></div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="comment"></span><span class="comment"></span></div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="comment">/// Analysis related</span></div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="comment"></span>    <span class="comment">//create unique ROOT file names in Macro/interactively</span></div>
+<div class="line"><a name="l00070"></a><span class="lineno"><a class="code" href="../../d8/d42/classHMolPolMessenger.html#a6a87de39f60dc4acc32cd11abaf1fdd3">   70</a></span>&#160;    G4UIcmdWithAString*   <a class="code" href="../../d8/d42/classHMolPolMessenger.html#a6a87de39f60dc4acc32cd11abaf1fdd3" title="Analysis related.">fRootFileStemCmd</a>;  <span class="comment">///&lt; Root file stem name</span></div>
+<div class="line"><a name="l00071"></a><span class="lineno"><a class="code" href="../../d8/d42/classHMolPolMessenger.html#a0170835918e27937fa9205ece6ef2202">   71</a></span>&#160;<span class="comment"></span>    G4UIcmdWithAString*   <a class="code" href="../../d8/d42/classHMolPolMessenger.html#a0170835918e27937fa9205ece6ef2202" title="Root file name.">fRootFileNameCmd</a>;  <span class="comment">///&lt; Root file name</span></div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<span class="comment"></span><span class="comment"></span></div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<span class="comment">/// Beam related variables</span></div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="comment"></span>    <span class="comment">//create the raster size for the beam</span></div>
+<div class="line"><a name="l00075"></a><span class="lineno"><a class="code" href="../../d8/d42/classHMolPolMessenger.html#a1d95a73aa47ec5fb1cdaf7c188675563">   75</a></span>&#160;    G4UIcmdWithADoubleAndUnit* <a class="code" href="../../d8/d42/classHMolPolMessenger.html#a1d95a73aa47ec5fb1cdaf7c188675563" title="Beam related variables.">fRasXCmd</a>; <span class="comment">///&lt; raster y size</span></div>
+<div class="line"><a name="l00076"></a><span class="lineno"><a class="code" href="../../d8/d42/classHMolPolMessenger.html#a4f7a3c84499fa72091f685349c1dd973">   76</a></span>&#160;<span class="comment"></span>    G4UIcmdWithADoubleAndUnit* <a class="code" href="../../d8/d42/classHMolPolMessenger.html#a4f7a3c84499fa72091f685349c1dd973" title="raster x size">fRasYCmd</a>; <span class="comment">///&lt; raster x size</span></div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00078"></a><span class="lineno"><a class="code" href="../../d8/d42/classHMolPolMessenger.html#adeb222b67c47f5f3d158ef09358d28f9">   78</a></span>&#160;    G4UIcmdWithADoubleAndUnit* <a class="code" href="../../d8/d42/classHMolPolMessenger.html#adeb222b67c47f5f3d158ef09358d28f9" title="beam energy">fBeamECmd</a>; <span class="comment">///&lt; beam energy</span></div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;};</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<span class="preprocessor">#endif // HMOLPOLMESSENGER_HH_</span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="../../dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><b>HMolPolMessenger.hh</b></li>
-    <li class="footer">Generated on Tue Jul 23 2013 09:26:17 for HMolPol by
+    <li class="footer">Generated on Tue Aug 27 2013 14:22:19 for HMolPol by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="../../doxygen.png" alt="doxygen"/></a> 1.8.3.1 </li>
   </ul>

@@ -26,10 +26,10 @@ var hierarchy =
     ] ],
     [ "HMolPolAnalysis", "d8/d0d/classHMolPolAnalysis.html", null ],
     [ "TObject", null, [
-      [ "HMolPolEvent", "db/da0/classHMolPolEvent.html", null ],
       [ "HMolPolEventGenericDetector", "d7/d31/classHMolPolEventGenericDetector.html", null ],
       [ "HMolPolEventGenericDetectorHit", "dc/de3/classHMolPolEventGenericDetectorHit.html", null ],
       [ "HMolPolEventPrimary", "d5/d4c/classHMolPolEventPrimary.html", null ],
+      [ "HMolPolEventUnits", "d4/d8a/classHMolPolEventUnits.html", null ],
       [ "HMolPolRunInformation", "dc/ddf/classHMolPolRunInformation.html", null ]
     ] ],
     [ "TRint", null, [

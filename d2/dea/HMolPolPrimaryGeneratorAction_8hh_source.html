@@ -106,71 +106,83 @@ $(document).ready(function(){initNavTree('d2/dea/HMolPolPrimaryGeneratorAction_8
 </div><!--header-->
 <div class="contents">
 <div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/********************************************</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment"> * Programmer: Valerie Gray</span></div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment"> * Purpose:</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment"> * \author &lt;b&gt;Programmer:&lt;\b&gt; Valerie Gray</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment"> * \author &lt;b&gt;Assisted By:&lt;\b&gt; Wouter Deconinck</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment"> *</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment"> * This is header file which for the primary action generator.</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment"> * \brief &lt;b&gt;Purpose:&lt;/b&gt; This is header file which for the primary action generator.</span></div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment"> * Or the generator of the primary particle</span></div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment"> *</span></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment"> * Entry Conditions:</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment"> * Date: 06-25-2013</span></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment"> * Modified: 07-06-2013</span></div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment"> * Assisted By: Wouter Deconinck</span></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment">********************************************/</span></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#ifndef HMolPolPrimaryGeneratorAction_h</span></div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define HMolPolPrimaryGeneratorAction_h 1</span></div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor"></span></div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment">//Geant4 includes</span></div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#include &lt;G4ParticleTable.hh&gt;</span></div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">#include &lt;G4VUserPrimaryGeneratorAction.hh&gt;</span></div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="comment">// HMolPol classes</span></div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="keyword">class </span><a class="code" href="../../d8/d0d/classHMolPolAnalysis.html">HMolPolAnalysis</a>;</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="comment">//Geant4 classes</span></div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="keyword">class </span>G4ParticleGun;</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;</div>
-<div class="line"><a name="l00027"></a><span class="lineno"><a class="code" href="../../d5/dc9/classHMolPolPrimaryGeneratorAction.html">   27</a></span>&#160;<span class="keyword">class </span><a class="code" href="../../d5/dc9/classHMolPolPrimaryGeneratorAction.html">HMolPolPrimaryGeneratorAction</a> : <span class="keyword">public</span> G4VUserPrimaryGeneratorAction</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;{</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;  <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    <span class="comment">//create the constructor and destructor for the primary particle generator</span></div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <a class="code" href="../../d5/dc9/classHMolPolPrimaryGeneratorAction.html#ac2cf1709d2102d57918e6f17d12283b5" title="The constructor.">HMolPolPrimaryGeneratorAction</a>(<a class="code" href="../../d8/d0d/classHMolPolAnalysis.html">HMolPolAnalysis</a>* AN); <span class="comment">///&lt; The constructor</span></div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="comment"></span>    <span class="comment">// for the HMolPolPrimaryGeneratorAction class - it gets passed the</span></div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    <span class="comment">// HMolPolAnalysis class so that the histogram will get filled</span></div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    <span class="keyword">virtual</span> <a class="code" href="../../d5/dc9/classHMolPolPrimaryGeneratorAction.html#ac63cf8a6ecdf7c56ce169476fff40956" title="The destructor.">~HMolPolPrimaryGeneratorAction</a>();   <span class="comment">///&lt; The destructor</span></div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="comment"></span>    <span class="comment">// for the HMolPolPrimaryGeneratorAction class</span></div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <span class="comment">//function to generate the primary electrons</span></div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="../../d5/dc9/classHMolPolPrimaryGeneratorAction.html#a9777d05ea201784dd5fa03af935667b9" title="function to generate">GeneratePrimaries</a>(G4Event* anEvent);  <span class="comment">///&lt; function to generate</span></div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="comment"></span>    <span class="comment">// primary electrons</span></div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;  <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <span class="comment">// Center of mass angles to generate particles between</span><span class="comment"></span></div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="comment">    /// \todo make this so that they are passed and in the messenger</span></div>
-<div class="line"><a name="l00047"></a><span class="lineno"><a class="code" href="../../d5/dc9/classHMolPolPrimaryGeneratorAction.html#aec8a7397137e0c4b24f8b8615ab9fb21">   47</a></span>&#160;<span class="comment"></span>    <span class="keywordtype">double</span> <a class="code" href="../../d5/dc9/classHMolPolPrimaryGeneratorAction.html#aec8a7397137e0c4b24f8b8615ab9fb21">fTheta_com_min</a>; <span class="comment">/// &lt; this is the minimum Theta that electrons</span></div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="comment"></span><span class="comment">    /// will be generated over</span></div>
-<div class="line"><a name="l00049"></a><span class="lineno"><a class="code" href="../../d5/dc9/classHMolPolPrimaryGeneratorAction.html#a017b4c7e9f6ce0feb1934330e4a34ada">   49</a></span>&#160;<span class="comment"></span>    <span class="keywordtype">double</span> <a class="code" href="../../d5/dc9/classHMolPolPrimaryGeneratorAction.html#a017b4c7e9f6ce0feb1934330e4a34ada" title="will be generated over">fTheta_com_max</a>; <span class="comment">/// &lt; this is the minimum Theta that electrons</span></div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="comment"></span><span class="comment">    /// will be generated over</span></div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="comment"></span></div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    <span class="comment">//the primary generation of the primary electrons</span><span class="comment"></span></div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="comment">    /// \todo why does doxygen not want this documented?? and are these right?</span></div>
-<div class="line"><a name="l00054"></a><span class="lineno"><a class="code" href="../../d5/dc9/classHMolPolPrimaryGeneratorAction.html#a81ed4263f1bb7c2c433fc5d04869a7f1">   54</a></span>&#160;<span class="comment"></span>    G4ParticleGun* <a class="code" href="../../d5/dc9/classHMolPolPrimaryGeneratorAction.html#a81ed4263f1bb7c2c433fc5d04869a7f1" title="will be generated over">fParticleGun</a>; <span class="comment">///&lt; the ParticleGun class</span></div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="comment"></span></div>
-<div class="line"><a name="l00056"></a><span class="lineno"><a class="code" href="../../d5/dc9/classHMolPolPrimaryGeneratorAction.html#ab54cd7e73b83ae2f22420c81661daf3c">   56</a></span>&#160;    <a class="code" href="../../d8/d0d/classHMolPolAnalysis.html">HMolPolAnalysis</a>* <a class="code" href="../../d5/dc9/classHMolPolPrimaryGeneratorAction.html#ab54cd7e73b83ae2f22420c81661daf3c" title="the analysis class">fAnalysis</a>;  <span class="comment">///&lt; the analysis class</span></div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="comment"></span>};</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment"> * \date &lt;b&gt;Date:&lt;/b&gt; 06-25-2013</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment"> * \date &lt;b&gt;Modified:&lt;/b&gt; 07-06-2013</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment"> * \note &lt;b&gt;Entry Conditions:&lt;/b&gt; none</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment">********************************************/</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#ifndef HMolPolPrimaryGeneratorAction_h</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define HMolPolPrimaryGeneratorAction_h 1</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor"></span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="comment">//Geant4 includes</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">#include &lt;G4ParticleTable.hh&gt;</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">#include &lt;G4VUserPrimaryGeneratorAction.hh&gt;</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="comment">// HMolPol classes</span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="keyword">class </span><a class="code" href="../../d8/d0d/classHMolPolAnalysis.html">HMolPolAnalysis</a>;</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="comment">//Geant4 classes</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="keyword">class </span>G4ParticleGun;</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;</div>
+<div class="line"><a name="l00028"></a><span class="lineno"><a class="code" href="../../d5/dc9/classHMolPolPrimaryGeneratorAction.html">   28</a></span>&#160;<span class="keyword">class </span><a class="code" href="../../d5/dc9/classHMolPolPrimaryGeneratorAction.html">HMolPolPrimaryGeneratorAction</a> : <span class="keyword">public</span> G4VUserPrimaryGeneratorAction</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;{</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;  <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <span class="comment">//create the constructor and destructor for the primary particle generator</span></div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <a class="code" href="../../d5/dc9/classHMolPolPrimaryGeneratorAction.html#ac2cf1709d2102d57918e6f17d12283b5" title="The constructor.">HMolPolPrimaryGeneratorAction</a>(<a class="code" href="../../d8/d0d/classHMolPolAnalysis.html">HMolPolAnalysis</a>* AN); <span class="comment">///&lt; The constructor</span></div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="comment"></span>    <span class="comment">// for the HMolPolPrimaryGeneratorAction class - it gets passed the</span></div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    <span class="comment">// HMolPolAnalysis class so that the histogram will get filled</span></div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <span class="keyword">virtual</span> <a class="code" href="../../d5/dc9/classHMolPolPrimaryGeneratorAction.html#ac63cf8a6ecdf7c56ce169476fff40956" title="The destructor.">~HMolPolPrimaryGeneratorAction</a>();   <span class="comment">///&lt; The destructor</span></div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="comment"></span>    <span class="comment">// for the HMolPolPrimaryGeneratorAction class</span></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <span class="comment">//function to generate the primary electrons</span></div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="../../d5/dc9/classHMolPolPrimaryGeneratorAction.html#a9777d05ea201784dd5fa03af935667b9" title="function to generate">GeneratePrimaries</a>(G4Event* anEvent);  <span class="comment">///&lt; function to generate</span></div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="comment"></span>    <span class="comment">// primary electrons</span></div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="comment">    ///&lt;  Set Raster size</span></div>
+<div class="line"><a name="l00044"></a><span class="lineno"><a class="code" href="../../d5/dc9/classHMolPolPrimaryGeneratorAction.html#a6d6e3778b7400793c72b222961240c4b">   44</a></span>&#160;<span class="comment"></span>    <span class="keywordtype">void</span> <a class="code" href="../../d5/dc9/classHMolPolPrimaryGeneratorAction.html#a6d6e3778b7400793c72b222961240c4b" title="&lt; Set Raster size">SetRasterX</a>(<span class="keyword">const</span> G4double&amp; XRaster) { <a class="code" href="../../d5/dc9/classHMolPolPrimaryGeneratorAction.html#af75051bcb4673d2cd723e0f7de6f06c8" title="will be generated over">fRasterX</a> = XRaster; }  <span class="comment">///&lt; set</span></div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="comment"></span><span class="comment">      /// the XRaster size of beam</span></div>
+<div class="line"><a name="l00046"></a><span class="lineno"><a class="code" href="../../d5/dc9/classHMolPolPrimaryGeneratorAction.html#ace540640ffb53da3a781423ce76d3381">   46</a></span>&#160;<span class="comment"></span>    <span class="keywordtype">void</span> <a class="code" href="../../d5/dc9/classHMolPolPrimaryGeneratorAction.html#ace540640ffb53da3a781423ce76d3381" title="the XRaster size of beam">SetRasterY</a>(<span class="keyword">const</span> G4double&amp; YRaster) { <a class="code" href="../../d5/dc9/classHMolPolPrimaryGeneratorAction.html#a547bb3fa7fa8a21588502adc30a81cd0" title="the total raser size in Y">fRasterY</a> = YRaster; }  <span class="comment">///&lt; set</span></div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="comment"></span><span class="comment">    /// the YRaster size of beam</span></div>
+<div class="line"><a name="l00048"></a><span class="lineno"><a class="code" href="../../d5/dc9/classHMolPolPrimaryGeneratorAction.html#aec66a1d480f08b95a25a96ed17eab5a3">   48</a></span>&#160;<span class="comment"></span>    <span class="keywordtype">void</span> <a class="code" href="../../d5/dc9/classHMolPolPrimaryGeneratorAction.html#aec66a1d480f08b95a25a96ed17eab5a3" title="the YRaster size of beam">SetBeamE</a>(<span class="keyword">const</span> G4double&amp; BeamE) { <a class="code" href="../../d5/dc9/classHMolPolPrimaryGeneratorAction.html#a70c3db65c3b988b5bb7ed1d4ffcaa82c" title="the incoming electron beam energy">fBeamE</a> = BeamE; }   <span class="comment">///&lt; set</span></div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="comment"></span><span class="comment">    /// the Energy of the beam</span></div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;  <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <span class="comment">// Center of mass angles to generate particles between</span><span class="comment"></span></div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="comment">    /// \todo make this so that they are passed and in the messenger</span></div>
+<div class="line"><a name="l00055"></a><span class="lineno"><a class="code" href="../../d5/dc9/classHMolPolPrimaryGeneratorAction.html#aec8a7397137e0c4b24f8b8615ab9fb21">   55</a></span>&#160;<span class="comment"></span>    <span class="keywordtype">double</span> <a class="code" href="../../d5/dc9/classHMolPolPrimaryGeneratorAction.html#aec8a7397137e0c4b24f8b8615ab9fb21" title="the Energy of the beam">fTheta_com_min</a>; <span class="comment">/// &lt; this is the minimum Theta that electrons</span></div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="comment"></span><span class="comment">    /// will be generated over</span></div>
+<div class="line"><a name="l00057"></a><span class="lineno"><a class="code" href="../../d5/dc9/classHMolPolPrimaryGeneratorAction.html#a017b4c7e9f6ce0feb1934330e4a34ada">   57</a></span>&#160;<span class="comment"></span>    <span class="keywordtype">double</span> <a class="code" href="../../d5/dc9/classHMolPolPrimaryGeneratorAction.html#a017b4c7e9f6ce0feb1934330e4a34ada" title="will be generated over">fTheta_com_max</a>; <span class="comment">/// &lt; this is the minimum Theta that electrons</span></div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="comment"></span><span class="comment">    /// will be generated over</span></div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00060"></a><span class="lineno"><a class="code" href="../../d5/dc9/classHMolPolPrimaryGeneratorAction.html#af75051bcb4673d2cd723e0f7de6f06c8">   60</a></span>&#160;    G4double <a class="code" href="../../d5/dc9/classHMolPolPrimaryGeneratorAction.html#af75051bcb4673d2cd723e0f7de6f06c8" title="will be generated over">fRasterX</a>;  <span class="comment">///&lt; the total raster size in X</span></div>
+<div class="line"><a name="l00061"></a><span class="lineno"><a class="code" href="../../d5/dc9/classHMolPolPrimaryGeneratorAction.html#a547bb3fa7fa8a21588502adc30a81cd0">   61</a></span>&#160;<span class="comment"></span>    G4double <a class="code" href="../../d5/dc9/classHMolPolPrimaryGeneratorAction.html#a547bb3fa7fa8a21588502adc30a81cd0" title="the total raser size in Y">fRasterY</a>;  <span class="comment">///&lt; the total raser size in Y</span></div>
+<div class="line"><a name="l00062"></a><span class="lineno"><a class="code" href="../../d5/dc9/classHMolPolPrimaryGeneratorAction.html#a70c3db65c3b988b5bb7ed1d4ffcaa82c">   62</a></span>&#160;<span class="comment"></span>    G4double <a class="code" href="../../d5/dc9/classHMolPolPrimaryGeneratorAction.html#a70c3db65c3b988b5bb7ed1d4ffcaa82c" title="the incoming electron beam energy">fBeamE</a>;    <span class="comment">///&lt; the incoming electron beam energy</span></div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    <span class="comment">//the primary generation of the primary electrons</span><span class="comment"></span></div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="comment">    /// \todo why does doxygen not want this documented?? and are these right?</span></div>
+<div class="line"><a name="l00066"></a><span class="lineno"><a class="code" href="../../d5/dc9/classHMolPolPrimaryGeneratorAction.html#a81ed4263f1bb7c2c433fc5d04869a7f1">   66</a></span>&#160;<span class="comment"></span>    G4ParticleGun* <a class="code" href="../../d5/dc9/classHMolPolPrimaryGeneratorAction.html#a81ed4263f1bb7c2c433fc5d04869a7f1" title="the ParticleGun class">fParticleGun</a>; <span class="comment">///&lt; the ParticleGun class</span></div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00068"></a><span class="lineno"><a class="code" href="../../d5/dc9/classHMolPolPrimaryGeneratorAction.html#ab54cd7e73b83ae2f22420c81661daf3c">   68</a></span>&#160;    <a class="code" href="../../d8/d0d/classHMolPolAnalysis.html">HMolPolAnalysis</a>* <a class="code" href="../../d5/dc9/classHMolPolPrimaryGeneratorAction.html#ab54cd7e73b83ae2f22420c81661daf3c" title="the analysis class">fAnalysis</a>;  <span class="comment">///&lt; the analysis class</span></div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="comment"></span>};</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="preprocessor">#endif</span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="../../dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><b>HMolPolPrimaryGeneratorAction.hh</b></li>
-    <li class="footer">Generated on Tue Jul 23 2013 09:26:17 for HMolPol by
+    <li class="footer">Generated on Tue Aug 27 2013 14:22:19 for HMolPol by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="../../doxygen.png" alt="doxygen"/></a> 1.8.3.1 </li>
   </ul>

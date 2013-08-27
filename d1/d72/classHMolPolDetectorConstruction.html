@@ -106,6 +106,7 @@ $(document).ready(function(){initNavTree('d1/d72/classHMolPolDetectorConstructio
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-attribs">Public Attributes</a> &#124;
 <a href="#pri-attribs">Private Attributes</a> &#124;
 <a href="../../d8/db8/classHMolPolDetectorConstruction-members.html">List of all members</a>  </div>
   <div class="headertitle">
@@ -123,9 +124,23 @@ Inheritance diagram for HMolPolDetectorConstruction:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
+<tr class="memitem:aa78d2ae46b53c6d7e8767c1749414cad"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa78d2ae46b53c6d7e8767c1749414cad"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>HMolPolDetectorConstruction</b> (<a class="el" href="../../d8/d0d/classHMolPolAnalysis.html">HMolPolAnalysis</a> *analysis)</td></tr>
+<tr class="separator:aa78d2ae46b53c6d7e8767c1749414cad"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aebbaf5c7462470f5fb9459bd28a04b80"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aebbaf5c7462470f5fb9459bd28a04b80"></a>
+virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/d72/classHMolPolDetectorConstruction.html#aebbaf5c7462470f5fb9459bd28a04b80">~HMolPolDetectorConstruction</a> ()</td></tr>
+<tr class="memdesc:aebbaf5c7462470f5fb9459bd28a04b80"><td class="mdescLeft">&#160;</td><td class="mdescRight">destuctor of the Detector construction <br/></td></tr>
+<tr class="separator:aebbaf5c7462470f5fb9459bd28a04b80"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a083f3ae17e46758a5cc673a43b444f05"><td class="memItemLeft" align="right" valign="top">G4VPhysicalVolume *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/d72/classHMolPolDetectorConstruction.html#a083f3ae17e46758a5cc673a43b444f05">Construct</a> ()</td></tr>
 <tr class="memdesc:a083f3ae17e46758a5cc673a43b444f05"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct the volume??  <a href="#a083f3ae17e46758a5cc673a43b444f05">More...</a><br/></td></tr>
 <tr class="separator:a083f3ae17e46758a5cc673a43b444f05"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
+Public Attributes</h2></td></tr>
+<tr class="memitem:aa977784908ffbb67c199842a6e771dbd"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa977784908ffbb67c199842a6e771dbd"></a>
+<a class="el" href="../../d8/d0d/classHMolPolAnalysis.html">HMolPolAnalysis</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/d72/classHMolPolDetectorConstruction.html#aa977784908ffbb67c199842a6e771dbd">fAnalysis</a></td></tr>
+<tr class="memdesc:aa977784908ffbb67c199842a6e771dbd"><td class="mdescLeft">&#160;</td><td class="mdescRight">the Analysis object <br/></td></tr>
+<tr class="separator:aa977784908ffbb67c199842a6e771dbd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
@@ -136,7 +151,7 @@ G4GDMLParser *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" 
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock">
-<p>Definition at line <a class="el" href="../../d5/d04/HMolPolDetectorConstruction_8hh_source.html#l00019">19</a> of file <a class="el" href="../../d5/d04/HMolPolDetectorConstruction_8hh_source.html">HMolPolDetectorConstruction.hh</a>.</p>
+<p>Definition at line <a class="el" href="../../d5/d04/HMolPolDetectorConstruction_8hh_source.html#l00022">22</a> of file <a class="el" href="../../d5/d04/HMolPolDetectorConstruction_8hh_source.html">HMolPolDetectorConstruction.hh</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a class="anchor" id="a083f3ae17e46758a5cc673a43b444f05"></a>
 <div class="memitem">
@@ -154,256 +169,258 @@ G4GDMLParser *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" 
 <p>Construct the volume?? </p>
 <p>construct the physical volume</p>
 <dl class="bug"><dt><b><a class="el" href="../../de/da5/bug.html#_bug000005">Bug:</a></b></dt><dd>what is the above and what is a singleton?? it is everywhere and I can't heads or tails of it. </dd></dl>
-<dl class="bug"><dt><b><a class="el" href="../../de/da5/bug.html#_bug000006">Bug:</a></b></dt><dd>G4NistManager do, I should make the name better too </dd></dl>
+<p>&lt; manages the NIST</p>
 <dl class="todo"><dt><b><a class="el" href="../../dd/da0/todo.html#_todo000005">Todo:</a></b></dt><dd>then are you recreating the G4GDMLParser - this makes no sense </dd></dl>
 <p>all of the Geometry will be read in since they are all</p>
-<dl class="bug"><dt><b><a class="el" href="../../de/da5/bug.html#_bug000007">Bug:</a></b></dt><dd><em>CHANGE</em> so that HMolPolMotherVolume is not hard-coded and other geometries can be able to read in easily </dd></dl>
-<dl class="todo"><dt><b><a class="el" href="../../dd/da0/todo.html#_todo000006">Todo:</a></b></dt><dd>have someone (Wouter) help me figure what this all does </dd></dl>
-<dl class="todo"><dt><b><a class="el" href="../../dd/da0/todo.html#_todo000007">Todo:</a></b></dt><dd>let <a class="el" href="../../d9/d19/classHMolPolGenericDetector.html">HMolPolGenericDetector</a> keep track of number using static (ask wdc for help if necessary) </dd></dl>
-<dl class="bug"><dt><b><a class="el" href="../../de/da5/bug.html#_bug000008">Bug:</a></b></dt><dd>this is for the <em>simple</em> magnetic field - need to be updated to something realistic and that might effect the following code </dd></dl>
+<dl class="bug"><dt><b><a class="el" href="../../de/da5/bug.html#_bug000006">Bug:</a></b></dt><dd><em>CHANGE</em> so that HMolPolMotherVolume is not hard-coded and other geometries can be able to read in easily </dd></dl>
+<dl class="todo"><dt><b><a class="el" href="../../dd/da0/todo.html#_todo000006">Todo:</a></b></dt><dd>let <a class="el" href="../../d9/d19/classHMolPolGenericDetector.html">HMolPolGenericDetector</a> keep track of number using static (ask wdc for help if necessary) </dd></dl>
+<dl class="bug"><dt><b><a class="el" href="../../de/da5/bug.html#_bug000007">Bug:</a></b></dt><dd>this is for the <em>simple</em> magnetic field - need to be updated to something realistic and that might effect the following code </dd></dl>
 
-<p>Definition at line <a class="el" href="../../df/d38/HMolPolDetectorConstruction_8cc_source.html#l00060">60</a> of file <a class="el" href="../../df/d38/HMolPolDetectorConstruction_8cc_source.html">HMolPolDetectorConstruction.cc</a>.</p>
-<div class="fragment"><div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;{</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;  G4cout &lt;&lt; <span class="stringliteral">&quot;In HMollerPolDetectorConstruction::Construct()...&quot;</span> &lt;&lt; G4endl;</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;  G4VPhysicalVolume *worldVolume;</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;  <span class="comment">//for getting NIST materials</span><span class="comment"></span></div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="comment">  /// \bug G4NistManager do, I should make the name better too</span></div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="comment"></span>  G4NistManager* NistManager = G4NistManager::Instance();</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;  NistManager-&gt;SetVerbose(1);</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;  <span class="comment">// Open file with NIST materials</span></div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;  std::ifstream nist_materials;</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;  nist_materials.open(<span class="stringliteral">&quot;nist_materials.txt&quot;</span>);</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;  <span class="comment">// Check whether materials file could be opened correctly</span></div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;  <span class="keywordflow">if</span> (nist_materials.good())</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;  {</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    <span class="comment">//add all the NIST materials we want to use</span></div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    std::string material;</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    <span class="comment">// Loop over all lines in the file</span></div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    <span class="keywordflow">while</span> (! nist_materials.eof())</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    {</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;      nist_materials &gt;&gt; material;</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;      <span class="comment">// Try to load the NIST material</span></div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;      G4bool success = NistManager-&gt;FindOrBuildMaterial(material);</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;      <span class="comment">// And complain if we can&#39;t find the material</span></div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;      <span class="keywordflow">if</span> (! success)</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;      {</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;        G4cout &lt;&lt; <span class="stringliteral">&quot;Material &quot;</span> &lt;&lt; material &lt;&lt; <span class="stringliteral">&quot; not found!&quot;</span> &lt;&lt; G4endl;</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;      }</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    }</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;  } <span class="keywordflow">else</span></div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;  {</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;    <span class="comment">// If the file cannot be found, load only the vacuum</span></div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;    NistManager-&gt;FindOrBuildMaterial(<span class="stringliteral">&quot;G4_Galactic&quot;</span>);</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;    G4cout &lt;&lt; <span class="stringliteral">&quot;File nist_materials.txt not found.  &quot;</span></div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;        &lt;&lt; <span class="stringliteral">&quot;Only loading NIST vacuum!&quot;</span> &lt;&lt; G4endl;</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;  }</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;  <span class="comment">// Close the file</span></div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;  nist_materials.close();</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;  <span class="comment">//if the simulation is using GDML</span></div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;  <span class="comment">//why don&#39;t we need #include &lt;G4GDMLParser.hh&gt;</span></div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;  <span class="comment">//what&#39;s a parser</span></div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;  <span class="keywordflow">if</span> (<a class="code" href="../../d1/d72/classHMolPolDetectorConstruction.html#a2000c253bfba234d86806b672c483fc2" title="GDML parser object.">fGDMLParser</a>)</div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;  {</div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;    <span class="comment">//why are you deleting the G4GDMLParser right away</span></div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;    <span class="keyword">delete</span> <a class="code" href="../../d1/d72/classHMolPolDetectorConstruction.html#a2000c253bfba234d86806b672c483fc2" title="GDML parser object.">fGDMLParser</a>;</div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;  }<span class="comment"></span></div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;<span class="comment">  /// \todo then are you recreating the G4GDMLParser - this makes no sense</span></div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;<span class="comment"></span>  <a class="code" href="../../d1/d72/classHMolPolDetectorConstruction.html#a2000c253bfba234d86806b672c483fc2" title="GDML parser object.">fGDMLParser</a> = <span class="keyword">new</span> G4GDMLParser();</div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;  <a class="code" href="../../d1/d72/classHMolPolDetectorConstruction.html#a2000c253bfba234d86806b672c483fc2" title="GDML parser object.">fGDMLParser</a>-&gt;Clear();</div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;  <span class="comment">//is this to check if the geometry overlaps?? - then why are then is there</span></div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;  <span class="comment">// no geometry yet?!?</span></div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;  <a class="code" href="../../d1/d72/classHMolPolDetectorConstruction.html#a2000c253bfba234d86806b672c483fc2" title="GDML parser object.">fGDMLParser</a>-&gt;SetOverlapCheck(<span class="keyword">true</span>);</div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;</div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;  <span class="comment">//read in the geometry - by reading the Mother Volume</span><span class="comment"></span></div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;<span class="comment">  ///all of the Geometry will be read in since they are all</span></div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;<span class="comment"></span>  <span class="comment">//MotherVolume.gdml uses all they other ones, they will all be read</span><span class="comment"></span></div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;<span class="comment">  /// \bug *CHANGE* so that HMolPolMotherVolume is not hard-coded and</span></div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;<span class="comment">  /// other geometries can be able to read in easily</span></div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;<span class="comment"></span>  <a class="code" href="../../d1/d72/classHMolPolDetectorConstruction.html#a2000c253bfba234d86806b672c483fc2" title="GDML parser object.">fGDMLParser</a>-&gt;Read(<span class="stringliteral">&quot;geometry/HMolPolMotherVolume.gdml&quot;</span>);</div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;</div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;  <span class="comment">//the world volume is set as the world volume??</span></div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;  <span class="comment">//but how does this become the MotherVolume??</span></div>
-<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;  worldVolume = <a class="code" href="../../d1/d72/classHMolPolDetectorConstruction.html#a2000c253bfba234d86806b672c483fc2" title="GDML parser object.">fGDMLParser</a>-&gt;GetWorldVolume();</div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;</div>
-<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;  <span class="comment">//==========================</span></div>
-<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;  <span class="comment">// List auxiliary info</span></div>
-<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;  <span class="comment">// this includes:</span></div>
-<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;  <span class="comment">//    color</span></div>
-<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;  <span class="comment">//    alpha (or opaqueness)</span></div>
-<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;  <span class="comment">//    detector type - if it is a sensitive detector</span></div>
-<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;  <span class="comment">//==========================</span></div>
-<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;</div>
-<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;  <span class="comment">//Wouter broke this - he needs to fix</span></div>
-<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;  <span class="comment">//I am not sure what anything from this point on does.  HELP!!</span><span class="comment"></span></div>
-<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;<span class="comment">  /// \todo have someone (Wouter) help me figure what this all does</span></div>
-<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;<span class="comment"></span>  <span class="keyword">const</span> G4GDMLAuxMapType* auxmap = <a class="code" href="../../d1/d72/classHMolPolDetectorConstruction.html#a2000c253bfba234d86806b672c483fc2" title="GDML parser object.">fGDMLParser</a>-&gt;GetAuxMap();</div>
-<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;</div>
-<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;  <span class="comment">//if it finds auxiliary info tell us</span></div>
-<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;  G4cout &lt;&lt; <span class="stringliteral">&quot;Found &quot;</span> &lt;&lt; auxmap-&gt;size()</div>
-<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;                                     &lt;&lt; <span class="stringliteral">&quot; volume(s) with auxiliary information.&quot;</span></div>
-<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;                                     &lt;&lt; G4endl &lt;&lt; G4endl;</div>
-<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;</div>
-<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;  <span class="comment">//this for loop iterates over all of the auxiliary info.  Starting at the</span></div>
-<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;  <span class="comment">// first one defined till there are no more.  Then it outputs what the volume</span></div>
-<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;  <span class="comment">// is and what type of auxiliary information it has and what the</span></div>
-<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;  <span class="comment">// corresponding value id</span></div>
-<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;  <span class="keywordflow">for</span>(G4GDMLAuxMapType::const_iterator</div>
-<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;      iter  = auxmap-&gt;begin();</div>
-<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;      iter != auxmap-&gt;end(); iter++)</div>
-<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;  {</div>
-<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;    G4cout &lt;&lt; <span class="stringliteral">&quot;Volume &quot;</span> &lt;&lt; ((*iter).first)-&gt;GetName()</div>
-<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;                    &lt;&lt; <span class="stringliteral">&quot; has the following list of auxiliary information: &quot;</span>&lt;&lt; G4endl;</div>
-<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;    <span class="keywordflow">for</span> (G4GDMLAuxListType::const_iterator</div>
-<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;        vit  = (*iter).second.begin();</div>
-<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;        vit != (*iter).second.end(); vit++)</div>
-<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;    {</div>
-<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;      G4cout &lt;&lt; <span class="stringliteral">&quot;--&gt; Type: &quot;</span> &lt;&lt; (*vit).type</div>
-<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;          &lt;&lt; <span class="stringliteral">&quot;, value: &quot;</span>   &lt;&lt; (*vit).value &lt;&lt; std::endl;</div>
-<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;</div>
-<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;      <span class="comment">// Support for the auxiliary tag &quot;Visibility&quot; that can be</span></div>
-<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;      <span class="comment">// &quot;true&quot; to show the volume</span></div>
-<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;      <span class="comment">// &quot;false&quot; to hide the volume</span></div>
-<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;      <span class="comment">// &quot;wireframe&quot; to show the volume as wireframe only</span></div>
-<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;</div>
-<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;      <span class="comment">//if there is a visibility attribute then set it</span></div>
-<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;      <span class="comment">//The defult it to be seen with a wireframe</span></div>
-<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;      <span class="keywordflow">if</span> ((*vit).type == <span class="stringliteral">&quot;Visibility&quot;</span>)</div>
-<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;      {</div>
-<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;        G4Colour colour(1.0,1.0,1.0);</div>
-<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;        <span class="comment">// get old color (this is just the standard Geant4 color)</span></div>
-<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;        <span class="keyword">const</span> G4VisAttributes* visAttribute_old =</div>
-<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;            ((*iter).first)-&gt;GetVisAttributes();</div>
-<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;        <span class="comment">//get the new color that is specified by the GDML code</span></div>
-<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;        <span class="keywordflow">if</span> (visAttribute_old)</div>
-<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;          colour = visAttribute_old-&gt;GetColour();</div>
-<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;        <span class="comment">// create new visibility attributes</span></div>
-<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;        G4VisAttributes visAttribute_new(colour);</div>
-<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;        <span class="keywordflow">if</span> ((*vit).value == <span class="stringliteral">&quot;true&quot;</span>)  <span class="comment">// if we want the object to be seen</span></div>
-<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;          visAttribute_new.SetVisibility(<span class="keyword">true</span>);</div>
-<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;        <span class="keywordflow">if</span> ((*vit).value == <span class="stringliteral">&quot;false&quot;</span>)  <span class="comment">// if we want to hide the object</span></div>
-<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;          visAttribute_new.SetVisibility(<span class="keyword">false</span>);</div>
-<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;        <span class="keywordflow">if</span> ((*vit).value == <span class="stringliteral">&quot;wireframe&quot;</span>) <span class="comment">// if we want wireframe</span></div>
-<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;          visAttribute_new.SetForceWireframe(<span class="keyword">true</span>);</div>
-<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;        <span class="comment">// set new visibility attributes</span></div>
-<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;        ((*iter).first)-&gt;SetVisAttributes(visAttribute_new);</div>
-<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;      }</div>
-<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;</div>
-<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;      <span class="comment">// Support for the auxiliary tag &quot;Color&quot; that can be any of black,</span></div>
-<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;      <span class="comment">// blue, brown, cyan, gray, green, grey, magenta, red, white, yellow</span></div>
-<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;      <span class="keywordflow">if</span> ((*vit).type == <span class="stringliteral">&quot;Color&quot;</span>)</div>
-<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;      {</div>
-<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;        G4Colour colour(1.0,1.0,1.0);</div>
-<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;        <span class="comment">// get requested color, if it exists</span></div>
-<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;        <span class="keywordflow">if</span> (G4Colour::GetColour((*vit).value, colour))</div>
-<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;        {</div>
-<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;          G4cout &lt;&lt; <span class="stringliteral">&quot;Setting color to &quot;</span> &lt;&lt; (*vit).value &lt;&lt; <span class="stringliteral">&quot;.&quot;</span> &lt;&lt; G4endl;</div>
-<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;          <span class="comment">// create new visibility attributes</span></div>
-<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;          G4VisAttributes visAttribute(colour);</div>
-<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;          <span class="comment">// set new visibility attributes</span></div>
-<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;          ((*iter).first)-&gt;SetVisAttributes(visAttribute);</div>
-<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;        } <span class="keywordflow">else</span></div>
-<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;        {</div>
-<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;          <span class="comment">//if color not in the above list</span></div>
-<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;          G4cout &lt;&lt; <span class="stringliteral">&quot;Colour &quot;</span> &lt;&lt; (*vit).value &lt;&lt; <span class="stringliteral">&quot; is not known.&quot;</span> &lt;&lt; G4endl;</div>
-<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;        }</div>
-<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;      }</div>
-<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;</div>
-<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;      <span class="comment">// Support for the auxiliary tag &quot;Alpha&quot; to set opacity,</span></div>
-<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;      <span class="comment">// a value of 0.0 is fully transparent, 1.0 is fully opaque</span></div>
-<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;      <span class="keywordflow">if</span> ((*vit).type == <span class="stringliteral">&quot;Alpha&quot;</span>)</div>
-<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;      {</div>
-<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;        <span class="comment">// get the old color - Geant4 standard color</span></div>
-<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;        G4Colour colour(1.0,1.0,1.0);</div>
-<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;        <span class="comment">// get old color</span></div>
-<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;        <span class="keyword">const</span> G4VisAttributes* visAttribute_old =</div>
-<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;            ((*iter).first)-&gt;GetVisAttributes();</div>
-<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;</div>
-<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;        <span class="keywordflow">if</span> (visAttribute_old)</div>
-<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;          colour = visAttribute_old-&gt;GetColour();</div>
-<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;        <span class="comment">// create new color with alpha channel (// \bug TODO input not checked?? Wouter?)</span></div>
-<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;        <span class="comment">// those color is the same as the color set by color (above)</span></div>
-<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;        G4Colour colour_new(</div>
-<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;            colour.GetRed(),</div>
-<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;            colour.GetGreen(),</div>
-<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;            colour.GetBlue(),</div>
-<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;            std::atof((*vit).value.c_str())); <span class="comment">//this is the alpha value</span></div>
-<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;        <span class="comment">// create new visibility attributes</span></div>
-<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;        G4VisAttributes visAttribute_new(colour_new);</div>
-<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;        <span class="comment">// set new visibility attributes</span></div>
-<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;        ((*iter).first)-&gt;SetVisAttributes(visAttribute_new);</div>
-<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;      }</div>
-<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;</div>
-<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;      <span class="comment">// Support for the auxiliary tag &quot;SensDet&quot; to set sensitive detector type</span></div>
-<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;      <span class="keywordflow">if</span> ((*vit).type == <span class="stringliteral">&quot;SensDet&quot;</span>)</div>
-<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;      {</div>
-<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;        <span class="comment">// Get specified sensitive detector type</span></div>
-<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;        G4String detectortype = (*vit).value;</div>
+<p>Definition at line <a class="el" href="../../df/d38/HMolPolDetectorConstruction_8cc_source.html#l00059">59</a> of file <a class="el" href="../../df/d38/HMolPolDetectorConstruction_8cc_source.html">HMolPolDetectorConstruction.cc</a>.</p>
+<div class="fragment"><div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;{</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;  G4cout &lt;&lt; <span class="stringliteral">&quot;In HMollerPolDetectorConstruction::Construct()...&quot;</span> &lt;&lt; G4endl;</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;  G4VPhysicalVolume *worldVolume;</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;  <span class="comment">//for getting NIST materials</span></div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;  G4NistManager* NistManager = G4NistManager::Instance();  <span class="comment">///&lt; manages the NIST</span></div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="comment"></span>  <span class="comment">// variables</span></div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;  NistManager-&gt;SetVerbose(1);</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;  <span class="comment">// Open file with NIST materials</span></div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;  std::ifstream nist_materials;</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;  nist_materials.open(<span class="stringliteral">&quot;nist_materials.txt&quot;</span>);</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;  <span class="comment">// Check whether materials file could be opened correctly</span></div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;  <span class="keywordflow">if</span> (nist_materials.good())</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;  {</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    <span class="comment">//add all the NIST materials we want to use</span></div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    std::string material;</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    <span class="comment">// Loop over all lines in the file (ie all the needed NIST materials)</span></div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    <span class="keywordflow">while</span> (! nist_materials.eof())</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    {</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;      nist_materials &gt;&gt; material;</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;      <span class="comment">// Try to load the NIST material</span></div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;      G4bool success = NistManager-&gt;FindOrBuildMaterial(material);</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;      <span class="comment">// And complain if we can&#39;t find the material</span></div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;      <span class="keywordflow">if</span> (! success)</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;      {</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;        G4cout &lt;&lt; <span class="stringliteral">&quot;Material &quot;</span> &lt;&lt; material &lt;&lt; <span class="stringliteral">&quot; not found!&quot;</span> &lt;&lt; G4endl;</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;      }</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    }</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;  } <span class="keywordflow">else</span></div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;  {</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;    <span class="comment">// If the file cannot be found, load only the vacuum</span></div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;    NistManager-&gt;FindOrBuildMaterial(<span class="stringliteral">&quot;G4_Galactic&quot;</span>);</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;    G4cout &lt;&lt; <span class="stringliteral">&quot;File nist_materials.txt not found.  &quot;</span></div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;        &lt;&lt; <span class="stringliteral">&quot;Only loading NIST vacuum!&quot;</span> &lt;&lt; G4endl;</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;  }</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;  <span class="comment">// Close the file</span></div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;  nist_materials.close();</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;  <span class="comment">//if the simulation is using GDML</span></div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;  <span class="comment">//why don&#39;t we need #include &lt;G4GDMLParser.hh&gt;</span></div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;  <span class="comment">//what&#39;s a parser</span></div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;  <span class="keywordflow">if</span> (<a class="code" href="../../d1/d72/classHMolPolDetectorConstruction.html#a2000c253bfba234d86806b672c483fc2" title="GDML parser object.">fGDMLParser</a>)</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;  {</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;    <span class="comment">//why are you deleting the G4GDMLParser right away</span></div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;    <span class="keyword">delete</span> <a class="code" href="../../d1/d72/classHMolPolDetectorConstruction.html#a2000c253bfba234d86806b672c483fc2" title="GDML parser object.">fGDMLParser</a>;</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;  }<span class="comment"></span></div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;<span class="comment">  /// \todo then are you recreating the G4GDMLParser - this makes no sense</span></div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;<span class="comment"></span>  <a class="code" href="../../d1/d72/classHMolPolDetectorConstruction.html#a2000c253bfba234d86806b672c483fc2" title="GDML parser object.">fGDMLParser</a> = <span class="keyword">new</span> G4GDMLParser();</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;  <a class="code" href="../../d1/d72/classHMolPolDetectorConstruction.html#a2000c253bfba234d86806b672c483fc2" title="GDML parser object.">fGDMLParser</a>-&gt;Clear();</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;  <span class="comment">//is this to check if the geometry overlaps?? - then why are then is there</span></div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;  <span class="comment">// no geometry yet?!?</span></div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;  <a class="code" href="../../d1/d72/classHMolPolDetectorConstruction.html#a2000c253bfba234d86806b672c483fc2" title="GDML parser object.">fGDMLParser</a>-&gt;SetOverlapCheck(<span class="keyword">true</span>);</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;  <span class="comment">//read in the geometry - by reading the Mother Volume</span><span class="comment"></span></div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;<span class="comment">  ///all of the Geometry will be read in since they are all</span></div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;<span class="comment"></span>  <span class="comment">//MotherVolume.gdml uses all they other ones, they will all be read</span><span class="comment"></span></div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;<span class="comment">  /// \bug *CHANGE* so that HMolPolMotherVolume is not hard-coded and</span></div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;<span class="comment">  /// other geometries can be able to read in easily</span></div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;<span class="comment"></span>  <a class="code" href="../../d1/d72/classHMolPolDetectorConstruction.html#a2000c253bfba234d86806b672c483fc2" title="GDML parser object.">fGDMLParser</a>-&gt;Read(<span class="stringliteral">&quot;geometry/HMolPolMotherVolume.gdml&quot;</span>);</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;  <span class="comment">//the world volume is set as the world volume??</span></div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;  <span class="comment">//but how does this become the MotherVolume??</span></div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;  worldVolume = <a class="code" href="../../d1/d72/classHMolPolDetectorConstruction.html#a2000c253bfba234d86806b672c483fc2" title="GDML parser object.">fGDMLParser</a>-&gt;GetWorldVolume();</div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;</div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;  <span class="comment">//==========================</span></div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;  <span class="comment">// List auxiliary info</span></div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;  <span class="comment">// this includes:</span></div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;  <span class="comment">//    color</span></div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;  <span class="comment">//    alpha (or opaqueness)</span></div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;  <span class="comment">//    detector type - if it is a sensitive detector</span></div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;  <span class="comment">//==========================</span></div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;</div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;  <span class="comment">// define and auxiliary map which has all the above info in it</span></div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;  <span class="keyword">const</span> G4GDMLAuxMapType* auxmap = <a class="code" href="../../d1/d72/classHMolPolDetectorConstruction.html#a2000c253bfba234d86806b672c483fc2" title="GDML parser object.">fGDMLParser</a>-&gt;GetAuxMap();</div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;</div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;  <span class="comment">//if it finds auxiliary info tell us</span></div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;  G4cout &lt;&lt; <span class="stringliteral">&quot;Found &quot;</span> &lt;&lt; auxmap-&gt;size()</div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;                                     &lt;&lt; <span class="stringliteral">&quot; volume(s) with auxiliary information.&quot;</span></div>
+<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;                                     &lt;&lt; G4endl &lt;&lt; G4endl;</div>
+<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;</div>
+<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;  <span class="comment">//this for loop iterates over all of the auxiliary info.  Starting at the</span></div>
+<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;  <span class="comment">// first one defined till there are no more.  Then it outputs what the volume</span></div>
+<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;  <span class="comment">// is and what type of auxiliary information it has and what the</span></div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;  <span class="comment">// corresponding value id</span></div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;  <span class="keywordflow">for</span>(G4GDMLAuxMapType::const_iterator</div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;      iter  = auxmap-&gt;begin();</div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;      iter != auxmap-&gt;end(); iter++)</div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;  {</div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;    G4cout &lt;&lt; <span class="stringliteral">&quot;Volume &quot;</span> &lt;&lt; ((*iter).first)-&gt;GetName()</div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;                    &lt;&lt; <span class="stringliteral">&quot; has the following list of auxiliary information: &quot;</span>&lt;&lt; G4endl;</div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;    <span class="keywordflow">for</span> (G4GDMLAuxListType::const_iterator</div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;        vit  = (*iter).second.begin();</div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;        vit != (*iter).second.end(); vit++)</div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;    {</div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;      G4cout &lt;&lt; <span class="stringliteral">&quot;--&gt; Type: &quot;</span> &lt;&lt; (*vit).type</div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;          &lt;&lt; <span class="stringliteral">&quot;, value: &quot;</span>   &lt;&lt; (*vit).value &lt;&lt; std::endl;</div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;</div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;      <span class="comment">// Support for the auxiliary tag &quot;Visibility&quot; that can be</span></div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;      <span class="comment">// &quot;true&quot; to show the volume</span></div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;      <span class="comment">// &quot;false&quot; to hide the volume</span></div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;      <span class="comment">// &quot;wireframe&quot; to show the volume as wireframe only</span></div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;</div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;      <span class="comment">//if there is a visibility attribute then set it</span></div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;      <span class="comment">//The defult it to be seen with a wireframe</span></div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;      <span class="keywordflow">if</span> ((*vit).type == <span class="stringliteral">&quot;Visibility&quot;</span>)</div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;      {</div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;        G4Colour colour(1.0,1.0,1.0);</div>
+<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;        <span class="comment">// get old color (this is just the standard Geant4 color)</span></div>
+<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;        <span class="keyword">const</span> G4VisAttributes* visAttribute_old =</div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;            ((*iter).first)-&gt;GetVisAttributes();</div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;        <span class="comment">//get the new color that is specified by the GDML code</span></div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;        <span class="keywordflow">if</span> (visAttribute_old)</div>
+<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;          colour = visAttribute_old-&gt;GetColour();</div>
+<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;        <span class="comment">// create new visibility attributes</span></div>
+<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;        G4VisAttributes visAttribute_new(colour);</div>
+<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;        <span class="keywordflow">if</span> ((*vit).value == <span class="stringliteral">&quot;true&quot;</span>)  <span class="comment">// if we want the object to be seen</span></div>
+<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;          visAttribute_new.SetVisibility(<span class="keyword">true</span>);</div>
+<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;        <span class="keywordflow">if</span> ((*vit).value == <span class="stringliteral">&quot;false&quot;</span>)  <span class="comment">// if we want to hide the object</span></div>
+<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;          visAttribute_new.SetVisibility(<span class="keyword">false</span>);</div>
+<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;        <span class="keywordflow">if</span> ((*vit).value == <span class="stringliteral">&quot;wireframe&quot;</span>) <span class="comment">// if we want wireframe</span></div>
+<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;          visAttribute_new.SetForceWireframe(<span class="keyword">true</span>);</div>
+<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;        <span class="comment">// set new visibility attributes</span></div>
+<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;        ((*iter).first)-&gt;SetVisAttributes(visAttribute_new);</div>
+<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;      }</div>
+<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;</div>
+<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;      <span class="comment">// Support for the auxiliary tag &quot;Color&quot; that can be any of black,</span></div>
+<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;      <span class="comment">// blue, brown, cyan, gray, green, grey, magenta, red, white, yellow</span></div>
+<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;      <span class="keywordflow">if</span> ((*vit).type == <span class="stringliteral">&quot;Color&quot;</span>)</div>
+<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;      {</div>
+<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;        G4Colour colour(1.0,1.0,1.0);</div>
+<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;        <span class="comment">// get requested color, if it exists</span></div>
+<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;        <span class="keywordflow">if</span> (G4Colour::GetColour((*vit).value, colour))</div>
+<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;        {</div>
+<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;          G4cout &lt;&lt; <span class="stringliteral">&quot;Setting color to &quot;</span> &lt;&lt; (*vit).value &lt;&lt; <span class="stringliteral">&quot;.&quot;</span> &lt;&lt; G4endl;</div>
+<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;          <span class="comment">// create new visibility attributes</span></div>
+<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;          G4VisAttributes visAttribute(colour);</div>
+<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;          <span class="comment">// set new visibility attributes</span></div>
+<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;          ((*iter).first)-&gt;SetVisAttributes(visAttribute);</div>
+<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;        } <span class="keywordflow">else</span></div>
+<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;        {</div>
+<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;          <span class="comment">//if color not in the above list</span></div>
+<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;          G4cout &lt;&lt; <span class="stringliteral">&quot;Colour &quot;</span> &lt;&lt; (*vit).value &lt;&lt; <span class="stringliteral">&quot; is not known.&quot;</span> &lt;&lt; G4endl;</div>
+<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;        }</div>
+<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;      }</div>
+<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;</div>
+<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;      <span class="comment">// Support for the auxiliary tag &quot;Alpha&quot; to set opacity,</span></div>
+<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;      <span class="comment">// a value of 0.0 is fully transparent, 1.0 is fully opaque</span></div>
+<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;      <span class="keywordflow">if</span> ((*vit).type == <span class="stringliteral">&quot;Alpha&quot;</span>)</div>
+<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;      {</div>
+<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;        <span class="comment">// get the old color - Geant4 standard color</span></div>
+<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;        G4Colour colour(1.0,1.0,1.0);</div>
+<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;        <span class="comment">// get old color</span></div>
+<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;        <span class="keyword">const</span> G4VisAttributes* visAttribute_old =</div>
+<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;            ((*iter).first)-&gt;GetVisAttributes();</div>
+<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;</div>
+<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;        <span class="keywordflow">if</span> (visAttribute_old)</div>
+<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;          colour = visAttribute_old-&gt;GetColour();</div>
+<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;        <span class="comment">// create new color with alpha channel (// \bug TODO input not checked?? Wouter?)</span></div>
+<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;        <span class="comment">// those color is the same as the color set by color (above)</span></div>
+<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;        G4Colour colour_new(</div>
+<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;            colour.GetRed(),</div>
+<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;            colour.GetGreen(),</div>
+<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;            colour.GetBlue(),</div>
+<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;            std::atof((*vit).value.c_str())); <span class="comment">//this is the alpha value</span></div>
+<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;        <span class="comment">// create new visibility attributes</span></div>
+<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;        G4VisAttributes visAttribute_new(colour_new);</div>
+<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;        <span class="comment">// set new visibility attributes</span></div>
+<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;        ((*iter).first)-&gt;SetVisAttributes(visAttribute_new);</div>
+<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;      }</div>
+<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;</div>
+<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;      <span class="comment">// Support for the auxiliary tag &quot;SensDet&quot; to set sensitive detector type</span></div>
+<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;      <span class="keywordflow">if</span> ((*vit).type == <span class="stringliteral">&quot;SensDet&quot;</span>)</div>
+<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;      {</div>
+<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;        <span class="comment">// Get specified sensitive detector type</span></div>
+<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;        G4String detectortype = (*vit).value;</div>
+<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;</div>
+<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;        <span class="comment">// Form name of sensitive detector</span></div>
+<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;        G4String detectorname = <span class="stringliteral">&quot;/hmolpol/&quot;</span> + detectortype;</div>
 <div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;</div>
-<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;        <span class="comment">// Form name of sensitive detector</span></div>
-<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;        G4String detectorname = <span class="stringliteral">&quot;hmolpol/det_&quot;</span> + detectortype;</div>
+<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;        <span class="comment">// Get pointer to sensitive detector manager</span></div>
+<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;        G4SDManager* SDman = G4SDManager::GetSDMpointer();</div>
 <div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;</div>
-<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;        <span class="comment">// Get pointer to sensitive detector manager</span></div>
-<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;        G4SDManager* SDman = G4SDManager::GetSDMpointer();</div>
-<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;</div>
-<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;        <span class="comment">// Find pointer to current sensitive detector of that name</span></div>
-<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;        G4VSensitiveDetector* sensitivedetector =</div>
-<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;            SDman-&gt;FindSensitiveDetector(detectorname);</div>
-<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;</div>
-<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;        <span class="comment">// Check whether the sensitive detector was found</span></div>
-<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;        <span class="keywordflow">if</span> (sensitivedetector == 0)</div>
-<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;        {</div>
-<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;          <span class="comment">// Sensitive detector doesn&#39;t exist yet, so create a new one</span><span class="comment"></span></div>
-<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;<span class="comment">          /// \todo let HMolPolGenericDetector keep track of number using static</span></div>
-<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;<span class="comment">          /// (ask wdc for help if necessary)</span></div>
-<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;<span class="comment"></span>          sensitivedetector = <span class="keyword">new</span> <a class="code" href="../../d9/d19/classHMolPolGenericDetector.html">HMolPolGenericDetector</a>(detectorname);</div>
-<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;          G4cout &lt;&lt; <span class="stringliteral">&quot;Creating sensitive detector &quot;</span> &lt;&lt; detectortype</div>
-<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;                 &lt;&lt; <span class="stringliteral">&quot; for volume &quot;</span> &lt;&lt; ((*iter).first)-&gt;GetName()</div>
-<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;                 &lt;&lt;  G4endl;</div>
-<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;</div>
-<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;          <span class="comment">// Add sensitive detector to manager</span></div>
-<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;          SDman-&gt;AddNewDetector(sensitivedetector);</div>
-<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;        }</div>
-<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;</div>
-<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;        <span class="comment">// Set sensitive detector for the physical volume</span></div>
-<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;        ((*iter).first)-&gt;SetSensitiveDetector(sensitivedetector);</div>
-<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;      }</div>
-<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;    }</div>
-<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;  }</div>
-<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;  G4cout &lt;&lt; G4endl &lt;&lt; G4endl;</div>
-<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;</div>
-<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;  <span class="comment">//==========================</span></div>
-<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;  <span class="comment">// Add in the Magnetic field to world volume</span></div>
+<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;        <span class="comment">// Find pointer to current sensitive detector of that name</span></div>
+<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;        G4VSensitiveDetector* sensitivedetector =</div>
+<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;            SDman-&gt;FindSensitiveDetector(detectorname);</div>
+<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;</div>
+<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;        <span class="comment">// Check whether the sensitive detector was found</span></div>
+<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;        <span class="keywordflow">if</span> (sensitivedetector == 0)</div>
+<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;        {</div>
+<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;          <span class="comment">// Sensitive detector doesn&#39;t exist yet, so create a new one</span><span class="comment"></span></div>
+<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;<span class="comment">          /// \todo let HMolPolGenericDetector keep track of number using static</span></div>
+<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;<span class="comment">          /// (ask wdc for help if necessary)</span></div>
+<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;<span class="comment"></span>          <a class="code" href="../../d9/d19/classHMolPolGenericDetector.html">HMolPolGenericDetector</a>* sensitivedetector =</div>
+<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;              <span class="keyword">new</span> <a class="code" href="../../d9/d19/classHMolPolGenericDetector.html">HMolPolGenericDetector</a>(detectorname);</div>
+<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;          sensitivedetector-&gt;<a class="code" href="../../d9/d19/classHMolPolGenericDetector.html#a0fa8124f5c99eb178482f5aa27c5b633" title="Set volume name function - does just what it implies.">SetVolumeName</a>(((*iter).first)-&gt;GetName());</div>
+<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;          G4cout &lt;&lt; <span class="stringliteral">&quot;Creating sensitive detector &quot;</span> &lt;&lt; detectortype</div>
+<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;                 &lt;&lt; <span class="stringliteral">&quot; for volume &quot;</span> &lt;&lt; ((*iter).first)-&gt;GetName()</div>
+<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;                 &lt;&lt;  G4endl;</div>
+<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;</div>
+<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;          <span class="comment">// Add sensitive detector to analysis</span></div>
+<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;          <a class="code" href="../../d1/d72/classHMolPolDetectorConstruction.html#aa977784908ffbb67c199842a6e771dbd" title="the Analysis object">fAnalysis</a>-&gt;AddNewDetector(detectortype);</div>
+<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;</div>
+<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;          <span class="comment">// Add sensitive detector to manager</span></div>
+<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;          SDman-&gt;AddNewDetector(sensitivedetector);</div>
+<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;        }</div>
+<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;</div>
+<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;        <span class="comment">// Set sensitive detector for the physical volume</span></div>
+<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;        ((*iter).first)-&gt;SetSensitiveDetector(sensitivedetector);</div>
+<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;      }</div>
+<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;    }</div>
+<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;  }</div>
+<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;  G4cout &lt;&lt; G4endl &lt;&lt; G4endl;</div>
+<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;</div>
 <div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;  <span class="comment">//==========================</span></div>
-<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;<span class="comment"></span></div>
-<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;<span class="comment">  /// \bug this is for the *simple* magnetic field - need to be updated to</span></div>
-<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;<span class="comment">  /// something realistic and that might effect the following code</span></div>
-<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;<span class="comment"></span>  <span class="comment">//get the field??</span></div>
-<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;  <a class="code" href="../../d5/dc4/classHMolPolSolenoidMagField.html">HMolPolSolenoidMagField</a>* HTargetSolenoidMagField =</div>
-<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;      <span class="keyword">new</span> <a class="code" href="../../d5/dc4/classHMolPolSolenoidMagField.html">HMolPolSolenoidMagField</a>;</div>
-<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;</div>
-<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;  <span class="comment">//tell Geant 4 to use this field - how??</span></div>
-<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;  G4FieldManager* HTargetSolenoidMagFieldMgr =</div>
-<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;      G4TransportationManager :: GetTransportationManager()-&gt;GetFieldManager();</div>
-<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;</div>
-<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;  <span class="comment">//set the field for the HTargetSolenoidFieldMgr</span></div>
-<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;  HTargetSolenoidMagFieldMgr-&gt;SetDetectorField(HTargetSolenoidMagField);</div>
-<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;</div>
-<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;  <span class="comment">//create the Chord finder (this is responsible for moving</span></div>
-<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;  <span class="comment">// the particles through the field</span></div>
-<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;  HTargetSolenoidMagFieldMgr-&gt;CreateChordFinder(HTargetSolenoidMagField);</div>
-<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;</div>
-<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;  <span class="comment">//==========================</span></div>
-<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;  <span class="comment">// Return world volume</span></div>
+<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;  <span class="comment">// Add in the Magnetic field to world volume</span></div>
+<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;  <span class="comment">//==========================</span></div>
+<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;<span class="comment">  /// \bug this is for the *simple* magnetic field - need to be updated to</span></div>
+<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;<span class="comment">  /// something realistic and that might effect the following code</span></div>
+<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;<span class="comment"></span>  <span class="comment">//get the field??</span></div>
+<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;  <a class="code" href="../../d5/dc4/classHMolPolSolenoidMagField.html">HMolPolSolenoidMagField</a>* HTargetSolenoidMagField =</div>
+<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;      <span class="keyword">new</span> <a class="code" href="../../d5/dc4/classHMolPolSolenoidMagField.html">HMolPolSolenoidMagField</a>;</div>
+<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;</div>
+<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;  <span class="comment">//tell Geant 4 to use this field - how??</span></div>
+<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;  G4FieldManager* HTargetSolenoidMagFieldMgr =</div>
+<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;      G4TransportationManager :: GetTransportationManager()-&gt;GetFieldManager();</div>
+<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;</div>
+<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;  <span class="comment">//set the field for the HTargetSolenoidFieldMgr</span></div>
+<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;  HTargetSolenoidMagFieldMgr-&gt;SetDetectorField(HTargetSolenoidMagField);</div>
+<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;</div>
+<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;  <span class="comment">//create the Chord finder (this is responsible for moving</span></div>
+<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;  <span class="comment">// the particles through the field</span></div>
+<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;  HTargetSolenoidMagFieldMgr-&gt;CreateChordFinder(HTargetSolenoidMagField);</div>
+<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;</div>
 <div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;  <span class="comment">//==========================</span></div>
-<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;</div>
-<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;  <span class="keyword">delete</span> <a class="code" href="../../d1/d72/classHMolPolDetectorConstruction.html#a2000c253bfba234d86806b672c483fc2" title="GDML parser object.">fGDMLParser</a>;</div>
+<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;  <span class="comment">// Return world volume</span></div>
+<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;  <span class="comment">//==========================</span></div>
 <div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;</div>
-<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;  <span class="keywordflow">return</span> worldVolume;</div>
-<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;}</div>
+<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;  <span class="keyword">delete</span> <a class="code" href="../../d1/d72/classHMolPolDetectorConstruction.html#a2000c253bfba234d86806b672c483fc2" title="GDML parser object.">fGDMLParser</a>;</div>
+<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;</div>
+<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;  <span class="keywordflow">return</span> worldVolume;</div>
+<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -417,7 +434,7 @@ G4GDMLParser *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" 
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="../../d1/d72/classHMolPolDetectorConstruction.html">HMolPolDetectorConstruction</a></li>
-    <li class="footer">Generated on Tue Jul 23 2013 09:26:18 for HMolPol by
+    <li class="footer">Generated on Tue Aug 27 2013 14:22:19 for HMolPol by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="../../doxygen.png" alt="doxygen"/></a> 1.8.3.1 </li>
   </ul>

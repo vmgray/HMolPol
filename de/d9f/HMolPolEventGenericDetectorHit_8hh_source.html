@@ -105,41 +105,58 @@ $(document).ready(function(){initNavTree('de/d9f/HMolPolEventGenericDetectorHit_
 <div class="title">HMolPolEventGenericDetectorHit.hh</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/*</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment"> * HMolPolEventGenericDetectorHit.hh</span></div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment"> *</span></div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment"> *  Created on: Jul 19, 2013</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment"> *      Author: vmgray</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment"> */</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;</div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#ifndef HMOLPOLEVENTGENERICDETECTORHIT_HH_</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define HMOLPOLEVENTGENERICDETECTORHIT_HH_</span></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor"></span></div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment">// ROOT includes</span></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &lt;TObject.h&gt;</span></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &lt;TVector3.h&gt;</span></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;</div>
-<div class="line"><a name="l00015"></a><span class="lineno"><a class="code" href="../../dc/de3/classHMolPolEventGenericDetectorHit.html">   15</a></span>&#160;<span class="keyword">class </span><a class="code" href="../../dc/de3/classHMolPolEventGenericDetectorHit.html">HMolPolEventGenericDetectorHit</a>: <span class="keyword">public</span> TObject {</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;  <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    <a class="code" href="../../dc/de3/classHMolPolEventGenericDetectorHit.html">HMolPolEventGenericDetectorHit</a>();</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    <span class="keyword">virtual</span> ~<a class="code" href="../../dc/de3/classHMolPolEventGenericDetectorHit.html">HMolPolEventGenericDetectorHit</a>();</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;</div>
-<div class="line"><a name="l00020"></a><span class="lineno"><a class="code" href="../../dc/de3/classHMolPolEventGenericDetectorHit.html#ae1c9dea5104a33491b9017ff13ec29ba">   20</a></span>&#160;    Int_t <a class="code" href="../../dc/de3/classHMolPolEventGenericDetectorHit.html#ae1c9dea5104a33491b9017ff13ec29ba" title="Track ID.">fTrackID</a>;     <span class="comment">///&lt; Track ID</span></div>
-<div class="line"><a name="l00021"></a><span class="lineno"><a class="code" href="../../dc/de3/classHMolPolEventGenericDetectorHit.html#a74a4fd5c473b859276ac9d3261c48c34">   21</a></span>&#160;<span class="comment"></span>    Int_t <a class="code" href="../../dc/de3/classHMolPolEventGenericDetectorHit.html#a74a4fd5c473b859276ac9d3261c48c34" title="Detector ID.">fDetectorID</a>;  <span class="comment">///&lt; Detector ID</span></div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="comment"></span></div>
-<div class="line"><a name="l00023"></a><span class="lineno"><a class="code" href="../../dc/de3/classHMolPolEventGenericDetectorHit.html#a8b6c31e75865faa64d860c6447a35576">   23</a></span>&#160;    TVector3 <a class="code" href="../../dc/de3/classHMolPolEventGenericDetectorHit.html#a8b6c31e75865faa64d860c6447a35576" title="Hit position.">fPosition</a>; <span class="comment">///&lt; Hit position</span></div>
-<div class="line"><a name="l00024"></a><span class="lineno"><a class="code" href="../../dc/de3/classHMolPolEventGenericDetectorHit.html#a82bf58acfcfedea2b2d21ac3c710a68c">   24</a></span>&#160;<span class="comment"></span>    TVector3 <a class="code" href="../../dc/de3/classHMolPolEventGenericDetectorHit.html#a82bf58acfcfedea2b2d21ac3c710a68c" title="Hit momentum.">fMomentum</a>; <span class="comment">///&lt; Hit momentum</span></div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="comment"></span></div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;};</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* HMOLPOLEVENTGENERICDETECTORHIT_HH_ */</span><span class="preprocessor"></span></div>
+<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/********************************************</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment"> * \author &lt;b&gt;Programmer:&lt;\b&gt; Valerie Gray</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment"> * \author &lt;b&gt;Assisted By:&lt;\b&gt; Wouter Deconinck</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment"> * \brief &lt;b&gt;Purpose:&lt;/b&gt; This is header file for the</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment"> *      HMolPolEventGenericDetectorHit class.</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment"> *      Sets up the variable for the ROOT tree</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment"> * \date &lt;b&gt;Date:&lt;/b&gt; 07-19-2013</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment"> * \date &lt;b&gt;Modified:&lt;/b&gt; 08-26-2013</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment"> * \note &lt;b&gt;Entry Conditions:&lt;/b&gt; none</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment">********************************************/</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">#ifndef HMOLPOLEVENTGENERICDETECTORHIT_HH_</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define HMOLPOLEVENTGENERICDETECTORHIT_HH_</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor"></span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="comment">// ROOT includes</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="preprocessor">#include &lt;TObject.h&gt;</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor">#include &lt;TVector3.h&gt;</span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;</div>
+<div class="line"><a name="l00024"></a><span class="lineno"><a class="code" href="../../dc/de3/classHMolPolEventGenericDetectorHit.html">   24</a></span>&#160;<span class="keyword">class </span><a class="code" href="../../dc/de3/classHMolPolEventGenericDetectorHit.html">HMolPolEventGenericDetectorHit</a>: <span class="keyword">public</span> TObject {</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;  <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <a class="code" href="../../dc/de3/classHMolPolEventGenericDetectorHit.html">HMolPolEventGenericDetectorHit</a>() { };  <span class="comment">///&lt; Constructor for</span></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="comment"></span><span class="comment">      /// HMolPolEventGenericDetectorHit</span></div>
+<div class="line"><a name="l00028"></a><span class="lineno"><a class="code" href="../../dc/de3/classHMolPolEventGenericDetectorHit.html#ab63377b17d682ad15f2c11dd59a6f349">   28</a></span>&#160;<span class="comment"></span>    <span class="keyword">virtual</span> <a class="code" href="../../dc/de3/classHMolPolEventGenericDetectorHit.html#ab63377b17d682ad15f2c11dd59a6f349" title="HMolPolEventGenericDetectorHit.">~HMolPolEventGenericDetectorHit</a>() { };  <span class="comment">///&lt; Destrutor for</span></div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="comment"></span><span class="comment">    /// HMolPolEventGenericDetectorHit</span></div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    Int_t <a class="code" href="../../dc/de3/classHMolPolEventGenericDetectorHit.html#ae1c9dea5104a33491b9017ff13ec29ba" title="HMolPolEventGenericDetectorHit.">fTrackID</a>;     <span class="comment">///&lt; Track ID</span></div>
+<div class="line"><a name="l00032"></a><span class="lineno"><a class="code" href="../../dc/de3/classHMolPolEventGenericDetectorHit.html#a74a4fd5c473b859276ac9d3261c48c34">   32</a></span>&#160;<span class="comment"></span>    Int_t <a class="code" href="../../dc/de3/classHMolPolEventGenericDetectorHit.html#a74a4fd5c473b859276ac9d3261c48c34" title="Detector ID.">fDetectorID</a>;  <span class="comment">///&lt; Detector ID</span></div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00034"></a><span class="lineno"><a class="code" href="../../dc/de3/classHMolPolEventGenericDetectorHit.html#a8b6c31e75865faa64d860c6447a35576">   34</a></span>&#160;    TVector3 <a class="code" href="../../dc/de3/classHMolPolEventGenericDetectorHit.html#a8b6c31e75865faa64d860c6447a35576" title="Hit position.">fPosition</a>; <span class="comment">///&lt; Hit position</span></div>
+<div class="line"><a name="l00035"></a><span class="lineno"><a class="code" href="../../dc/de3/classHMolPolEventGenericDetectorHit.html#a82bf58acfcfedea2b2d21ac3c710a68c">   35</a></span>&#160;<span class="comment"></span>    TVector3 <a class="code" href="../../dc/de3/classHMolPolEventGenericDetectorHit.html#a82bf58acfcfedea2b2d21ac3c710a68c" title="Hit momentum.">fMomentum</a>; <span class="comment">///&lt; Hit momentum</span></div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00037"></a><span class="lineno"><a class="code" href="../../dc/de3/classHMolPolEventGenericDetectorHit.html#acd78053d689cba01970e8ec75a13ab79">   37</a></span>&#160;    TString <a class="code" href="../../dc/de3/classHMolPolEventGenericDetectorHit.html#acd78053d689cba01970e8ec75a13ab79" title="Particle Name.">fParticleName</a>;     <span class="comment">///&lt; Particle Name</span></div>
+<div class="line"><a name="l00038"></a><span class="lineno"><a class="code" href="../../dc/de3/classHMolPolEventGenericDetectorHit.html#ad2fd389115dc61fa61a333a86195b4fd">   38</a></span>&#160;<span class="comment"></span>    Int_t <a class="code" href="../../dc/de3/classHMolPolEventGenericDetectorHit.html#ad2fd389115dc61fa61a333a86195b4fd" title="Particle Type (PGD encoding)">fParticleType</a>;       <span class="comment">///&lt; Particle Type (PGD encoding)</span></div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00040"></a><span class="lineno"><a class="code" href="../../dc/de3/classHMolPolEventGenericDetectorHit.html#af4d8b9403831372ecec0875d62842798">   40</a></span>&#160;    Double_t <a class="code" href="../../dc/de3/classHMolPolEventGenericDetectorHit.html#af4d8b9403831372ecec0875d62842798" title="total energy of the track">fTotalEnergy</a>;      <span class="comment">///&lt; total energy of the track</span></div>
+<div class="line"><a name="l00041"></a><span class="lineno"><a class="code" href="../../dc/de3/classHMolPolEventGenericDetectorHit.html#aec27ce06792a36625d208921052c8a8e">   41</a></span>&#160;<span class="comment"></span>    Double_t <a class="code" href="../../dc/de3/classHMolPolEventGenericDetectorHit.html#aec27ce06792a36625d208921052c8a8e" title="Kinetic energy of the track.">fKineticEnergy</a>;    <span class="comment">///&lt; Kinetic energy of the track</span></div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;};</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* HMOLPOLEVENTGENERICDETECTORHIT_HH_ */</span><span class="preprocessor"></span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="../../dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><b>HMolPolEventGenericDetectorHit.hh</b></li>
-    <li class="footer">Generated on Tue Jul 23 2013 09:26:17 for HMolPol by
+    <li class="footer">Generated on Tue Aug 27 2013 14:22:19 for HMolPol by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="../../doxygen.png" alt="doxygen"/></a> 1.8.3.1 </li>
   </ul>
