@@ -32,9 +32,12 @@ include_directories(${ROOT_INCLUDE_DIR})
 # Create ROOT dictionary before messing up include dirs with Geant4 stuff
 # (-p option to "use of the compiler's preprocessor instead of CINT's preprocessor.")
 ROOT_GENERATE_DICTIONARY(${CMAKE_CURRENT_BINARY_DIR}/HMolPolDict
-  ${CMAKE_CURRENT_SOURCE_DIR}/include/HMolPol*Event.hh
+  ${CMAKE_CURRENT_SOURCE_DIR}/include/HMolPolEventUnits.hh
+  ${CMAKE_CURRENT_SOURCE_DIR}/include/HMolPolEventPrimary.hh
+  ${CMAKE_CURRENT_SOURCE_DIR}/include/HMolPolEventGenericDetector.hh
+  ${CMAKE_CURRENT_SOURCE_DIR}/include/HMolPolEventGenericDetectorHit.hh
   ${CMAKE_CURRENT_SOURCE_DIR}/include/HMolPolRunInformation.hh
-  LINKDEF ${CMAKE_CURRENT_SOURCE_DIR}/include/HMolPolLinkDef.hh
+  LINKDEF ${CMAKE_CURRENT_SOURCE_DIR}/include/HMolPolEventLinkDef.hh
   OPTIONS -p)
 set(my_project_sources ${my_project_sources} ${CMAKE_CURRENT_BINARY_DIR}/HMolPolDict.cxx)
 

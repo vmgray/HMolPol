@@ -80,28 +80,25 @@ int main (int argc, char** argv)
   // give the run manager the physics list
   runManager->SetUserInitialization(physlist);
 
-  // add the global messenger - this will talk with all of
-  //the files and the user
-  HMolPolMessenger* HMolPolMess = new HMolPolMessenger();
+
+  // Analysis (interface with ROOT file)
+  HMolPolAnalysis* myHMolPolAnalysis  = new HMolPolAnalysis();
 
 
   // Detector geometry
   //pass the geometry of the HMolPol to the Geant4 class G4VUserDetectorConstruction
   G4VUserDetectorConstruction* myHMolPolDetector =
-      new HMolPolDetectorConstruction();
+      new HMolPolDetectorConstruction(myHMolPolAnalysis);
   // give the run manager the geometry
   runManager->SetUserInitialization(myHMolPolDetector);
 
 
-  // Analysis (interface with ROOT file)
-  HMolPolAnalysis* myHMolPolAnalysis  = new HMolPolAnalysis();
-
   //give run manager the stuff that is done at every event (write to rootfile)
-  G4UserEventAction* myHMolPolEventAction =
+  HMolPolEventAction* myHMolPolEventAction =
       new HMolPolEventAction(myHMolPolAnalysis);
   runManager->SetUserAction(myHMolPolEventAction);
   // give the run manager stuff that is done in each run (save rootfile)
-  G4UserRunAction* myHMolPolRunAction =
+  HMolPolRunAction* myHMolPolRunAction =
       new HMolPolRunAction(myHMolPolAnalysis);
   runManager->SetUserAction(myHMolPolRunAction);
 
@@ -113,10 +110,18 @@ int main (int argc, char** argv)
 
 
   //beam
-  G4VUserPrimaryGeneratorAction* myHMolPolPrimaryGeneratorAction =
+  HMolPolPrimaryGeneratorAction* myHMolPolPrimaryGeneratorAction =
       new HMolPolPrimaryGeneratorAction(myHMolPolAnalysis);
   runManager->SetUserAction(myHMolPolPrimaryGeneratorAction);
-//  HMolPolMess->SetPriGen(primaryGeneratorAction);
+
+
+  // add the global messenger - this will talk with all of
+  //the files and the user - pass it whatever it will talk with
+  HMolPolMessenger* myHMolPolMess = new HMolPolMessenger(
+      myHMolPolPrimaryGeneratorAction,
+      myHMolPolRunAction,
+      myHMolPolEventAction,
+      myHMolPolAnalysis);
 
 
   // Initialize Run manager
@@ -173,6 +178,9 @@ int main (int argc, char** argv)
 
   //delete the runManager
   delete runManager;
+
+  //shoot the messenger
+  delete myHMolPolMess;
 
   //now that everything has ran and is deleted - the simulation can be closed
   return 0;

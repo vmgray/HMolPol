@@ -1,14 +1,15 @@
 /********************************************
- * Programmer: Valerie Gray
- * Purpose:
+ * \author <b>Programmer:<\b> Valerie Gray
+ * \author <b>Assisted By:<\b> Wouter Deconinck
  *
- * This is header file which for the primary action generator.
+ * \brief <b>Purpose:</b> This is header file which for the primary action generator.
  * Or the generator of the primary particle
  *
- * Entry Conditions:
- * Date: 06-25-2013
- * Modified: 07-06-2013
- * Assisted By: Wouter Deconinck
+ * \date <b>Date:</b> 06-25-2013
+ * \date <b>Modified:</b> 07-06-2013
+ *
+ * \note <b>Entry Conditions:</b> none
+ *
 ********************************************/
 
 #ifndef HMolPolPrimaryGeneratorAction_h
@@ -18,8 +19,8 @@
 #include <G4ParticleTable.hh>
 #include <G4VUserPrimaryGeneratorAction.hh>
 
-// HMolPol includes
-#include "HMolPolAnalysis.hh"
+// HMolPol classes
+class HMolPolAnalysis;
 
 //Geant4 classes
 class G4ParticleGun;
@@ -39,6 +40,13 @@ class HMolPolPrimaryGeneratorAction : public G4VUserPrimaryGeneratorAction
     void GeneratePrimaries(G4Event* anEvent);  ///< function to generate
     // primary electrons
 
+    ///<  Set Raster size
+    void SetRasterX(const G4double& XRaster) { fRasterX = XRaster; }  ///< set
+      /// the XRaster size of beam
+    void SetRasterY(const G4double& YRaster) { fRasterY = YRaster; }  ///< set
+    /// the YRaster size of beam
+    void SetBeamE(const G4double& BeamE) { fBeamE = BeamE; }   ///< set
+    /// the Energy of the beam
 
   private:
 
@@ -48,6 +56,10 @@ class HMolPolPrimaryGeneratorAction : public G4VUserPrimaryGeneratorAction
     /// will be generated over
     double fTheta_com_max; /// < this is the minimum Theta that electrons
     /// will be generated over
+
+    G4double fRasterX;  ///< the total raster size in X
+    G4double fRasterY;  ///< the total raser size in Y
+    G4double fBeamE;    ///< the incoming electron beam energy
 
     //the primary generation of the primary electrons
     /// \todo why does doxygen not want this documented?? and are these right?

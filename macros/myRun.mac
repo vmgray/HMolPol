@@ -18,12 +18,16 @@
 
 # This turns off processes for all particles
 #/process/inactivate msc
-#/process/inactivate eBrem
-#/process/inactivate compt
+/process/inactivate eBrem
+/process/inactivate compt
 #/process/inactivate eIoni
 /process/inactivate phot
-#/process/inactivate Cerenkov
+/process/inactivate Cerenkov
+
+#choose name out outpted rootfile
+#/HMolPol/Analysis/RootFileName HMolPol_DummyOnly_theDetector.root
 
 #run beam
-/run/beamOn 210
+#/run/beamOn 4500
+/run/beamOn 100
 

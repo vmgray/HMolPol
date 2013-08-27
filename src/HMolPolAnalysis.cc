@@ -19,7 +19,9 @@
 
 // HMolPol includes
 #include "HMolPolAnalysis.hh"
-#include "HMolPolEvent.hh"
+#include "HMolPolEventUnits.hh"
+#include "HMolPolEventPrimary.hh"
+#include "HMolPolEventGenericDetector.hh"
 #include "HMolPolRunInformation.hh"
 
 /// \todo make this so the file names can change with things like generator etc
@@ -33,7 +35,8 @@
  *      Tree to null.
  *
  * Global:
- * Entry Conditions: none
+ * Entry Conditions: fRootFileStem("HMolPol")
+ *                   f(RootFileName("")
  * Return:
  * Called By:
  * Date: 07-11-2013
@@ -45,11 +48,8 @@ HMolPolAnalysis::HMolPolAnalysis(): fRootFileStem("HMolPol"),fRootFileName("")
 
   // Initialize everything to nothing
   fRootTree   = NULL;
-  fRootBranch = NULL;
+  fPrimaryBranch = NULL;
   fRootFile   = NULL;
-
-  // Create event structure
-  fEvent = new HMolPolEvent();
 }
 
 /********************************************
@@ -70,10 +70,11 @@ HMolPolAnalysis::HMolPolAnalysis(): fRootFileStem("HMolPol"),fRootFileName("")
 HMolPolAnalysis::~HMolPolAnalysis()
 {
   // Delete ROOT objects
-  if (fEvent)        delete fEvent;
+  if (fPrimary)        delete fPrimary;
   if (fRootTree)     delete fRootTree;
-  if (fRootBranch)   delete fRootBranch;
+  if (fPrimaryBranch)   delete fPrimaryBranch;
   if (fRootFile)     delete fRootFile;
+
 }
 
 /********************************************
@@ -81,9 +82,10 @@ HMolPolAnalysis::~HMolPolAnalysis()
  * Function: BeginOfRun
  *
  * Purpose:  Set up what should be done at the beginning of a run.
+ *      Set up the output ROOT file name
  *
  * \define run is a set of events for which a whole root file is produced.
- *      i.e. if one has /run/beamOn/ 1000 then a run is 100 fired electrons
+ *      i.e. if one has /run/beamOn/ 1000 then a run is 1000 fired electrons
  *
  *
  * Global:
@@ -117,6 +119,7 @@ void HMolPolAnalysis::BeginOfRun(const G4Run* aRun)
  * Function: EndOfRun
  *
  * Purpose:  Say you are at the end of a run
+ *      Save and close the ROOT file
  *
  * Global:
  * Entry Conditions: const G4Run* aRun
@@ -144,11 +147,22 @@ void HMolPolAnalysis::EndOfRun(const G4Run* aRun)
  * Function: ConstructRootTree
  *
  * Purpose:  Construct the actual ROOT tree in the ROOT file that
- *      was created earlier
+ *      was created earlier.
+ *
+ *      This add each branch to the ROOT file separately
+ *              - the Units branch - connected to the HMolPolEventUnits files.
+ *                Has all the needed units
+ *              - the Primary branch - connected to the HMolPolEventPrimary.
+ *                Has all the information about the primary electron
+ *              - the Detector branch - connected to the
+ *                HMolPolEventGenericDetectorHit
+ *                Has all the information about the hits in the detectors.
+ *                Each detector is in its own sub-branch of this branch
+ *
  *
  * Global:
- * Entry Conditions:
- * Return:
+ * Entry Conditions: none
+ * Return: none
  * Called By:
  * Date: 07-11-2013
  * Modified:
@@ -160,7 +174,8 @@ void HMolPolAnalysis::ConstructRootTree()
   fRootTree = new TTree("HMolPol_Tree","HMolPol Simulation Tree");
 
   // Save the file after so many bytes. Avoids complete data loss after crash
-  //fRootTree ->SetAutoSave(1000000);  //AutoSave after every 1 Mbyte written to disk
+  //fRootTree ->SetAutoSave(1000000);
+  //AutoSave after every 1 Mbyte written to disk
 
 // \todo I have no idea what the next lines means (till end)
   // Instance of data structure to be written into ROOT file
@@ -170,8 +185,26 @@ void HMolPolAnalysis::ConstructRootTree()
   // THE QWEAK WAY OF LIFE
   int bufsize = 64000;
   int split   = 99;
-  fRootBranch = fRootTree->Branch("HMolPolEvent",
-      "HMolPolEvent", &fEvent, bufsize, split);
+
+  // Add units - the units branch
+  fUnits = new HMolPolEventUnits();
+  fUnitsBranch = fRootTree->Branch("fUnits",
+      "HMolPolEventUnits", &fUnits, bufsize, split);
+
+  // Add global event structure - the primary branch
+  fPrimary = new HMolPolEventPrimary();
+  fPrimaryBranch = fRootTree->Branch("fPrimary",
+      "HMolPolEventPrimary", &fPrimary, bufsize, split);
+
+  // Add individual detectors - the Detector branch
+  fDetector.resize(fDetectorName.size());
+  fDetectorBranch.resize(fDetectorName.size());
+  for (size_t i = 0; i < fDetectorName.size(); i++) {
+    G4cout << "Adding " << fDetectorName[i] << " to ROOT tree." << G4endl;
+    fDetector[i] = new HMolPolEventGenericDetector();
+    fDetectorBranch[i] = fRootTree->Branch(TString("f") + TString(fDetectorName[i]),
+        "HMolPolEventGenericDetector", &fDetector[i], bufsize, split);
+  }
 
   // Write run data
   //pUserRunInformation->Write();
@@ -184,8 +217,8 @@ void HMolPolAnalysis::ConstructRootTree()
  *      Then take all the "small" trees and combine it into one large one.
  *
  * Global:
- * Entry Conditions:
- * Return:
+ * Entry Conditions: none
+ * Return: none
  * Called By:
  * Date: 07-11-2013
  * Modified:

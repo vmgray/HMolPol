@@ -55,3 +55,12 @@
 /gui/addButton viewer "Update scene"         "/vis/scene/notifyHandlers"
 /gui/addButton viewer "Reset scene"          "/control/execute vis/vis.mac"
 #
+
+# Beam menu :
+/gui/addMenu   beam Beam
+/gui/addButton beam "Set Mainz Beam Energy- 200Mev"  "/HMolPol/Beam/SetBeamEnergy 200 MeV"
+/gui/addButton beam "Set JLab Low Beam Energy - 2GeV"  "/HMolPol/Beam/SetBeamEnergy 2 GeV"
+/gui/addButton beam "Set JLab High Beam Energy - 11GeV"  "/HMolPol/Beam/SetBeamEnergy 11 GeV"
+
+
+#/

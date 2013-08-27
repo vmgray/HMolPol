@@ -1,9 +1,15 @@
-/*
- * HMolPolEventAction.hh
+/********************************************
+ * \author <b>Programmer:<\b> Valerie Gray
+ * \author <b>Assisted By:<\b> Wouter Deconinck
  *
- *  Created on: Jul 11, 2013
- *      Author: vmgray
- */
+ * \brief <b>Purpose:</b> This is header file for the detector construction.
+ *
+ * \date <b>Date:</b> 07-11-2013
+ * \date <b>Modified:</b> 08-26-2013
+ *
+ * \note <b>Entry Conditions:</b> none
+ *
+********************************************/
 
 #ifndef HMOLPOLEVENTACTION_HH_
 #define HMOLPOLEVENTACTION_HH_
@@ -29,21 +35,20 @@ class HMolPolEventAction : public G4UserEventAction
 {
   public:
 
-    //!Constructor
-    HMolPolEventAction(HMolPolAnalysis* a);
+    HMolPolEventAction(HMolPolAnalysis* a);  ///< Constructor for
+    // HMolPolEventAction
 
-    //!Destructor
-    ~HMolPolEventAction();
+    virtual ~HMolPolEventAction();  ///< Destructor for HMolPolEventAction
 
-    void BeginOfEventAction(const G4Event* evt);
-    void EndOfEventAction(const G4Event* evt);
+    void BeginOfEventAction(const G4Event* evt);  ///< function BeginOfEventAction
+    void EndOfEventAction(const G4Event* evt);  ///< function EndOfEventAction
 
   private:
-    void Initialize();
+    void Initialize();  ///< function Initialize
 
-    HMolPolAnalysis* fAnalysis;
+    HMolPolAnalysis* fAnalysis;  ///< the Analysis object
 
-    G4int CollID;
+    G4int CollID;  ///< the colection Id number
 };
 
 

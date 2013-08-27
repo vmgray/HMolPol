@@ -54,7 +54,7 @@ HMolPolSolenoidMagField::HMolPolSolenoidMagField ()
  *
  * Purpose:
  *
- * to create the magnetic field
+ * to create the magnetic field at each point
  *
  * Global:
  * Entry Conditions:

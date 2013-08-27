@@ -1,9 +1,16 @@
-/*
- * HMolPolPrimaryEvent.hh
+/********************************************
+ * \author <b>Programmer:<\b> Valerie Gray
+ * \author <b>Assisted By:<\b> Wouter Deconinck
  *
- *  Created on: Jul 17, 2013
- *      Author: vmgray
- */
+ * \brief <b>Purpose:</b> This is header file for the Primary event.
+ *
+ * \date <b>Date:</b> 07-17-2013
+ * \date <b>Modified:</b> 07-26-2013
+ *
+ * \note <b>Entry Conditions:</b> none
+ *
+********************************************/
+
 
 #ifndef HMOLPOLPRIMARYEVENT_HH_
 #define HMOLPOLPRIMARYEVENT_HH_
@@ -13,8 +20,8 @@
 
 class HMolPolEventPrimary: public TObject {
   public:
-    HMolPolEventPrimary();
-    virtual ~HMolPolEventPrimary();
+    HMolPolEventPrimary();  ///< constructor for the primary event
+    virtual ~HMolPolEventPrimary();  ///< destuctor for the primary event
 
     Double_t fCrossSection;  ///< the cross section
     Double_t fPhiLab;        ///< the lab phi angle (same as CM phi angle)

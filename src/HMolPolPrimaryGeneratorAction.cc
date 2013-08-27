@@ -8,13 +8,13 @@
  * \details This is invoked at the beginning of each event.  This it generates the
  * primary particles, and its properties (momentum, energy directions, etc.)
  *
+ * Also the passing of ariables
+ *
  * \date 0<b>Date:</b> 6-25-2013
  * \date <b>Modified:</b> 07-06-2013
  *
  * \note <b>Entry Conditions:</b>
  *
- * \todo comment the comment blocks to get the how this is all put together
- * \todo break into more then one file so that it is easier to follow
  * \todo add in actual <b> incoming electrons </b> not just the ones after
  * the interaction
  ********************************************/
@@ -28,6 +28,8 @@
 
 //HMolPol includes
 #include "HMolPolPrimaryGeneratorAction.hh"
+#include "HMolPolAnalysis.hh"
+#include "HMolPolEventPrimary.hh"
 
 /********************************************
  * Programmer: Valerie Gray
@@ -37,7 +39,7 @@
  * Construction of the HMolPolPrimaryGeneratorAction
  *
  * Global:
- * Entry Conditions: HMolPolAnalysis function
+ * Entry Conditions: HMolPolAnalysis
  * Return: Nothing
  * Called By:
  * Date: 06-25-2013
@@ -45,7 +47,10 @@
  ********************************************/
   /// \todo have someone (Wouter) help me figure what this all does
 HMolPolPrimaryGeneratorAction::HMolPolPrimaryGeneratorAction(HMolPolAnalysis* a)
-: fAnalysis(a)
+: fAnalysis(a),
+  fRasterX(4.0*mm),
+  fRasterY(4.0*mm),
+  fBeamE(200*MeV)  // initialization
 {
   //set number of particles getting fired at a time
   G4int NubofParticles = 1;
@@ -53,6 +58,7 @@ HMolPolPrimaryGeneratorAction::HMolPolPrimaryGeneratorAction(HMolPolAnalysis* a)
   //set a particle gun with n number of particles
   fParticleGun = new G4ParticleGun(NubofParticles);
 
+  /// set the min and max theta angles in the CM frame
   fTheta_com_min = 0.0 * degree;
   fTheta_com_max = 180.0 * degree;
 
@@ -89,10 +95,10 @@ HMolPolPrimaryGeneratorAction::~HMolPolPrimaryGeneratorAction()
  *
  * Purpose:
  *
- * Sets up and generates the primaries
+ * Sets up and generates the primaries via Moller scattering right now
  *
  * Global:
- * Entry Conditions: a G4Event
+ * Entry Conditions: G4Event
  * Return:
  * Called By:
  * Date: 06-25-2013
@@ -112,7 +118,7 @@ void HMolPolPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 
 // This needs to get passed globally and be a variable in the GUI
   //beam energy
-  double beamE = 200.0 * MeV;
+  double beamE = fBeamE;
   // mass of Electron
   double m_e = electron_mass_c2;
   double Ecm = sqrt(2*pow(m_e,2) + 2*m_e*beamE); //Energy in the CM frame
@@ -132,18 +138,18 @@ void HMolPolPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
   // this is *NOT* the from
   // (formula (2) and (7) in J. Arrington et al, 1992,
   // A Moller Polarimeter for the MIT-Bates Storage Ring)
-  double D_sigma = fine_structure_const*fine_structure_const *
-      pow(3.0+cos(theta_com)*cos(theta_com),2.0) *
-      hbarc*hbarc/pow(sin(theta_com),4.0)/(2.0*m_e*beamE); // units of mbarn
+  //double D_sigma = fine_structure_const*fine_structure_const *
+  //    pow(3.0+cos(theta_com)*cos(theta_com),2.0) *
+  //    hbarc*hbarc/pow(sin(theta_com),4.0)/(2.0*m_e*beamE); // units of mbarn
 
   //This is more like Qweak... but they have a odd factor in it
-  // Using the formula (2) from J. Arrington et al, 1992,
+  /// \see Using the formula (2) from J. Arrington et al, 1992,
   //  A Moller Polarimeter for the MIT-Bates Storage Ring
   // This is the cross section in the lab fram not the CM frame
   //This D_sigma is really d_sigma/d_omega
-  //double D_sigma = MeV2_to_mbarns * pow( alpha/(2*m_e) ,2)
- //     * pow( (1 + cos(theta_com) )( 3.0+pow(cos(theta_com),2.0)) ,2.0)
- //     / pow(sin(theta_com),4.0); // units of mbarns
+  double D_sigma = pow( hbarc*fine_structure_const/(2*m_e) ,2)
+      * pow( (1 + cos(theta_com))*( 3.0+pow(cos(theta_com),2.0)) ,2.0)
+      / pow(sin(theta_com),4.0); // units of mbarns
 
   //This is the Detla sigma one needs to get the delta_sigma (cross section)
   // for a Certain range of theta covered
@@ -191,7 +197,7 @@ void HMolPolPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
   double pperp = e_com*sin(theta_com);
   double ppar  = e_com*cos(theta_com);
 
-  // *CHANGE* this right now, right now it is HARDCODED which is BAD :(
+  // \todo *CHANGE* this right now, right now it is HARDCODED which is BAD :(
 
   // 1. uniform z distribution between zmin = -20 cm and zmax = + 20 cm
   //    (can be changed by messenger class) use G4UniformRand()
@@ -204,13 +210,13 @@ void HMolPolPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 
 // **ALL** of these need better variable names and ability to get passed
   // determine x,y position of event (ie raster??)
-  G4double interaction_vertex_x_min = -2.0 * mm; //*MAKE GLOBAL*
-  G4double interaction_vertex_x_max = +2.0 * mm; //*MAKE GLOBAL*
+  G4double interaction_vertex_x_min = -fRasterX/2; //*MAKE GLOBAL*
+  G4double interaction_vertex_x_max = +fRasterX/2; //*MAKE GLOBAL*
   G4double interaction_vertex_x = interaction_vertex_x_min +
         (interaction_vertex_x_max - interaction_vertex_x_min) * G4UniformRand();
 
-  G4double interaction_vertex_y_min = -2.0 * mm; //*MAKE GLOBAL*
-  G4double interaction_vertex_y_max = +2.0 * mm; //*MAKE GLOBAL*
+  G4double interaction_vertex_y_min = -fRasterY/2; //*MAKE GLOBAL*
+  G4double interaction_vertex_y_max = +fRasterY/2; //*MAKE GLOBAL*
   G4double interaction_vertex_y = interaction_vertex_y_min +
         (interaction_vertex_y_max - interaction_vertex_y_min) * G4UniformRand();
 
@@ -267,30 +273,30 @@ void HMolPolPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 
   // Store cross section in ROOT file
   /// \todo actually write the cross section
-  fAnalysis->fEvent->fPrimary.fInteractionVertexPositionX
+  fAnalysis->fPrimary->fInteractionVertexPositionX
     = interaction_vertex_x;
-  fAnalysis->fEvent->fPrimary.fInteractionVertexPositionY
+  fAnalysis->fPrimary->fInteractionVertexPositionY
     = interaction_vertex_y;
-  fAnalysis->fEvent->fPrimary.fInteractionVertexPositionZ
+  fAnalysis->fPrimary->fInteractionVertexPositionZ
     = interaction_vertex_z;
-  fAnalysis->fEvent->fPrimary.fInteractionVertexMomentumX
+  fAnalysis->fPrimary->fInteractionVertexMomentumX
     = interaction_vertex_mom_x1;
-  fAnalysis->fEvent->fPrimary.fInteractionVertexMomentumY
+  fAnalysis->fPrimary->fInteractionVertexMomentumY
     = interaction_vertex_mom_y1;
-  fAnalysis->fEvent->fPrimary.fInteractionVertexMomentumZ
+  fAnalysis->fPrimary->fInteractionVertexMomentumZ
     = interaction_vertex_mom_z1;
-  fAnalysis->fEvent->fPrimary.fInteractionVertexMomentumX
+  fAnalysis->fPrimary->fInteractionVertexMomentumX
     = interaction_vertex_mom_x2;
-  fAnalysis->fEvent->fPrimary.fInteractionVertexMomentumY
+  fAnalysis->fPrimary->fInteractionVertexMomentumY
     = interaction_vertex_mom_y2;
-  fAnalysis->fEvent->fPrimary.fInteractionVertexMomentumZ
+  fAnalysis->fPrimary->fInteractionVertexMomentumZ
     = interaction_vertex_mom_z2;
-  fAnalysis->fEvent->fPrimary.fThetaCenterOfMass = theta_com;
-  fAnalysis->fEvent->fPrimary.fPhiCenterOfMass = phi_com;
-  fAnalysis->fEvent->fPrimary.fThetaLab1 = theta_lab1;
-  fAnalysis->fEvent->fPrimary.fThetaLab2 = theta_lab2;
-  fAnalysis->fEvent->fPrimary.fPhiLab = phi_com;
-  fAnalysis->fEvent->fPrimary.fCrossSection = D_sigma;
+  fAnalysis->fPrimary->fThetaCenterOfMass = theta_com;
+  fAnalysis->fPrimary->fPhiCenterOfMass = phi_com;
+  fAnalysis->fPrimary->fThetaLab1 = theta_lab1;
+  fAnalysis->fPrimary->fThetaLab2 = theta_lab2;
+  fAnalysis->fPrimary->fPhiLab = phi_com;
+  fAnalysis->fPrimary->fCrossSection = D_sigma;
 
 
 

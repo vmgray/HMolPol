@@ -1,9 +1,26 @@
-/*
- * HMolPolRint.hh
+/********************************************
+ * \author <b>Programmer:<\b> Valerie Gray
+ * \author <b>Assisted By:<\b> Wouter Deconinck
  *
- *  Created on: Jul 16, 2013
- *      Author: vmgray
- */
+ * \brief <b>Purpose:</b> This is header file for the Rint class
+ *
+ *  \class HMolPolRint
+ *  \ingroup QwThreadSafe
+ *  \brief A ROOT command line interface
+ *
+ * The HMolPolRint class implements a ROOT command line interface.  It inherits
+ * from the ROOT interactive C++ interpreter TRint.  All functionality available
+ * in ROOT is available in this interface.  In particular, all histograms that
+ * are defined in memory or in a ROOT file are accessible under the path
+ * "/root/ROOT memory", while they are being filled.  All HMolPol specific class
+ * structures are available in an interactive mode.
+ *
+ * \date <b>Date:</b> 07-16-2013
+ * \date <b>Modified:</b> 07-26-2013
+ *
+ * \note <b>Entry Conditions:</b> none
+ *
+********************************************/
 
 #ifndef HMOLPOLRINT_HH_
 #define HMOLPOLRINT_HH_
@@ -12,35 +29,23 @@
 #include <TRint.h>
 #include <TThread.h>
 
-// Global pointers recognised by CINT
+// Global pointers recognized by CINT
 R__EXTERN class HMolPolRint* gHMolPolRint;
 
-/**
- *  \class HMolPolRint
- *  \ingroup QwThreadSafe
- *  \brief A ROOT command line interface
- *
- * The QwRint class implements a ROOT command line interface.  It inherits
- * from the ROOT interactive C++ interpreter TRint.  All functionality available
- * in ROOT is available in this interface.  In particular, all histograms that
- * are defined in memory or in a ROOT file are accessible under the path
- * "/root/ROOT memory", while they are being filled.  All Qweak specific class
- * structures are available in an interactive mode.
- *
- */
 class HMolPolRint : public TRint {
 
   protected:
 
-    static HMolPolRint* fExists;       ///< Check whether interface already existing
+    static HMolPolRint* fExists;   ///< Check whether interface already existing
 
   public:
     /// \brief Constructor
     HMolPolRint (const char* appClassName, int* argc, char** argv,
                 void* options = 0, int numOptions = 0, bool noLogo = kFALSE);
+    ///< constructor for HMolPolRint
 
     /// \brief Destructor
-    virtual ~HMolPolRint();
+    virtual ~HMolPolRint();   ///< destructor for HMolPolRint
 
 }; // class HMolPolRint
 

@@ -11,8 +11,6 @@
  *
  * \note <b>Entry Conditions:</b>
  *
- * \todo comment the comment blocks to get the how this is all put together
- *
  ********************************************/
 
 //Geant4 specific includes
@@ -31,6 +29,7 @@
 #include "HMolPolDetectorConstruction.hh"
 #include "HMolPolHSolenoidMagField.hh"
 #include "HMolPolGenericDetector.hh"
+#include "HMolPolAnalysis.hh"
 
 /********************************************
  * Programmer: Valerie Gray
@@ -41,6 +40,7 @@
  * To construct the geometry of the simulation.
  *    The world
  *    The H target and the Al cell
+ *    detectors
  *
  * Define the NIST materials
  *
@@ -63,8 +63,8 @@ G4VPhysicalVolume* HMolPolDetectorConstruction::Construct()
   G4VPhysicalVolume *worldVolume;
 
   //for getting NIST materials
-  /// \bug G4NistManager do, I should make the name better too
-  G4NistManager* NistManager = G4NistManager::Instance();
+  G4NistManager* NistManager = G4NistManager::Instance();  ///< manages the NIST
+  // variables
   NistManager->SetVerbose(1);
 
   // Open file with NIST materials
@@ -75,7 +75,7 @@ G4VPhysicalVolume* HMolPolDetectorConstruction::Construct()
   {
     //add all the NIST materials we want to use
     std::string material;
-    // Loop over all lines in the file
+    // Loop over all lines in the file (ie all the needed NIST materials)
     while (! nist_materials.eof())
     {
       nist_materials >> material;
@@ -131,9 +131,7 @@ G4VPhysicalVolume* HMolPolDetectorConstruction::Construct()
   //    detector type - if it is a sensitive detector
   //==========================
 
-  //Wouter broke this - he needs to fix
-  //I am not sure what anything from this point on does.  HELP!!
-  /// \todo have someone (Wouter) help me figure what this all does
+  // define and auxiliary map which has all the above info in it
   const G4GDMLAuxMapType* auxmap = fGDMLParser->GetAuxMap();
 
   //if it finds auxiliary info tell us
@@ -238,7 +236,7 @@ G4VPhysicalVolume* HMolPolDetectorConstruction::Construct()
         G4String detectortype = (*vit).value;
 
         // Form name of sensitive detector
-        G4String detectorname = "hmolpol/det_" + detectortype;
+        G4String detectorname = "/hmolpol/" + detectortype;
 
         // Get pointer to sensitive detector manager
         G4SDManager* SDman = G4SDManager::GetSDMpointer();
@@ -253,10 +251,15 @@ G4VPhysicalVolume* HMolPolDetectorConstruction::Construct()
           // Sensitive detector doesn't exist yet, so create a new one
           /// \todo let HMolPolGenericDetector keep track of number using static
           /// (ask wdc for help if necessary)
-          sensitivedetector = new HMolPolGenericDetector(detectorname);
+          HMolPolGenericDetector* sensitivedetector =
+              new HMolPolGenericDetector(detectorname);
+          sensitivedetector->SetVolumeName(((*iter).first)->GetName());
           G4cout << "Creating sensitive detector " << detectortype
                  << " for volume " << ((*iter).first)->GetName()
                  <<  G4endl;
+
+          // Add sensitive detector to analysis
+          fAnalysis->AddNewDetector(detectortype);
 
           // Add sensitive detector to manager
           SDman->AddNewDetector(sensitivedetector);

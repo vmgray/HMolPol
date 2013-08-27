@@ -1,9 +1,16 @@
-/*
- * HMolPolGenericDetectorEvent.hh
+/********************************************
+ * \author <b>Programmer:<\b> Valerie Gray
+ * \author <b>Assisted By:<\b> Wouter Deconinck
  *
- *  Created on: Jul 19, 2013
- *      Author: vmgray
- */
+ * \brief <b>Purpose:</b> This is header file for the
+ *      HMolPolGenericDetectorEvent class.
+ *
+ * \date <b>Date:</b> 07-19-2013
+ * \date <b>Modified:</b> 08-26-2013
+ *
+ * \note <b>Entry Conditions:</b> none
+ *
+********************************************/
 
 #ifndef HMOLPOLGENERICDETECTOREVENT_HH_
 #define HMOLPOLGENERICDETECTOREVENT_HH_
@@ -17,12 +24,15 @@
 // HMolPol includes
 #include "HMolPolEventGenericDetectorHit.hh"
 
+
 class HMolPolEventGenericDetector: public TObject {
   public:
-    HMolPolEventGenericDetector();
-    virtual ~HMolPolEventGenericDetector();
+    HMolPolEventGenericDetector() { };    ///< the constructor for
+      /// HMolPolEventGenericDetector
+    virtual ~HMolPolEventGenericDetector() { };  ///< the destrutor for
+    /// HMolPolEventGenericDetector
 
-    std::vector<HMolPolEventGenericDetectorHit> fHits;
+    std::vector<HMolPolEventGenericDetectorHit> fHits; ///< vector of the Hits
 };
 
 #endif /* HMOLPOLGENERICDETECTOREVENT_HH_ */

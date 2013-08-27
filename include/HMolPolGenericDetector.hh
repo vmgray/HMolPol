@@ -1,16 +1,16 @@
-//FILL IN ALL THESE COMMENTS
-
 /********************************************
- * Programmer: Valerie Gray
- * Purpose:
+ * \author <b>Programmer:<\b> Valerie Gray
+ * \author <b>Assisted By:<\b> Wouter Deconinck
  *
- * This is header file for the generic detector.  What it does no one knows
+ * \brief <b>Purpose:</b> This is header file for the generic detector.
+ *      What it does no one knows
  *
- * Entry Conditions:
- * Date: 06-15-2013
- * Modified: 07-06-2013
- * Assisted By: Wouter Deconinck
- ********************************************/
+ * \date <b>Date:</b> 06-15-2013
+ * \date <b>Modified:</b> 07-06-2013
+ *
+ * \note <b>Entry Conditions:</b> none
+ *
+********************************************/
 
 #ifndef HMOLPOLGENERICDETECTOR_HH_
 #define HMOLPOLGENERICDETECTOR_HH_
@@ -21,20 +21,10 @@
 // Geant4 includes
 #include <G4VSensitiveDetector.hh>
 
-// HMolPol include
+// HMolPol includes
 #include "HMolPolGenericDetectorHit.hh"
 
-/*! 
-      Default detector class.  This will record information on:
-
-      - Primary generated hit information
-      - Secondary hit information on particles not produced within the volume
-      - Calorimetric data (total energy deposited)
-
-      This requires two hit collections, one for "hits" and one for "sum"
-      Summing occurs uniquely over copyIDs
- */
-
+//Geant4 classes
 class G4HCofThisEvent;
 class G4Step;
 class G4TouchableHistory;
@@ -42,19 +32,33 @@ class G4TouchableHistory;
 class HMolPolGenericDetector : public G4VSensitiveDetector
 {
   public:
-    HMolPolGenericDetector( G4String name);
-    virtual ~HMolPolGenericDetector();
+    HMolPolGenericDetector( G4String name);   ///< Constructor for the
+      /// HMolPolGenericDetector
+    virtual ~HMolPolGenericDetector();   ///< destructor for the
+    /// HMolPolGenericDetector
 
-    virtual void Initialize(G4HCofThisEvent* );
-    virtual G4bool ProcessHits(G4Step*,G4TouchableHistory* );
-    virtual void EndOfEvent(G4HCofThisEvent* );
+    virtual void Initialize(G4HCofThisEvent* );   ///< Initialize function
+    virtual G4bool ProcessHits(G4Step*,G4TouchableHistory* );  ///< process hits function
+    virtual void EndOfEvent(G4HCofThisEvent* );   ///, End of event function
+
+    const G4String& GetVolumeName() const {
+      return fVolumeName;
+    }  ///< Get volume name function - does just what it implies
+
+    void SetVolumeName(const G4String& volumeName) {
+      fVolumeName = volumeName;
+    }  ///< Set volume name function - does just what it implies
 
   private:
 
-    static G4int fNumberOfDetectors;
+    static G4int fTotalNumberOfDetectors;   ///< integer total number of detectors
+    static std::map<G4String,G4int> fNumberOfDetectorsWithName;  ///< Map of
+      /// the name of the detector to a number associated with that detector
 
-    HMolPolGenericDetectorHitsCollection *fHitColl;     ///< Hit collection
-    G4int fHitCollID;                                   ///< Hit collection ID
+    G4String fVolumeName;   ///< the volume
+
+    HMolPolGenericDetectorHitsCollection *fHitsCollection;     ///< Hit collection
+    G4int fHitsCollectionID;                                   ///< Hit collection ID
 
 };
 

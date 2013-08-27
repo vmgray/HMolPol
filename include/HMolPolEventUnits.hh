@@ -1,9 +1,16 @@
-/*
- * HMolPolUserMainEvent.hh
+/********************************************
+ * \author <b>Programmer:<\b> Valerie Gray
+ * \author <b>Assisted By:<\b> Wouter Deconinck
  *
- *  Created on: Jul 11, 2013
- *      Author: vmgray
- */
+ * \brief <b>Purpose:</b> This is header file for the header file for the
+ *      HMolPolEventUnits class .
+ *
+ * \date <b>Date:</b> 07-15-2013
+ * \date <b>Modified:</b> 07-20-2013
+ *
+ * \note <b>Entry Conditions:</b> none
+ *
+********************************************/
 
 //CHANGE ME!!!
 //=============================================================================
@@ -14,39 +21,29 @@
 //  | Doxygen Class Information |
 //  ---------------------------
 /**
-   \class HMolPolEvent
+   \class HMolPolEventUnits
 
-   \brief Defines Top ROOT Tree structure of the ROOT file for each event.
+   \brief Defines a branch of the ROOT tree - the Units branch
 
-          Primary
+          Units - has all the units need for the simulation.
 
  */
 //=============================================================================
 
-#ifndef HMOLPOLEVENT_HH_
-#define HMOLPOLEVENT_HH_
+#ifndef HMOLPOLEVENTUNITS_HH_
+#define HMOLPOLEVENTUNITS_HH_
 
 // root include
 #include <TObject.h>
 
-// HMolPol includes
-#include "HMolPolEventPrimary.hh"
-#include "HMolPolEventGenericDetector.hh"
-
-class HMolPolEvent : public TObject
+class HMolPolEventUnits : public TObject
 {
   public:
 
     // Constructor
-    HMolPolEvent();
+    HMolPolEventUnits();  ///< constructor for the HMolPolEventUnits class
     // Destructor
-    virtual ~HMolPolEvent();
-
-    HMolPolEventPrimary fPrimary;
-    ///< object containing primary particle info
-
-    HMolPolEventGenericDetector fGenericDetector;
-    ///< object containing hits in generic detector
+    virtual ~HMolPolEventUnits() { };  ///< destrutor for the HMolPolEventUnits class
 
     // Distance
     const Double_t mm;        /// \ingroup root Units of mm
@@ -77,14 +74,11 @@ class HMolPolEvent : public TObject
     // Magnetic Field
     const Double_t Tesla;     /// \ingroup root Units of tesla
 
-
-    Int_t fEventNumber; ///< event number
-
     // define a new Class known to ROOT? Huh?
-    ClassDef(HMolPolEvent,1)
+    ClassDef(HMolPolEventUnits,1)
 
   private:
 
 };
 
-#endif /* HMOLPOLEVENT_HH_ */
+#endif /* HMOLPOLEVENTUNITS_HH_ */

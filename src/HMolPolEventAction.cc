@@ -22,8 +22,8 @@
 
 // HMolPol includes
 #include "HMolPolAnalysis.hh"
-#include "HMolPolEvent.hh"
 #include "HMolPolEventAction.hh"
+#include "HMolPolEventGenericDetector.hh"
 #include "HMolPolGenericDetectorHit.hh"
 
 /********************************************
@@ -33,7 +33,7 @@
  * Purpose: to construct the HMolPolEventAction
  *
  * Global:
- * Entry Conditions: HMolPolAnalysis
+ * Entry Conditions: HMolPolAnalysis object
  * Return:
  * Called By:
  * Date: 07-11-2013
@@ -49,7 +49,7 @@ HMolPolEventAction::HMolPolEventAction (HMolPolAnalysis* a)
  * Programmer: Valerie Gray
  * Function: ~HMolPolEventAction
  *
- * Purpose: to desturct the HMolPolEventAction
+ * Purpose: to destruct the HMolPolEventAction
  *
  * Global:
  * Entry Conditions:
@@ -96,6 +96,9 @@ void HMolPolEventAction::BeginOfEventAction(const G4Event* /*evt*/)
  * Function: EndOfEventAction
  *
  * Purpose: What happens at the end of a event
+ *      - clear all hits
+ *      - loop over hit collection
+ *      - get information about hits
  *
  * Global:
  * Entry Conditions: G4Event
@@ -110,8 +113,16 @@ void HMolPolEventAction::EndOfEventAction(const G4Event* evt)
   //  G4cout << "At end of event" << G4endl;
 
   // Get the event number
-  fAnalysis->fEvent->fEventNumber = evt->GetEventID();
+  /// \todo Event number should be branch in ROOT tree
+  //fAnalysis->fPrimary->fEventNumber = evt->GetEventID();
 
+
+  // Clear all hits
+  for (size_t i = 0; i < fAnalysis->fDetector.size(); i++)
+  {
+    G4cout << "Clearing branch " << i << G4endl;
+    fAnalysis->fDetector[i]->fHits.clear();
+  }
 
   // Get the hit collections of this event
   G4HCofThisEvent *HCE = evt->GetHCofThisEvent();
@@ -119,27 +130,47 @@ void HMolPolEventAction::EndOfEventAction(const G4Event* evt)
   // Loop over all hit collections, sort by output type
   for (int hcidx = 0; hcidx < HCE->GetCapacity(); hcidx++)
   {
+
     // Get this particular hit collection
     G4VHitsCollection* thiscol = HCE->GetHC(hcidx);
 
     // This is NULL if nothing is stored
     if (thiscol)
     {
+  //I do get in here.
       // Dynamic cast to test for types
       if (HMolPolGenericDetectorHitsCollection* thiscast =
           dynamic_cast<HMolPolGenericDetectorHitsCollection*>(thiscol))
       {
+//We never get in this loop
         // Process all hits
-        fAnalysis->fEvent->fGenericDetector.fHits.resize(thiscast->GetSize());
-        for (unsigned int hidx = 0; hidx < thiscast->GetSize(); hidx++) {
+        for (unsigned int hidx = 0; hidx < thiscast->GetSize(); hidx++)
+        {
+          G4cout << "made it too the loop to process all hits" << G4endl;
+
           HMolPolGenericDetectorHit* thisHit =
               (HMolPolGenericDetectorHit*) thiscast->GetHit(hidx);
-          fAnalysis->fEvent->fGenericDetector.fHits[hidx].fTrackID = thisHit->GetTrackID();
-          fAnalysis->fEvent->fGenericDetector.fHits[hidx].fDetectorID = thisHit->GetDetectorID();
-          fAnalysis->fEvent->fGenericDetector.fHits[hidx].fPosition =
-              TVector3(thisHit->GetPosition().x(),thisHit->GetPosition().y(),thisHit->GetPosition().z());
-          fAnalysis->fEvent->fGenericDetector.fHits[hidx].fMomentum =
-              TVector3(thisHit->GetMomentum().x(),thisHit->GetMomentum().y(),thisHit->GetMomentum().z());
+
+          // Create new hit
+          HMolPolEventGenericDetectorHit hit;
+          hit.fTrackID = thisHit->GetTrackID();
+          hit.fDetectorID = thisHit->GetDetectorID();
+          hit.fPosition = TVector3(
+                            thisHit->GetPosition().x(),
+                            thisHit->GetPosition().y(),
+                            thisHit->GetPosition().z());
+          hit.fMomentum = TVector3(
+                            thisHit->GetMomentum().x(),
+                            thisHit->GetMomentum().y(),
+                            thisHit->GetMomentum().z());
+          hit.fParticleName = thisHit->GetParticleName();
+          hit.fParticleType = thisHit->GetParticleType();
+          hit.fTotalEnergy = thisHit->GetTotalEnergy();
+          hit.fKineticEnergy = thisHit->GetKineticEnergy();
+
+          // Add hit
+          G4cout << "Adding hit to branch " << hit.fDetectorID << G4endl;
+          fAnalysis->fDetector[hit.fDetectorID]->fHits.push_back(hit);
         }
       }
     }
