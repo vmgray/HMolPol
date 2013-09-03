@@ -34,12 +34,12 @@ Assisted By: Wouter Deconinck
         
     <!-- X length of the "World" or the experimental hall -->
     <quantity name="Detector_X_length" 
-      value = "4" 
+      value = "15" 
       unit = "cm" />
      
     <!-- Y length of the "World" or the experimental hall -->   
     <quantity name="Detector_Y_length" 
-      value = "4" 
+      value = "15" 
       unit = "cm" />
 
     <!-- X length of the "World" or the experimental hall -->

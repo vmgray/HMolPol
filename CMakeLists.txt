@@ -11,6 +11,9 @@ file(GLOB my_project_sources ${CMAKE_CURRENT_SOURCE_DIR}/src/*.cc)
 # Local path for cmake modules, before ${CMAKE_ROOT}/Modules/ is checked
 set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake/modules")
 
+# Compile with debug information
+set(CMAKE_BUILD_TYPE "Debug")
+
 # Custom target that is always built
 add_custom_target(HMolPolVersion ALL)
 

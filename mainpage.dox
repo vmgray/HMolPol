@@ -122,6 +122,9 @@ This has not been investigated yet...
 
 \section sec_layout General layout and function
 
+These are some of the more important files from this simulation or what certian 
+groups of files do
+
 \subsection subsec_DetectorCons Detector Construction 
 
 Geometry is read in and constructed in HMolPolDetectorConstruction::Construct.  
@@ -152,23 +155,24 @@ file, and all these files then go into the world volume.
 
 \subsubsection subsubsec_Materials Materials 
 
+All NIST variables (materials that are defined with in the Geant4 infrastructure) 
+are stored in the nist_materials.txt file.  This files has all the NIST 
+variables can be found at 
+http://geant4.cern.ch/UserDocumentation/UsersGuides/ForApplicationDeveloper/html/apas10.html
+THis file is read in from the HMolPolDetectorConstruction::Construct() function.
+
+Materials that are not defined as standard NIST variables are then created from 
+NIST variables or from scratch (iff there is no NIST variable).  These are then 
+ready to use in the GDML file.  <b>Warning:</b> Upon compiling the GDML will 
+output errors saying that it doesn't know what G4_H, or so is, but that is just 
+the GDML part of the code and the C++ part of the code miscommunicating.  This 
+will work just fine and is nothing to worry about. 
+
 The materials used in this simulation are defined in the <b>materials.gdml</b>
 file in the geometry folder.  The materials are defined using NIST materials 
 (materials that are defined with in the Geant4 infrastructure) are defined in
-the HMolPolDetectorConstruction::Construct() function.  These are then ready to 
-use in the GDML file.  <b>Warning:</b> Upon compiling the GDML will output 
-errors saying that it doesn't know what G4_H, or so is, but that is just the 
-GDML part of the code and the C++ part of the code miscommunicating.  This will 
-work just fine. 
-
-In the materials.gdml file materials that are made up of NIST materials are 
-defined.  This file is then used like the NIST materials, as a global way to 
-define and then grab any material you need in various files.
-
-\bug Can we define the materials in a new file outside of 
-HMolPolDetectorConstruction::Construct() it would make it less messy, and 
-it might make a little more sense. 
- 
+the HMolPolDetectorConstruction::Construct() function.  These are also "global"
+materials and can be used in any of the gdml files.
 
 \subsection subsec_HSolenoidMagField H Solenoid Mag Field
 
@@ -183,4 +187,58 @@ created HMolPolSolenoidMagField::GetFieldValue.
 
 Events are generated in HMolPolPrimaryGeneratorAction::GeneratePrimaries.
 
+\subsection subsec_Messenger Messenger 
+
+The HMolPolMessenge allows for communtication between the GEANT4 interface and 
+the simulation itself.  This allows for variables to change.  Some of these are
+
+<ul>
+  <li> <b> Beam related properties</b>
+  <ul>
+    <li> Beam energy
+    <li> Beam raster size (X and Y)
+  </ul>
+  <li> Analysis related
+  <ul>
+    <li> Output ROOT file name
+  </ul>
+</ul>
+
+\subsection subsec_OutputToROOT Output to ROOT file 
+
+All of the files that start with <b>HMolPolEvent</b> purpose is to take 
+variables from the Geant4 simulation to the ROOT file.
+
+\subsubsection subsubsec_UnitToROOT Units to ROOT file 
+ 
+This file allows for units to be in a branch under the main ROOT tree.  These 
+unit <b> can be and are only </b> Geant4 standard units.  See the ROOT section 
+for how to use this in ROOT.  
+
+\section sec_Root Root
+
+\subsection subsec_hmolpolroot hmolpolroot
+
+This upon comiling this simulation in ones build folder there will be a 
+exicutable called <b>hmolpolroot</b> this is the HMolPol version of ROOT.
+This is so that ROOT will understand the stucture that we have created.  
+
+One will notice in the ROOT tree, <b>HMolPol_Tree</b> there are a bunch of 
+leaves with names that look oddly like units.  These are units that are 
+part of Geant4.  These have been added so that one can make a graph and 
+know exactly what the units are with ease.  However to keep this functianlity, 
+one must always work in only internal Geant4 units in the code.
+
+To get out the units you want in a HMolPol ROOT file all you need to do is 
+divide by the unit you would like the variable to be in.  For example if I
+would like to look at the Theta Center of Mass angle in degrees the I would use:
+
+<b><i>HMolPol_Tree->Draw("fPrimary.fThetaCenterOfMass/deg")</i></b>
+ 
+but if I wanted to see the same thing, but in radians, I would change this to:
+
+<b><i>HMolPol_Tree->Draw("fPrimary.fThetaCenterOfMass/rad")</i></b>
+
+If there are units that one needs in the hmolpolroot, but are not there, they
+can be added in the begining of HMolPolEvent::HMolPolEvent.
 */

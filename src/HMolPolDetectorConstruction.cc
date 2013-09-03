@@ -236,7 +236,7 @@ G4VPhysicalVolume* HMolPolDetectorConstruction::Construct()
         G4String detectortype = (*vit).value;
 
         // Form name of sensitive detector
-        G4String detectorname = "/hmolpol/" + detectortype;
+        G4String detectorname = "hmolpol/" + detectortype;
 
         // Get pointer to sensitive detector manager
         G4SDManager* SDman = G4SDManager::GetSDMpointer();

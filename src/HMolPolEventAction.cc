@@ -134,6 +134,9 @@ void HMolPolEventAction::EndOfEventAction(const G4Event* evt)
     // Get this particular hit collection
     G4VHitsCollection* thiscol = HCE->GetHC(hcidx);
 
+    G4cout << "HC " << thiscol->GetName() << ": "
+           << thiscol->GetSize() << " hits" << G4endl;
+
     // This is NULL if nothing is stored
     if (thiscol)
     {
@@ -142,7 +145,8 @@ void HMolPolEventAction::EndOfEventAction(const G4Event* evt)
       if (HMolPolGenericDetectorHitsCollection* thiscast =
           dynamic_cast<HMolPolGenericDetectorHitsCollection*>(thiscol))
       {
-//We never get in this loop
+//debug line
+        G4cout << thiscast->GetSize() << G4endl;
         // Process all hits
         for (unsigned int hidx = 0; hidx < thiscast->GetSize(); hidx++)
         {

@@ -72,11 +72,11 @@ class HMolPolGenericDetectorHit: public G4VHit {
 
     G4double GetKineticEnergy() const {
       return fKineticEnergy;
-    } ///< function to get the Kinetic energy (double) of the track
+    } ///< function to get the kinetic energy (double) of the track
 
     void SetKineticEnergy(G4double kineticEnergy) {
       fKineticEnergy = kineticEnergy;
-    } ///< function to set the Kinetic energy (double) of the track
+    } ///< function to set the kinetic energy (double) of the track
 
     const G4String& GetParticleName() const {
       return fParticleName;
@@ -98,11 +98,11 @@ class HMolPolGenericDetectorHit: public G4VHit {
 
     G4double GetTotalEnergy() const {
       return fTotalEnergy;
-    } ///< function to get the totat energy (double) of the track
+    } ///< function to get the total energy (double) of the track
 
     void SetTotalEnergy(G4double totalEnergy) {
       fTotalEnergy = totalEnergy;
-    } ///< function to set the totat energy (double) of the track
+    } ///< function to set the total energy (double) of the track
 
   private:
     G4int fDetectorID; ///< the Detector ID number (What ever this is and for?)
@@ -110,13 +110,13 @@ class HMolPolGenericDetectorHit: public G4VHit {
     // - the number of the track within an Event
 
     G4String fParticleName; ///< the particle name
-    G4int fParticleType;    ///< the particle type (as an interger)
+    G4int fParticleType;    ///< the particle type (as an integer)
 
     G4double fTotalEnergy;   ///< the total energy of the track
     G4double fKineticEnergy; ///< the kinetic energy of the track
 
     G4ThreeVector fPosition; ///<the position of the track
-    G4ThreeVector fMomentum; ///< the mometum of the track
+    G4ThreeVector fMomentum; ///< the momentum of the track
 
 };
 

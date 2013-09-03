@@ -58,9 +58,11 @@ HMolPolPrimaryGeneratorAction::HMolPolPrimaryGeneratorAction(HMolPolAnalysis* a)
   //set a particle gun with n number of particles
   fParticleGun = new G4ParticleGun(NubofParticles);
 
+/*
   /// set the min and max theta angles in the CM frame
   fTheta_com_min = 0.0 * degree;
   fTheta_com_max = 180.0 * degree;
+*/
 
   //set particle type
   // \todo *ADD* in functionality for other particles as incoming ones later
