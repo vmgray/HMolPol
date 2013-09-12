@@ -19,6 +19,7 @@
 #include <CLHEP/Vector/ThreeVector.h>
 #include <G4String.hh>
 #include <G4THitsCollection.hh>
+#include <G4Allocator.hh>
 #include <G4ThreeVector.hh>
 #include <G4Types.hh>
 #include <G4VHit.hh>
@@ -32,6 +33,12 @@ class HMolPolGenericDetectorHit: public G4VHit {
 // \bug    ///< constructor for HMolPolGenericDetectorHit I think, the second one??
     virtual ~HMolPolGenericDetectorHit();
        //< destructor for HMolPolGenericDetectorHit
+
+    // New and delete operators for custom allocator
+    inline void *operator new(size_t);
+    inline void operator delete(void *aHit);
+    void *operator new(size_t,void*p) { return p; }
+
 
     G4int GetDetectorID() const {
       return fDetectorID;
@@ -123,7 +130,18 @@ class HMolPolGenericDetectorHit: public G4VHit {
 // Define the hit collection type - this is NOT working
 typedef G4THitsCollection<HMolPolGenericDetectorHit> HMolPolGenericDetectorHitsCollection;
 // Define the hit allocator
-/// \todo Do we need this?
-//extern G4Allocator<HMolPolGenericDetectorHit> HMolPolGenericDetectorHitAllocator;
+extern G4Allocator<HMolPolGenericDetectorHit> HMolPolGenericDetectorHitAllocator;
+
+/// Operator to create a new hit (for use with the custom allocator)
+inline void* HMolPolGenericDetectorHit::operator new(size_t){
+    void *aHit;
+    aHit = (void *) HMolPolGenericDetectorHitAllocator.MallocSingle();
+    return aHit;
+}
+
+/// Operator to delete a hit (for use with the custom allocator)
+inline void HMolPolGenericDetectorHit::operator delete(void *aHit){
+    HMolPolGenericDetectorHitAllocator.FreeSingle( (HMolPolGenericDetectorHit*) aHit);
+}
 
 #endif // HMolPolGenericDetectorHit_h

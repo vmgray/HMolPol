@@ -19,6 +19,9 @@
 //user includes
 #include "HMolPolGenericDetectorHit.hh"
 
+/// Create the static custom allocator
+G4Allocator<HMolPolGenericDetectorHit> HMolPolGenericDetectorHitAllocator;
+
 /********************************************
  * Programmer: Valerie Gray
  * Function: HMolPolGenericDetectorHit
