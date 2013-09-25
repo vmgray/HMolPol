@@ -16,7 +16,13 @@
 
 // /todo does this link to ROOT tree?? double check
 
-//user includes
+// geant4 includes
+#include "G4VVisManager.hh"
+#include "G4VisAttributes.hh"
+#include "G4Circle.hh"
+#include "G4Color.hh"
+
+// user includes
 #include "HMolPolGenericDetectorHit.hh"
 
 /// Create the static custom allocator
@@ -52,8 +58,6 @@ HMolPolGenericDetectorHit::HMolPolGenericDetectorHit()
   fTotalEnergy  = 0.;
 
   fPosition = G4ThreeVector(0.0,0.0,-1000.0);
-
-  G4cout << "Created hit" << G4endl;
 }
 
 /********************************************
@@ -106,4 +110,66 @@ HMolPolGenericDetectorHit::HMolPolGenericDetectorHit(const HMolPolGenericDetecto
 HMolPolGenericDetectorHit::~HMolPolGenericDetectorHit()
 {
 
+}
+
+
+/********************************************
+ * Programmer: Wouter Deconinck
+ * Function: Draw
+ *
+ * Purpose:
+ *
+ * Draw the hit on the display
+ *
+ * Global:
+ * Entry Conditions: HMolPolGenericDetectorHit
+ * Return:
+ * Called By:
+ * Date: 09-25-2013
+ * Modified:
+ ********************************************/
+void HMolPolGenericDetectorHit::Draw()
+{
+  // Get the visualization manager
+  G4VVisManager* pVVisManager = G4VVisManager::GetConcreteInstance();
+
+  // If there is a visualization manager
+  if (pVVisManager) {
+    // Create a little filled circle at the position of the hit
+    G4Circle circle(fPosition);
+    circle.SetWorldSize(5.0*mm);
+    circle.SetFillStyle(G4Circle::filled);
+    // Create the visibility attributes
+    G4Color color(1.,1.,0.);
+    G4VisAttributes attribs(color);
+    // Set the visibility attributes for the circle
+    circle.SetVisAttributes(attribs);
+    // Draw the circle
+    pVVisManager->Draw(circle);
+  }
+}
+
+/********************************************
+ * Programmer: Wouter Deconinck
+ * Function: Print
+ *
+ * Purpose:
+ *
+ * Print info about the hit
+ *
+ * Global:
+ * Entry Conditions: HMolPolGenericDetectorHit
+ * Return:
+ * Called By:
+ * Date: 09-25-2013
+ * Modified:
+ ********************************************/
+void HMolPolGenericDetectorHit::Print()
+{
+  G4cout << "Hit: fDetectorID[" << fDetectorID << "], fTrackID[" << fTrackID << "]: "
+      << " --- position (x,y,z) [cm] "
+      << fPosition.x()/cm << ", "
+      << fPosition.y()/cm << ", "
+      << fPosition.z()/cm << ", "
+      << G4endl;
 }

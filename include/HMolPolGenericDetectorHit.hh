@@ -39,6 +39,10 @@ class HMolPolGenericDetectorHit: public G4VHit {
     inline void operator delete(void *aHit);
     void *operator new(size_t,void*p) { return p; }
 
+    // Draw the hit on the display
+    virtual void Draw();
+    // Print info about the hit
+    virtual void Print();
 
     G4int GetDetectorID() const {
       return fDetectorID;
@@ -122,7 +126,7 @@ class HMolPolGenericDetectorHit: public G4VHit {
     G4double fTotalEnergy;   ///< the total energy of the track
     G4double fKineticEnergy; ///< the kinetic energy of the track
 
-    G4ThreeVector fPosition; ///<the position of the track
+    G4ThreeVector fPosition; ///< the position of the track
     G4ThreeVector fMomentum; ///< the momentum of the track
 
 };
