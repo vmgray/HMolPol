@@ -12,7 +12,7 @@
  *
  * \note <b>Entry Conditions:</b>
  *
- ********************************************/
+********************************************/
 
 // geant4 includes
 #include <G4SystemOfUnits.hh>

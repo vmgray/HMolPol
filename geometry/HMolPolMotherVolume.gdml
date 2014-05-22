@@ -64,17 +64,17 @@ Assisted By: Wouter Deconinck
       y="0" 
       z="4.5"
       unit="m"/>
-      
+          
     <!-- position of the Right Detector (and all its parts) in the "World" -->
     <position name="RightDetectorCenter" 
-      x="0.2" 
+      x="0.09" 
       y="0" 
       z="3.0"
       unit="m"/>
     
     <!-- position of the Left Detector (and all its parts) in the "World" -->
     <position name="LeftDetectorCenter" 
-      x="-0.2" 
+      x="-0.09" 
       y="0" 
       z="3.0"
       unit="m"/>
@@ -112,8 +112,8 @@ Assisted By: Wouter Deconinck
       <physvol>
         <file name="geometry/dummy.gdml"/>
         <positionref ref="DummyCenter"/>
-      </physvol>
- 
+      </physvol>     
+      
       <physvol>
         <file name="geometry/detector.gdml"/>
         <positionref ref="RightDetectorCenter"/>

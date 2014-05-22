@@ -179,6 +179,9 @@ int main (int argc, char** argv)
   //delete the runManager
   delete runManager;
 
+  //delete HMolPolAnalysis
+  delete myHMolPolAnalysis;
+
   //shoot the messenger
   delete myHMolPolMess;
 

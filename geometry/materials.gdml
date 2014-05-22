@@ -38,6 +38,18 @@ Assisted By:
     <fraction n="0.0095" ref="G4_H" />    
     <fraction n="0.9905" ref="G4_C" />
     
+    <!-- This is the material Geant4 has to stop everything
+    the "traditional way" is as follows: 
+    // this material will kill every tracks that touch it
+    G4Material *Kryptonite = 
+      new G4Material("Kryptonite", density= 0.00000001*mg/cm3, nel=1);
+    Kryptonite->AddElement(Ar, 100.*perCent);-->
+  <material name="Kryptonite_dummy" formula="Kryptonite">
+    <D unit="mg/cm3" value="0.00000001">
+    <fraction n="1.00" ref="G4_Ar">
+  </material>
+
+    
   </material>
 
 </materials>

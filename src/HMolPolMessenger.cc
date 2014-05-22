@@ -128,6 +128,13 @@ HMolPolMessenger::~HMolPolMessenger()
   if (fAnalysisDir)     delete fAnalysisDir;
   if (fBeamDir)         delete fBeamDir;
 
+  //delete the raster info
+  if(fRasXCmd)          delete fRasXCmd;
+  if(fRasYCmd)          delete fRasYCmd;
+
+  //Delete beam energy info
+  if(fBeamECmd)         delete fBeamECmd;
+
 }
 
 /********************************************
