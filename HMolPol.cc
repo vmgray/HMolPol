@@ -35,11 +35,6 @@ Assisted By: Wouter Deconinck
 #include <G4VisExecutive.hh>
 #endif
 
-//why is this not a void function? Why is it getting passed anything?
-//what is the point of whatever it is getting passed
-//if this is the number of things passed and the commands, then how does it work
-//
-
 /** \defgroup root Variables include in the ROOT file
      *
      *  This group contains all variables that are included in the ROOT file.
@@ -51,6 +46,10 @@ Assisted By: Wouter Deconinck
      *  things
 */
 
+// argc is the number of arguments passed (including the executable name)
+// argv is a vector with all arguments
+// if no arguments are passed (argc == 1) we only create a Qt GUI session
+// if arguments are passed (argc > 1) we execute the first argument passed
 int main (int argc, char** argv)
 {
   //Need to put in random seed info... not the remoll way as it is not good
@@ -135,7 +134,7 @@ int main (int argc, char** argv)
   //----------------
 
   G4UIsession* session = 0;
-  if (argc==1)   // Define UI session for interactive mode.
+  if (argc==1)   // Define UI session for interactive mode (no arguments passed).
   {
     session = new G4UIQt(argc,argv);
   }

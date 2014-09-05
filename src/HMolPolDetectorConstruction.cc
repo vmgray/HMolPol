@@ -2,19 +2,21 @@
  * \author <b>Programmer:</b> Valerie Gray
  * \author <b>Assisted By:</b> Wouter Deconinck
  *
- * \brief <b>Purpose:</b> This is the file is in charge reading in the geometry
- * of the simulations and therefore the polarimeter.  This is also sets any
- * attributes of the objects in the simulations, and any magnetic fields.
+ * \brief <b>Purpose:</b> This is the file is in charge
+ *      reading in the geometry of the simulations and
+ *      therefore the polarimeter.  This is also sets any
+ *      attributes of the objects in the simulations, and
+ *      any magnetic fields.
  *
  * \date <b>Date:</b> 06-25-2013
  * \date <b>Modified:</b> 07-06-2013
  *
  * \note <b>Entry Conditions:</b>
- *
+ * TODO magnetic fields
  ********************************************/
 
 //Geant4 specific includes
-#include <G4Colour.hh>
+#include <G4Color.hh>
 #include <G4VisAttributes.hh>
 #include <G4NistManager.hh>
 #include <G4FieldManager.hh>
@@ -22,8 +24,6 @@
 #include <G4SDManager.hh>
 
 #include <fstream>
-/// \bug what is the above and what is a singleton?? it is everywhere and I
-/// can't heads or tails of it.
 
 //HMolPol includes
 #include "HMolPolDetectorConstruction.hh"
@@ -60,8 +60,12 @@ G4VPhysicalVolume* HMolPolDetectorConstruction::Construct()
 {
   G4cout << "In HMollerPolDetectorConstruction::Construct()..." << G4endl;
 
+  //define a world volume
   G4VPhysicalVolume *worldVolume;
 
+  /*****************
+   * NIST Materials set up
+  *****************/
   //for getting NIST materials
   G4NistManager* NistManager = G4NistManager::Instance();  ///< manages the NIST
   // variables
@@ -97,31 +101,26 @@ G4VPhysicalVolume* HMolPolDetectorConstruction::Construct()
   // Close the file
   nist_materials.close();
 
-  //if the simulation is using GDML
-  //why don't we need #include <G4GDMLParser.hh>
-  //what's a parser
-  if (fGDMLParser)
-  {
-    //why are you deleting the G4GDMLParser right away
-    delete fGDMLParser;
-  }
-  /// \todo then are you recreating the G4GDMLParser - this makes no sense
-  fGDMLParser = new G4GDMLParser();
-  fGDMLParser->Clear();
-  //is this to check if the geometry overlaps?? - then why are then is there
-  // no geometry yet?!?
-  fGDMLParser->SetOverlapCheck(true);
+  /*****************
+   * Read in GDML and make geometry
+  *****************/
+  //Clear any info from the GDML parser object (initiate it to 0)
+  //it was created in the header
+  fGDMLParser.Clear();
+  //set the flag to check for overlaps as reading in the file to true
+  //when it reads geometry it will say if there is an overlap issue
+  fGDMLParser.SetOverlapCheck(true);
 
   //read in the geometry - by reading the Mother Volume
   ///all of the Geometry will be read in since they are all
   //MotherVolume.gdml uses all they other ones, they will all be read
-  /// \bug *CHANGE* so that HMolPolMotherVolume is not hard-coded and
+  /// TODO \bug *CHANGE* so that HMolPolMotherVolume is not hard-coded and
   /// other geometries can be able to read in easily
-  fGDMLParser->Read("geometry/HMolPolMotherVolume.gdml");
+  fGDMLParser.Read("geometry/HMolPolMotherVolume.gdml");
 
-  //the world volume is set as the world volume??
-  //but how does this become the MotherVolume??
-  worldVolume = fGDMLParser->GetWorldVolume();
+  //function to take the GDML it read in (the experiment)
+  //and make it the "World"
+  worldVolume = fGDMLParser.GetWorldVolume();
 
   //==========================
   // List auxiliary info
@@ -131,13 +130,17 @@ G4VPhysicalVolume* HMolPolDetectorConstruction::Construct()
   //    detector type - if it is a sensitive detector
   //==========================
 
-  // define and auxiliary map which has all the above info in it
-  const G4GDMLAuxMapType* auxmap = fGDMLParser->GetAuxMap();
+  // define and get auxiliary map  from the Parser
+  // which has all the above info in it - it is already there
+  //from reading the files, just grabing it from the parser
+  const G4GDMLAuxMapType* auxmap = fGDMLParser.GetAuxMap();
+  //Aux map is a map from Logical Volume to list of properties
 
-  //if it finds auxiliary info tell us
+  //if it finds auxiliary info on a detector
+  //tell us how many have that
   G4cout << "Found " << auxmap->size()
-                                     << " volume(s) with auxiliary information."
-                                     << G4endl << G4endl;
+         << " volume(s) with auxiliary information."
+         << G4endl << G4endl;
 
   //this for loop iterates over all of the auxiliary info.  Starting at the
   // first one defined till there are no more.  Then it outputs what the volume
@@ -147,8 +150,13 @@ G4VPhysicalVolume* HMolPolDetectorConstruction::Construct()
       iter  = auxmap->begin();
       iter != auxmap->end(); iter++)
   {
+    //Start with the the the volume (fist component of the map)
     G4cout << "Volume " << ((*iter).first)->GetName()
                     << " has the following list of auxiliary information: "<< G4endl;
+
+    //for that volume ((*iter).first)->GetName() loop over the properties
+    //the properties are in the form (type, value)
+    //(*vit) is the object corresponding to (type,value)
     for (G4GDMLAuxListType::const_iterator
         vit  = (*iter).second.begin();
         vit != (*iter).second.end(); vit++)
@@ -156,24 +164,34 @@ G4VPhysicalVolume* HMolPolDetectorConstruction::Construct()
       G4cout << "--> Type: " << (*vit).type
           << ", value: "   << (*vit).value << std::endl;
 
+      // /todo TODO: We should get the visibility attributes before the first
+      // if statement, modify them in the if statements, and write them
+      // to the volume after the last if statement.
+
       // Support for the auxiliary tag "Visibility" that can be
       // "true" to show the volume
       // "false" to hide the volume
       // "wireframe" to show the volume as wireframe only
 
       //if there is a visibility attribute then set it
-      //The defult it to be seen with a wireframe
+      // The default is to be seen with a wireframe, other options are
+      // full, wireframe and completely off.  Color is not a part of the
+      // visibility tag, but it has to be set as part of the VisAttribute
+      // in geant4
       if ((*vit).type == "Visibility")
       {
-        G4Colour colour(1.0,1.0,1.0);
+        // definition & initialization
+        G4Color color(1.0,1.0,1.0);
+
         // get old color (this is just the standard Geant4 color)
+        //(this is not the color in the GDML file)
         const G4VisAttributes* visAttribute_old =
             ((*iter).first)->GetVisAttributes();
-        //get the new color that is specified by the GDML code
         if (visAttribute_old)
-          colour = visAttribute_old->GetColour();
-        // create new visibility attributes
-        G4VisAttributes visAttribute_new(colour);
+          color = visAttribute_old->GetColor();
+
+        // create new visibility attributes with the old color
+        G4VisAttributes visAttribute_new(color);
         if ((*vit).value == "true")  // if we want the object to be seen
           visAttribute_new.SetVisibility(true);
         if ((*vit).value == "false")  // if we want to hide the object
@@ -188,19 +206,27 @@ G4VPhysicalVolume* HMolPolDetectorConstruction::Construct()
       // blue, brown, cyan, gray, green, grey, magenta, red, white, yellow
       if ((*vit).type == "Color")
       {
-        G4Colour colour(1.0,1.0,1.0);
+        // definition & initialization
+        G4Color color(1.0,1.0,1.0);
+
+        // get old visibility attributes so that all previously set properties
+        // are still going to be valid
+        G4VisAttributes* visAttribute =
+            ((*iter).first)->GetVisAttributes();
+
         // get requested color, if it exists
-        if (G4Colour::GetColour((*vit).value, colour))
+        if (G4Color::GetColour((*vit).value, color))
         {
+          //write out the color we are setting the volume too
           G4cout << "Setting color to " << (*vit).value << "." << G4endl;
-          // create new visibility attributes
-          G4VisAttributes visAttribute(colour);
-          // set new visibility attributes
+          // change the color in the visibility attributes
+          visAttribute->SetColor(color);
+          // saves this color to the VisAttributes of the volume
           ((*iter).first)->SetVisAttributes(visAttribute);
         } else
         {
           //if color not in the above list
-          G4cout << "Colour " << (*vit).value << " is not known." << G4endl;
+          G4cout << "Color " << (*vit).value << " is not known." << G4endl;
         }
       }
 
@@ -208,14 +234,16 @@ G4VPhysicalVolume* HMolPolDetectorConstruction::Construct()
       // a value of 0.0 is fully transparent, 1.0 is fully opaque
       if ((*vit).type == "Alpha")
       {
-        // get the old color - Geant4 standard color
+        // definition & initialization
         G4Colour colour(1.0,1.0,1.0);
-        // get old color
-        const G4VisAttributes* visAttribute_old =
+
+        // get old visibility attributes so that all previously set properties
+        // are still going to be valid
+        G4VisAttributes* visAttribute =
             ((*iter).first)->GetVisAttributes();
 
-        if (visAttribute_old)
-          colour = visAttribute_old->GetColour();
+        if (visAttribute)
+          colour = visAttribute->GetColour();
         // create new color with alpha channel (// \bug TODO input not checked?? Wouter?)
         // those color is the same as the color set by color (above)
         G4Colour colour_new(
@@ -223,25 +251,28 @@ G4VPhysicalVolume* HMolPolDetectorConstruction::Construct()
             colour.GetGreen(),
             colour.GetBlue(),
             std::atof((*vit).value.c_str())); //this is the alpha value
-        // create new visibility attributes
+
+        // create new visibility attributes with the Alpha included
         G4VisAttributes visAttribute_new(colour_new);
-        // set new visibility attributes
+
+        // saves the alpha value to the visibility attributes for this volume
         ((*iter).first)->SetVisAttributes(visAttribute_new);
       }
 
       // Support for the auxiliary tag "SensDet" to set sensitive detector type
       if ((*vit).type == "SensDet")
       {
-        // Get specified sensitive detector type
+        // Get specified sensitive detector type: essentially the name
         G4String detectortype = (*vit).value;
 
-        // Form name of sensitive detector
+        // Form name of sensitive detector (convention is to prefix this with hmolpol/ )
         G4String detectorname = "hmolpol/" + detectortype;
 
         // Get pointer to sensitive detector manager
         G4SDManager* SDman = G4SDManager::GetSDMpointer();
 
         // Find pointer to current sensitive detector of that name
+        // in the SDmanager
         G4VSensitiveDetector* sensitivedetector =
             SDman->FindSensitiveDetector(detectorname);
 
@@ -249,19 +280,30 @@ G4VPhysicalVolume* HMolPolDetectorConstruction::Construct()
         if (sensitivedetector == 0)
         {
           // Sensitive detector doesn't exist yet, so create a new one
+
           /// \todo let HMolPolGenericDetector keep track of number using static
           /// (ask wdc for help if necessary)
+
+          //crates a HMolPolGenericDetector with the detector name
+          //(has the hmolpol/ in front)
           HMolPolGenericDetector* sensitivedetector =
               new HMolPolGenericDetector(detectorname);
+
+          //give that newly created HMolPolGenericDetector, sensitivedetector
+          //the name if the volume
           sensitivedetector->SetVolumeName(((*iter).first)->GetName());
+
+          //write out the name if the sensitive detector and the volume
           G4cout << "Creating sensitive detector " << detectortype
                  << " for volume " << ((*iter).first)->GetName()
                  <<  G4endl;
 
           // Add sensitive detector to analysis
+          //therefore adding it to the ROOT file
           fAnalysis->AddNewDetector(detectortype);
 
-          // Add sensitive detector to manager
+          // Add sensitive detector to SDmanager
+          // so we can finds and use it
           SDman->AddNewDetector(sensitivedetector);
         }
 
@@ -276,28 +318,28 @@ G4VPhysicalVolume* HMolPolDetectorConstruction::Construct()
   // Add in the Magnetic field to world volume
   //==========================
 
-  /// \bug this is for the *simple* magnetic field - need to be updated to
+  /// TODO \bug this is for the *simple* magnetic field - need to be updated to
   /// something realistic and that might effect the following code
   //get the field??
+
+  //create a new magnetic field HMolPolSolenoidMagField
+  //for the  HTargetSolenoid, and store the pointer to it
   HMolPolSolenoidMagField* HTargetSolenoidMagField =
       new HMolPolSolenoidMagField;
 
-  //tell Geant 4 to use this field - how??
+  //Make a MagFeildMaanager for this field
   G4FieldManager* HTargetSolenoidMagFieldMgr =
       G4TransportationManager :: GetTransportationManager()->GetFieldManager();
 
-  //set the field for the HTargetSolenoidFieldMgr
+  //add the field (HTargetSolenoidMagField) to the HTargetSolenoidFieldMgr
+  //Allows the feild to get used
   HTargetSolenoidMagFieldMgr->SetDetectorField(HTargetSolenoidMagField);
 
   //create the Chord finder (this is responsible for moving
-  // the particles through the field
+  // the particles through the field)
   HTargetSolenoidMagFieldMgr->CreateChordFinder(HTargetSolenoidMagField);
 
-  //==========================
-  // Return world volume
-  //==========================
 
-  delete fGDMLParser;
-
+  //Return world volume
   return worldVolume;
 }

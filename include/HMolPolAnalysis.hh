@@ -2,7 +2,11 @@
  * \author <b>Programmer:<\b> Valerie Gray
  * \author <b>Assisted By:<\b> Wouter Deconinck
  *
- * \brief <b>Purpose:</b> This is header file for the HMolPolAnalysis Class
+ * \brief <b>Purpose:</b> This is header file for
+ *   the HMolPolAnalysis Class, which prints out
+ *   the ROOT files
+ *
+ *   So it must include all the root tree variables
  *
  * \date <b>Date:</b> 07-11-2013
  * \date <b>Modified:</b> 08-20-2013
@@ -74,11 +78,12 @@ class HMolPolAnalysis
   public:
 
     // ROOT variables that are common for all events in the ROOT tree
-    // for example, the run number, beam energy, etc.
+    // for example, the run number, beam energy, etc. One run per ROOT
+    // tree - single value for the whole run
     Int_t fRunNumber;           ///< Run number
     Double_t fBeamEnergy;       ///< Beam energy
 
-    HMolPolEventUnits* fUnits;          ///< Primary event structure
+    HMolPolEventUnits* fUnits;    ///< Primary event structure
     TBranch* fUnitsBranch;              ///< Primary event ROOT branch
 
     HMolPolEventPrimary* fPrimary;      ///< Primary event structure

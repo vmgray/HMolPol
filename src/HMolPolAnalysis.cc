@@ -2,15 +2,16 @@
  * \author <b>Programmer:</b> Valerie Gray
  * \author <b>Assisted By:</b> Wouter Deconinck
  *
- * \brief <b>Purpose:</b> This file is in charge of getting everything set
- *      up so that the simulation will have results in a ROOT file.
+ * \brief <b>Purpose:</b> This file is in charge
+ *      of getting everything set up so that the
+ *      simulation will have results in a ROOT file.
  *
  * \date <b>Date:</b> 07-11-2013
- * \date <b>Modified:</b> 07-017-2013
+ * \date <b>Modified:</b> 09-03-2014
  *
  * \note <b>Entry Conditions:</b>
  *
- * \todo comment the comment blocks to get the how this is all put together
+ * \todo GET User info to print to tree
  *
  ********************************************/
 
@@ -29,10 +30,15 @@
 
 /********************************************
  * Programmer: Valerie Gray
- * Function: HMolPolAnalysis(): fRootFileStem("HMolPol"),fRootFileName("")
+ * Function: HMolPolAnalysis():
+ *      fRootFileStem("HMolPol"),fRootFileName("")
  *
- * Purpose:  To initialize the default Root file name and everything in the
+ * Purpose:  To initialize the default Root file
+ *      name and everything in the
  *      Tree to null.
+ *
+ *      Can do this initialization following the : after the
+ *      function name, only since this is the constructor.
  *
  * Global:
  * Entry Conditions: fRootFileStem("HMolPol")
@@ -40,32 +46,34 @@
  * Return:
  * Called By:
  * Date: 07-11-2013
- * Modified:
+ * Modified: 09-03-2014
  ********************************************/
-HMolPolAnalysis::HMolPolAnalysis(): fRootFileStem("HMolPol"),fRootFileName("")
+HMolPolAnalysis::HMolPolAnalysis()
+: fRootTree(0),fRootFile(0),
+  fRootFileStem("HMolPol"),fRootFileName(""),
+  fRunNumber(0),fBeamEnergy(0),
+  fUnits(0),fUnitsBranch(0),
+  fPrimary(0),fPrimaryBranch(0),
+  pUserRunInformation(0)
 {
+  // starting the anaylsis
   G4cout << "###### Calling HMolPolAnalysis::HMolPolAnalysis()" << G4endl;
 
-  // Initialize everything to nothing
-  fRootTree   = NULL;
-  fPrimaryBranch = NULL;
-  fRootFile   = NULL;
 }
 
 /********************************************
  * Programmer: Valerie Gray
  * Function: ~HMolPolAnalysis()
  *
- * Purpose:  To deconsturuct the default Root file name and everything in the
- *      Tree.
- *
+ * Purpose:  To deconsturuct the default Root file
+ *      name and everything in the Tree.
  *
  * Global:
  * Entry Conditions:
  * Return:
  * Called By:
  * Date: 07-11-2013
- * Modified:
+ * Modified: 09-03-2014
  ********************************************/
 HMolPolAnalysis::~HMolPolAnalysis()
 {
@@ -81,12 +89,15 @@ HMolPolAnalysis::~HMolPolAnalysis()
  * Programmer: Valerie Gray
  * Function: BeginOfRun
  *
- * Purpose:  Set up what should be done at the beginning of a run.
- *      Set up the output ROOT file name
+ * Purpose:  Set up what should be done at the
+ *      beginning of a run.
+ *      - Set up the output ROOT file name
+ *      - Create ROOT file with that name
  *
- * \define run is a set of events for which a whole root file is produced.
- *      i.e. if one has /run/beamOn/ 1000 then a run is 1000 fired electrons
- *
+ * \define run is a set of events for which a
+ *      whole root file is produced.
+ *      i.e. if one has /run/beamOn/ 1000 then
+ *      a run is 1000 fired electrons
  *
  * Global:
  * Entry Conditions: const G4Run* aRun
@@ -108,10 +119,10 @@ void HMolPolAnalysis::BeginOfRun(const G4Run* aRun)
   if (fRootFileName.size() == 0)
     fRootFileName = fRootFileStem + "_" + Form("%d",runID) + ".root";
 
-  // Create ROOT file
+  // Create  NEW ROOT file
   G4cout << "###### Analysis: creating ROOT file " << fRootFileName << G4endl;
   fRootFile = new TFile(fRootFileName,"RECREATE","HMolPol ROOT file");
-  ConstructRootTree();
+  ConstructRootTree();  //calls the function that constructs the ROOT tree
 }
 
 /********************************************
@@ -135,8 +146,9 @@ void HMolPolAnalysis::EndOfRun(const G4Run* aRun)
   // Autosave one last time
   AutoSaveRootTree();
 
-  // Write the data to the ROOT file
-  G4cout << "###### Analysis: closing ROOT file " << fRootFileName << G4endl;
+  // Write the data to the ROOT file, closes the file safely
+  G4cout << "###### Analysis: closing ROOT file "
+      << fRootFileName << G4endl;
   fRootFile->Write(0,TObject::kOverwrite);
   fRootFile->Close();
   fRootFileName = "";
@@ -146,18 +158,22 @@ void HMolPolAnalysis::EndOfRun(const G4Run* aRun)
  * Programmer: Valerie Gray
  * Function: ConstructRootTree
  *
- * Purpose:  Construct the actual ROOT tree in the ROOT file that
- *      was created earlier.
+ * Purpose:  Construct the structure (skeleton) of the ROOT tree in
+ *      the ROOT file that was created earlier.
  *
  *      This add each branch to the ROOT file separately
- *              - the Units branch - connected to the HMolPolEventUnits files.
- *                Has all the needed units
- *              - the Primary branch - connected to the HMolPolEventPrimary.
- *                Has all the information about the primary electron
+ *              - the Units branch - connected to the
+ *                      HMolPolEventUnits files. Has
+ *                      all the needed units
+ *              - the Primary branch - connected to the
+ *                      HMolPolEventPrimary. Has all the
+ *                      information about the primary electron
  *              - the Detector branch - connected to the
- *                HMolPolEventGenericDetectorHit
- *                Has all the information about the hits in the detectors.
- *                Each detector is in its own sub-branch of this branch
+ *                      HMolPolEventGenericDetectorHit
+ *                      Has all the information about
+ *                      the hits in the detectors.
+ *                      Each detector is in its own
+ *                      sub-branch of this branch
  *
  *
  * Global:
@@ -173,17 +189,8 @@ void HMolPolAnalysis::ConstructRootTree()
   // the tree name will be HMolPol_Tree in the ROOT file
   fRootTree = new TTree("HMolPol_Tree","HMolPol Simulation Tree");
 
-  // Save the file after so many bytes. Avoids complete data loss after crash
-  //fRootTree ->SetAutoSave(1000000);
-  //AutoSave after every 1 Mbyte written to disk
-
-// \todo I have no idea what the next lines means (till end)
-  // Instance of data structure to be written into ROOT file
-  //fRootEvent  = new HMolPolEvent();
-
   // Create a branch with the data structure defined by fRootEvent
-  // THE QWEAK WAY OF LIFE
-  int bufsize = 64000;
+  int bufsize = 64000;  //64 kbytes
   int split   = 99;
 
   // Add units - the units branch
@@ -206,6 +213,7 @@ void HMolPolAnalysis::ConstructRootTree()
         "HMolPolEventGenericDetector", &fDetector[i], bufsize, split);
   }
 
+  //TODO get the Run information to work
   // Write run data
   //pUserRunInformation->Write();
 }

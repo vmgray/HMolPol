@@ -68,6 +68,7 @@ HMolPolEventAction::~HMolPolEventAction()
  * Function: BeginOfEventAction
  *
  * Purpose: What happens at the beginning of a event
+ *   write that we are starting a new run
  *
  * Global:
  * Entry Conditions: G4Event
