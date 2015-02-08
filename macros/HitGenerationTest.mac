@@ -1,0 +1,37 @@
+#Programmer: Valerie Gray
+#Purpose:  Generate a HMolPol Simulation file, which to test the simulation
+#
+#  At 02-08-2015 - specifically interested in looking at the hits recorded.
+#
+#Date: 02-08-2015
+#Modified:
+#Assisted By:
+#
+
+#This is to initialize the run manager. This is needed IFF the lines
+# runManager->Initialize(); is not in HMollerPol.cc
+/run/initialize
+
+# blah blah a lot
+#/control/verbose 1
+#/tracking/verbose 1
+#/run/verbose 1
+
+# This turns off processes for all particles
+
+#needed to test, maybe it is a process causeing the hit issue
+
+/process/inactivate msc
+/process/inactivate eBrem
+/process/inactivate compt
+/process/inactivate eIoni
+/process/inactivate phot
+/process/inactivate Cerenkov
+
+#choose name out outpted rootfile
+#/HMolPol/Analysis/RootFileName HMolPol_HitTest_Process_ALL_DATE.root
+
+#run beam
+#/run/beamOn 4500
+/run/beamOn 100
+
