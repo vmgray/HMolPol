@@ -1,3 +1,11 @@
+#Programmer: Valerie Gray
+#Purpose:  Example HMolPol simulaiton macro
+#
+#Date: 10-14-2013
+#Modified: 02-08-2015
+#Assisted By:
+#
+
 #This is to initialize the run manager. This is needed IFF the lines
 # runManager->Initialize(); is not in HMollerPol.cc
 /run/initialize
