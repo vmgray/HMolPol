@@ -7,24 +7,31 @@ Add stuff here :)
 Package:
 =====================
 
-    This software package, HMollerPol, is the Geant4 Simulation for the 
-  Hydrogen Moller Polarimeter which is a collaboration between Jefferson Lab in 
+    This software package, HMollerPol, is the Geant4 Simulation for the
+  Hydrogen Moller Polarimeter which is a collaboration between Jefferson Lab in
   Newport News, VA, USA and Johannes Gutenberg University of Mainz, Germany.
 
 
 Compiling:
 =====================
+In your directory where you have the HMollerPol simulation make a folder called build.  
+Go in this directory run the command 
+  cmake .. 
+ 
+ Then run the command
+   make
+This will create the excitable hmolpol
 
 Stand by for more information
 
 Documentation:
 =====================
 
-Well here is some.  More to come.  Even more in comments :) 
+Well here is some.  More to come.  Even more in comments :)
 
 Also look at the mainpage.dox or look at the doxyogen webpage ()
 
-IntroToGDMLLayout - This file is introduction to the GDML layout for geometry 
+IntroToGDMLLayout - This file is introduction to the GDML layout for geometry
   files.  For more information the following web pages might be useful:
      - http://gdml.web.cern.ch/GDML/
      - http://gdml1.web.cern.ch/gdml1/doc/g4gdml_howto.html
@@ -34,13 +41,13 @@ Usage:
 =====================
 
     Well the use of this will be to run the simulation for the Hydrogen Moller
-  Polarimeter.  
+  Polarimeter.
 
 Authors:
 =====================
 
   Valerie Gray, vmgray@email.wm.edu - College of William and Mary
-  
+
 Copyright:
 =====================
 
