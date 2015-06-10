@@ -108,7 +108,6 @@ HMolPolGenericDetector::~HMolPolGenericDetector()
  * Date: 07-10-2013
  * Modified:
  ********************************************/
-
 void HMolPolGenericDetector::Initialize(G4HCofThisEvent* HCE)
 {
   // Create new hits collection
@@ -138,9 +137,6 @@ void HMolPolGenericDetector::Initialize(G4HCofThisEvent* HCE)
  * Date: 07-10-2013
  * Modified:
  ********************************************/
-
-///////////////////////////////////////////////////////////////////////
-
 G4bool HMolPolGenericDetector::ProcessHits(G4Step *step, G4TouchableHistory* )
 {
   // Get touchable volume info
@@ -215,9 +211,6 @@ G4bool HMolPolGenericDetector::ProcessHits(G4Step *step, G4TouchableHistory* )
  * Date: 07-10-2013
  * Modified:
  ********************************************/
-
-///////////////////////////////////////////////////////////////////////
-
 void HMolPolGenericDetector::EndOfEvent(G4HCofThisEvent* HCE)
 {
   // Get pointer to the sensitive detector manager

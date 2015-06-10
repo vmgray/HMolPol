@@ -3,7 +3,9 @@
  * \author <b>Assisted By:</b> Wouter Deconinck
  *
  * \brief <b>Purpose:</b> This is the file is in charge creating the HMolPol
- *      ROOT version.  This is so that ROOT can handle the tree structure
+ *      ROOT version (hmolpolroot).  This is so that ROOT can handle
+ *      the tree structure.
+ *      Functionality of the command prompt.
  *
  * \date <b>Date:</b> 07-16-2013
  * \date <b>Modified:</b> 07-26-2013
@@ -59,6 +61,7 @@ HMolPolRint::HMolPolRint (const char* appClassName, int* argc, char** argv,
   // Pointer to self
   fExists = this;
 }
+
 /********************************************
  * Programmer: Valerie Gray
  * Function: ~HMolPolRint

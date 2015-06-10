@@ -7,7 +7,7 @@
  *      simulation will have results in a ROOT file.
  *
  * \date <b>Date:</b> 07-11-2013
- * \date <b>Modified:</b> 09-03-2014
+ * \date <b>Modified:</b> 05-07-2014
  *
  * \note <b>Entry Conditions:</b>
  *
@@ -28,10 +28,11 @@
 /// \todo make this so the file names can change with things like generator etc
 /// ie HMolPol_eleastic HMolPol_Moller, etc
 
+/// \todo get the Github information to print to the ROOT file via HMolPolRunInformation
+
 /********************************************
  * Programmer: Valerie Gray
- * Function: HMolPolAnalysis():
- *      fRootFileStem("HMolPol"),fRootFileName("")
+ * Function: HMolPolAnalysis::HMolPolAnalysis():
  *
  * Purpose:  To initialize the default Root file
  *      name and everything in the
@@ -116,7 +117,7 @@ void HMolPolAnalysis::BeginOfRun(const G4Run* aRun)
   // Construct file name if not set explicitly
   // This is from the default name and the number of times one had
   // simulated a run in the present session of HMolPol (starting with 0)
-  if (fRootFileName.size() == 0)
+  if (fRootFileName.size() == 0) //if no name is set the size of it is 0
     fRootFileName = fRootFileStem + "_" + Form("%d",runID) + ".root";
 
   // Create  NEW ROOT file
@@ -159,7 +160,7 @@ void HMolPolAnalysis::EndOfRun(const G4Run* aRun)
  * Function: ConstructRootTree
  *
  * Purpose:  Construct the structure (skeleton) of the ROOT tree in
- *      the ROOT file that was created earlier.
+ *      the ROOT file that was created earlier, in HMolPolAnalysis::BeginOfRun(const G4Run* aRun)
  *
  *      This add each branch to the ROOT file separately
  *              - the Units branch - connected to the
@@ -213,7 +214,7 @@ void HMolPolAnalysis::ConstructRootTree()
         "HMolPolEventGenericDetector", &fDetector[i], bufsize, split);
   }
 
-  //TODO get the Run information to work
+  /// \TODO get the Run information to work
   // Write run data
   //pUserRunInformation->Write();
 }
