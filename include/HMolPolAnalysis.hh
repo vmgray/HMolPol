@@ -47,7 +47,7 @@ class HMolPolAnalysis
 
     void BeginOfRun(const G4Run* aRun); ///< begin of run function
     void EndOfRun(const G4Run* aRun);   ///< End of run function
-    void EndOfEvent(G4int flag);        ///< end of Event function
+    void EndOfEvent();        ///< end of Event function
 
     ///<  Set ROOT file stem or name
     void SetRootFileStem(const G4String& stem) { fRootFileStem = stem; }
@@ -83,8 +83,8 @@ class HMolPolAnalysis
     Int_t fRunNumber;           ///< Run number
     Double_t fBeamEnergy;       ///< Beam energy
 
-    HMolPolEventUnits* fUnits;    ///< Primary event structure
-    TBranch* fUnitsBranch;              ///< Primary event ROOT branch
+    HMolPolEventUnits* fUnits;    ///< Primary unit structure
+    TBranch* fUnitsBranch;              ///< Primary unit ROOT branch
 
     HMolPolEventPrimary* fPrimary;      ///< Primary event structure
     TBranch* fPrimaryBranch;            ///< Primary event ROOT branch
@@ -92,6 +92,7 @@ class HMolPolAnalysis
     std::vector<HMolPolEventGenericDetector*> fDetector; ///< Detector event structure
     std::vector<TBranch*> fDetectorBranch;              ///< ROOT file branches
     std::vector<G4String> fDetectorName;                ///< Detector names
+    //wdc: add more infor on the fDetectorName what is etc.
 
   private:
 
