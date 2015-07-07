@@ -146,7 +146,7 @@ int main (int argc, char** argv)
   #endif
 
   //get the pointer to the User Interface manager
-  G4UImanager * UI = G4UImanager::GetUIpointer();
+  G4UImanager* UI = G4UImanager::GetUIpointer();
 
   if (session)   // Define UI session for interactive mode.
   {
