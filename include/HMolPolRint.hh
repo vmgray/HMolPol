@@ -5,7 +5,7 @@
  * \brief <b>Purpose:</b> This is header file for the Rint class
  *
  *  \class HMolPolRint
- *  \ingroup QwThreadSafe
+ *  \ingroup
  *  \brief A ROOT command line interface
  *
  * The HMolPolRint class implements a ROOT command line interface.  It inherits
