@@ -3,107 +3,73 @@
 <!ENTITY materials SYSTEM "materials.gdml">
 ]>
 
-<gdml xmlns:gdml="http://cern.ch/2001/Schemas/GDML" 
-      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-      xsi:noNamespaceSchemaLocation="schema/gdml.xsd">
-      <!-- include GDML namespace -->
-      <!-- XML Schema instance Namespace -->
-      <!-- GDML Schema Location -->
+<gdml xmlns:gdml="http://cern.ch/2001/Schemas/GDML" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="schema/gdml.xsd">
+  <!-- include GDML namespace -->
+  <!-- XML Schema instance Namespace -->
+  <!-- GDML Schema Location -->
 
-<!--
-/***********************************************************
-Programmer: Valerie Gray
-Purpose:
-
-To a dummy plane down stream of the H target, also this will be made into a 
-dummy detector just so that we can get events out, this will be replaced by 
-real detectors soon. 
-
-Entry Conditions:
-Date:05-17-2013
-Modified: 07-10-2013
-Assisted By: Wouter Deconinck
-*********************************************************/
--->
- <define>
+  <!-- /*********************************************************** Programmer: Valerie 
+    Gray Purpose: To a dummy plane down stream of the H target, also this will be made 
+    into a dummy detector just so that we can get events out, this will be replaced by 
+    real detectors soon. Entry Conditions: Date:05-17-2013 Modified: 07-10-2013 Assisted 
+    By: Wouter Deconinck *********************************************************/ -->
+  <define>
 
     <!-- NOTICE: all of these values have been pulled out of thin error, they will 
-     have to be changed to be inline with the actual experiment -->
-     
+      have to be changed to be inline with the actual experiment -->
+
     <!-- Define the constants for this file -->
-    
-    <constant name="TWOPI" value="2.*pi"/>
-  
-    <!-- Define the quantities that will be used in this file 
-      This might be wrong and these need to be constants... -->
-    
+
+    <constant name="TWOPI" value="2.*pi" />
+
+    <!-- Define the quantities that will be used in this file This might be wrong 
+      and these need to be constants... -->
+
     <!-- Minimum radius of the dummy detector -->
-    <quantity name="Dummy_MinRadius" 
-      type="length" 
-      value = "0.0" 
-      unit = "m" />
-  
-    <!-- Maximum radius of the dummy detector --> 
-    <quantity name="Dummy_MaxRadius" 
-      type="length" 
-      value = "2.25" 
-      unit = "m" />
-    
+    <quantity name="Dummy_MinRadius" type="length" value="0.0" unit="m" />
+
+    <!-- Maximum radius of the dummy detector -->
+    <quantity name="Dummy_MaxRadius" type="length" value="2.25" unit="m" />
+
     <!-- Length of the dummy detector -->
-    <quantity name="Dummy_Z_Length" 
-      type="length" 
-      value = "0.5" 
-      unit = "mm" />
-  
+    <quantity name="Dummy_Z_Length" type="length" value="0.5" unit="mm" />
+
     <!-- Define the starting Phi angle of the dummy detector -->
-    <quantity name="Dummy_StartPhi" 
-      type="angle" 
-      value = "0" 
-      unit = "rad"/>
-    
+    <quantity name="Dummy_StartPhi" type="angle" value="0" unit="rad" />
+
     <!-- Define the ending Phi angle of the dummy detector -->
-    <quantity name="Dummy_EndPhi" 
-      type="angle" 
-      value = "TWOPI" 
-      unit = "rad"/>
-    
+    <quantity name="Dummy_EndPhi" type="angle" value="TWOPI" unit="rad" />
+
     <!-- define positions of the target in this file -->
-    <position name="Dummy_Position" 
-      x="0.0"
-      y="0.0" 
-      z="0.0" 
-      unit="m"/>
+    <position name="Dummy_Position" x="0.0" y="0.0" z="0.0" unit="m" />
 
   </define>
   
   &materials;
-  
+
   <solids>
     <!-- Define the tube of the dummy -->
-    <tube name="Dummy_tube" 
-      rmin="Dummy_MinRadius" 
-      rmax="Dummy_MaxRadius"
-      z="Dummy_Z_Length" 
-      startphi="Dummy_StartPhi" 
-      deltaphi="Dummy_EndPhi"/> 
+    <tube name="Dummy_tube" rmin="Dummy_MinRadius" rmax="Dummy_MaxRadius"
+      z="Dummy_Z_Length" startphi="Dummy_StartPhi" deltaphi="Dummy_EndPhi" />
   </solids>
-  
-   <structure>
-  <!-- implement the geometry - through logical volumes and physical volumes  -->
-    <volume name="logicalDummy"> 
-      <materialref ref="G4_AIR"/>
-      <solidref ref="Dummy_tube"/>
-      <auxiliary auxtype="Color" auxvalue="yellow"/>
-      <auxiliary auxtype="Alpha" auxvalue="0.1"/>
-      <auxiliary auxtype="SensDet" auxvalue="DummyDet"/> 
+
+  <structure>
+    <!-- implement the geometry - through logical volumes and physical volumes -->
+    <volume name="logicalDummy">
+      <materialref ref="G4_AIR" />
+      <solidref ref="Dummy_tube" />
+      <auxiliary auxtype="Color" auxvalue="yellow" />
+      <auxiliary auxtype="Alpha" auxvalue="0.1" />
+      <auxiliary auxtype="SensDet" auxvalue="DummyDet" />
     </volume>
   </structure>
 
-  <!-- I am not sure what all this does, sets up something for the implementation
-       to the World -->
+  <!-- I am not sure what all this does, sets up something for the implementation 
+    to the World -->
 
   <setup name="DummySetup" version="1.0">
-    <world ref="logicalDummy"/>
+    <world ref="logicalDummy" />
   </setup>
 
 </gdml>

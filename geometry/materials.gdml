@@ -1,55 +1,41 @@
-<!-- /***********************************************************
-Programmer: Valerie Gray
-Purpose:
-
-To define the materials that will be used in this simulation
-
-These will only be the non-NIST variables materials, the NIST variables
-are defined in the typical Geant4 way in the HMollerPolDetectorConstrution.cc
-file
-
-Entry Conditions: none
-Date: 05-21-2013
-Modified:
-Assisted By:
-********************************************************* -->
+<!-- /*********************************************************** Programmer: Valerie 
+  Gray Purpose: To define the materials that will be used in this simulation These 
+  will only be the non-NIST variables materials, the NIST variables are defined in 
+  the typical Geant4 way in the HMollerPolDetectorConstrution.cc file Entry Conditions: 
+  none Date: 05-21-2013 Modified: Assisted By: ********************************************************* -->
 
 <materials>
 
- <!-- Non-NIST materials -->
+  <!-- Non-NIST materials -->
 
-  <!-- Cold Atomic H gas as defined in  
-     /// as defined in Moller Polarimetry with Atomic Hydrogen Targets 
-     by E.~Chudakov and V.~Luppov(long)--> 
-<!-- Change this to use NIST variables -->
+  <!-- Cold Atomic H gas as defined in /// as defined in Moller Polarimetry with 
+    Atomic Hydrogen Targets by E.~Chudakov and V.~Luppov(long) -->
+  <!-- Change this to use NIST variables -->
   <material name="Cold_Atomic_HGas" Z="1">
-    <T unit="K" value="0.3"/>               <!-- pg 9 -->
-    <P unit="pascal" value="1.33e-13"/>     <!-- 1e-15 Torr in paper pg 15 -->
-    <D unit="1/cm3" value="3e15"/>          <!-- pg 10 -->
-    <atom unit="g/mole" value="1.01"/>
-  </material>
-  
-    <!-- Dummy Scintillator material  I am using the BC-408 material from 
-    http://www.detectors.saint-gobain.com/Plastic-Scintillator.aspx - this 
-    is just so that we have something to work with --> 
-    
-  <material name="BC-408_scint_dummy" formula="BC-408_scint">     
-    <D unit="1/cm3" value="0.08278"/>          <!-- Average density -->
-    <fraction n="0.0095" ref="G4_H" />    
-    <fraction n="0.9905" ref="G4_C" />
-    
-    <!-- This is the material Geant4 has to stop everything
-    the "traditional way" is as follows: 
-    // this material will kill every tracks that touch it
-    G4Material *Kryptonite = 
-      new G4Material("Kryptonite", density= 0.00000001*mg/cm3, nel=1);
-    Kryptonite->AddElement(Ar, 100.*perCent);-->
-  <material name="Kryptonite_dummy" formula="Kryptonite">
-    <D unit="mg/cm3" value="0.00000001">
-    <fraction n="1.00" ref="G4_Ar">
+    <T unit="K" value="0.3" />               <!-- pg 9 -->
+    <P unit="pascal" value="1.33e-13" />     <!-- 1e-15 Torr in paper pg 15 -->
+    <D unit="1/cm3" value="3e15" />          <!-- pg 10 -->
+    <atom unit="g/mole" value="1.01" />
   </material>
 
-    
+  <!-- Dummy Scintillator material I am using the BC-408 material from http://www.detectors.saint-gobain.com/Plastic-Scintillator.aspx 
+    - this is just so that we have something to work with -->
+
+  <material name="BC-408_scint_dummy" formula="BC-408_scint">
+    <D unit="1/cm3" value="0.08278" />          <!-- Average density -->
+    <fraction n="0.0095" ref="G4_H" />
+    <fraction n="0.9905" ref="G4_C" />
+
+    <!-- This is the material Geant4 has to stop everything the "traditional way" 
+      is as follows: // this material will kill every tracks that touch it G4Material *Kryptonite 
+      = new G4Material("Kryptonite", density= 0.00000001*mg/cm3, nel=1); Kryptonite->AddElement(Ar, 
+      100.*perCent); -->
+    <material name="Kryptonite_dummy" formula="Kryptonite">
+      <D unit="mg/cm3" value="0.00000001">
+        <fraction n="1.00" ref="G4_Ar">
+    </material>
+
+
   </material>
 
 </materials>

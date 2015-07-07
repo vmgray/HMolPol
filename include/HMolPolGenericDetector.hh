@@ -3,7 +3,6 @@
  * \author <b>Assisted By:<\b> Wouter Deconinck
  *
  * \brief <b>Purpose:</b> This is header file for the generic detector.
- *      What it does no one knows
  *
  * \date <b>Date:</b> 06-15-2013
  * \date <b>Modified:</b> 07-06-2013
@@ -57,7 +56,7 @@ class HMolPolGenericDetector : public G4VSensitiveDetector
 
     G4String fVolumeName;   ///< the volume
 
-    HMolPolGenericDetectorHitsCollection *fHitsCollection;     ///< Hit collection
+    HMolPolGenericDetectorHitsCollection* fHitsCollection;     ///< Hit collection
     G4int fHitsCollectionID;                                   ///< Hit collection ID
 
 };

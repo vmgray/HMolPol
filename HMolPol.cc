@@ -1,14 +1,14 @@
 /***********************************************************
-Programmer: Valerie Gray
-Purpose:
+\author <b>Programmer:<\b> Valerie Gray
+\author <b>Assisted By:<\b> Wouter Deconinck
 
-This is the main function for the H moller Geant4 simulation
-it should put everything together...
+\brief <b>Purpose:</b> This is the main function for the Atomic Hydrogen
+    Moller Geant4 simulation or HMolPol it should put everything together...
 
-Entry Conditions:
-Date: 05-15-2013
-Modified: 07-11-2013
-Assisted By: Wouter Deconinck
+\note <b>Entry Conditions:</b> none
+
+\date <b>Date:</b> 05-15-2013
+\date <b>Modified:</b> 04-21-2015
  *********************************************************/
 
 #include <iostream>
@@ -24,6 +24,7 @@ Assisted By: Wouter Deconinck
 #include <G4UIQt.hh>
 
 //all the HMollerPol specific includes
+//all of the HMolPol headers must be included
 #include "HMolPolDetectorConstruction.hh"
 #include "HMolPolPrimaryGeneratorAction.hh"
 #include "HMolPolMessenger.hh"
@@ -36,12 +37,10 @@ Assisted By: Wouter Deconinck
 #endif
 
 /** \defgroup root Variables include in the ROOT file
-     *
      *  This group contains all variables that are included in the ROOT file.
 */
 
 /** \defgroup see References to where things are found, papers and such
-     *
      *  This contains all references in the code to papers and other important
      *  things
 */
@@ -52,7 +51,7 @@ Assisted By: Wouter Deconinck
 // if arguments are passed (argc > 1) we execute the first argument passed
 int main (int argc, char** argv)
 {
-  //Need to put in random seed info... not the remoll way as it is not good
+  //< TODO: Need to put in random seed info... not the remoll way as it is not good
 
   //-------------------------------
   // Initialization of Run manager
@@ -62,10 +61,11 @@ int main (int argc, char** argv)
   G4RunManager* runManager = new G4RunManager;
 
   // Physics we want to use
+  // How much output we want to see - 0 is the most
   G4int verbose = 0;
+
   //physics list factory allows one to use the standard geant4 physics list
   G4PhysListFactory* factory = new G4PhysListFactory;
-
   /// use the FTFP-BERT
   ///(FTFP_BERT
   // - http://geant4.cern.ch/support/proc_mod_catalog/physics_lists/hadronic/FTFP_BERT.html)
@@ -74,48 +74,51 @@ int main (int argc, char** argv)
   /// \note standard EM processes are include in all list
   /// \bug FTFP_bert may be no the right physics list for Mainz energy,
   /// but should be for JLab
+  //< TODO: check to see if these are right and have one for each place
   G4VModularPhysicsList* physlist = factory->GetReferencePhysList("FTFP_BERT");
   physlist->SetVerboseLevel(verbose);
   // give the run manager the physics list
   runManager->SetUserInitialization(physlist);
 
-
   // Analysis (interface with ROOT file)
   HMolPolAnalysis* myHMolPolAnalysis  = new HMolPolAnalysis();
 
-
-  // Detector geometry
+  // Add the Detector geometry
   //pass the geometry of the HMolPol to the Geant4 class G4VUserDetectorConstruction
   G4VUserDetectorConstruction* myHMolPolDetector =
       new HMolPolDetectorConstruction(myHMolPolAnalysis);
   // give the run manager the geometry
   runManager->SetUserInitialization(myHMolPolDetector);
 
-
+  //Add the things that happen at each event
   //give run manager the stuff that is done at every event (write to rootfile)
   HMolPolEventAction* myHMolPolEventAction =
       new HMolPolEventAction(myHMolPolAnalysis);
   runManager->SetUserAction(myHMolPolEventAction);
+
+  // Add the thing that happen for each run (run==a full simulation of \BeamOn n)
   // give the run manager stuff that is done in each run (save rootfile)
   HMolPolRunAction* myHMolPolRunAction =
       new HMolPolRunAction(myHMolPolAnalysis);
   runManager->SetUserAction(myHMolPolRunAction);
 
+  //< TODO: Add in the magnetic field
 
-/// \todo FIX ME!!!!  do something to get the messenger involved
+/// \todo FIX ME!!!!  do something to get the messenger involved But with what?
+  //< what is the point of this part?
 //  HMolPolMess->SetDetCon( ((HMolPolDetectorConstruction *) detector) );
 //  HMolPolMess->SetMagField(
 //      ((HMolPolDetectorConstruction *) detector)->GetGlobalField() );
 
-
-  //beam
+  // Add in the beam - what happen for each initial interaction
+  // give the run manager the beam information
   HMolPolPrimaryGeneratorAction* myHMolPolPrimaryGeneratorAction =
       new HMolPolPrimaryGeneratorAction(myHMolPolAnalysis);
   runManager->SetUserAction(myHMolPolPrimaryGeneratorAction);
 
-
   // add the global messenger - this will talk with all of
-  //the files and the user - pass it whatever it will talk with
+  //the files and the user - Allows for the interaction and changes
+  // in the simulation without going into the code making changes
   HMolPolMessenger* myHMolPolMess = new HMolPolMessenger(
       myHMolPolPrimaryGeneratorAction,
       myHMolPolRunAction,
@@ -126,13 +129,14 @@ int main (int argc, char** argv)
   // Initialize Run manager
   // we can either us this or have /run/initialize staring all out macros...
   // I have taken it our so that different geometries configurations
-  // can be used with ease
+  // can be used with ease, it is better to do this in your macros if you
+  // are using GDML
   //runManager->Initialize();
 
   //----------------
   // Visualization:
   //----------------
-
+  // Start with out a interactive session
   G4UIsession* session = 0;
   if (argc==1)   // Define UI session for interactive mode (no arguments passed).
   {
@@ -154,7 +158,9 @@ int main (int argc, char** argv)
     // Customize the G4UIQt menu-bar with a macro file :
     UI->ApplyCommand("/control/execute gui.mac");
 
+    //start the interactive session
     session->SessionStart();
+    // delete the session
     delete session;
   }
   else           // Batch mode - not using the GUI
@@ -165,6 +171,7 @@ int main (int argc, char** argv)
     //these line will execute a macro without the GUI
     //in GEANT4 a macro is executed when it is passed to the command,
     // /control/execute
+    // you pass the name of the macro and the /control/exicute is added for free :)
     G4String command = "/control/execute ";
     G4String fileName = argv[1];
     UI->ApplyCommand(command+fileName);
@@ -175,12 +182,11 @@ int main (int argc, char** argv)
     delete visManager;
   #endif
 
+  //Now delete all the objects we created,
   //delete the runManager
   delete runManager;
-
   //delete HMolPolAnalysis
   delete myHMolPolAnalysis;
-
   //shoot the messenger
   delete myHMolPolMess;
 

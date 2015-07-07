@@ -7,9 +7,10 @@
  *   the ROOT files
  *
  *   So it must include all the root tree variables
+ * \todo wdc should expand this
  *
  * \date <b>Date:</b> 07-11-2013
- * \date <b>Modified:</b> 08-20-2013
+ * \date <b>Modified:</b> 07-06-2015
  *
  * \note <b>Entry Conditions:</b> none
  *
@@ -45,15 +46,21 @@ class HMolPolAnalysis
     HMolPolAnalysis();             ///< constructor for HMolPolAnalysis class
     virtual ~HMolPolAnalysis();    ///< destructor for HMolPolAnalysis class
 
+    // functions that take care of what happens at the start of end of a run or event
     void BeginOfRun(const G4Run* aRun); ///< begin of run function
     void EndOfRun(const G4Run* aRun);   ///< End of run function
-    void EndOfEvent();        ///< end of Event function
 
-    ///<  Set ROOT file stem or name
+    ///<  Set ROOT file stem
+    ///< RootfileStem is the standard rootfile name, that gets incremented
+    ///< i.e. fRootFileStem = HMolPol then rootfiles are named HMolPol_%d.root
+    ///< %d is an natural number
     void SetRootFileStem(const G4String& stem) { fRootFileStem = stem; }
     ///< Set ROOT file name
+    ///< RootFileName is the name that the user gives a simulation, works for that
+    ///< simulation and is not incremented.
     void SetRootFileName(const G4String& name) { fRootFileName = name; }
 
+    ///< functions to take care of the ROOT file
     ///< Fill the ROOT file
     void FillRootTree() { fRootTree->Fill(); }
     ///< Save the ROOT file
@@ -61,6 +68,7 @@ class HMolPolAnalysis
 
     ///< Function to add a new detector to the ROOT Tree.
     // This is so each detector has its own branch
+    //detectors are stored in a vector, thus the push_back function
     void AddNewDetector(const G4String& name) {
       fDetectorName.push_back(name);
     }
@@ -96,7 +104,9 @@ class HMolPolAnalysis
 
   private:
 
-    HMolPolRunInformation* pUserRunInformation;  ///< the HMolPolRunIOnformation structure
+    HMolPolRunInformation* pUserRunInformation;  ///< the HMolPolRunInformation structure
+    ///< contain the information from GitHub, so the version of the simulation is
+    ///< knowen
 };
 
 #endif /* HMOLPOLANALYSIS_HH_ */

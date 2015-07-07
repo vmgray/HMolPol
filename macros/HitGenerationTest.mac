@@ -29,7 +29,7 @@
 /process/inactivate Cerenkov
 
 #choose name out outpted rootfile
-#/HMolPol/Analysis/RootFileName HMolPol_HitTest_Process_ALL_DATE.root
+#/HMolPol/Analysis/RootFileName HMolPol_HitTest_Process_ALL_02-08-2015.root
 
 #run beam
 #/run/beamOn 4500

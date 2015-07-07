@@ -3,155 +3,110 @@
 <!ENTITY materials SYSTEM "materials.gdml">
 ]>
 
-<gdml xmlns:gdml="http://cern.ch/2001/Schemas/GDML" 
-      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-      xsi:noNamespaceSchemaLocation="schema/gdml.xsd">
-      <!-- include GDML namespace -->
-      <!-- XML Schema instance Namespace -->
-      <!-- GDML Schema Location -->
+<gdml xmlns:gdml="http://cern.ch/2001/Schemas/GDML" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="schema/gdml.xsd">
+  <!-- include GDML namespace -->
+  <!-- XML Schema instance Namespace -->
+  <!-- GDML Schema Location -->
 
-<!--
-/***********************************************************
-Programmer: Valerie Gray
-Purpose:
-
-To define the Hydrogen gas target of the simulation
-
-H gas target
-Al container which is around the H target
-
-Entry Conditions:
-Date:05-17-2013
-Modified: 06-19-2013
-Assisted By: Wouter Deconinck
-*********************************************************/
--->
+  <!-- /*********************************************************** Programmer: Valerie 
+    Gray Purpose: To define the Hydrogen gas target of the simulation H gas target Al 
+    container which is around the H target Entry Conditions: Date:05-17-2013 Modified: 
+    06-19-2013 Assisted By: Wouter Deconinck *********************************************************/ -->
 
   <define>
 
-<!-- NOTICE: all of these values have been pulled out of thin error, they will 
-     have to be changed to be inline with the actual experiment -->
-     
+    <!-- NOTICE: all of these values have been pulled out of thin error, they will 
+      have to be changed to be inline with the actual experiment -->
+
     <!-- Define the constants for this file -->
-    
-    <constant name = "TWOPI" value = "2.*pi"/>
-  
-    <!-- Define the quantities that will be used in this file 
-      This might be wrong and these need to be constants... -->
-    
+
+    <constant name="TWOPI" value="2.*pi" />
+
+    <!-- Define the quantities that will be used in this file This might be wrong 
+      and these need to be constants... -->
+
     <!-- Minimum radius of the Hydrogen Target -->
-    <quantity name="HTarget_MinRadius" 
-      type="length" 
-      value = "0.0" 
-      unit = "m" />
-  
-    <!-- Maximum radius of the Hydrogen target 
-        /// as defined in Moller Polarimetry with Atomic Hydrogen Targets 
-        by E.~Chudakov and V.~Luppov(long)--> 
+    <quantity name="HTarget_MinRadius" type="length" value="0.0" unit="m" />
+
+    <!-- Maximum radius of the Hydrogen target /// as defined in Moller Polarimetry 
+      with Atomic Hydrogen Targets by E.~Chudakov and V.~Luppov(long) -->
     <!-- pg 9 -->
-    <quantity name="HTarget_MaxRadius" 
-      type="length" 
-      value = "2.0"                   
-      unit = "cm" />
-    
-    <!-- Length of the Hydrogen Target 
-        /// as defined in Moller Polarimetry with Atomic Hydrogen Targets 
-        by E.~Chudakov and V.~Luppov(long)-->
+    <quantity name="HTarget_MaxRadius" type="length" value="2.0" unit="cm" />
+
+    <!-- Length of the Hydrogen Target /// as defined in Moller Polarimetry with 
+      Atomic Hydrogen Targets by E.~Chudakov and V.~Luppov(long) -->
     <!-- pg 9 -->
-    <quantity name="HTarget_Z_Length" 
-      type="length" 
-      value = "45"                   
-      unit = "cm" />
-  
+    <quantity name="HTarget_Z_Length" type="length" value="45" unit="cm" />
+
     <!-- Define the starting Phi angle of the Hydrogen target -->
-    <quantity name="HTarget_StartPhi" 
-      type="angle" 
-      value = "0" 
-      unit = "rad"/>
-    
+    <quantity name="HTarget_StartPhi" type="angle" value="0" unit="rad" />
+
     <!-- Define the ending Phi angle of the hydrogen Target -->
-    <quantity name="HTarget_EndPhi" 
-      type="angle" 
-      value = "TWOPI" 
-      unit = "rad"/>
-    
+    <quantity name="HTarget_EndPhi" type="angle" value="TWOPI" unit="rad" />
+
     <!-- The above two values make the target a complete cylinder -->
-    
+
     <!-- Defining the minimum radius of the Al container around the H Target -->
-    <quantity name="HTarget_AlCell_MinRadius" 
-      value = "HTarget_MaxRadius" />
-  
+    <quantity name="HTarget_AlCell_MinRadius" value="HTarget_MaxRadius" />
+
     <!-- Defining the maximum radius of the Al container around the H Target -->
-    <quantity name="HTarget_AlCell_MaxRadius" 
-      type="length" 
-      value = "3.0" 
-      unit = "cm" />
-    
+    <quantity name="HTarget_AlCell_MaxRadius" type="length" value="3.0"
+      unit="cm" />
+
     <!-- define positions of the target in this file -->
-    <position name="HTarget_Position" 
-      x="0.0"
-      y="0.0" 
-      z="0.0" 
-      unit="m"/>
+    <position name="HTarget_Position" x="0.0" y="0.0" z="0.0" unit="m" />
 
   </define>
 
-  <!-- define materials here - this with the ENTITY up top pass the materials 
-      from the materials.gdml file -->
+  <!-- define materials here - this with the ENTITY up top pass the materials from 
+    the materials.gdml file -->
   &materials;
 
   <solids>
 
     <!-- Define the tube of the Hydrogen target -->
-    <tube name="Htarget_tube" 
-      rmin="HTarget_MinRadius" 
-      rmax="HTarget_MaxRadius"
-      z="HTarget_Z_Length" 
-      startphi="HTarget_StartPhi" 
-      deltaphi="HTarget_EndPhi"/> 
-  
+    <tube name="Htarget_tube" rmin="HTarget_MinRadius" rmax="HTarget_MaxRadius"
+      z="HTarget_Z_Length" startphi="HTarget_StartPhi" deltaphi="HTarget_EndPhi" />
+
     <!-- Define the tube of the Al case around the H target -->
-    <tube name="Htarget_AlCase_tube" 
-      rmin="HTarget_AlCell_MinRadius" 
-      rmax="HTarget_AlCell_MaxRadius"
-      z="HTarget_Z_Length" 
-      startphi="HTarget_StartPhi" 
-      deltaphi="HTarget_EndPhi"/>   
+    <tube name="Htarget_AlCase_tube" rmin="HTarget_AlCell_MinRadius" rmax="HTarget_AlCell_MaxRadius"
+      z="HTarget_Z_Length" startphi="HTarget_StartPhi" deltaphi="HTarget_EndPhi" />
 
   </solids>
 
   <structure>
-  <!-- implement the geometry - through logical volumes and physical volumes  -->
+    <!-- implement the geometry - through logical volumes and physical volumes -->
 
     <!-- Define the Target -->
-    <volume name="HTarget"> 
-      <materialref ref="Cold_Atomic_HGas"/>
-      <solidref ref="Htarget_tube"/>
-      <auxiliary auxtype="Color" auxvalue="green"/>
-      <auxiliary auxtype="Alpha" auxvalue="0.3"/>
+    <volume name="HTarget">
+      <materialref ref="Cold_Atomic_HGas" />
+      <solidref ref="Htarget_tube" />
+      <auxiliary auxtype="Color" auxvalue="green" />
+      <auxiliary auxtype="Alpha" auxvalue="0.3" />
     </volume>
-  
+
     <!-- create the logical volume -->
     <volume name="logicalHTarget">
-      <materialref ref="G4_Al"/>
-      <solidref ref="Htarget_AlCase_tube"/>
-      
+      <materialref ref="G4_Al" />
+      <solidref ref="Htarget_AlCase_tube" />
+
       <!-- Define the physical volume -->
       <physvol>
-        <volumeref ref="HTarget"/>
-        <positionref ref="HTarget_Position"/>
+        <volumeref ref="HTarget" />
+        <positionref ref="HTarget_Position" />
       </physvol>
-      
-      <auxiliary auxtype="Color" auxvalue="gray"/>
+
+      <auxiliary auxtype="Color" auxvalue="gray" />
     </volume>
 
   </structure>
 
-  <!-- I am not sure what all this does, sets up something for the 
-       implementation to the World -->
+  <!-- I am not sure what all this does, sets up something for the implementation 
+    to the World -->
 
   <setup name="HTargetSetup" version="1.0">
-    <world ref="logicalHTarget"/>
+    <world ref="logicalHTarget" />
   </setup>
 
 </gdml>

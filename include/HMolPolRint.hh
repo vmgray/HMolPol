@@ -3,23 +3,22 @@
  * \author <b>Assisted By:<\b> Wouter Deconinck
  *
  * \brief <b>Purpose:</b> This is header file for the Rint class
+ *      - The HMolPolRint class implements a ROOT command line interface.
+ *      - It inherits from the ROOT interactive C++ interpreter TRint.
+ *      All functionality available in ROOT is available in this interface.
+ *      In particular, all histograms that are defined in memory or in a
+ *      ROOT file are accessible under the path "/root/ROOT memory",
+ *      while they are being filled.
+ *      - All HMolPol specific class structures are available in an interactive mode.
  *
  *  \class HMolPolRint
- *  \ingroup
+ *  \ingroup I have no idea what this is for WDC: Help
  *  \brief A ROOT command line interface
  *
- * The HMolPolRint class implements a ROOT command line interface.  It inherits
- * from the ROOT interactive C++ interpreter TRint.  All functionality available
- * in ROOT is available in this interface.  In particular, all histograms that
- * are defined in memory or in a ROOT file are accessible under the path
- * "/root/ROOT memory", while they are being filled.  All HMolPol specific class
- * structures are available in an interactive mode.
- *
  * \date <b>Date:</b> 07-16-2013
- * \date <b>Modified:</b> 07-26-2013
+ * \date <b>Modified:</b> 04-20-2015
  *
  * \note <b>Entry Conditions:</b> none
- *
 ********************************************/
 
 #ifndef HMOLPOLRINT_HH_
