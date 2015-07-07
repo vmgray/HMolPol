@@ -75,6 +75,7 @@ class HMolPolEventUnits : public TObject
     const Double_t Tesla;     /// \ingroup root Units of tesla
 
     // define a new Class known to ROOT? Huh?
+    /// todo: wdc, what is this really about?
     ClassDef(HMolPolEventUnits,1)
 
   private:
