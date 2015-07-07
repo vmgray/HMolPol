@@ -165,6 +165,22 @@ G4VPhysicalVolume* HMolPolDetectorConstruction::Construct()
           << ", value: "   << (*vit).value << std::endl;
 
       // /todo TODO: We should get the visibility attributes before the first
+
+      // get visibility attributes (this is just the standard Geant4 ones)
+      //(this is not the ones from the in the GDML file - those we are changing)
+      const G4VisAttributes* visAttribute_original =
+          ((*iter).first)->GetVisAttributes();
+      //if there are original visiablity attributes get them
+      if (visAttribute_original)
+        color = visAttribute_original->GetColor();
+
+      //create new visibility attributes with the old color
+      //or the orignal geant4 ones - this will be where the
+      //the new ones we define will be stored, and then this
+      //will be saved and attributed to the detector
+      G4VisAttributes visAttribute_new(color);
+
+
       // if statement, modify them in the if statements, and write them
       // to the volume after the last if statement.
 
@@ -183,23 +199,28 @@ G4VPhysicalVolume* HMolPolDetectorConstruction::Construct()
         // definition & initialization
         G4Color color(1.0,1.0,1.0);
 
-        // get old color (this is just the standard Geant4 color)
-        //(this is not the color in the GDML file)
-        const G4VisAttributes* visAttribute_old =
-            ((*iter).first)->GetVisAttributes();
-        if (visAttribute_old)
-          color = visAttribute_old->GetColor();
+/*
+ * TODO REMOVE when global viablity works
+//        // get old color (this is just the standard Geant4 color)
+//        //(this is not the color in the GDML file)
+//        const G4VisAttributes* visAttribute_original =
+//            ((*iter).first)->GetVisAttributes();
+        if (visAttribute_original)
+          color = visAttribute_original->GetColor();
 
         // create new visibility attributes with the old color
         G4VisAttributes visAttribute_new(color);
-        if ((*vit).value == "true")  // if we want the object to be seen
+ */       if ((*vit).value == "true")  // if we want the object to be seen
           visAttribute_new.SetVisibility(true);
         if ((*vit).value == "false")  // if we want to hide the object
           visAttribute_new.SetVisibility(false);
         if ((*vit).value == "wireframe") // if we want wireframe
           visAttribute_new.SetForceWireframe(true);
+/*
+ * TODO REMOVE when global visablity works
         // set new visibility attributes
         ((*iter).first)->SetVisAttributes(visAttribute_new);
+*/
       }
 
       // Support for the auxiliary tag "Color" that can be any of black,
@@ -209,10 +230,13 @@ G4VPhysicalVolume* HMolPolDetectorConstruction::Construct()
         // definition & initialization
         G4Color color(1.0,1.0,1.0);
 
+/*
+ * TODO REMOVE when global viablity works
         // get old visibility attributes so that all previously set properties
         // are still going to be valid
-        G4VisAttributes* visAttribute =
+        G4VisAttributes* visAttribute_original =
             ((*iter).first)->GetVisAttributes();
+*/
 
         // get requested color, if it exists
         if (G4Color::GetColour((*vit).value, color))
@@ -221,8 +245,11 @@ G4VPhysicalVolume* HMolPolDetectorConstruction::Construct()
           G4cout << "Setting color to " << (*vit).value << "." << G4endl;
           // change the color in the visibility attributes
           visAttribute->SetColor(color);
+/*
+ * TODO remove when global visablitly works
           // saves this color to the VisAttributes of the volume
           ((*iter).first)->SetVisAttributes(visAttribute);
+*/
         } else
         {
           //if color not in the above list
@@ -237,13 +264,16 @@ G4VPhysicalVolume* HMolPolDetectorConstruction::Construct()
         // definition & initialization
         G4Colour colour(1.0,1.0,1.0);
 
+/*
+ * REMOVE when global viablity works
         // get old visibility attributes so that all previously set properties
         // are still going to be valid
         G4VisAttributes* visAttribute =
             ((*iter).first)->GetVisAttributes();
+*/
 
-        if (visAttribute)
-          colour = visAttribute->GetColour();
+        if (visAttribute_original)
+          colour = visAttribute_original->GetColour();
         // create new color with alpha channel (// \bug TODO input not checked?? Wouter?)
         // those color is the same as the color set by color (above)
         G4Colour colour_new(
@@ -252,12 +282,20 @@ G4VPhysicalVolume* HMolPolDetectorConstruction::Construct()
             colour.GetBlue(),
             std::atof((*vit).value.c_str())); //this is the alpha value
 
-        // create new visibility attributes with the Alpha included
+        // create new visibility attributes with the Alphaincluded
         G4VisAttributes visAttribute_new(colour_new);
 
+/*
+ * Remove when global visablity works
         // saves the alpha value to the visibility attributes for this volume
         ((*iter).first)->SetVisAttributes(visAttribute_new);
+*/
       }
+
+      //TODO Does this work??
+      // saves the alpha value to the visibility attributes for this volume
+              ((*iter).first)->SetVisAttributes(visAttribute_new);
+
 
       // Support for the auxiliary tag "SensDet" to set sensitive detector type
       if ((*vit).type == "SensDet")
