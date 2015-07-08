@@ -25,12 +25,12 @@
 
 //all the HMollerPol specific includes
 //all of the HMolPol headers must be included
-#include "HMolPolDetectorConstruction.hh"
-#include "HMolPolPrimaryGeneratorAction.hh"
-#include "HMolPolMessenger.hh"
 #include "HMolPolAnalysis.hh"
+#include "HMolPolDetectorConstruction.hh"
 #include "HMolPolEventAction.hh"
 #include "HMolPolRunAction.hh"
+#include "HMolPolPrimaryGeneratorAction.hh"
+#include "HMolPolMessenger.hh"
 
 #ifdef G4VIS_USE
 #include <G4VisExecutive.hh>

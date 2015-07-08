@@ -15,7 +15,7 @@
 ********************************************/
 
 // geant4 includes
-#include <G4SystemOfUnits.hh>
+#include <CLHEP/Units/SystemOfUnits.h>
 
 //HMolPol includes
 #include "HMolPolEventUnits.hh"

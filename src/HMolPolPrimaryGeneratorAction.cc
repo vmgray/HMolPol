@@ -25,11 +25,13 @@
 #include <G4ParticleGun.hh>
 #include <G4ThreeVector.hh>
 #include <Randomize.hh>
+#include <CLHEP/Units/SystemOfUnits.h>
 
 //HMolPol includes
 #include "HMolPolPrimaryGeneratorAction.hh"
 #include "HMolPolAnalysis.hh"
 #include "HMolPolEventPrimary.hh"
+//#include "HMolPolSystemOfUnits.hh"
 
 /********************************************
  * Programmer: Valerie Gray
@@ -48,9 +50,9 @@
   /// \todo have someone (Wouter) help me figure what this all does
 HMolPolPrimaryGeneratorAction::HMolPolPrimaryGeneratorAction(HMolPolAnalysis* a)
 : fAnalysis(a),
-  fRasterX(4.0*mm),
-  fRasterY(4.0*mm),
-  fBeamE(200*MeV)  // initialization
+  fRasterX(4.0*CLHEP::mm),
+  fRasterY(4.0*CLHEP::mm),
+  fBeamE(200*CLHEP::MeV)  // initialization
 {
   //set number of particles getting fired at a time
   G4int NubofParticles = 1;
@@ -59,8 +61,8 @@ HMolPolPrimaryGeneratorAction::HMolPolPrimaryGeneratorAction(HMolPolAnalysis* a)
   fParticleGun = new G4ParticleGun(NubofParticles);
 
   /// set the min and max theta angles in the CM frame
-  fTheta_com_min = 0.0 * degree;
-  fTheta_com_max = 180.0 * degree;
+  fTheta_com_min = 0.0 * CLHEP::degree;
+  fTheta_com_max = 180.0 * CLHEP::degree;
 
   //set particle type
   // \todo *ADD* in functionality for other particles as incoming ones later
@@ -221,8 +223,8 @@ void HMolPolPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
         (interaction_vertex_y_max - interaction_vertex_y_min) * G4UniformRand();
 
   // determine z position of event
-  G4double interaction_vertex_z_min = -22.5 * cm; //half length of H target - *MAKE GLOBAL*
-  G4double interaction_vertex_z_max = +22.5 * cm; //half length of H target - *MAKE GLOBAL*
+  G4double interaction_vertex_z_min = -22.5 * CLHEP::cm; //half length of H target - *MAKE GLOBAL*
+  G4double interaction_vertex_z_max = +22.5 * CLHEP::cm; //half length of H target - *MAKE GLOBAL*
   G4double interaction_vertex_z = interaction_vertex_z_min +
         (interaction_vertex_z_max - interaction_vertex_z_min) * G4UniformRand();
   fParticleGun->SetParticlePosition(
@@ -272,7 +274,8 @@ void HMolPolPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 
 
   // Store cross section in ROOT file
-  /// \todo actually write the cross section
+
+  //Store the interaction point info to the ROOT file
   fAnalysis->fPrimary->fInteractionVertexPositionX
     = interaction_vertex_x;
   fAnalysis->fPrimary->fInteractionVertexPositionY
@@ -291,11 +294,17 @@ void HMolPolPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
     = interaction_vertex_mom_y2;
   fAnalysis->fPrimary->fInteractionVertexMomentumZ
     = interaction_vertex_mom_z2;
+
+  //Store the scattering angles for the interaction
+  //in CM and Lab frame in ROOT file
   fAnalysis->fPrimary->fThetaCenterOfMass = theta_com;
   fAnalysis->fPrimary->fPhiCenterOfMass = phi_com;
   fAnalysis->fPrimary->fThetaLab1 = theta_lab1;
   fAnalysis->fPrimary->fThetaLab2 = theta_lab2;
   fAnalysis->fPrimary->fPhiLab = phi_com;
+
+  //store cross section info in the ROOT file
+  /// \todo actually write the cross section
   fAnalysis->fPrimary->fCrossSection = D_sigma;
 
 
