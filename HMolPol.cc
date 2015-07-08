@@ -182,13 +182,23 @@ int main (int argc, char** argv)
     delete visManager;
   #endif
 
-  //Now delete all the objects we created,
-  //delete the runManager
-  delete runManager;
-  //delete HMolPolAnalysis
-  delete myHMolPolAnalysis;
+  //Now delete all the objects we created, must be done in the opposite order as
+  //they were created
+
   //shoot the messenger
   delete myHMolPolMess;
+  //delete  HMolPolPrimaryGeneratorAction
+  delete myHMolPolPrimaryGeneratorAction;
+  //delete the HMolPolRunAction
+  delete myHMolPolRunAction;
+  //delete HMolPolEventAction
+  delete myHMolPolEventAction;
+  //delete HMolPolDetector
+  delete myHMolPolDetector;
+  //delete HMolPolAnalysis
+  delete myHMolPolAnalysis;
+  //delete the runManager
+  delete runManager;
 
   //now that everything has ran and is deleted - the simulation can be closed
   return 0;
