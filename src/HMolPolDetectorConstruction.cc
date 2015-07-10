@@ -122,17 +122,18 @@ G4VPhysicalVolume* HMolPolDetectorConstruction::Construct()
   //and make it the "World"
   worldVolume = fGDMLParser.GetWorldVolume();
 
-  //==========================
-  // List auxiliary info
-  // this includes:
-  //    color
-  //    alpha (or opaqueness)
-  //    detector type - if it is a sensitive detector
-  //==========================
+  /*****************
+   * Read in the auxiliary information.
+   *
+   * List auxiliary info includes:
+   *    color
+   *    alpha (or opaqueness)
+   *    detector type - if it is a sensitive detector
+  *****************/
 
   // define and get auxiliary map  from the Parser
   // which has all the above info in it - it is already there
-  //from reading the files, just grabing it from the parser
+  //from reading the files, just grabbing it from the parser
   const G4GDMLAuxMapType* auxmap = fGDMLParser.GetAuxMap();
   //Aux map is a map from Logical Volume to list of properties
 
@@ -148,9 +149,9 @@ G4VPhysicalVolume* HMolPolDetectorConstruction::Construct()
   // corresponding value id
   for(G4GDMLAuxMapType::const_iterator
       iter  = auxmap->begin();
-      iter != auxmap->end(); iter++)
+      iter != auxmap->end(); iter++) //This is over the volumes
   {
-    //Start with the the the volume (fist component of the map)
+    //Start with the the the volume (first component of the map)
     G4cout << "Volume " << ((*iter).first)->GetName()
                     << " has the following list of auxiliary information: "<< G4endl;
 
@@ -159,7 +160,7 @@ G4VPhysicalVolume* HMolPolDetectorConstruction::Construct()
     //(*vit) is the object corresponding to (type,value)
     for (G4GDMLAuxListType::const_iterator
         vit  = (*iter).second.begin();
-        vit != (*iter).second.end(); vit++)
+        vit != (*iter).second.end(); vit++) //This is over the attributes for said Volume
     {
       G4cout << "--> Type: " << (*vit).type
           << ", value: "   << (*vit).value << std::endl;
@@ -170,6 +171,8 @@ G4VPhysicalVolume* HMolPolDetectorConstruction::Construct()
       //(this is not the ones from the in the GDML file - those we are changing)
       const G4VisAttributes* visAttribute_original =
           ((*iter).first)->GetVisAttributes();
+      //define a color
+      G4Color color;
       //if there are original visiablity attributes get them
       if (visAttribute_original)
         color = visAttribute_original->GetColor();
@@ -179,7 +182,6 @@ G4VPhysicalVolume* HMolPolDetectorConstruction::Construct()
       //the new ones we define will be stored, and then this
       //will be saved and attributed to the detector
       G4VisAttributes visAttribute_new(color);
-
 
       // if statement, modify them in the if statements, and write them
       // to the volume after the last if statement.
@@ -244,7 +246,7 @@ G4VPhysicalVolume* HMolPolDetectorConstruction::Construct()
           //write out the color we are setting the volume too
           G4cout << "Setting color to " << (*vit).value << "." << G4endl;
           // change the color in the visibility attributes
-          visAttribute->SetColor(color);
+          visAttribute_new.SetColor(color);
 /*
  * TODO remove when global visablitly works
           // saves this color to the VisAttributes of the volume
@@ -352,9 +354,9 @@ G4VPhysicalVolume* HMolPolDetectorConstruction::Construct()
   }
   G4cout << G4endl << G4endl;
 
-  //==========================
-  // Add in the Magnetic field to world volume
-  //==========================
+  /*****************
+   * Add in the Magnetic field to world volume
+  *****************/
 
   /// TODO \bug this is for the *simple* magnetic field - need to be updated to
   /// something realistic and that might effect the following code
