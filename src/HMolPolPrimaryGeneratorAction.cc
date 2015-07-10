@@ -122,7 +122,7 @@ void HMolPolPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
   //beam energy
   double beamE = fBeamE;
   // mass of Electron
-  double m_e = electron_mass_c2;
+  double m_e = electron_mass_c2; // MeV
   double Ecm = sqrt(2*pow(m_e,2) + 2*m_e*beamE); //Energy in the CM frame
   double Pcm = sqrt(pow(Ecm,2) - 4*pow(m_e,2));  // mometum in the CM frame
 
