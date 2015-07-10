@@ -137,7 +137,7 @@ void HMolPolGenericDetectorHit::Draw()
   if (pVVisManager) {
     // Create a little filled circle at the position of the hit
     G4Circle circle(fPosition);
-    circle.SetWorldSize(5.0*mm);
+    circle.SetWorldSize(5.0*CLHEP::mm);
     circle.SetFillStyle(G4Circle::filled);
     // Create the visibility attributes
     G4Color color(1.,1.,0.);
@@ -168,8 +168,8 @@ void HMolPolGenericDetectorHit::Print()
 {
   G4cout << "Hit: fDetectorID[" << fDetectorID << "], fTrackID[" << fTrackID << "]: "
       << " --- position (x,y,z) [cm] "
-      << fPosition.x()/cm << ", "
-      << fPosition.y()/cm << ", "
-      << fPosition.z()/cm << ", "
+      << fPosition.x()/CLHEP::cm << ", "
+      << fPosition.y()/CLHEP::cm << ", "
+      << fPosition.z()/CLHEP::cm << ", "
       << G4endl;
 }
