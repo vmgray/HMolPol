@@ -44,15 +44,15 @@
 #
 # Create style
 #
-/vis/modeling/trajectories/create/drawByParticleID QweakStyle
-/vis/modeling/trajectories/QweakStyle/set e- red
-/vis/modeling/trajectories/QweakStyle/set e+ blue
-/vis/modeling/trajectories/QweakStyle/set gamma green
-/vis/modeling/trajectories/QweakStyle/set neutron white
-/vis/modeling/trajectories/QweakStyle/set opticalphoton yellow
-/vis/modeling/trajectories/QweakStyle/set proton magenta
+/vis/modeling/trajectories/create/drawByParticleID HMolPolStyle
+/vis/modeling/trajectories/HMolPolStyle/set e- red
+/vis/modeling/trajectories/HMolPolStyle/set e+ blue
+/vis/modeling/trajectories/HMolPolStyle/set gamma green
+/vis/modeling/trajectories/HMolPolStyle/set neutron white
+/vis/modeling/trajectories/HMolPolStyle/set opticalphoton yellow
+/vis/modeling/trajectories/HMolPolStyle/set proton magenta
 #
-/vis/modeling/trajectories/select QweakStyle
+/vis/modeling/trajectories/select HMolPolStyle
 
 #
 # Event action
