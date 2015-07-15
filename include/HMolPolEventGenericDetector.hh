@@ -6,7 +6,7 @@
  *      HMolPolGenericDetectorEvent class.
  *
  * \date <b>Date:</b> 07-19-2013
- * \date <b>Modified:</b> 08-26-2013
+ * \date <b>Modified:</b> 07-15-2015
  *
  * \note <b>Entry Conditions:</b> none
  *
@@ -33,6 +33,9 @@ class HMolPolEventGenericDetector: public TObject {
     /// HMolPolEventGenericDetector
 
     std::vector<HMolPolEventGenericDetectorHit> fHits; ///< vector of the Hits
+
+    //define a class for ROOT
+    ClassDef(HMolPolEventGenericDetector,1)
 };
 
 #endif /* HMOLPOLGENERICDETECTOREVENT_HH_ */
