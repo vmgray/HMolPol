@@ -1,8 +1,15 @@
-<!-- /*********************************************************** Programmer: Valerie 
-  Gray Purpose: To define the materials that will be used in this simulation These 
+<!-- /*********************************************************** 
+  Programmer: Valerie Gray 
+  
+  Purpose: To define the materials that will be used in this simulation These 
   will only be the non-NIST variables materials, the NIST variables are defined in 
-  the typical Geant4 way in the HMollerPolDetectorConstrution.cc file Entry Conditions: 
-  none Date: 05-21-2013 Modified: Assisted By: ********************************************************* -->
+  the typical Geant4 way in the HMollerPolDetectorConstrution.cc file
+  
+  Entry Conditions: none 
+  Date: 05-21-2013
+  Modified: 07-15-2015
+  Assisted By:
+  ********************************************************* -->
 
 <materials>
 
@@ -25,17 +32,16 @@
     <D unit="1/cm3" value="0.08278" />          <!-- Average density -->
     <fraction n="0.0095" ref="G4_H" />
     <fraction n="0.9905" ref="G4_C" />
-
-    <!-- This is the material Geant4 has to stop everything the "traditional way" 
-      is as follows: // this material will kill every tracks that touch it G4Material *Kryptonite 
-      = new G4Material("Kryptonite", density= 0.00000001*mg/cm3, nel=1); Kryptonite->AddElement(Ar, 
-      100.*perCent); -->
-    <material name="Kryptonite_dummy" formula="Kryptonite">
-      <D unit="mg/cm3" value="0.00000001">
-        <fraction n="1.00" ref="G4_Ar">
-    </material>
-
-
   </material>
+
+  <!-- This is the material Geant4 has to stop everything the "traditional way" is 
+    as follows: // this material will kill every tracks that touch it G4Material *Kryptonite 
+    = new G4Material("Kryptonite", density= 0.00000001*mg/cm3, nel=1); Kryptonite->AddElement(Ar, 
+    100.*perCent); -->
+  <material name="Kryptonite_dummy" formula="Kryptonite">
+    <D unit="mg/cm3" value="0.00000001" />
+    <fraction n="1.00" ref="G4_Ar" />
+  </material>
+
 
 </materials>
