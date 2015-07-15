@@ -8,7 +8,7 @@
  *      Sets up the variable for the ROOT tree
  *
  * \date <b>Date:</b> 07-19-2013
- * \date <b>Modified:</b> 08-26-2013
+ * \date <b>Modified:</b> 07-14-2015
  *
  * \note <b>Entry Conditions:</b> none
  *
@@ -40,6 +40,8 @@ class HMolPolEventGenericDetectorHit: public TObject {
     Double_t fTotalEnergy;      ///< total energy of the track
     Double_t fKineticEnergy;    ///< Kinetic energy of the track
 
+    //define a class for ROOT
+    ClassDef(HMolPolEventGenericDetectorHit,1)
 };
 
 #endif /* HMOLPOLEVENTGENERICDETECTORHIT_HH_ */
