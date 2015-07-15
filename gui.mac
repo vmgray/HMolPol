@@ -7,19 +7,21 @@
 #
 #Entry Conditions:
 #Date:06-19-2013
-#Modified: 
+#Modified: 07-13-2015
 #Assisted By: Qweak
 #*********************************************************/
 
 # This file permits to customize, with commands,
 # the menu bar of the G4UIXm, G4UIWin32 sessions.
 # It has no effect with G4UIterminal.
-#
+
+
 # File :
 /gui/addMenu   file File
 /gui/addButton file Initialize "/run/initialize"
 /gui/addButton file Exit "exit"
-#
+
+
 # Run menu :
 /gui/addMenu   run Run
 /gui/addButton run "beamOn 1"    "/run/beamOn 1"
@@ -35,14 +37,17 @@
 /gui/addButton run "beamOn 1000" "/run/beamOn 1000"
 /gui/addButton run "beamOn 2000" "/run/beamOn 2000"
 
-#
+
 # Viewer menu :
 /gui/addMenu   viewer Viewer
+#
+# the only viewer in HMolPol is the Qt viewer
 #/gui/addButton viewer "My viewer"            "/control/execute vis/myVis.mac"
 #/gui/addButton viewer "OIX viewer"           "/control/execute vis/OIX.mac"
 #/gui/addButton viewer "X viewer"             "/control/execute vis/X.mac"
+#
 /gui/addButton viewer "Qt viewer"            "/control/execute vis/Qt.mac"
-/gui/addButton viewer "Set style solid"      "/vis/viewer/set/style solid"
+/gui/addButton viewer "Set style solid"      "/vis/viewer/set/style surface"
 /gui/addButton viewer "Set style wire"       "/vis/viewer/set/style wire"
 /gui/addButton viewer "Hide tracks behind objects" "/vis/viewer/set/hiddenMarker true"
 /gui/addButton viewer "Show tracks behind objects" "/vis/viewer/set/hiddenMarker false"
@@ -54,7 +59,7 @@
 /gui/addButton viewer "Update viewer"        "/vis/viewer/update"
 /gui/addButton viewer "Update scene"         "/vis/scene/notifyHandlers"
 /gui/addButton viewer "Reset scene"          "/control/execute vis/vis.mac"
-#
+
 
 # Beam menu :
 /gui/addMenu   beam Beam
@@ -62,5 +67,4 @@
 /gui/addButton beam "Set JLab Low Beam Energy - 2GeV"  "/HMolPol/Beam/SetBeamEnergy 2 GeV"
 /gui/addButton beam "Set JLab High Beam Energy - 11GeV"  "/HMolPol/Beam/SetBeamEnergy 11 GeV"
 
-
-#/
+#/gui
