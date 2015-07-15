@@ -8,7 +8,7 @@
 \note <b>Entry Conditions:</b> none
 
 \date <b>Date:</b> 05-15-2013
-\date <b>Modified:</b> 04-21-2015
+\date <b>Modified:</b> 07-15-2015
  *********************************************************/
 
 #include <iostream>
@@ -36,6 +36,9 @@
 #include <G4VisExecutive.hh>
 #endif
 
+///< TODO Doxygen doesn't work at all. This needs to get fixed
+///< and then comments in that form and README and mainpage.dox
+
 /** \defgroup root Variables include in the ROOT file
      *  This group contains all variables that are included in the ROOT file.
 */
@@ -45,18 +48,20 @@
      *  things
 */
 
-// argc is the number of arguments passed (including the executable name)
-// argv is a vector with all arguments
-// if no arguments are passed (argc == 1) we only create a Qt GUI session
-// if arguments are passed (argc > 1) we execute the first argument passed
+/*******
+ * argc is the number of arguments passed (including the executable name)
+ * argv is a vector with all arguments
+ * if no arguments are passed (argc == 1) we only create a Qt GUI session
+ * if arguments are passed (argc > 1) we execute the first argument passed
+*******/
 int main (int argc, char** argv)
 {
   //< TODO: Need to put in random seed info... not the remoll way as it is not good
 
-  //-------------------------------
-  // Initialization of Run manager
-  // This is need so that all the "events" are looped through in a run
-  //-------------------------------
+  /**********
+   * Initialization of Run manager
+   * This is need so that all the "events" are looped through in a run
+  ***********/
   G4cout << "RunManager construction starting...." << G4endl;
   G4RunManager* runManager = new G4RunManager;
 
@@ -66,15 +71,17 @@ int main (int argc, char** argv)
 
   //physics list factory allows one to use the standard geant4 physics list
   G4PhysListFactory* factory = new G4PhysListFactory;
-  /// use the FTFP-BERT
-  ///(FTFP_BERT
-  // - http://geant4.cern.ch/support/proc_mod_catalog/physics_lists/hadronic/FTFP_BERT.html)
-  ///(FTFP - http://geant4.cern.ch/support/proc_mod_catalog/physics_lists/hadronic/FTFP.html)
-  /// \note physics list - FTRP-BERT is replacing the LHEP physics list
-  /// \note standard EM processes are include in all list
-  /// \bug FTFP_bert may be no the right physics list for Mainz energy,
-  /// but should be for JLab
-  //< TODO: check to see if these are right and have one for each place
+  /*********
+   *  use the FTFP-BERT
+   * (FTFP_BERT
+   * - http://geant4.cern.ch/support/proc_mod_catalog/physics_lists/hadronic/FTFP_BERT.html)
+   * (FTFP - http://geant4.cern.ch/support/proc_mod_catalog/physics_lists/hadronic/FTFP.html)
+   *  \note physics list - FTRP-BERT is replacing the LHEP physics list
+   *  \note standard EM processes are include in all list
+   *  \bug FTFP_bert may be no the right physics list for Mainz energy,
+   *  but should be for JLab
+   *  \TODO: check to see if these are right and have one for each place
+  *********/
   G4VModularPhysicsList* physlist = factory->GetReferencePhysList("FTFP_BERT");
   physlist->SetVerboseLevel(verbose);
   // give the run manager the physics list
@@ -82,6 +89,8 @@ int main (int argc, char** argv)
 
   // Analysis (interface with ROOT file)
   HMolPolAnalysis* myHMolPolAnalysis  = new HMolPolAnalysis();
+
+  //< TODO WDC: what is the difference in SetUserInitialization and SetUserAction
 
   // Add the Detector geometry
   //pass the geometry of the HMolPol to the Geant4 class G4VUserDetectorConstruction
@@ -119,23 +128,25 @@ int main (int argc, char** argv)
   // add the global messenger - this will talk with all of
   //the files and the user - Allows for the interaction and changes
   // in the simulation without going into the code making changes
+  // /todo WDC: Why is this not added to the run manager?
   HMolPolMessenger* myHMolPolMess = new HMolPolMessenger(
       myHMolPolPrimaryGeneratorAction,
       myHMolPolRunAction,
       myHMolPolEventAction,
       myHMolPolAnalysis);
 
-
-  // Initialize Run manager
-  // we can either us this or have /run/initialize staring all out macros...
-  // I have taken it our so that different geometries configurations
-  // can be used with ease, it is better to do this in your macros if you
-  // are using GDML
+  /*******
+   * Initialize Run manager
+   * we can either us this or have /run/initialize staring all out macros...
+   * I have taken it our so that different geometries configurations
+   * can be used with ease, it is better to do this in your macros if you
+   * are using GDML
+  ********/
   //runManager->Initialize();
 
-  //----------------
-  // Visualization:
-  //----------------
+  /*******
+   *  Visualization:
+  *******/
   // Start with out a interactive session
   G4UIsession* session = 0;
   if (argc==1)   // Define UI session for interactive mode (no arguments passed).
@@ -146,6 +157,18 @@ int main (int argc, char** argv)
   #ifdef G4VIS_USE
     //this is the initializing the visualization manager
     G4VisManager* visManager = new G4VisExecutive;
+    /*******
+     * Simple graded message scheme - give first letter or a digit:
+     * 0) quiet,         // Nothing is printed.
+     * 1) startup,       // Startup and endup messages are printed...
+     * 2) errors,        // ...and errors...
+     * 3) warnings,      // ...and warnings...
+     * 4) confirmations, // ...and confirming messages...
+     * 5) parameters,    // ...and parameters of scenes and views...
+     * 6) all            // ...and everything available.
+    ********/
+    //visManager -> SetVerboseLevel (1);
+
     visManager ->Initialize();
   #endif
 
@@ -154,7 +177,6 @@ int main (int argc, char** argv)
 
   if (session)   // Define UI session for interactive mode.
   {
-
     // Customize the G4UIQt menu-bar with a macro file :
     UI->ApplyCommand("/control/execute gui.mac");
 
@@ -171,7 +193,7 @@ int main (int argc, char** argv)
     //these line will execute a macro without the GUI
     //in GEANT4 a macro is executed when it is passed to the command,
     // /control/execute
-    // you pass the name of the macro and the /control/exicute is added for free :)
+    // you pass the name of the macro and the /control/execute is added for free :)
     G4String command = "/control/execute ";
     G4String fileName = argv[1];
     UI->ApplyCommand(command+fileName);
@@ -187,18 +209,23 @@ int main (int argc, char** argv)
 
   //shoot the messenger
   delete myHMolPolMess;
-  //delete  HMolPolPrimaryGeneratorAction
-  delete myHMolPolPrimaryGeneratorAction;
-  //delete the HMolPolRunAction
-  delete myHMolPolRunAction;
-  //delete HMolPolEventAction
-  delete myHMolPolEventAction;
-  //delete HMolPolDetector
-  delete myHMolPolDetector;
   //delete HMolPolAnalysis
   delete myHMolPolAnalysis;
   //delete the runManager
   delete runManager;
+ /******
+ * Don't need to delete as deleting the run manager does this
+ * //delete HMolPolEventAction
+ * delete myHMolPolEventAction;
+ * //delete HMolPolDetector
+ * delete myHMolPolDetector;
+ * //delete the physics list
+ * delete physlist;
+ * //delete  HMolPolPrimaryGeneratorAction
+ * delete myHMolPolPrimaryGeneratorAction;
+ * //delete the HMolPolRunAction
+ * delete myHMolPolRunAction;
+ ********/
 
   //now that everything has ran and is deleted - the simulation can be closed
   return 0;
