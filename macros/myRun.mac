@@ -11,13 +11,13 @@
 /run/initialize
 
 #start the viewer
-#/control/execute vis/Qt.mac
+/control/execute vis/Qt.mac
 
 #set viewer to solid
-#/vis/viewer/set/style solid
+#/vis/viewer/set/style surface
 
 #set viewer to wire
-#/vis/viewer/set/style wire
+#/vis/viewer/set/style wireframe
 
 # blah blah a lot
 #/control/verbose 1
@@ -26,11 +26,11 @@
 
 # This turns off processes for all particles
 #/process/inactivate msc
-/process/inactivate eBrem
-/process/inactivate compt
+#/process/inactivate eBrem
+#/process/inactivate compt
 #/process/inactivate eIoni
-/process/inactivate phot
-/process/inactivate Cerenkov
+#/process/inactivate phot
+#/process/inactivate Cerenkov
 
 #choose name out outpted rootfile
 #/HMolPol/Analysis/RootFileName HMolPol_DummyOnly_theDetector.root
