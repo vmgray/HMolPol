@@ -6,7 +6,7 @@
  *      detector construction, which makes all the detectors
  *
  * \date <b>Date:</b> 06-15-2013
- * \date <b>Modified:</b> 07-06-2013
+ * \date <b>Modified:</b> 07-14-2013
  *
  * \note <b>Entry Conditions:</b> none
  *
@@ -26,7 +26,7 @@ class HMolPolDetectorConstruction: public G4VUserDetectorConstruction
 
     /// GDML parser object included in the
     /// detector construction class
-    G4GDMLParser fGDMLParser;
+    G4GDMLParser* fGDMLParser;
 
   public:
 
@@ -34,10 +34,13 @@ class HMolPolDetectorConstruction: public G4VUserDetectorConstruction
     HMolPolDetectorConstruction(HMolPolAnalysis* analysis)
     {
       fAnalysis = analysis;
-      fGDMLParser = 0;
+      fGDMLParser = new G4GDMLParser();
     };
     /// Destructor of the Detector construction
-    virtual ~HMolPolDetectorConstruction() { };
+    virtual ~HMolPolDetectorConstruction()
+    {
+      delete fGDMLParser;
+    };
 
   public:
 
