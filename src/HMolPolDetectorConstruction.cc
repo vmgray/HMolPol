@@ -239,9 +239,6 @@ G4VPhysicalVolume* HMolPolDetectorConstruction::Construct()
         // definition & get the "old" color
         G4Color color = visAttribute_new.GetColour();
 
-        // get requested color, if it exists
-        //puts (*vit).value in color_new if exist
-
         //define another color (color_lookup) that will be a place holder to store the
         //requested color if properly defined.
         G4Color color_lookup(1.0,1.0,1.0);
@@ -285,7 +282,9 @@ G4VPhysicalVolume* HMolPolDetectorConstruction::Construct()
         // definition & get the "old" color - this will contain any changes from above
         G4Color color = visAttribute_new.GetColour();
 
+        //define a double to store the alpha value
         G4double alpha = std::atof((*vit).value.c_str());
+        //Bool  and if to check if the alpha value is valid ie between 0 and 1
         G4bool alpha_is_valid = false;
         if (alpha >= 0.0 && alpha <= 1.0)
         {
