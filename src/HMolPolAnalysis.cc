@@ -7,7 +7,7 @@
  *      simulation will have results in a ROOT file.
  *
  * \date <b>Date:</b> 07-11-2013
- * \date <b>Modified:</b> 07-06-2015
+ * \date <b>Modified:</b> 07-15-2015
  *
  * \note <b>Entry Conditions:</b>
  *
@@ -74,16 +74,16 @@ HMolPolAnalysis::HMolPolAnalysis()
  * Return:
  * Called By:
  * Date: 07-11-2013
- * Modified: 09-03-2014
+ * Modified: 07-15-2015
  ********************************************/
 HMolPolAnalysis::~HMolPolAnalysis()
 {
   // Delete ROOT objects
   if (fPrimary)        delete fPrimary;
-  if (fRootTree)     delete fRootTree;
-  if (fPrimaryBranch)   delete fPrimaryBranch;
   if (fRootFile)     delete fRootFile;
-
+  //These don't get deleted they are with delete fRootFile
+  //if (fRootTree)     delete fRootTree;
+  //if (fPrimaryBranch)   delete fPrimaryBranch;
 }
 
 /********************************************
@@ -138,9 +138,9 @@ void HMolPolAnalysis::BeginOfRun(const G4Run* aRun)
  * Return:
  * Called By:
  * Date: 07-11-2013
- * Modified:
+ * Modified: 07-15-2015
  ********************************************/
-void HMolPolAnalysis::EndOfRun(const G4Run* aRun)
+void HMolPolAnalysis::EndOfRun(const G4Run* /* aRun */) //get rid of unused parameter warning
 {
   G4cout << "At end of run" << G4endl;
 
@@ -153,6 +153,9 @@ void HMolPolAnalysis::EndOfRun(const G4Run* aRun)
   fRootFile->Write(0,TObject::kOverwrite);
   fRootFile->Close();
   fRootFileName = "";
+  //Saying Root tree pointer doesn't exist as we closed the file
+  //If we don't have this then errors can occur.
+  fRootTree = 0;
 }
 
 /********************************************
@@ -230,23 +233,22 @@ void HMolPolAnalysis::ConstructRootTree()
  * Return: none
  * Called By:
  * Date: 07-11-2013
- * Modified:
+ * Modified: 07-15-2015
  ********************************************/
 void HMolPolAnalysis::AutoSaveRootTree()
 {
-  // save the current ROOT Tree:
-  // In case your program crashes before closing the file holding this tree,
-  // the file will be automatically recovered when you will connect the file
-  // in UPDATE mode.
-  // The Tree will be recovered at the status corresponding to the last AutoSave.
-  //
-  // if option contains "SaveSelf", gDirectory->SaveSelf() is called.
-  // This allows another process to analyze the Tree while the Tree is being filled.
-  //
-  /// \see http://root.cern.ch/root/html/TTree.html#TTree:AutoSave
-
+  /**********
+   * save the current ROOT Tree:
+   * In case your program crashes before closing the file holding this tree,
+   * the file will be automatically recovered when you will connect the file
+   * in UPDATE mode.
+   * The Tree will be recovered at the status corresponding to the last AutoSave.
+   *
+   * if option contains "SaveSelf", gDirectory->SaveSelf() is called.
+   * This allows another process to analyze the Tree while the Tree is being filled.
+   * \see http://root.cern.ch/root/html/TTree.html#TTree:AutoSave
+  **********/
   // fRootTree -> AutoSave("SaveSelf");
   fRootTree -> AutoSave();
   gDirectory -> Purge(); //Purge old trees
-
 }
