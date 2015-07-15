@@ -11,7 +11,7 @@
  * Also the passing of ariables
  *
  * \date 0<b>Date:</b> 6-25-2013
- * \date <b>Modified:</b> 07-06-2013
+ * \date <b>Modified:</b> 07-15-2015
  *
  * \note <b>Entry Conditions:</b>
  *
@@ -45,7 +45,7 @@
  * Return: Nothing
  * Called By:
  * Date: 06-25-2013
- * Modified: 07-06-2013
+ * Modified: 07-15-2015
  ********************************************/
   /// \todo have someone (Wouter) help me figure what this all does
 HMolPolPrimaryGeneratorAction::HMolPolPrimaryGeneratorAction(HMolPolAnalysis* a)
@@ -104,7 +104,7 @@ HMolPolPrimaryGeneratorAction::~HMolPolPrimaryGeneratorAction()
  * Return:
  * Called By:
  * Date: 06-25-2013
- * Modified: 07-06-2013
+ * Modified: 07-15-2015
  ********************************************/
 void HMolPolPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 {
@@ -113,18 +113,21 @@ void HMolPolPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 // it does the following
   /// \todo have someone (Wouter) help me figure what this all does
 
-
-  // Generate Moller event
-
-// Make it so the beam of energy is passed to this - not hard coded
+  /**********
+   * Generate Moller event
+  ***********/
+// TODO \todo Make it so the beam of energy is passed to this - not hard coded
 
 // This needs to get passed globally and be a variable in the GUI
   //beam energy
   double beamE = fBeamE;
   // mass of Electron
   double m_e = electron_mass_c2; // MeV
+
+/* get rid of unused parameter warning
   double Ecm = sqrt(2*pow(m_e,2) + 2*m_e*beamE); //Energy in the CM frame
   double Pcm = sqrt(pow(Ecm,2) - 4*pow(m_e,2));  // mometum in the CM frame
+*/
 
   //find the beta and gamma value in Center of Mass
   double beta_com  = std::sqrt((beamE - m_e)/(beamE + m_e));
@@ -136,26 +139,30 @@ void HMolPolPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
       acos(CLHEP::RandFlat::shoot(cos(fTheta_com_max), cos(fTheta_com_min)));
   double phi_com = CLHEP::RandFlat::shoot(0.0, 2.0*pi);
 
-  //the cross section
-  // this is *NOT* the from
-  // (formula (2) and (7) in J. Arrington et al, 1992,
-  // A Moller Polarimeter for the MIT-Bates Storage Ring)
-  //double D_sigma = fine_structure_const*fine_structure_const *
-  //    pow(3.0+cos(theta_com)*cos(theta_com),2.0) *
-  //    hbarc*hbarc/pow(sin(theta_com),4.0)/(2.0*m_e*beamE); // units of mbarn
-
-  //This is more like Qweak... but they have a odd factor in it
-  /// \see Using the formula (2) from J. Arrington et al, 1992,
-  //  A Moller Polarimeter for the MIT-Bates Storage Ring
-  // This is the cross section in the lab fram not the CM frame
-  //This D_sigma is really d_sigma/d_omega
+  /*******
+   * the cross section
+   * this is *NOT* the from
+   * (formula (2) and (7) in J. Arrington et al, 1992,
+   * A Moller Polarimeter for the MIT-Bates Storage Ring)
+   * double D_sigma = fine_structure_const*fine_structure_const *
+   *     pow(3.0+cos(theta_com)*cos(theta_com),2.0) *
+   *     hbarc*hbarc/pow(sin(theta_com),4.0)/(2.0*m_e*beamE); // units of mbarn
+   *
+   * This is more like Qweak... but they have a odd factor in it
+   * / \see Using the formula (2) from J. Arrington et al, 1992,
+   *   A Moller Polarimeter for the MIT-Bates Storage Ring
+   * This is the cross section in the lab fram not the CM frame
+   * This D_sigma is really d_sigma/d_omega
+  ********/
   double D_sigma = pow( hbarc*fine_structure_const/(2*m_e) ,2)
       * pow( (1 + cos(theta_com))*( 3.0+pow(cos(theta_com),2.0)) ,2.0)
       / pow(sin(theta_com),4.0); // units of mbarns
 
+/* get rid of unused parameter warning
   //This is the Detla sigma one needs to get the delta_sigma (cross section)
   // for a Certain range of theta covered
   double Delta_Omega = 2.0*pi*(cos(fTheta_com_min) - cos(fTheta_com_max));
+*/
 
 //More of I have no idea what this is doing
   //  Multiply by Z because we have Z electrons
@@ -171,8 +178,8 @@ void HMolPolPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 //    exit(1);
 //  }
 
-  // Using the formula (3) from
-  /*! \see J. Arrington et al, 1992,
+  /*! Using the formula (3) from
+   \see J. Arrington et al, 1992,
   //  A Moller Polarimeter for the MIT-Bates Storage Ring */
   // the A_zz is the analyzing power
 //  double A_zz = - ( (pow(sin(theta_com),2.0), 2.0)
