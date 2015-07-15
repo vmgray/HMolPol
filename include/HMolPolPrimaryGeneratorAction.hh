@@ -6,7 +6,7 @@
  * Or the generator of the primary particle
  *
  * \date <b>Date:</b> 06-25-2013
- * \date <b>Modified:</b> 07-06-2013
+ * \date <b>Modified:</b> 07-14-2015
  *
  * \note <b>Entry Conditions:</b> none
  *
@@ -50,6 +50,8 @@ class HMolPolPrimaryGeneratorAction : public G4VUserPrimaryGeneratorAction
 
   private:
 
+    HMolPolAnalysis* fAnalysis;  ///< the analysis class
+
     // Center of mass angles to generate particles between
     /// \todo make this so that they are passed and in the messenger
     double fTheta_com_min; /// < this is the minimum Theta that electrons
@@ -64,8 +66,6 @@ class HMolPolPrimaryGeneratorAction : public G4VUserPrimaryGeneratorAction
     //the primary generation of the primary electrons
     /// \todo why does doxygen not want this documented?? and are these right?
     G4ParticleGun* fParticleGun; ///< the ParticleGun class
-
-    HMolPolAnalysis* fAnalysis;  ///< the analysis class
 };
 
 #endif
