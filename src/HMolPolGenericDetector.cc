@@ -6,7 +6,7 @@
  * detectors out of and then processing the hits of in each of these detectors
  *
  * \date <b>Date:</b> 07-10-2013
- * \date <b>Modified:</b> 07-11-2013
+ * \date <b>Modified:</b> 07-15-2015
  *
  * \note <b>Entry Conditions:</b>
  *
@@ -135,23 +135,25 @@ void HMolPolGenericDetector::Initialize(G4HCofThisEvent* HCE)
  * Return:
  * Called By:
  * Date: 07-10-2013
- * Modified:
+ * Modified: 07-15-2015
  ********************************************/
 G4bool HMolPolGenericDetector::ProcessHits(G4Step *step, G4TouchableHistory* )
 {
+  //get rid of unused parameter warning
   // Get touchable volume info
-  G4TouchableHistory *hist =
-      (G4TouchableHistory*)(step->GetPreStepPoint()->GetTouchable());
-  G4int copyID = hist->GetReplicaNumber();
+  //G4TouchableHistory *hist =
+  //    (G4TouchableHistory*)(step->GetPreStepPoint()->GetTouchable());
+  //get rid of unused parameter warning
+  //G4int copyID = hist->GetReplicaNumber();
 
   G4StepPoint *prestep = step->GetPreStepPoint();
   G4Track     *track   = step->GetTrack();
   G4TouchableHistory* touchable = (G4TouchableHistory*) prestep->GetTouchable();
 
-  G4double edep = step->GetTotalEnergyDeposit();
+  //get rid of unused parameter warning
+  //G4double edep = step->GetTotalEnergyDeposit();
 
   G4ParticleDefinition*  particleDefinition = step->GetTrack()->GetDefinition();
-
 
   // We're just going to record primary particles and things
   // that have just entered our boundary
