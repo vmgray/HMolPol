@@ -35,6 +35,7 @@ class HMolPolGenericDetectorHit: public G4VHit {
        //< destructor for HMolPolGenericDetectorHit
 
     // New and delete operators for custom allocator
+    /// \todo TODO What are these for?
     inline void *operator new(size_t);
     inline void operator delete(void *aHit);
     void *operator new(size_t,void*p) { return p; }
@@ -131,6 +132,8 @@ class HMolPolGenericDetectorHit: public G4VHit {
 
 };
 
+
+/// TODO \todo What is this for, what does it do???
 // Define the hit collection type - this is NOT working
 typedef G4THitsCollection<HMolPolGenericDetectorHit> HMolPolGenericDetectorHitsCollection;
 // Define the hit allocator
