@@ -316,6 +316,6 @@ void HMolPolPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 
 
 
-  G4cout << "###### Leaving QweakSimPrimaryGeneratorAction::GeneratePrimaries"
+  G4cout << "#### Leaving HMolPolPrimaryGeneratorAction::GeneratePrimaries ####"
       << G4endl;
 }
