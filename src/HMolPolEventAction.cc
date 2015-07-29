@@ -80,7 +80,7 @@ HMolPolEventAction::~HMolPolEventAction()
 void HMolPolEventAction::BeginOfEventAction(const G4Event* /*evt*/)
 {
   //Say that an event is beginning
-  G4cout << "At begin of event" << G4endl;
+  G4cout << "  At begin of event" << G4endl;
 
 /// \bug not sure what this does at this point forward - it is unused!?!
 //  G4SDManager* SDman = G4SDManager::GetSDMpointer();
@@ -111,7 +111,7 @@ void HMolPolEventAction::BeginOfEventAction(const G4Event* /*evt*/)
 void HMolPolEventAction::EndOfEventAction(const G4Event* evt)
 {
   //We are at the end of an event
-  //  G4cout << "At end of event" << G4endl;
+  //  G4cout << "  At end of event" << G4endl;
 
   // Get the event number
   /// \todo Event number should be branch in ROOT tree
@@ -121,7 +121,7 @@ void HMolPolEventAction::EndOfEventAction(const G4Event* evt)
   // Clear all hits
   for (size_t i = 0; i < fAnalysis->fDetector.size(); i++)
   {
-    G4cout << "Clearing branch " << i << G4endl;
+    G4cout << "  Clearing branch " << i << G4endl;
     fAnalysis->fDetector[i]->fHits.clear();
   }
 
@@ -135,7 +135,7 @@ void HMolPolEventAction::EndOfEventAction(const G4Event* evt)
     // Get this particular hit collection
     G4VHitsCollection* thiscol = HCE->GetHC(hcidx);
 
-    G4cout << "HC " << thiscol->GetName() << ": "
+    G4cout << G4endl << "  HC " << thiscol->GetName() << ": "
            << thiscol->GetSize() << " hits" << G4endl;
 
     // This is NULL if nothing is stored
@@ -146,8 +146,9 @@ void HMolPolEventAction::EndOfEventAction(const G4Event* evt)
       if (HMolPolGenericDetectorHitsCollection* thiscast =
           dynamic_cast<HMolPolGenericDetectorHitsCollection*>(thiscol))
       {
-//debug line
-        G4cout << thiscast->GetSize() << G4endl;
+        //debug line
+        G4cout << "  HMolPolGenericDetectorHitsCollection size: " <<
+            thiscast->GetSize() << G4endl;
         // Process all hits
         for (unsigned int hidx = 0; hidx < thiscast->GetSize(); hidx++)
         {
@@ -174,7 +175,7 @@ void HMolPolEventAction::EndOfEventAction(const G4Event* evt)
           hit.fKineticEnergy = thisHit->GetKineticEnergy();
 
           // Add hit
-          G4cout << "Adding hit to branch " << hit.fDetectorID << G4endl;
+          G4cout << "  Adding hit to branch " << hit.fDetectorID << G4endl;
           fAnalysis->fDetector[hit.fDetectorID]->fHits.push_back(hit);
         }
       }
@@ -182,7 +183,7 @@ void HMolPolEventAction::EndOfEventAction(const G4Event* evt)
   }
 
   //Debugging
-  G4cout << "At end of event number " << evt->GetEventID() << G4endl;
+  G4cout << "  At end of event number " << evt->GetEventID() << G4endl;
 
   // Fill the tree
   fAnalysis->FillRootTree();
