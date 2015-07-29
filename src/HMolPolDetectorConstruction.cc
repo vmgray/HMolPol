@@ -58,7 +58,7 @@
 
 G4VPhysicalVolume* HMolPolDetectorConstruction::Construct()
 {
-  G4cout << "In HMollerPolDetectorConstruction::Construct()..." << G4endl;
+  G4cout << "##### In HMollerPolDetectorConstruction::Construct()... #####" << G4endl;
 
   //define a world volume
   G4VPhysicalVolume *worldVolume;
@@ -77,6 +77,10 @@ G4VPhysicalVolume* HMolPolDetectorConstruction::Construct()
   // Check whether materials file could be opened correctly
   if (nist_materials.good())
   {
+/*
+    //debugging
+    G4cout << "  Nist Material File is open" << G4endl;
+*/
     //add all the NIST materials we want to use
     std::string material;
     // Loop over all lines in the file (ie all the needed NIST materials)
@@ -86,16 +90,23 @@ G4VPhysicalVolume* HMolPolDetectorConstruction::Construct()
       // Try to load the NIST material
       G4bool success = NistManager->FindOrBuildMaterial(material);
       // And complain if we can't find the material
+/*
+      //debugging
+      if(success)
+      {
+        G4cout << "  Material " << material << " is added" << G4endl;
+      }
+*/
       if (! success)
       {
-        G4cout << "Material " << material << " not found!" << G4endl;
+        G4cout << "  Material " << material << " not found!" << G4endl;
       }
     }
   } else
   {
     // If the file cannot be found, load only the vacuum
     NistManager->FindOrBuildMaterial("G4_Galactic");
-    G4cout << "File nist_materials.txt not found.  "
+    G4cout << "File nist_materials.txt not found. "
         << "Only loading NIST vacuum!" << G4endl;
   }
   // Close the file
@@ -205,7 +216,7 @@ G4VPhysicalVolume* HMolPolDetectorConstruction::Construct()
         vit++)//This is over the attributes for said Volume
     {
       //Print what the property is and is value
-      G4cout << "--> Type: " << (*vit).type
+      G4cout << "  --> Type: " << (*vit).type
       << ", value: " << (*vit).value << std::endl;
 
       /********
@@ -248,12 +259,12 @@ G4VPhysicalVolume* HMolPolDetectorConstruction::Construct()
         if (G4Color::GetColour((*vit).value, color_lookup))// this fills color_lookup
         {
           //write out the color we are setting the volume too
-          G4cout << "Setting color to " << (*vit).value << "." << G4endl;
+          G4cout << "    Setting color to " << (*vit).value << "." << G4endl;
           found_color_in_lookup = true;
         } else  //color not right so we complain
         {
           //if color not in the above list
-          G4cout << "Color " << (*vit).value << " is not known." << G4endl;
+          G4cout << "  Color " << (*vit).value << " is not known." << G4endl;
         }
 
         //we do have a color that is correct and then we set this as
@@ -289,12 +300,12 @@ G4VPhysicalVolume* HMolPolDetectorConstruction::Construct()
         if (alpha >= 0.0 && alpha <= 1.0)
         {
           //write out the color we are setting the volume too
-          G4cout << "Setting alpha to " << (*vit).value << "." << G4endl;
+          G4cout << "    Setting alpha to " << (*vit).value << "." << G4endl;
           alpha_is_valid = true;
         } else  //alpha not right so we complain
         {
           //if alpha not in the above list
-          G4cout << "Alpha " << (*vit).value << " is not known." << G4endl;
+          G4cout << "  Alpha " << (*vit).value << " is not known." << G4endl;
         }
 
         //we do have a alpha that is valid and then we set this as
@@ -352,7 +363,7 @@ G4VPhysicalVolume* HMolPolDetectorConstruction::Construct()
           sensitivedetector->SetVolumeName(((*iter).first)->GetName());
 
           //write out the name if the sensitive detector and the volume
-          G4cout << "Creating sensitive detector " << detectortype
+          G4cout << "    Creating sensitive detector " << detectortype
           << " for volume " << ((*iter).first)->GetName()
           << G4endl;
 
