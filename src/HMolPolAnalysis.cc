@@ -58,7 +58,7 @@ HMolPolAnalysis::HMolPolAnalysis()
   pUserRunInformation(0)
 {
   // starting the anaylsis
-  G4cout << "###### Calling HMolPolAnalysis::HMolPolAnalysis()" << G4endl;
+  G4cout << "###### Calling HMolPolAnalysis::HMolPolAnalysis() ######" << G4endl;
 
 }
 
@@ -109,7 +109,7 @@ HMolPolAnalysis::~HMolPolAnalysis()
  ********************************************/
 void HMolPolAnalysis::BeginOfRun(const G4Run* aRun)
 {
-  G4cout << "At begin of run" << G4endl;
+  G4cout << "  At begin of run" << G4endl;
 
   // Get run number
   G4int runID = aRun->GetRunID();
@@ -121,7 +121,7 @@ void HMolPolAnalysis::BeginOfRun(const G4Run* aRun)
     fRootFileName = fRootFileStem + "_" + Form("%d",runID) + ".root";
 
   // Create  NEW ROOT file
-  G4cout << "###### Analysis: creating ROOT file " << fRootFileName << G4endl;
+  G4cout << "###### Analysis: creating ROOT file " << fRootFileName << " ######" << G4endl;
   fRootFile = new TFile(fRootFileName,"RECREATE","HMolPol ROOT file");
   ConstructRootTree();  //calls the function that constructs the ROOT tree
 }
@@ -142,14 +142,14 @@ void HMolPolAnalysis::BeginOfRun(const G4Run* aRun)
  ********************************************/
 void HMolPolAnalysis::EndOfRun(const G4Run* /* aRun */) //get rid of unused parameter warning
 {
-  G4cout << "At end of run" << G4endl;
+  G4cout << "  At end of run" << G4endl;
 
   // Autosave one last time
   AutoSaveRootTree();
 
   // Write the data to the ROOT file, closes the file safely
   G4cout << "###### Analysis: closing ROOT file "
-      << fRootFileName << G4endl;
+      << fRootFileName << " ######" << G4endl;
   fRootFile->Write(0,TObject::kOverwrite);
   fRootFile->Close();
   fRootFileName = "";
@@ -211,7 +211,7 @@ void HMolPolAnalysis::ConstructRootTree()
   fDetector.resize(fDetectorName.size());
   fDetectorBranch.resize(fDetectorName.size());
   for (size_t i = 0; i < fDetectorName.size(); i++) {
-    G4cout << "Adding " << fDetectorName[i] << " to ROOT tree." << G4endl;
+    G4cout << "  Adding " << fDetectorName[i] << " to ROOT tree." << G4endl;
     fDetector[i] = new HMolPolEventGenericDetector();
     fDetectorBranch[i] = fRootTree->Branch(TString("f") + TString(fDetectorName[i]),
         "HMolPolEventGenericDetector", &fDetector[i], bufsize, split);
