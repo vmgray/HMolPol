@@ -35,6 +35,10 @@
 ********************************************/
 HMolPolSolenoidMagField::HMolPolSolenoidMagField ()
 {
+/*
+  //debugging
+  Bz = 3000.0*tesla;  // this is the strength of the magnetic
+*/
   Bz = 8.0*tesla;  // this is the strength of the magnetic
   /** \ingroup see
    * /\brief Z B field value of 8 Tesla
