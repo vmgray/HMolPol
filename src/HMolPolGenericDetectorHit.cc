@@ -25,6 +25,8 @@
 // user includes
 #include "HMolPolGenericDetectorHit.hh"
 
+/// TODO \todo WDC:  What the does this do?
+
 /// Create the static custom allocator
 G4Allocator<HMolPolGenericDetectorHit> HMolPolGenericDetectorHitAllocator;
 
@@ -166,7 +168,7 @@ void HMolPolGenericDetectorHit::Draw()
  ********************************************/
 void HMolPolGenericDetectorHit::Print()
 {
-  G4cout << "Hit: fDetectorID[" << fDetectorID << "], fTrackID[" << fTrackID << "]: "
+  G4cout << "  Hit: fDetectorID[" << fDetectorID << "], fTrackID[" << fTrackID << "]: "
       << " --- position (x,y,z) [cm] "
       << fPosition.x()/CLHEP::cm << ", "
       << fPosition.y()/CLHEP::cm << ", "
