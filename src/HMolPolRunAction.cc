@@ -78,7 +78,7 @@ void HMolPolRunAction::BeginOfRunAction(const G4Run* aRun)
   runID = aRun->GetRunID();
 
   // Print run number
-  G4cout << "### Start of Run " << runID << "  ###" << G4endl;
+  G4cout << "### Start of Run " << runID << " ###" << G4endl;
 
   // Start analysis at begin of run
   fAnalysis->BeginOfRun(aRun);
@@ -100,7 +100,7 @@ void HMolPolRunAction::BeginOfRunAction(const G4Run* aRun)
 void HMolPolRunAction::EndOfRunAction(const G4Run* aRun)
 {
   // Print run number
-  G4cout << "### End of Run " << runID << "  ###" << G4endl;
+  G4cout << "### End of Run " << runID << " ###" << G4endl;
 
   // End analysis procedure at end of run
   fAnalysis->EndOfRun(aRun);
