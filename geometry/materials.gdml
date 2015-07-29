@@ -21,17 +21,20 @@
   <material name="Cold_Atomic_HGas" Z="1">
     <T unit="K" value="0.3" />               <!-- pg 9 -->
     <P unit="pascal" value="1.33e-13" />     <!-- 1e-15 Torr in paper pg 15 -->
-    <D unit="1/cm3" value="3e15" />          <!-- pg 10 -->
+    <D unit="g/cm3" value="5.022e-9" />          <!-- pg 9 -->
+    <!-- pg 9 says 3e15 1/cm3 or atoms/cm3. Atomic weight of H is 1.674e-24 g.
+      Density then is 5.022e-9 g/cm3  -->
     <atom unit="g/mole" value="1.01" />
   </material>
 
   <!-- Dummy Scintillator material I am using the BC-408 material from http://www.detectors.saint-gobain.com/Plastic-Scintillator.aspx 
-    - this is just so that we have something to work with -->
+    - this is just so that we have something to work with
+    Data Sheet: http://www.crystals.saint-gobain.com/uploadedFiles/SG-Crystals/Documents/SGC%20BC400-404-408-412-416%20Data%20Sheet.pdf-->
 
   <material name="BC-408_scint_dummy" formula="BC-408_scint">
-    <D unit="1/cm3" value="0.08278" />          <!-- Average density -->
-    <fraction n="0.0095" ref="G4_H" />
-    <fraction n="0.9905" ref="G4_C" />
+    <D unit="g/cm3" value="1.032" />          <!-- Average density -->
+    <fraction n="0.552" ref="G4_H" />
+    <fraction n="0.5" ref="G4_C" />
   </material>
 
   <!-- This is the material Geant4 has to stop everything the "traditional way" is 
