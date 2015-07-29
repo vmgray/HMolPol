@@ -58,7 +58,7 @@ HMolPolGenericDetector::HMolPolGenericDetector(G4String name)
   // Insert name of this detector hits collection into the list of hit collections
   std::stringstream number;
   number << fNumberOfDetectorsWithName[SensitiveDetectorName];
-  G4cout << "Inserting collection " << SensitiveDetectorName + "_" + number.str()
+  G4cout << "  Inserting collection " << SensitiveDetectorName + "_" + number.str()
          << " in SD " << name << "." << G4endl;
   collectionName.insert(SensitiveDetectorName + "_" + number.str());
 
