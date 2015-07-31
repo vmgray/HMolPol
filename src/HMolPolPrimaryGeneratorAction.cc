@@ -108,6 +108,8 @@ HMolPolPrimaryGeneratorAction::~HMolPolPrimaryGeneratorAction()
  ********************************************/
 void HMolPolPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 {
+  //debugging
+  G4cout << G4endl << "#### Entering HMolPolPrimaryGeneratorAction::GeneratePrimaries ####"<< G4endl;
 
 //All the following is from remoll - I have no idea why I am using it or what
 // it does the following

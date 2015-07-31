@@ -74,11 +74,13 @@ HMolPolRunAction::~HMolPolRunAction()
  ********************************************/
 void HMolPolRunAction::BeginOfRunAction(const G4Run* aRun)
 {
+  //debugging
+  G4cout << G4endl << "### In the HMolPolRunAction::BeginOfRunAction ###"<< G4endl;
   // Get run number
   runID = aRun->GetRunID();
 
   // Print run number
-  G4cout << "### Start of Run " << runID << " ###" << G4endl;
+  G4cout << "  Start of Run " << runID << G4endl;
 
   // Start analysis at begin of run
   fAnalysis->BeginOfRun(aRun);
@@ -99,8 +101,11 @@ void HMolPolRunAction::BeginOfRunAction(const G4Run* aRun)
  ********************************************/
 void HMolPolRunAction::EndOfRunAction(const G4Run* aRun)
 {
+  //debugging
+  G4cout << G4endl << "### In the HMolPolRunAction::EndOfRunAction ###"<< G4endl;
+
   // Print run number
-  G4cout << "### End of Run " << runID << " ###" << G4endl;
+  G4cout << "  End of Run " << runID << G4endl;
 
   // End analysis procedure at end of run
   fAnalysis->EndOfRun(aRun);

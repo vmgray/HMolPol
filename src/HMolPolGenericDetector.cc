@@ -49,6 +49,9 @@ HMolPolGenericDetector::HMolPolGenericDetector(G4String name)
   fHitsCollection(0),
   fHitsCollectionID(-1)
 {
+  //debugging
+  G4cout << G4endl << "## In the HMolPolGenericDetector::HMolPolGenericDetector() ##"<< G4endl;
+
   // Have we encountered a detector of this type yet?
   if (fNumberOfDetectorsWithName.count(SensitiveDetectorName) == 0) {
     // No, then this is the first one
@@ -84,9 +87,10 @@ HMolPolGenericDetector::HMolPolGenericDetector(G4String name)
  * Date: 07-10-2013
  * Modified:
  ********************************************/
-
 HMolPolGenericDetector::~HMolPolGenericDetector()
 {
+  //debugging
+  G4cout << G4endl << "## In the HMolPolGenericDetector::~HMolPolGenericDetector() ##"<< G4endl;
   fTotalNumberOfDetectors--;
   fNumberOfDetectorsWithName[SensitiveDetectorName]--;
 }
@@ -110,6 +114,11 @@ HMolPolGenericDetector::~HMolPolGenericDetector()
  ********************************************/
 void HMolPolGenericDetector::Initialize(G4HCofThisEvent* HCE)
 {
+  //debugging
+  G4cout << G4endl << "## In the HMolPolGenericDetector::Initialize ##"<< G4endl;
+
+  G4cout << "  Initializing " << SensitiveDetectorName << G4endl;
+
   // Create new hits collection
   fHitsCollection = new HMolPolGenericDetectorHitsCollection
       (SensitiveDetectorName, collectionName[0]);
@@ -139,6 +148,10 @@ void HMolPolGenericDetector::Initialize(G4HCofThisEvent* HCE)
  ********************************************/
 G4bool HMolPolGenericDetector::ProcessHits(G4Step *step, G4TouchableHistory* )
 {
+  //debugging
+  G4cout << G4endl << "## In the HMolPolGenericDetector::ProcessHits ##"<< G4endl;
+  G4cout << "  Processing hit in " << SensitiveDetectorName << G4endl;
+
   //get rid of unused parameter warning
   // Get touchable volume info
   //G4TouchableHistory *hist =
@@ -215,6 +228,10 @@ G4bool HMolPolGenericDetector::ProcessHits(G4Step *step, G4TouchableHistory* )
  ********************************************/
 void HMolPolGenericDetector::EndOfEvent(G4HCofThisEvent* HCE)
 {
+  //debugging
+  G4cout << G4endl << "## In the HMolPolGenericDetector::EndOfEvent ##"<< G4endl;
+  G4cout << "  End of event for detector " << SensitiveDetectorName << G4endl;
+
   // Get pointer to the sensitive detector manager
   G4SDManager *sdman = G4SDManager::GetSDMpointer();
 

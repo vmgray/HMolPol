@@ -79,11 +79,15 @@ HMolPolEventAction::~HMolPolEventAction()
  ********************************************/
 void HMolPolEventAction::BeginOfEventAction(const G4Event* /*evt*/)
 {
+  //debugging
+  G4cout << G4endl << "####### In the HMolPolEventAction::BeginOfEventAction #######"<< G4endl;
   //Say that an event is beginning
   G4cout << "  At begin of event" << G4endl;
 
+/*
 /// \bug not sure what this does at this point forward - it is unused!?!
-//  G4SDManager* SDman = G4SDManager::GetSDMpointer();
+  G4SDManager* SDman = G4SDManager::GetSDMpointer();
+*/
 
   // check for existing Collection ID (if it's -1 it will be assigned)
   /// \todo reenable hit collection
@@ -110,6 +114,8 @@ void HMolPolEventAction::BeginOfEventAction(const G4Event* /*evt*/)
  ********************************************/
 void HMolPolEventAction::EndOfEventAction(const G4Event* evt)
 {
+  //debugging
+  G4cout << G4endl << "####### In the HMolPolEventAction::EndOfEventAction #######"<< G4endl;
   //We are at the end of an event
   //  G4cout << "  At end of event" << G4endl;
 

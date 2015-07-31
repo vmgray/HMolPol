@@ -109,6 +109,9 @@ HMolPolAnalysis::~HMolPolAnalysis()
  ********************************************/
 void HMolPolAnalysis::BeginOfRun(const G4Run* aRun)
 {
+  //debugging
+  G4cout << G4endl << "###### HMolPolAnalysis::BeginOfRun ######" << G4endl;
+
   G4cout << "  At begin of run" << G4endl;
 
   // Get run number
@@ -142,6 +145,9 @@ void HMolPolAnalysis::BeginOfRun(const G4Run* aRun)
  ********************************************/
 void HMolPolAnalysis::EndOfRun(const G4Run* /* aRun */) //get rid of unused parameter warning
 {
+  //debugging
+  G4cout << G4endl << "###### HMolPolAnalysis::EndOfRun ######" << G4endl;
+
   G4cout << "  At end of run" << G4endl;
 
   // Autosave one last time
@@ -189,6 +195,9 @@ void HMolPolAnalysis::EndOfRun(const G4Run* /* aRun */) //get rid of unused para
  ********************************************/
 void HMolPolAnalysis::ConstructRootTree()
 {
+  //debugging
+  G4cout << G4endl << "###### HMolPolAnalysis::ConstructRootTree ######" << G4endl;
+
   // Create ROOT tree and give it a name
   // the tree name will be HMolPol_Tree in the ROOT file
   fRootTree = new TTree("HMolPol_Tree","HMolPol Simulation Tree");
@@ -237,6 +246,8 @@ void HMolPolAnalysis::ConstructRootTree()
  ********************************************/
 void HMolPolAnalysis::AutoSaveRootTree()
 {
+  //debugging
+  G4cout << G4endl << "###### HMolPolAnalysis::AutoSaveRootTree ######" << G4endl;
   /**********
    * save the current ROOT Tree:
    * In case your program crashes before closing the file holding this tree,

@@ -82,6 +82,8 @@ HMolPolGenericDetectorHit::HMolPolGenericDetectorHit()
 
 HMolPolGenericDetectorHit::HMolPolGenericDetectorHit(const HMolPolGenericDetectorHit& right)
 {
+  //debugging
+  G4cout << G4endl << "# In the HMolPolGenericDetectorHit::HMolPolGenericDetectorHit #"<< G4endl;
   G4cout << "Copy constructor for HMolPolGenericDetectorHit called" << G4endl;
 
   fDetectorID = right.fDetectorID;
@@ -132,6 +134,8 @@ HMolPolGenericDetectorHit::~HMolPolGenericDetectorHit()
  ********************************************/
 void HMolPolGenericDetectorHit::Draw()
 {
+  //debugging
+  G4cout << G4endl << "# In the HMolPolGenericDetectorHit::Draw() #"<< G4endl;
   // Get the visualization manager
   G4VVisManager* pVVisManager = G4VVisManager::GetConcreteInstance();
 
@@ -168,6 +172,8 @@ void HMolPolGenericDetectorHit::Draw()
  ********************************************/
 void HMolPolGenericDetectorHit::Print()
 {
+  //debugging
+  G4cout << G4endl << "# In the HMolPolGenericDetectorHit::Print #"<< G4endl;
   G4cout << "  Hit: fDetectorID[" << fDetectorID << "], fTrackID[" << fTrackID << "]: "
       << " --- position (x,y,z) [cm] "
       << fPosition.x()/CLHEP::cm << ", "

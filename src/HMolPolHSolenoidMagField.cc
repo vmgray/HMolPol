@@ -33,8 +33,12 @@
  * Date: 06-25-2013
  * Modified:
 ********************************************/
-HMolPolSolenoidMagField::HMolPolSolenoidMagField ()
+HMolPolSolenoidMagField::HMolPolSolenoidMagField()
 {
+  //debugging
+  G4cout << G4endl << "######## In the HMolPolSolenoidMagField::"
+      "HMolPolSolenoidMagField ########"<< G4endl;
+
 /*
   //debugging
   Bz = 3000.0*tesla;  // this is the strength of the magnetic
