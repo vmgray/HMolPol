@@ -40,7 +40,7 @@ class HMolPolMessenger : public G4UImessenger
     HMolPolMessenger(HMolPolPrimaryGeneratorAction*,
         HMolPolRunAction*,
         HMolPolEventAction*,
-        HMolPolAnalysis*);   ///< consturctor of the HMolPolMessenger
+        HMolPolAnalysis*);   ///< constructor of the HMolPolMessenger
     virtual ~HMolPolMessenger();   ///< destructor of the HMolPolMessenger
 
     void SetNewValue(G4UIcommand* cmd, G4String newValue);   ///< function to

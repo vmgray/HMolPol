@@ -6,8 +6,17 @@
  *   the HMolPolAnalysis Class, which prints out
  *   the ROOT files
  *
- *   So it must include all the root tree variables
- * \todo wdc should expand this
+ *   This class includes the top-level ROOT tree variables. For example, if the
+ *   ROOT tree contains a branch 'Primary' which is (for each event) an object
+ *   of the class HMolPolEventPrimary, then this class must contain a pointer
+ *   to HMolPolEventPrimary which is named fPrimary. That branch is then added
+ *   to the ROOT tree in the function ConstructRootTree().
+ *
+ *   For the various detectors this class has a vector of pointers to
+ *   HMolPolEventGenericDetector objects. Each pointer corresponds to one
+ *   branch in the ROOT tree. If you have a branch 'Detector1' and a second
+ *   branch 'Detector2' then you will have a vector with 2 pointers to
+ *   HMolPolEventGenericDetector objects.
  *
  * \date <b>Date:</b> 07-11-2013
  * \date <b>Modified:</b> 07-06-2015
@@ -43,11 +52,11 @@ class HMolPolAnalysis
 {
 
   public:
-    HMolPolAnalysis();             ///< constructor for HMolPolAnalysis class
-    virtual ~HMolPolAnalysis();    ///< destructor for HMolPolAnalysis class
+    HMolPolAnalysis();             ///< Constructor for HMolPolAnalysis class
+    virtual ~HMolPolAnalysis();    ///< Destructor for HMolPolAnalysis class
 
     // functions that take care of what happens at the start of end of a run or event
-    void BeginOfRun(const G4Run* aRun); ///< begin of run function
+    void BeginOfRun(const G4Run* aRun); ///< Begin of run function
     void EndOfRun(const G4Run* aRun);   ///< End of run function
 
     ///<  Set ROOT file stem
@@ -97,10 +106,25 @@ class HMolPolAnalysis
     HMolPolEventPrimary* fPrimary;      ///< Primary event structure
     TBranch* fPrimaryBranch;            ///< Primary event ROOT branch
 
-    std::vector<HMolPolEventGenericDetector*> fDetector; ///< Detector event structure
-    std::vector<TBranch*> fDetectorBranch;              ///< ROOT file branches
-    std::vector<G4String> fDetectorName;                ///< Detector names
-    //wdc: add more infor on the fDetectorName what is etc.
+    /// Event structure for the branches in the ROOT tree corresponding to a
+    /// particular detector. There could be several of them so they are stored
+    /// in a vector: one element in the vector for each detector that is stored
+    /// in the ROOT tree. For example, when there are two branches, 'Detector1'
+    /// and 'Detector2', then there will be two elements in this vector. The
+    /// pointers in this vector only describe what data to store, not what the
+    /// branch will be called.
+    std::vector<HMolPolEventGenericDetector*> fDetector;
+    /// ROOT file branches associated with the corresponding elements in the
+    /// vector fDetector above. The  pointers in this vector only identify to
+    /// ROOT where the branches are stored in memory, not what the branch will
+    /// be called.
+    std::vector<TBranch*> fDetectorBranch;
+    /// Name of the detector associated with the corresponding elements in the
+    /// vector fDetector above. For example, if you have two sensitive detectors
+    /// defined in the geometry, 'Detector1' and 'Detector2', then this vector
+    /// will contain the strings 'Detector1' and 'Detector2'. That's all this
+    /// vector does: store the name of the branches in the ROOT file.
+    std::vector<G4String> fDetectorName;
 
   private:
 

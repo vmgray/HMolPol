@@ -25,9 +25,12 @@
 // user includes
 #include "HMolPolGenericDetectorHit.hh"
 
-/// TODO \todo WDC:  What the does this do?
-
-/// Create the static custom allocator
+/// In order to speed up the creation and deletion of new hits (something that
+/// happens a lot in a typical geant4 simulation), geant4 uses a special class
+/// that allocates (reserves) and deallocates (frees up) memory efficiency.
+/// This custom allocator class has to be setup using G4Allocator, as in the
+/// next line. You can give this allocator variable any name you like, as long
+/// you create it somewhere.
 G4Allocator<HMolPolGenericDetectorHit> HMolPolGenericDetectorHitAllocator;
 
 /********************************************
@@ -79,7 +82,8 @@ HMolPolGenericDetectorHit::HMolPolGenericDetectorHit()
  * Modified:
  ********************************************/
 // /todo what is the difference between this and the above function??
-
+// This is a copy constructor that take the object 'right' and copies into the
+// current object, element by element (in this case).
 HMolPolGenericDetectorHit::HMolPolGenericDetectorHit(const HMolPolGenericDetectorHit& right)
 {
   //debugging

@@ -5,8 +5,11 @@
 \brief <b>Purpose:</b> Create the hmolpolroot executable, aka the version of ROOT
 that know about HMolPol and can work with the HMolPol structure
 
-//< TODO: Active only when hmolpolroot is running?
-// But it doesn't seem to do anything, there is no meat to it?
+This executable is active run when hmolpolroot is running. All it does is
+provide the HMolPol classes to the user through a ROOT interface. All other
+classes are compiled and saved to a shared library which is then used by this
+executable, so it does not need to explicitly include all the header files.
+That is why it can be short, sweet, and to the point.
 
 \date <b>Date:</b> 07-16-2013
 \date <b>Modified:</b> 04-20-2015
@@ -22,8 +25,10 @@ that know about HMolPol and can work with the HMolPol structure
 // HMolPol headers
 #include "HMolPolRint.hh"
 
-//< TODO: How really does this work> I have no idea what so ever
-//Just a copy and paste job from Qweak
+// When the main function is called, all we do is start a command prompt as
+// an interface to ROOT. Whatever is typed on the command prompt will be
+// handled by ROOT, possibly using the classes of HMolPol that have been
+// compiled and loaded as a shared library.
 
 int main(int argc, char** argv)
 {
@@ -38,7 +43,7 @@ int main(int argc, char** argv)
   //the parts of the HMolPol ROOT tree are and the structure
   //< TODO: Uses HMolPolRint?? where??
   gROOT->ProcessLine(".include include");
-  // Run the interface
+  // Run the interface, the program will spend all of its time in this next line
   hmolpolrint->Run();
   //delete the object
   delete hmolpolrint;

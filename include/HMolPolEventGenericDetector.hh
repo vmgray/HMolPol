@@ -34,7 +34,10 @@ class HMolPolEventGenericDetector: public TObject {
 
     std::vector<HMolPolEventGenericDetectorHit> fHits; ///< vector of the Hits
 
-    //define a class for ROOT
+    /// Register this class with ROOT. This adds some standard ROOT functions to
+    /// the class, and makes sure that on the command line in ROOT it can do
+    /// tab-completion. This is associated with the ClassImp() line at the top
+    /// of the .cc file.
     ClassDef(HMolPolEventGenericDetector,1)
 };
 

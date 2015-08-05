@@ -34,8 +34,14 @@ class HMolPolGenericDetectorHit: public G4VHit {
     virtual ~HMolPolGenericDetectorHit();
        //< destructor for HMolPolGenericDetectorHit
 
+    /// In order to speed up the creation and deletion of new hits (something that
+    /// happens a lot in a typical geant4 simulation), geant4 uses a special class
+    /// that allocates (reserves) and deallocates (frees up) memory efficiency.
+    /// This custom allocator class has to be setup using G4Allocator at the top
+    /// of the .cc file. It also requires that we define our own new and delete
+    /// operators that use the allocator.
+
     // New and delete operators for custom allocator
-    /// \todo TODO What are these for?
     inline void *operator new(size_t);
     inline void operator delete(void *aHit);
     void *operator new(size_t,void*p) { return p; }
