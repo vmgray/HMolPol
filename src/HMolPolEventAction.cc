@@ -77,12 +77,12 @@ HMolPolEventAction::~HMolPolEventAction()
  * Date: 07-11-2013
  * Modified:
  ********************************************/
-void HMolPolEventAction::BeginOfEventAction(const G4Event* /*evt*/)
+void HMolPolEventAction::BeginOfEventAction(const G4Event* event)
 {
   //debugging
   G4cout << G4endl << "####### In the HMolPolEventAction::BeginOfEventAction #######"<< G4endl;
   //Say that an event is beginning
-  G4cout << "  At begin of event" << G4endl;
+  G4cout << "  At begin of event number: " << event->GetEventID() << G4endl;
 
 /*
 /// \bug not sure what this does at this point forward - it is unused!?!
@@ -94,6 +94,8 @@ void HMolPolEventAction::BeginOfEventAction(const G4Event* /*evt*/)
 //  if (CollID == -1) {
 //      CollID = SDman->GetCollectionID("SD/Collection");
 //  }
+
+  return;
 }
 
 /********************************************
@@ -112,7 +114,7 @@ void HMolPolEventAction::BeginOfEventAction(const G4Event* /*evt*/)
  * Date: 07-11-2013
  * Modified:
  ********************************************/
-void HMolPolEventAction::EndOfEventAction(const G4Event* evt)
+void HMolPolEventAction::EndOfEventAction(const G4Event* event)
 {
   //debugging
   G4cout << G4endl << "####### In the HMolPolEventAction::EndOfEventAction #######"<< G4endl;
@@ -121,7 +123,7 @@ void HMolPolEventAction::EndOfEventAction(const G4Event* evt)
 
   // Get the event number
   /// \todo Event number should be branch in ROOT tree
-  //fAnalysis->fPrimary->fEventNumber = evt->GetEventID();
+  //fAnalysis->fPrimary->fEventNumber = event->GetEventID();
 
 
   // Clear all hits
@@ -132,7 +134,7 @@ void HMolPolEventAction::EndOfEventAction(const G4Event* evt)
   }
 
   // Get the hit collections of this event
-  G4HCofThisEvent *HCE = evt->GetHCofThisEvent();
+  G4HCofThisEvent *HCE = event->GetHCofThisEvent();
 
   // Loop over all hit collections, sort by output type
   for (int hcidx = 0; hcidx < HCE->GetCapacity(); hcidx++)
@@ -189,12 +191,14 @@ void HMolPolEventAction::EndOfEventAction(const G4Event* evt)
   }
 
   //Debugging
-  G4cout << "  At end of event number " << evt->GetEventID() << G4endl;
+  G4cout << "  At end of event number " << event->GetEventID() << G4endl;
 
   // Fill the tree
   fAnalysis->FillRootTree();
 
   // Print some progress information
-  if (evt->GetEventID() % 1000 == 0)
+  if (event->GetEventID() % 1000 == 0)
       fAnalysis->AutoSaveRootTree();
+
+  return;
 }
