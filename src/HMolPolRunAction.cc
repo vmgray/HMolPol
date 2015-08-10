@@ -84,6 +84,8 @@ void HMolPolRunAction::BeginOfRunAction(const G4Run* aRun)
 
   // Start analysis at begin of run
   fAnalysis->BeginOfRun(aRun);
+
+  return;
 }
 
 /********************************************
@@ -109,4 +111,6 @@ void HMolPolRunAction::EndOfRunAction(const G4Run* aRun)
 
   // End analysis procedure at end of run
   fAnalysis->EndOfRun(aRun);
+
+  return;
 }
