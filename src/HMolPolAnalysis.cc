@@ -127,6 +127,8 @@ void HMolPolAnalysis::BeginOfRun(const G4Run* aRun)
   G4cout << "###### Analysis: creating ROOT file " << fRootFileName << " ######" << G4endl;
   fRootFile = new TFile(fRootFileName,"RECREATE","HMolPol ROOT file");
   ConstructRootTree();  //calls the function that constructs the ROOT tree
+
+  return;
 }
 
 /********************************************
@@ -162,6 +164,8 @@ void HMolPolAnalysis::EndOfRun(const G4Run* /* aRun */) //get rid of unused para
   //Saying Root tree pointer doesn't exist as we closed the file
   //If we don't have this then errors can occur.
   fRootTree = 0;
+
+  return;
 }
 
 /********************************************
@@ -229,6 +233,8 @@ void HMolPolAnalysis::ConstructRootTree()
   /// \TODO get the Run information to work
   // Write run data
   //pUserRunInformation->Write();
+
+  return;
 }
 /********************************************
  * Programmer: Valerie Gray
@@ -262,4 +268,6 @@ void HMolPolAnalysis::AutoSaveRootTree()
   // fRootTree -> AutoSave("SaveSelf");
   fRootTree -> AutoSave();
   gDirectory -> Purge(); //Purge old trees
+
+  return;
 }
