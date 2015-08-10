@@ -93,4 +93,6 @@ void HMolPolSolenoidMagField::GetFieldValue(const G4double Point[4],
   {
     Bfield[2] = 0.;
   }
+
+  return;
 }
