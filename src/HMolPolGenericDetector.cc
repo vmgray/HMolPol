@@ -129,6 +129,8 @@ void HMolPolGenericDetector::Initialize(G4HCofThisEvent* HCE)
 
   // Add the hits collection ID number to the hits collections of this event
   HCE->AddHitsCollection(fHitsCollectionID, fHitsCollection);
+
+  return;
 }
 
 /********************************************
@@ -243,6 +245,6 @@ void HMolPolGenericDetector::EndOfEvent(G4HCofThisEvent* HCE)
   }
 
   HCE->AddHitsCollection(fHitsCollectionID, fHitsCollection);
+
+  return;
 }
-
-
