@@ -18,9 +18,12 @@
 //Geant4 specific includes
 #include <G4Color.hh>
 #include <G4VisAttributes.hh>
+
 #include <G4NistManager.hh>
+
 #include <G4FieldManager.hh>
 #include <G4TransportationManager.hh>
+
 #include <G4SDManager.hh>
 
 #include <fstream>
