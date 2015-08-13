@@ -1,1 +1,7 @@
-.project
+/latex
+/build
+/html
+/HMolPol_0.root
+/.project
+/HMolPol_*.root
+
