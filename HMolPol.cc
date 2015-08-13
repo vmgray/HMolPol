@@ -90,7 +90,16 @@ int main (int argc, char** argv)
   // Analysis (interface with ROOT file)
   HMolPolAnalysis* myHMolPolAnalysis  = new HMolPolAnalysis();
 
-  //< TODO WDC: what is the difference in SetUserInitialization and SetUserAction
+  // Geant4 has two main mechanisms to allow the user to affect the way it is
+  // running: you can pass UserInitialization classes that affect how the
+  // simulation is initialized at the beginning, or you can pass UserAction
+  // classes which can be called several times (for example for every run or
+  // for every event). Since the initialization classes are only executed once,
+  // it is not as important that they are fast. For user action classes it is
+  // important to make them relatively fast (some things cannot be avoided,
+  // for example writing to a ROOT file for each event, but the ROOT file can
+  // be kept in memory to avoid having to write to disk for each event; ROOT
+  // does this by default already).
 
   // Add the Detector geometry
   //pass the geometry of the HMolPol to the Geant4 class G4VUserDetectorConstruction
@@ -126,9 +135,13 @@ int main (int argc, char** argv)
   runManager->SetUserAction(myHMolPolPrimaryGeneratorAction);
 
   // add the global messenger - this will talk with all of
-  //the files and the user - Allows for the interaction and changes
+  // the files and the user - Allows for the interaction and changes
   // in the simulation without going into the code making changes
-  // /todo WDC: Why is this not added to the run manager?
+  //
+  // This does not need to be added to the run manager because the messenger
+  // class defines user interface commands, and only the user interface needs
+  // to know about those. The run manager does not care about the commands that
+  // are implemented.
   HMolPolMessenger* myHMolPolMess = new HMolPolMessenger(
       myHMolPolPrimaryGeneratorAction,
       myHMolPolRunAction,

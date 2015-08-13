@@ -74,8 +74,10 @@ class HMolPolEventUnits : public TObject
     // Magnetic Field
     const Double_t Tesla;     /// \ingroup root Units of tesla
 
-    // define a new Class known to ROOT? Huh?
-    /// todo: wdc, what is this really about?
+    /// Register this class with ROOT. This adds some standard ROOT functions to
+    /// the class, and makes sure that on the command line in ROOT it can do
+    /// tab-completion. This is associated with the ClassImp() line at the top
+    /// of the .cc file.
     ClassDef(HMolPolEventUnits,1)
 
   private:

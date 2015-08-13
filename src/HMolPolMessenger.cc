@@ -154,6 +154,14 @@ HMolPolMessenger::~HMolPolMessenger()
  ********************************************/
 /// \todo have someone (Wouter) help me figure what this all does
 
+// Whenever a command from this messenger is called, for example the command
+// /HMolPol/Analysis/RootFileName, then this function is called with as first
+// argument the command and as second argument a string with the value that
+// was passed, for example SetNewValue(fRootFileNameCmd,"run.root"). It is
+// the job of this function to figure out what to do for this command, to
+// convert the value to its proper data type (for example string to int), and
+// to test whether the value was even an allowed value.
+
 void HMolPolMessenger::SetNewValue(G4UIcommand* command, G4String newValue)
 {
 

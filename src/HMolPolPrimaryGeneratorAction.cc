@@ -48,6 +48,10 @@
  * Modified: 07-15-2015
  ********************************************/
   /// \todo have someone (Wouter) help me figure what this all does
+// Initialize the generator action with the pointer to the analysis object (so
+// we have access to the ROOT file if needed), with some initial raster size
+// settings, and with an initial beam energy. Commands by the user could still
+// change these values from within geant4 through the messenger class.
 HMolPolPrimaryGeneratorAction::HMolPolPrimaryGeneratorAction(HMolPolAnalysis* a)
 : fAnalysis(a),
   fRasterX(4.0*CLHEP::mm),
@@ -114,6 +118,9 @@ void HMolPolPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 //All the following is from remoll - I have no idea why I am using it or what
 // it does the following
   /// \todo have someone (Wouter) help me figure what this all does
+  // Based on a random value for theta and phi (chosen from a flat distribution
+  // with CLHEP::RandFlat::shoot), we calculate the kinematics, the asymmetry
+  // and the cross section for this event.
 
   /**********
    * Generate Moller event

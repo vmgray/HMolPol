@@ -12,7 +12,6 @@
  *      - All HMolPol specific class structures are available in an interactive mode.
  *
  *  \class HMolPolRint
- *  \ingroup I have no idea what this is for WDC: Help
  *  \brief A ROOT command line interface
  *
  * \date <b>Date:</b> 07-16-2013

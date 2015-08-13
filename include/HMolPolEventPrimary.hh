@@ -36,7 +36,10 @@ class HMolPolEventPrimary: public TObject {
     Double_t fInteractionVertexMomentumY; ///< Interaction vertex momentum in Y
     Double_t fInteractionVertexMomentumZ; ///< Interaction vertex momentum in Z
 
-    // define a new Class known to ROOT? Huh?
+    /// Register this class with ROOT. This adds some standard ROOT functions to
+    /// the class, and makes sure that on the command line in ROOT it can do
+    /// tab-completion. This is associated with the ClassImp() line at the top
+    /// of the .cc file.
     ClassDef(HMolPolEventPrimary,1)
 
 };
