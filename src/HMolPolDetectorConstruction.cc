@@ -21,11 +21,14 @@
 
 #include <G4NistManager.hh>
 
+//Magnetic Field related stuff
 #include <G4FieldManager.hh>
 #include <G4TransportationManager.hh>
 
+// Sensitive detector stuff
 #include <G4SDManager.hh>
 
+//system includes
 #include <fstream>
 
 //HMolPol includes
@@ -64,7 +67,7 @@ G4VPhysicalVolume* HMolPolDetectorConstruction::Construct()
   G4cout << "##### In HMollerPolDetectorConstruction::Construct()... #####" << G4endl;
 
   //define a world volume
-  G4VPhysicalVolume *worldVolume;
+  G4VPhysicalVolume* worldVolume;
 
   /*****************
    * NIST Materials set up
