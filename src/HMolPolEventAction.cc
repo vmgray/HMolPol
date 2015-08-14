@@ -20,6 +20,16 @@
 #include <G4UserEventAction.hh>
 #include <G4SDManager.hh>
 
+//Taken from REMOLL - Attempt tp fix issue
+#include <G4HCofThisEvent.hh> // Use but not included
+#include <G4VHitsCollection.hh> //use but not included
+//#include <G4EventManager.hh>
+//#include "G4TrajectoryContainer.hh"
+//#include "G4Trajectory.hh"
+//#include "G4VVisManager.hh"
+//#include "G4UImanager.hh"
+//#include "G4ios.hh"
+
 // HMolPol includes
 #include "HMolPolAnalysis.hh"
 #include "HMolPolEventAction.hh"
@@ -125,7 +135,6 @@ void HMolPolEventAction::EndOfEventAction(const G4Event* event)
   /// \todo Event number should be branch in ROOT tree
   //fAnalysis->fPrimary->fEventNumber = event->GetEventID();
 
-
   // Clear all hits
   for (size_t i = 0; i < fAnalysis->fDetector.size(); i++)
   {
@@ -134,14 +143,19 @@ void HMolPolEventAction::EndOfEventAction(const G4Event* event)
   }
 
   // Get the hit collections of this event
-  G4HCofThisEvent *HCE = event->GetHCofThisEvent();
+  G4HCofThisEvent* HCE = event->GetHCofThisEvent();
+
+  //Define a particular hit collection
+  G4VHitsCollection* thiscol;
 
   // Loop over all hit collections, sort by output type
   for (int hcidx = 0; hcidx < HCE->GetCapacity(); hcidx++)
   {
 
     // Get this particular hit collection
-    G4VHitsCollection* thiscol = HCE->GetHC(hcidx);
+    //Debugging this orginal line, the bottom and line above are the changes
+    //G4VHitsCollection* thiscol = HCE->GetHC(hcidx);
+    thiscol = HCE->GetHC(hcidx);
 
     G4cout << G4endl << "  HC " << thiscol->GetName() << ": "
            << thiscol->GetSize() << " hits" << G4endl;
