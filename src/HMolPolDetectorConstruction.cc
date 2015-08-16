@@ -361,12 +361,12 @@ G4VPhysicalVolume* HMolPolDetectorConstruction::Construct()
 
           //crates a HMolPolGenericDetector with the detector name
           //(has the hmolpol/ in front)
-          HMolPolGenericDetector* sensitivedetector =
+          HMolPolGenericDetector* genericdetector =
           new HMolPolGenericDetector(detectorname);
 
-          //give that newly created HMolPolGenericDetector, sensitivedetector
+          //give that newly created HMolPolGenericDetector, genericdetector
           //the name if the volume
-          sensitivedetector->SetVolumeName(((*iter).first)->GetName());
+          genericdetector->SetVolumeName(((*iter).first)->GetName());
 
           //write out the name if the sensitive detector and the volume
           G4cout << "    Creating sensitive detector " << detectortype
@@ -379,7 +379,10 @@ G4VPhysicalVolume* HMolPolDetectorConstruction::Construct()
 
           // Add sensitive detector to SDmanager
           // so we can finds and use it
-          SDman->AddNewDetector(sensitivedetector);
+          SDman->AddNewDetector(genericdetector);
+
+          // Lastly, set sensitive detector to this and proceed
+          sensitivedetector = genericdetector;
         }
 
         // Set sensitive detector for the physical volume
