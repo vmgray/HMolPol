@@ -206,4 +206,5 @@ void HMolPolMessenger::SetNewValue(G4UIcommand* command, G4String newValue)
     fPrimaryGeneratorAction->SetBeamE(fBeamECmd->GetNewDoubleValue(newValue));
   }
 
+  return;
 }
