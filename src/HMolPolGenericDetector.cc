@@ -6,7 +6,7 @@
  * detectors out of and then processing the hits of in each of these detectors
  *
  * \date <b>Date:</b> 07-10-2013
- * \date <b>Modified:</b> 07-15-2015
+ * \date <b>Modified:</b> 08-17-2015
  *
  * \note <b>Entry Conditions:</b>
  *
@@ -69,6 +69,8 @@ HMolPolGenericDetector::HMolPolGenericDetector(G4String name)
   fNumberOfDetectorsWithName[SensitiveDetectorName]++;
   // Increment total number of detectors
   fTotalNumberOfDetectors++;
+
+  return;
 }
 
 /********************************************
@@ -93,6 +95,8 @@ HMolPolGenericDetector::~HMolPolGenericDetector()
   G4cout << G4endl << "## In the HMolPolGenericDetector::~HMolPolGenericDetector() ##"<< G4endl;
   fTotalNumberOfDetectors--;
   fNumberOfDetectorsWithName[SensitiveDetectorName]--;
+
+  return;
 }
 
 /********************************************
@@ -156,13 +160,13 @@ G4bool HMolPolGenericDetector::ProcessHits(G4Step *step, G4TouchableHistory* )
 
   //get rid of unused parameter warning
   // Get touchable volume info
-  //G4TouchableHistory *hist =
+  //G4TouchableHistory* hist =
   //    (G4TouchableHistory*)(step->GetPreStepPoint()->GetTouchable());
   //get rid of unused parameter warning
   //G4int copyID = hist->GetReplicaNumber();
 
-  G4StepPoint *prestep = step->GetPreStepPoint();
-  G4Track     *track   = step->GetTrack();
+  G4StepPoint* prestep = step->GetPreStepPoint();
+  G4Track* track   = step->GetTrack();
   G4TouchableHistory* touchable = (G4TouchableHistory*) prestep->GetTouchable();
 
   //get rid of unused parameter warning
@@ -235,7 +239,7 @@ void HMolPolGenericDetector::EndOfEvent(G4HCofThisEvent* HCE)
   G4cout << "  End of event for detector " << SensitiveDetectorName << G4endl;
 
   // Get pointer to the sensitive detector manager
-  G4SDManager *sdman = G4SDManager::GetSDMpointer();
+  G4SDManager* sdman = G4SDManager::GetSDMpointer();
 
   // If no ID for this hit collection
   if (fHitsCollectionID < 0)
