@@ -183,6 +183,7 @@ void HMolPolEventAction::EndOfEventAction(const G4Event* event)
           HMolPolEventGenericDetectorHit hit;
           hit.fTrackID = thisHit->GetTrackID();
           hit.fDetectorID = thisHit->GetDetectorID();
+          hit.fDetectorName = thisHit->GetDetectorName();
           hit.fPosition = TVector3(
                             thisHit->GetPosition().x(),
                             thisHit->GetPosition().y(),
@@ -198,7 +199,9 @@ void HMolPolEventAction::EndOfEventAction(const G4Event* event)
 
           // Add hit
           G4cout << "  Adding hit to branch " << hit.fDetectorID << G4endl;
-          fAnalysis->fDetector[hit.fDetectorID]->fHits.push_back(hit);
+          //logical volumes  are branches. This adds the hit to the correct
+          //branch
+          fAnalysis->fDetector[thisHit->GetDetectorTypeID()]->fHits.push_back(hit);
         }
       }
     }

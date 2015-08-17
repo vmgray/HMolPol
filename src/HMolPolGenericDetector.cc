@@ -22,7 +22,7 @@
 
 //HMolPol includes
 #include "HMolPolGenericDetector.hh"
-#include "HMolPolGenericDetectorHit.hh"
+//#include "HMolPolGenericDetectorHit.hh"
 
 // Initialize static variables
 G4int HMolPolGenericDetector::fTotalNumberOfDetectors = 0;
@@ -152,7 +152,7 @@ void HMolPolGenericDetector::Initialize(G4HCofThisEvent* HCE)
  * Date: 07-10-2013
  * Modified: 07-15-2015
  ********************************************/
-G4bool HMolPolGenericDetector::ProcessHits(G4Step *step, G4TouchableHistory* )
+G4bool HMolPolGenericDetector::ProcessHits(G4Step* step, G4TouchableHistory* )
 {
   //debugging
   G4cout << G4endl << "## In the HMolPolGenericDetector::ProcessHits ##"<< G4endl;
@@ -167,13 +167,46 @@ G4bool HMolPolGenericDetector::ProcessHits(G4Step *step, G4TouchableHistory* )
 
   G4StepPoint* prestep = step->GetPreStepPoint();
   G4Track* track   = step->GetTrack();
-  G4TouchableHistory* touchable = (G4TouchableHistory*) prestep->GetTouchable();
+  //No longer need
+  //  G4TouchableHistory* touchable = (G4TouchableHistory*) prestep->GetTouchable();
+
+  //loop through our vector of names and make sure the physical volume
+  //is registered to to this detector instance (logical Volume)
+  //track has the volume name
+  G4int VolumeIndex = -1;
+
+  for(size_t i = 0; i < fPhysicalVolumeNames.size(); i++)
+  {
+    if( fPhysicalVolumeNames[i].compareTo(track->GetVolume()->GetName()) == 0)
+    {
+      VolumeIndex = i;
+      break;
+    }
+  }
+/*
+  //debugging
+  G4cout << "  Searching for Volume Names " << track->GetVolume()->GetName() <<
+      " Found at Volume index: "<< VolumeIndex << G4endl;
+  G4cout << "  Volume Stored " << fPhysicalVolumeNames[VolumeIndex] <<
+        " for Volume index: "<< VolumeIndex << G4endl;
+  G4cout << "  Volume Type ID: " << fHitsCollectionID << G4endl;
+*/
+
+  //if the VolumeIndex is less than 0 it it is not part of this detector instance
+  //so we ignore it
+  if(VolumeIndex < 0)
+  {
+    G4cerr << "Hit not associated with: " << SensitiveDetectorName << G4endl;
+    return false;
+  }
+
 
   //get rid of unused parameter warning
   //G4double edep = step->GetTotalEnergyDeposit();
 
   G4ParticleDefinition*  particleDefinition = step->GetTrack()->GetDefinition();
 
+  //TODO THIS IS WRONG FIX.
   // We're just going to record primary particles and things
   // that have just entered our boundary
   G4bool badhit = true;
@@ -185,33 +218,51 @@ G4bool HMolPolGenericDetector::ProcessHits(G4Step *step, G4TouchableHistory* )
 
   //  Make pointer to new hit if it's a valid track
   HMolPolGenericDetectorHit *thisHit;
-  if (!badhit) {
-      thisHit = new HMolPolGenericDetectorHit();
+  if (!badhit)
+  {
+    thisHit = new HMolPolGenericDetectorHit();
 
-      //Really I want this to be the name of the "detector" (with left and right
-      // the closest I get is in detector construction line 238
-      // How do I get that here?? or even better what I want??
-      thisHit->SetTrackID(step->GetTrack()->GetTrackID());
+    //Really I want this to be the name of the "detector" (with left and right
+    // the closest I get is in detector construction line 238
+    // How do I get that here?? or even better what I want??
+    thisHit->SetTrackID(step->GetTrack()->GetTrackID());
 
-      /// \todo Fix volume numbering for detector ID
-      G4cout << touchable->GetVolume(0)->GetCopyNo() << G4endl;
-      G4cout << touchable->GetVolume(1)->GetCopyNo() << G4endl;
-      thisHit->SetDetectorID(touchable->GetVolume(1)->GetCopyNo());
+    //Set the detector type ID, which is associated with the logical volume
+    //Logical volumes have one branch this makes sure the hits land in the
+    //corresponding logical detector branch
+    thisHit->SetDetectorTypeID(fHitsCollectionID);
 
-      thisHit->SetPosition(prestep->GetPosition());
-      thisHit->SetMomentum(prestep->GetMomentum());
+    //Detector name is the name of the physical volume
+    //detector ID is the index the physical volume had in
+    //fPhysicalVolumeNames vector.
+    thisHit->SetDetectorID(VolumeIndex);
+    thisHit->SetDetectorName(fPhysicalVolumeNames[VolumeIndex]);
 
-      thisHit->SetKineticEnergy(step->GetTrack()->GetKineticEnergy());
-      thisHit->SetTotalEnergy(step->GetTrack()->GetTotalEnergy());
+    thisHit->SetPosition(prestep->GetPosition());
+    thisHit->SetMomentum(prestep->GetMomentum());
 
-      thisHit->SetParticleName(particleDefinition->GetParticleName());
-      thisHit->SetParticleType(particleDefinition->GetPDGEncoding());
+    thisHit->SetKineticEnergy(step->GetTrack()->GetKineticEnergy());
+    thisHit->SetTotalEnergy(step->GetTrack()->GetTotalEnergy());
 
-      // add hit to hit collection
-      fHitsCollection->insert(thisHit);
+    thisHit->SetParticleName(particleDefinition->GetParticleName());
+    thisHit->SetParticleType(particleDefinition->GetPDGEncoding());
 
-      // delete this hit (a copy continues to live in hit collection)
-      //delete thisHit;
+/*
+    //debugging
+    G4cout << G4endl << "  What is added to Hit to Collection" << G4endl;
+    G4cout << "  Searching for Volume Names " << track->GetVolume()->GetName() <<
+        " Found at Volume index: "<< VolumeIndex << G4endl;
+    G4cout << "  Volume Stored " << thisHit->GetDetectorName() <<
+          " for Volume index: "<< thisHit->GetDetectorID() << G4endl;
+    G4cout << "  Volume Type ID: " << thisHit->GetDetectorTypeID() << G4endl;
+*/
+
+
+    // add hit to hit collection
+    fHitsCollection->insert(thisHit);
+
+    // delete this hit (a copy continues to live in hit collection)
+    //delete thisHit;
   }
   return !badhit;
 }

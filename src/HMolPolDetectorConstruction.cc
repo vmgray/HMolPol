@@ -25,6 +25,8 @@
 #include <G4FieldManager.hh>
 #include <G4TransportationManager.hh>
 
+#include <G4PhysicalVolumeStore.hh>
+
 // Sensitive detector stuff
 #include <G4SDManager.hh>
 
@@ -138,6 +140,10 @@ G4VPhysicalVolume* HMolPolDetectorConstruction::Construct()
   //function to take the GDML it read in (the experiment)
   //and make it the "World"
   worldVolume = fGDMLParser->GetWorldVolume();
+
+  // Get pointer to sensitive detector manager
+  //This can be useful and used throughout all scopes :)
+  G4SDManager* SDman = G4SDManager::GetSDMpointer();
 
   /*****************
    * Read in the auxiliary information.
@@ -343,9 +349,6 @@ G4VPhysicalVolume* HMolPolDetectorConstruction::Construct()
         // Form name of sensitive detector (convention is to prefix this with hmolpol/ )
         G4String detectorname = "hmolpol/" + detectortype;
 
-        // Get pointer to sensitive detector manager
-        G4SDManager* SDman = G4SDManager::GetSDMpointer();
-
         // Find pointer to current sensitive detector of that name
         // in the SDmanager
         G4VSensitiveDetector* sensitivedetector =
@@ -383,14 +386,99 @@ G4VPhysicalVolume* HMolPolDetectorConstruction::Construct()
 
           // Lastly, set sensitive detector to this and proceed
           sensitivedetector = genericdetector;
+        }else //we have another volume of detector detector with detectorname
+        {
+          //tell sensitive detector we have a new volume
+          //sensitivedetector
         }
 
-        // Set sensitive detector for the physical volume
+        //debugging
+        G4cout << "    Volume Name: " << ((*iter).first)->GetName() << G4endl;
+
+        // Set sensitive detector for the logical volume
         ((*iter).first)->SetSensitiveDetector(sensitivedetector);
       }
     }
   }
   G4cout << G4endl << G4endl;
+
+  /*
+   * Now we want to loop over the physical volumes and use there names in the
+   * Generaic Detector (and ROOT Tree). Physical are all 100% seperate intities
+   * were the logical volumes are not as they can and are reused.
+   */
+  G4cout << "  Parsing through physical volumes" << G4endl;
+
+  //Get a list of all physical volumes read.
+  const G4PhysicalVolumeStore* pvs = G4PhysicalVolumeStore::GetInstance();
+  //defining a new iterator for the physical volumes
+  std::vector<G4VPhysicalVolume*>::const_iterator pvciter;
+  for( pvciter = pvs->begin(); pvciter != pvs->end(); pvciter++ )
+  {
+    G4cout << "Physical Volume: " << (*pvciter)->GetName() << " \tHash ID: "
+      << (*pvciter)->GetName().hash(G4String::exact) << G4endl;
+
+    //Gets the auxerly info for this physical volume
+    G4GDMLAuxListType auxInfo = fGDMLParser->GetVolumeAuxiliaryInformation(
+      (*pvciter)->GetLogicalVolume());
+
+    //Loop over auxiliary attributes for physical volumes. THis is all the things
+    //that we have in a logical volume GDML file like:
+    //<auxiliary auxtype="SensDet" auxvalue="DetectorDet" />
+    std::vector<G4GDMLAuxPairType>::const_iterator ipair = auxInfo.begin();
+    for( ipair = auxInfo.begin(); ipair != auxInfo.end(); ipair++ )
+    {
+      /*
+       * Only intersted in attributes of sensitive detectors.
+       * ipair is the GDML attiributes,
+       *
+       * This is showen in the GDML by:
+       * <auxiliary auxtype="SensDet" auxvalue="DetectorDet" />
+       *
+       * ipar.type = "SensDet" means we go in the if
+       */
+      if( ipair->type == "SensDet" )
+      {
+        // Get specified sensitive detector type: essentially the name
+        //Using this GDML example:
+        //<auxiliary auxtype="SensDet" auxvalue="DetectorDet" />
+        // ipar->valu is DetectorDet
+         G4String detectortype = ipair->value;
+
+         // Form name of sensitive detector (convention is to prefix this with hmolpol/ )
+         G4String detectorname = "hmolpol/" + detectortype;
+
+         // This is a copy of the sensitive detector we defined and
+         //gave attributes before
+         //casting this, because it spits out the parent class,
+         //G4SensitiveDetector and we need a HMolPolGenericDetector
+         HMolPolGenericDetector* sensitivedetector =
+             (HMolPolGenericDetector*) SDman->FindSensitiveDetector(detectorname);
+
+         //Make sure this is it is defined
+         if(sensitivedetector)
+         {
+           //register this phyiscal volume with sensitivedetector (the
+           //HMolPolGenericDetector defined above
+           //This is different then the standard Geant4 way, because we want
+           //our detector to know the name of ALL physical volumes of this type.
+           //
+           // our sensitivedetector is associated to a logical volume. We want
+           // this sensitivedetector to know all daughter physical volumes
+           // A logical volume could have many daughter physical volumes, and
+           //when we write to the ROOT file we want them to be (easily) distigusable
+           //ie. Logial volume DetectorDet has 2 phyical volume daughter,
+           //Right and Left. So we are telling sensitivedetector that logical volume
+           //DetectorDet has 2 daughters and their names
+           sensitivedetector->RegisterPhysicalVolume((*pvciter)->GetName());
+         }else
+         {
+           G4cerr << "Sensitive Detector not found: " << detectorname << G4endl;
+         }
+      }
+    }
+  }
+
 
   /*****************
    * Add in the Magnetic field to world volume

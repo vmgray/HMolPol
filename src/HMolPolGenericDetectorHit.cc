@@ -6,7 +6,7 @@
  * \bug I really would like to know why this is here
  *
  * \date <b>Date:</b> 07-15-2013
- * \date <b>Modified:</b> 07-18-2013
+ * \date <b>Modified:</b> 08-11-2013
  *
  * \note <b>Entry Conditions:</b>
  *
@@ -63,6 +63,8 @@ HMolPolGenericDetectorHit::HMolPolGenericDetectorHit()
   fTotalEnergy  = 0.;
 
   fPosition = G4ThreeVector(0.0,0.0,-1000.0);
+
+  return;
 }
 
 /********************************************
@@ -98,6 +100,8 @@ HMolPolGenericDetectorHit::HMolPolGenericDetectorHit(const HMolPolGenericDetecto
 
   fParticleName = right.fParticleName;
   fParticleType = right.fParticleType;
+
+  return;
 }
 
 /********************************************
@@ -157,6 +161,8 @@ void HMolPolGenericDetectorHit::Draw()
     // Draw the circle
     pVVisManager->Draw(circle);
   }
+
+  return;
 }
 
 /********************************************
@@ -184,4 +190,6 @@ void HMolPolGenericDetectorHit::Print()
       << fPosition.y()/CLHEP::cm << ", "
       << fPosition.z()/CLHEP::cm << ", "
       << G4endl;
+
+  return;
 }

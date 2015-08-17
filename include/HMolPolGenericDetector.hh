@@ -34,11 +34,16 @@ class HMolPolGenericDetector : public G4VSensitiveDetector
     HMolPolGenericDetector( G4String name);   ///< Constructor for the
       /// HMolPolGenericDetector
     virtual ~HMolPolGenericDetector();   ///< destructor for the
-    /// HMolPolGenericDetector
 
     virtual void Initialize(G4HCofThisEvent* );   ///< Initialize function
     virtual G4bool ProcessHits(G4Step*,G4TouchableHistory* );  ///< process hits function
     virtual void EndOfEvent(G4HCofThisEvent* );   ///, End of event function
+
+    ///< this function registars (adds) the physical volume name to
+    //things to track
+    void RegisterPhysicalVolume(G4String name){
+      fPhysicalVolumeNames.push_back(name);
+    }
 
     const G4String& GetVolumeName() const {
       return fVolumeName;
@@ -58,6 +63,8 @@ class HMolPolGenericDetector : public G4VSensitiveDetector
 
     HMolPolGenericDetectorHitsCollection* fHitsCollection;     ///< Hit collection
     G4int fHitsCollectionID;                                   ///< Hit collection ID
+
+    std::vector<G4String> fPhysicalVolumeNames; ///< Names of all the physical volumes
 
 };
 

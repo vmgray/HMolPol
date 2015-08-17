@@ -51,14 +51,14 @@ class HMolPolGenericDetectorHit: public G4VHit {
     // Print info about the hit
     virtual void Print();
 
-    G4int GetDetectorID() const {
-      return fDetectorID;
+    G4int GetDetectorTypeID() const {
+      return fDetectorTypeID;
     } ///< function to get the detector id number (int)
 
-    void SetDetectorID(G4int detectorID) {
-      fDetectorID = detectorID;
-      //fDetectorID = fColHits->GetName(); - want something like this where this is a string not an int
-    } ///< function to set the detector id number (int)
+    void SetDetectorTypeID(G4int detectorTypeID) {
+      fDetectorTypeID = detectorTypeID;
+      //fDetectorTypeID = fColHits->GetName(); - want something like this where this is a string not an int
+    } ///< function to set the logical detector id number (int)
 
     G4int GetTrackID() const {
       return fTrackID;
@@ -122,10 +122,29 @@ class HMolPolGenericDetectorHit: public G4VHit {
       fTotalEnergy = totalEnergy;
     } ///< function to set the total energy (double) of the track
 
+    G4String GetDetectorName() const {
+      return fDetectorName;
+    } ///< function to get the physical volume name
+
+    void SetDetectorName(G4String DetectorName) {
+      fDetectorName = DetectorName;
+    } ///< function to set the physical volume name
+
+    G4int GetDetectorID() const {
+      return fDetectorID;
+    } ///< function to get the physical detector id number (int)
+
+    void SetDetectorID(G4int detectorID) {
+      fDetectorID = detectorID;
+    } ///< function to set the physical detector id number (int)
+
   private:
-    G4int fDetectorID; ///< the Detector ID number (What ever this is and for?)
+    G4int fDetectorTypeID; ///< the Detector ID of the logical volume (internal only)
     G4int fTrackID; ///< Track ID number
     // - the number of the track within an Event
+
+    G4String fDetectorName; ///< Name of the physical volume
+    G4int fDetectorID; ///< the Detector ID number of the PHYSICAL volume(What ever this is and for?)
 
     G4String fParticleName; ///< the particle name
     G4int fParticleType;    ///< the particle type (as an integer)
