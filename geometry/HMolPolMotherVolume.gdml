@@ -34,14 +34,17 @@
     <position name="HGasTargetCenter" x="0" y="0" z="0" unit="m" />
 
     <!-- position of the Dummy (and all its parts) in the "World" -->
-    <position name="DummyCenter" x="0" y="0" z="4.5" unit="m" />
+    <position name="DummyCenter" x="0" y="0" z="2.5" unit="m" />
 
-<!-- Commented Out for debugging -->
+<!-- more debugging -->
+    <!-- position of the Dummy (and all its parts) in the "World" -->
+    <position name="DummyCenter2" x="0" y="0" z="4.5" unit="m" />
+
     <!-- position of the Right Detector (and all its parts) in the "World" -->
-<!--    <position name="RightDetectorCenter" x="0.09" y="0" z="3.0" unit="m" /> -->
+    <position name="RightDetectorCenter" x="0.09" y="0" z="3.0" unit="m" />
 
     <!-- position of the Left Detector (and all its parts) in the "World" -->
-<!--     <position name="LeftDetectorCenter" x="-0.09" y="0" z="3.0" unit="m" /> -->
+     <position name="LeftDetectorCenter" x="-0.09" y="0" z="3.0" unit="m" />
 
 
   </define>
@@ -70,21 +73,26 @@
         <positionref ref="HGasTargetCenter" />
       </physvol>
 
-      <physvol>
+      <physvol name="Dummy">
         <file name="geometry/dummy.gdml" />
         <positionref ref="DummyCenter" />
       </physvol>
-<!-- debugging
-      <physvol>
+<!-- more dubbiging -->
+      <physvol name="Dummy2">
+        <file name="geometry/dummy.gdml" />
+        <positionref ref="DummyCenter2" />
+      </physvol>
+
+      <physvol name="RightDetector">
         <file name="geometry/detector.gdml" />
         <positionref ref="RightDetectorCenter" />
       </physvol>
 
-      <physvol>
+      <physvol name="LeftDetector">
         <file name="geometry/detector.gdml" />
         <positionref ref="LeftDetectorCenter" />
       </physvol>
--->
+
     </volume>
   </structure>
 
