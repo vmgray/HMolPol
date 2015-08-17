@@ -74,6 +74,7 @@ HMolPolPrimaryGeneratorAction::HMolPolPrimaryGeneratorAction(HMolPolAnalysis* a)
 
   //set the beam energy
 
+  return;
 }
 
 /********************************************
@@ -323,8 +324,8 @@ void HMolPolPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
   /// \todo actually write the cross section
   fAnalysis->fPrimary->fCrossSection = D_sigma;
 
-
-
   G4cout << "#### Leaving HMolPolPrimaryGeneratorAction::GeneratePrimaries ####"
       << G4endl;
+
+  return;
 }
