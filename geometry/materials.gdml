@@ -33,8 +33,8 @@
 
   <material name="BC-408_scint_dummy" formula="BC-408_scint">
     <D unit="g/cm3" value="1.032" />          <!-- Average density -->
-    <fraction n="0.552" ref="G4_H" />
-    <fraction n="0.5" ref="G4_C" />
+    <fraction n="0.523" ref="G4_H" />
+    <fraction n="0.474" ref="G4_C" />
   </material>
 
   <!-- This is the material Geant4 has to stop everything the "traditional way" is 
