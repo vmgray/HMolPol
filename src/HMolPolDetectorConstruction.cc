@@ -386,10 +386,6 @@ G4VPhysicalVolume* HMolPolDetectorConstruction::Construct()
 
           // Lastly, set sensitive detector to this and proceed
           sensitivedetector = genericdetector;
-        }else //we have another volume of detector detector with detectorname
-        {
-          //tell sensitive detector we have a new volume
-          //sensitivedetector
         }
 
         //debugging

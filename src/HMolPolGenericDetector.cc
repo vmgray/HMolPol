@@ -225,7 +225,7 @@ G4bool HMolPolGenericDetector::ProcessHits(G4Step* step, G4TouchableHistory* )
     //Really I want this to be the name of the "detector" (with left and right
     // the closest I get is in detector construction line 238
     // How do I get that here?? or even better what I want??
-    thisHit->SetTrackID(step->GetTrack()->GetTrackID());
+    thisHit->SetTrackID(track->GetTrackID());
 
     //Set the detector type ID, which is associated with the logical volume
     //Logical volumes have one branch this makes sure the hits land in the
@@ -241,8 +241,8 @@ G4bool HMolPolGenericDetector::ProcessHits(G4Step* step, G4TouchableHistory* )
     thisHit->SetPosition(prestep->GetPosition());
     thisHit->SetMomentum(prestep->GetMomentum());
 
-    thisHit->SetKineticEnergy(step->GetTrack()->GetKineticEnergy());
-    thisHit->SetTotalEnergy(step->GetTrack()->GetTotalEnergy());
+    thisHit->SetKineticEnergy(track->GetKineticEnergy());
+    thisHit->SetTotalEnergy(track->GetTotalEnergy());
 
     thisHit->SetParticleName(particleDefinition->GetParticleName());
     thisHit->SetParticleType(particleDefinition->GetPDGEncoding());
