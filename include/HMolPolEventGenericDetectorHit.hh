@@ -31,11 +31,14 @@ class HMolPolEventGenericDetectorHit: public TObject {
     Int_t fTrackID;     ///< Track ID
     Int_t fDetectorID;  ///< Detector ID
 
+    TString fParticleName;     ///< Particle Name
+    Int_t fParticleType;       ///< Particle Type (PGD encoding)
+
+    TString fDetectorName; ///< The physical volume name
+
     TVector3 fPosition; ///< Hit position
     TVector3 fMomentum; ///< Hit momentum
 
-    TString fParticleName;     ///< Particle Name
-    Int_t fParticleType;       ///< Particle Type (PGD encoding)
 
     Double_t fTotalEnergy;      ///< total energy of the track
     Double_t fKineticEnergy;    ///< Kinetic energy of the track
