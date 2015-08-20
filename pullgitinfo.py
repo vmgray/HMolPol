@@ -1,44 +1,64 @@
 #!/usr/bin/python
 
-import os
-import sys
+#import (includes)
+import os #OS stuff
+import sys # System
 
+#Get working directory (build directory)
 presentcwd = os.getcwd()
-os.chdir(sys.argv[1])
+#Change current working directory to the first command-line argument
+#(as a string) supplied to the script in question. 
+#Main simulation directory???
+os.chdir(sys.argv[1]) 
 
+f = os.popen("git log -n 1 && git status -bs && " \
+             "echo \"\nGeant4 version\" `geant4-config --version` && " \
+             "echo \"  ROOT version\" `root-config --version` && "\
+             "echo \" `cmake --version`\" && echo \"\nGenerated at `date`\"")
 
-f = os.popen("git log -n 1 && git status -bs && echo \"\nGeant4 version\" `geant4-config --version` && echo \"  ROOT version\" `root-config --version` && echo \" `cmake --version`\" && echo \"\nGenerated at `date`\"")
-
+#define 2 empty stings
 boringstring = "";
 fullstring = "";
 
-if( f != 0):
-    for line in f:
-	boringstring += line
-else:
-    boringstring = "git information unavailable"
+#if f exits
+if (f != 0):
+  #for each line in f add it to the boringstring
+  for line in f:
+    boringstring += line
+else: #if f doesn't exist 
+  boringstring = "git information unavailable"
 
+#variable, for max lengh of boringstring
 maxlen = 2048
 
+# add in the source directory location to boringstring
 boringstring += "Source dir " + os.getcwd()
+# add in the build directory location to boringstring
 boringstring += "\nBuild  dir " + presentcwd + "\n"
 
+#If the lenght of the boringstring is greater than maxlen give warning
 if  len(boringstring) > maxlen:
-     print "WARNING:  Truncating info from git";
-     boringstring = boringstring[0:maxlen-1]
+  print "WARNING:  Truncating info from git";
+  #Cut the boringstring lenght and value to only the charaters numbering 0 to maxlen-1 
+  boringstring = boringstring[0:maxlen-1]
 
+#for each charater in the boringstring and encode in hex store in fullstring
 for x in boringstring:
-    fullstring += '\\x'+x.encode('hex')
+  fullstring += '\\x'+x.encode('hex')
 
-
-     
-
-newheadertext = """#ifndef __GITINFO_HH
-#define __GITINFO_HH
+#define a new srting  which will be written to the screen when buliding
+#simulation. Includes:
+#Last commit #, author, date, message
+#branch using, of local simulation to that on the repository
+#Geantt 4 info
+#Cmake info
+#Complie time, simulation directory, build directory 
+newheadertext = """#ifndef __GITINFO_HH 
+  #define __GITINFO_HH
 
 /*
-    Generated automatically by cmake process
-    Encoding:
+  Generated automatically by cmake process
+  Encoding:
 -------------------------------------------------------------
 """ + boringstring + """
 -------------------------------------------------------------
@@ -53,15 +73,21 @@ newheadertext = """#ifndef __GITINFO_HH
 #endif//__GITINFO_HH
 """
 
-
+#Change directory to working directory (main simulation directory)
 os.chdir(presentcwd)
 
+#set an output directory 
 outdir = "include/"
+#If this diectroy doesn't exist, creat it
 if not os.path.exists(outdir):
-    os.makedirs(outdir)
+  os.makedirs(outdir)
 
+#Open a writeable file in outdir called gitinfo.hh
 newheader = open( outdir + "/gitinfo.hh", "w")
+#write newheadertext to this file
 newheader.write(newheadertext)
+#Close file
 newheader.close()
 
+#print thie information to the terminal
 print "Repository information\n", boringstring
