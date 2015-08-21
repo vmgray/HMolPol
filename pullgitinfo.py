@@ -12,18 +12,25 @@ presentcwd = os.getcwd()
 # Main simulation directory
 os.chdir(sys.argv[1])
 
-print presentcwd
-print sys.argv[1]
+#debugging
+#print presentcwd
+#print sys.argv[1]
 
 # Grab All the information needed for the ROOT File
-HMOLPOL_REVISION = os.popen("git log --pretty=format:'%H' -n 1").read()
-HMOLPOL_ROOT = os.popen("root-config --version").read()
-HMOLPOL_LAST_CHANGED_AUTHOR = os.popen("git log --pretty=format:'%an' -n 1").read()
-HMOLPOL_LAST_CHANGED_DATE = os.popen("git log --pretty=format:'%cd' -n 1").read()
-HMOLPOL_CURRENT_BRANCH = os.popen("git symbolic-ref -q --short HEAD").read()
-HMOLPOL_LAST_MASTER_REVISION = os.popen("git log HEAD --pretty=format:'%H' -n 1").read()
-HMOLPOL_LAST_MASTER_CHANGED_AUTHOR = os.popen("git log HEAD --pretty=format:'%an' -n 1").read()
-HMOLPOL_LAST_MASTER_CHANGED_DATE = os.popen("git log HEAD --pretty=format:'%cd' -n 1").read()
+# String name = run a command and read the output of the command and strip any
+# new line
+# 
+# os.open = Open a pipe to or from command. The return value is an open file object connected to the pipe,
+# read() = read the output of the command (this would be stored)
+# remove any new line charaters
+HMOLPOL_REVISION = os.popen("git log --pretty=format:'%H' -n 1").read().rstrip('\n')
+HMOLPOL_ROOT = os.popen("root-config --version").read().rstrip('\n')
+HMOLPOL_LAST_CHANGED_AUTHOR = os.popen("git log --pretty=format:'%an' -n 1").read().rstrip('\n')
+HMOLPOL_LAST_CHANGED_DATE = os.popen("git log --pretty=format:'%cd' -n 1").read().rstrip('\n')
+HMOLPOL_CURRENT_BRANCH = os.popen("git symbolic-ref -q --short HEAD").read().rstrip('\n')
+HMOLPOL_LAST_MASTER_REVISION = os.popen("git log master HEAD --pretty=format:'%H' -n 1").read().rstrip('\n')
+HMOLPOL_LAST_MASTER_CHANGED_AUTHOR = os.popen("git log master HEAD --pretty=format:'%an' -n 1").read().rstrip('\n')
+HMOLPOL_LAST_MASTER_CHANGED_DATE = os.popen("git log master HEAD --pretty=format:'%cd' -n 1").read().rstrip('\n')
 # HMOLPOL_URL =
 
 # create the lines for the file
@@ -37,23 +44,24 @@ Master_Author = "#define HMOLPOL_LAST_MASTER_CHANGED_AUTHOR \t\"%s\"" % HMOLPOL_
 Master_Date = "#define HMOLPOL_LAST_MASTER_CHANGED_DATE \t\"%s\"" % HMOLPOL_LAST_MASTER_CHANGED_DATE
 
 # debugging
-print Revision
-print Root
-print Last_Author
-print Last_Date
-print Branch
-print Master_Revision
-print Master_Author
-print Master_Date
+if False:
+  print Revision
+  print Root
+  print Last_Author
+  print Last_Date
+  print Branch
+  print Master_Revision
+  print Master_Author
+  print Master_Date
 
 f = os.popen("git log -n 1 && git status -bs && " \
              "echo \"\nGeant4 version\" `geant4-config --version` && " \
              "echo \"  ROOT version\" `root-config --version` && "\
              "echo \" `cmake --version`\" && echo \"\nGenerated at `date`\"")
 
-# define 2 empty stings
+
+# define empty stings, this will be printed when compiled will hold 
 boringstring = "";
-fullstring = "";
 
 # if f exits
 if (f != 0):
@@ -77,36 +85,16 @@ if  len(boringstring) > maxlen:
   # Cut the boringstring lenght and value to only the charaters numbering 0 to maxlen-1
   boringstring = boringstring[0:maxlen - 1]
 
-# for each charater in the boringstring and encode in hex store in fullstring
-for x in boringstring:
-  fullstring += '\\x' + x.encode('hex')
-
 # define a new srting  which will be written to the screen when buliding
 # simulation. Includes:
 # Last commit #, author, date, message
 # branch using, of local simulation to that on the repository
-# Geantt 4 info
-# Cmake info
 # Complie time, simulation directory, build directory
-newheadertext = """#ifndef __GITINFO_HH
-  #define __GITINFO_HH
+#
+# Not included:
+# Geant 4 info
+# Cmake info
 
-/*
-  Generated automatically by cmake process
-  Encoding:
--------------------------------------------------------------
-""" + boringstring + """
--------------------------------------------------------------
-*/
-
-#define __GITMAXINFO_SIZE 2048
-
-#define gGitInfoStr \"""" + fullstring + '\"' \
-+ \
-"""
-
-#endif//__GITINFO_HH
-"""
 
 # Change directory to working directory (main simulation directory)
 #os.chdir(presentcwd)
@@ -122,9 +110,9 @@ headertext = "// This file is generated automatically.All changes will be lost."
                                         Last_Date, Branch, Master_Revision,
                                         Master_Author, Master_Date)
 
-#debugging
-#print "headertext: %s" % headertext
 
+#debugging
+#print "headertext:\n%s" % headertext
 
 # write this run information to HMolPolVersion
 newheader = open(outdir + "/HMolPolVersion.hh", "w")
@@ -133,12 +121,5 @@ newheader.write(headertext)
 # Close file
 newheader.close()
 
-# Open a writeable file in outdir called gitinfo.hh
-# newheader = open( outdir + "/gitinfo.hh", "w")
-# write newheadertext to this file
-# newheader.write(newheadertext)
-# Close file
-# newheader.close()
-
 # print thie information to the terminal
-print "Repository information\n", boringstring
+#print "Repository information\n", boringstring

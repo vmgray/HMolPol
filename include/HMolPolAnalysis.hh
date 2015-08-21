@@ -128,9 +128,11 @@ class HMolPolAnalysis
 
   private:
 
-    HMolPolRunInformation* pUserRunInformation;  ///< the HMolPolRunInformation structure
+    HMolPolRunInformation* pRunInformation;  ///< the HMolPolRunInformation structure
     ///< contain the information from GitHub, so the version of the simulation is
     ///< knowen
+
+
 };
 
 #endif /* HMOLPOLANALYSIS_HH_ */

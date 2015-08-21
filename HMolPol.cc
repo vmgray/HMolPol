@@ -78,7 +78,7 @@ int main (int argc, char** argv)
    * (FTFP - http://geant4.cern.ch/support/proc_mod_catalog/physics_lists/hadronic/FTFP.html)
    *  \note physics list - FTRP-BERT is replacing the LHEP physics list
    *  \note standard EM processes are include in all list
-   *  \bug FTFP_bert may be no the right physics list for Mainz energy,
+   *  \bug FTFP_bert may be not the right physics list for Mainz energy,
    *  but should be for JLab
    *  \TODO: check to see if these are right and have one for each place
   *********/

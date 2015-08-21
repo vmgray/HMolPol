@@ -51,14 +51,17 @@
  ********************************************/
 HMolPolAnalysis::HMolPolAnalysis()
 : fRootTree(0),fRootFile(0),
-  fRootFileStem("HMolPol"),fRootFileName(""),
+  fRootFileStem("HMolPol"),
+  fRootFileName(""),
   fRunNumber(0),fBeamEnergy(0),
   fUnits(0),fUnitsBranch(0),
-  fPrimary(0),fPrimaryBranch(0),
-  pUserRunInformation(0)
+  fPrimary(0),fPrimaryBranch(0)
 {
   // starting the anaylsis
   G4cout << "###### Calling HMolPolAnalysis::HMolPolAnalysis() ######" << G4endl;
+
+  //Create the user information
+  pRunInformation = new HMolPolRunInformation();
 
 }
 
@@ -230,12 +233,12 @@ void HMolPolAnalysis::ConstructRootTree()
         "HMolPolEventGenericDetector", &fDetector[i], bufsize, split);
   }
 
-  /// \TODO get the Run information to work
   // Write run data
-  //pUserRunInformation->Write();
+  pRunInformation->Write();
 
   return;
 }
+
 /********************************************
  * Programmer: Valerie Gray
  * Function: AutoSaveRootTree

@@ -5,7 +5,7 @@
  * \brief <b>Purpose:</b> This is the file is to get the run information
  *
  * \date <b>Date:</b> 07-16-2013
- * \date <b>Modified:</b> 07-26-2013
+ * \date <b>Modified:</b> 08-21-2015
  *
  * \note <b>Entry Conditions:</b>
  *
@@ -33,16 +33,20 @@ ClassImp(HMolPolRunInformation)
  * Return:
  * Called By:
  * Date: 07-16-2013
- * Modified:
+ * Modified: 08-21-2015
  ********************************************/
 HMolPolRunInformation::HMolPolRunInformation()
 {
-  //Conditions.AddLast(new TObjString("Revision: " + TString(HMOLPOL_REVISION)));
-  //Conditions.AddLast(new TObjString("Root: " + TString(HMOLPOL_ROOT)));
+  Conditions.AddLast(new TObjString("Revision: " + TString(HMOLPOL_REVISION)));
+  Conditions.AddLast(new TObjString("Root: " + TString(HMOLPOL_ROOT)));
   //Conditions.AddLast(new TObjString("URL: " + TString(HMOLPOL_URL)));
-  //Conditions.AddLast(new TObjString("Last changed author: " + TString(HMOLPOL_LAST_CHANGED_AUTHOR)));
-  //Conditions.AddLast(new TObjString("Last changed date: " + TString(HMOLPOL_LAST_CHANGED_DATE)));
-  //Conditions.AddLast(new TObjString("Last changed revision: " + TString(HMOLPOL_LAST_CHANGED_REV)));
+  Conditions.AddLast(new TObjString("Last changed author: " + TString(HMOLPOL_LAST_CHANGED_AUTHOR)));
+  Conditions.AddLast(new TObjString("Last changed date: " + TString(HMOLPOL_LAST_CHANGED_DATE)));
+  Conditions.AddLast(new TObjString("Current Branch: " + TString(HMOLPOL_CURRENT_BRANCH)));
+  Conditions.AddLast(new TObjString("Master: Last changed revision: " + TString(HMOLPOL_LAST_MASTER_REVISION)));
+  Conditions.AddLast(new TObjString("Master: Last changed author: " + TString(HMOLPOL_LAST_MASTER_CHANGED_AUTHOR)));
+  Conditions.AddLast(new TObjString("Master: Last changed date: " + TString(HMOLPOL_LAST_MASTER_CHANGED_DATE)));
+
 }
 
 /********************************************
