@@ -19,8 +19,8 @@ add_custom_target(HMolPolVersion ALL)
 
 # Creates HMolPolVersion.hh using cmake script
 add_custom_command(TARGET HMolPolVersion
-  COMMAND ${CMAKE_COMMAND} -DSOURCE_DIR=${CMAKE_CURRENT_SOURCE_DIR}
-  -P ${CMAKE_CURRENT_SOURCE_DIR}/GetHMolPolVersion.cmake)
+  COMMAND ${PROJECT_SOURCE_DIR}/pullgitinfo.py ${PROJECT_SOURCE_DIR}
+  ${CMAKE_CURRENT_BINARY_DIR}/HMolPolVersion.hh )
 
 # HMolPolVersion.hh is a generated file
 set_source_files_properties(${CMAKE_CURRENT_BINARY_DIR}/HMolPolVersion.h
@@ -62,7 +62,3 @@ add_executable(hmolpol HMolPol.cc)
 target_link_libraries(hmolpol ${Geant4_LIBRARIES} ${ROOT_LIBRARIES} HMolPol)
 add_executable(hmolpolroot HMolPolRoot.cc)
 target_link_libraries(hmolpolroot ${Geant4_LIBRARIES} ${ROOT_LIBRARIES} HMolPol)
-
-# Update header file
-add_custom_command( OUTPUT  ${PROJECT_SOURCE_DIR}/include/gitinfo.hh always COMMAND ${PROJECT_SOURCE_DIR}/pullgitinfo.py ${PROJECT_SOURCE_DIR} )
-add_custom_target( gitinfo ALL DEPENDS ${PROJECT_SOURCE_DIR}/include/gitinfo.hh )
