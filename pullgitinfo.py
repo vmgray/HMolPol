@@ -100,10 +100,7 @@ if  len(boringstring) > maxlen:
 #os.chdir(presentcwd)
 
 # set an output directory
-outdir = "include/"
-# If this diectroy doesn't exist, creat it
-if not os.path.exists(outdir):
-  os.makedirs(outdir)
+outfile = sys.argv[2]
 
 headertext = "// This file is generated automatically.All changes will be lost." \
   "\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s" % (Revision, Root, Last_Author,
@@ -115,7 +112,7 @@ headertext = "// This file is generated automatically.All changes will be lost."
 #print "headertext:\n%s" % headertext
 
 # write this run information to HMolPolVersion
-newheader = open(outdir + "/HMolPolVersion.hh", "w")
+newheader = open(outfile, "w")
 # Write to the HMolPolVersion.hh file
 newheader.write(headertext)
 # Close file

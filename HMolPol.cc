@@ -28,6 +28,7 @@
 #include "HMolPolAnalysis.hh"
 #include "HMolPolDetectorConstruction.hh"
 #include "HMolPolEventAction.hh"
+#include "HMolPolSteppingAction.hh"
 #include "HMolPolRunAction.hh"
 #include "HMolPolPrimaryGeneratorAction.hh"
 #include "HMolPolMessenger.hh"
@@ -107,6 +108,9 @@ int main (int argc, char** argv)
       new HMolPolDetectorConstruction(myHMolPolAnalysis);
   // give the run manager the geometry
   runManager->SetUserInitialization(myHMolPolDetector);
+
+  // Register the Stepping Action (called at each step)
+  runManager->SetUserAction( new HMolPolSteppingAction() );
 
   //Add the things that happen at each event
   //give run manager the stuff that is done at every event (write to rootfile)
