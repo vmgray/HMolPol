@@ -23,12 +23,6 @@
 //Taken from REMOLL - Attempt tp fix issue
 #include <G4HCofThisEvent.hh> // Use but not included
 #include <G4VHitsCollection.hh> //use but not included
-//#include <G4EventManager.hh>
-//#include "G4TrajectoryContainer.hh"
-//#include "G4Trajectory.hh"
-//#include "G4VVisManager.hh"
-//#include "G4UImanager.hh"
-//#include "G4ios.hh"
 
 // HMolPol includes
 #include "HMolPolAnalysis.hh"
@@ -129,7 +123,7 @@ void HMolPolEventAction::EndOfEventAction(const G4Event* event)
   //debugging
   G4cout << G4endl << "####### In the HMolPolEventAction::EndOfEventAction #######"<< G4endl;
   //We are at the end of an event
-  //  G4cout << "  At end of event" << G4endl;
+  G4cout << "  At end of event" << G4endl;
 
   // Get the event number
   /// \todo Event number should be branch in ROOT tree
@@ -138,7 +132,8 @@ void HMolPolEventAction::EndOfEventAction(const G4Event* event)
   // Clear all hits
   for (size_t i = 0; i < fAnalysis->fDetector.size(); i++)
   {
-    G4cout << "  Clearing branch " << i << G4endl;
+    //debuggine
+    //G4cout << "  Clearing branch " << i << G4endl;
     fAnalysis->fDetector[i]->fHits.clear();
   }
 
@@ -157,8 +152,11 @@ void HMolPolEventAction::EndOfEventAction(const G4Event* event)
     //G4VHitsCollection* thiscol = HCE->GetHC(hcidx);
     thiscol = HCE->GetHC(hcidx);
 
+/*
+    //debugging
     G4cout << G4endl << "  HC " << thiscol->GetName() << ": "
            << thiscol->GetSize() << " hits" << G4endl;
+*/
 
     // This is NULL if nothing is stored
     if (thiscol)
@@ -168,13 +166,18 @@ void HMolPolEventAction::EndOfEventAction(const G4Event* event)
       if (HMolPolGenericDetectorHitsCollection* thiscast =
           dynamic_cast<HMolPolGenericDetectorHitsCollection*>(thiscol))
       {
+/*
         //debug line
         G4cout << "  HMolPolGenericDetectorHitsCollection size: " <<
             thiscast->GetSize() << G4endl;
+*/
         // Process all hits
         for (unsigned int hidx = 0; hidx < thiscast->GetSize(); hidx++)
         {
+/*
+          //debugging
           G4cout << "made it too the loop to process all hits" << G4endl;
+*/
 
           HMolPolGenericDetectorHit* thisHit =
               (HMolPolGenericDetectorHit*) thiscast->GetHit(hidx);
@@ -198,7 +201,10 @@ void HMolPolEventAction::EndOfEventAction(const G4Event* event)
           hit.fKineticEnergy = thisHit->GetKineticEnergy();
 
           // Add hit
+/*
+          //debugging
           G4cout << "  Adding hit to branch " << hit.fDetectorID << G4endl;
+*/
           //logical volumes  are branches. This adds the hit to the correct
           //branch
           fAnalysis->fDetector[thisHit->GetDetectorTypeID()]->fHits.push_back(hit);
