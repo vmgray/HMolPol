@@ -35,12 +35,20 @@ class HMolPolDetectorConstruction: public G4VUserDetectorConstruction
     {
       fAnalysis = analysis;
       fGDMLParser = new G4GDMLParser();
+
+      // Set a default geometry file name
+      fGeometryFileName = "geometry/HMolPolMotherVolume.gdml";
     };
     /// Destructor of the Detector construction
     virtual ~HMolPolDetectorConstruction()
     {
       delete fGDMLParser;
     };
+
+    void SetGeometryFileName(G4String fileName)
+    {
+      fGeometryFileName = fileName;
+    }
 
   public:
 
@@ -49,5 +57,8 @@ class HMolPolDetectorConstruction: public G4VUserDetectorConstruction
 
     /// Construct the volume??
     G4VPhysicalVolume* Construct();  ///< construct the physical volume
+
+    // Geometry File name
+    G4String fGeometryFileName;
 
 };

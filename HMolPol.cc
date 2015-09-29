@@ -104,7 +104,7 @@ int main (int argc, char** argv)
 
   // Add the Detector geometry
   //pass the geometry of the HMolPol to the Geant4 class G4VUserDetectorConstruction
-  G4VUserDetectorConstruction* myHMolPolDetector =
+  HMolPolDetectorConstruction* myHMolPolDetector =
       new HMolPolDetectorConstruction(myHMolPolAnalysis);
   // give the run manager the geometry
   runManager->SetUserInitialization(myHMolPolDetector);
@@ -150,7 +150,8 @@ int main (int argc, char** argv)
       myHMolPolPrimaryGeneratorAction,
       myHMolPolRunAction,
       myHMolPolEventAction,
-      myHMolPolAnalysis);
+      myHMolPolAnalysis,
+      myHMolPolDetector);
 
   /*******
    * Initialize Run manager
