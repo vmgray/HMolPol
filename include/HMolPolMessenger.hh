@@ -31,6 +31,7 @@ class HMolPolPrimaryGeneratorAction;
 class HMolPolRunAction;
 class HMolPolEventAction;
 class HMolPolAnalysis;
+class HMolPolDetectorConstruction;
 
 class HMolPolMessenger : public G4UImessenger
 {
@@ -40,7 +41,8 @@ class HMolPolMessenger : public G4UImessenger
     HMolPolMessenger(HMolPolPrimaryGeneratorAction*,
         HMolPolRunAction*,
         HMolPolEventAction*,
-        HMolPolAnalysis*);   ///< constructor of the HMolPolMessenger
+        HMolPolAnalysis*,
+        HMolPolDetectorConstruction*);   ///< constructor of the HMolPolMessenger
     virtual ~HMolPolMessenger();   ///< destructor of the HMolPolMessenger
 
     void SetNewValue(G4UIcommand* cmd, G4String newValue);   ///< function to
@@ -57,6 +59,8 @@ class HMolPolMessenger : public G4UImessenger
       /// to the Event Action class
     HMolPolAnalysis*                    fAnalysis;   ///< pointer
       /// to the Analysis class
+    HMolPolDetectorConstruction*        fDetectorConstruction; ///< pointer
+      /// to the DetectorConstruction class
 
     //Create different directories
       //These directories are the
@@ -77,6 +81,9 @@ class HMolPolMessenger : public G4UImessenger
 
     G4UIcmdWithADoubleAndUnit* fBeamECmd; ///< beam energy
 
+/// Geometry related variables
+    G4UIdirectory*        fGeometryDir;       ///< create the Geometry Directory
+    G4UIcmdWithAString*   fGeometryFileNameCmd;  ///< Geometry File Name
 };
 
 #endif // HMOLPOLMESSENGER_HH_

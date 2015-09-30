@@ -227,6 +227,9 @@ G4bool HMolPolGenericDetector::ProcessHits(G4Step* step, G4TouchableHistory* )
     // How do I get that here?? or even better what I want??
     thisHit->SetTrackID(track->GetTrackID());
 
+    // Set the parent ID
+    thisHit->SetParentID(track->GetParentID());
+
     //Set the detector type ID, which is associated with the logical volume
     //Logical volumes have one branch this makes sure the hits land in the
     //corresponding logical detector branch
