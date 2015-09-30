@@ -27,6 +27,7 @@
 // HMolPol includes
 #include "HMolPolAnalysis.hh"
 #include "HMolPolEventAction.hh"
+#include "HMolPolStackingAction.hh"
 #include "HMolPolEventGenericDetector.hh"
 #include "HMolPolGenericDetectorHit.hh"
 
@@ -44,8 +45,9 @@
  * Modified:
  ********************************************/
 
-HMolPolEventAction::HMolPolEventAction (HMolPolAnalysis* a)
-: fAnalysis(a),CollID(-1)
+HMolPolEventAction::HMolPolEventAction (HMolPolAnalysis* a,
+    HMolPolStackingAction* s)
+: fAnalysis(a),fStacking(s),CollID(-1)
 {
 
 }
@@ -87,6 +89,9 @@ void HMolPolEventAction::BeginOfEventAction(const G4Event* event)
   G4cout << G4endl << "####### In the HMolPolEventAction::BeginOfEventAction #######"<< G4endl;
   //Say that an event is beginning
   G4cout << "  At begin of event number: " << event->GetEventID() << G4endl;
+
+  // Ask StackingAction to prepare for new event
+  fStacking->InitNewEvent();
 
 /*
 /// \bug not sure what this does at this point forward - it is unused!?!
@@ -142,6 +147,9 @@ void HMolPolEventAction::EndOfEventAction(const G4Event* event)
 
   //Define a particular hit collection
   G4VHitsCollection* thiscol;
+
+  // Get a copy of the parent primary ids
+  std::map<G4int,G4int> parentPrimaries = fStacking->GetTrackParentPrimaries();
 
   // Loop over all hit collections, sort by output type
   for (int hcidx = 0; hcidx < HCE->GetCapacity(); hcidx++)
@@ -199,6 +207,17 @@ void HMolPolEventAction::EndOfEventAction(const G4Event* event)
           hit.fParticleType = thisHit->GetParticleType();
           hit.fTotalEnergy = thisHit->GetTotalEnergy();
           hit.fKineticEnergy = thisHit->GetKineticEnergy();
+          hit.fParentID = thisHit->GetParentID();
+
+          // Identify its parent primary ID
+          if(hit.fParentID == 0)
+          {
+            hit.fPrimaryID = hit.fTrackID;
+          }
+          else
+          {
+            hit.fPrimaryID = parentPrimaries[hit.fTrackID];
+          }
 
           // Add hit
 /*

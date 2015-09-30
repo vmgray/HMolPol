@@ -30,6 +30,8 @@ class HMolPolEventGenericDetectorHit: public TObject {
 
     Int_t fTrackID;     ///< Track ID
     Int_t fDetectorID;  ///< Physical Detector ID
+    Int_t fParentID;    ///< Parent Track ID
+    Int_t fPrimaryID;   ///< Parent Primary ID
 
     TString fParticleName;     ///< Particle Name
     Int_t fParticleType;       ///< Particle Type (PGD encoding)
