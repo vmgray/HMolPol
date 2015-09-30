@@ -135,7 +135,7 @@ G4VPhysicalVolume* HMolPolDetectorConstruction::Construct()
   //MotherVolume.gdml uses all they other ones, they will all be read
   /// TODO \bug *CHANGE* so that HMolPolMotherVolume is not hard-coded and
   /// other geometries can be able to read in easily
-  fGDMLParser->Read("geometry/HMolPolMotherVolume.gdml");
+  fGDMLParser->Read(fGeometryFileName);
 
   //function to take the GDML it read in (the experiment)
   //and make it the "World"

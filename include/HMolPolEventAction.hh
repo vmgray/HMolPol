@@ -30,13 +30,14 @@
 
 // HMolPol classes
 class HMolPolAnalysis;
+class HMolPolStackingAction;
 
 class HMolPolEventAction : public G4UserEventAction
 {
   public:
 
-    HMolPolEventAction(HMolPolAnalysis* a);  ///< Constructor for
-    // HMolPolEventAction
+    HMolPolEventAction(HMolPolAnalysis* a, HMolPolStackingAction *s); ///<
+    // Constructor for HMolPolEventAction
 
     virtual ~HMolPolEventAction();  ///< Destructor for HMolPolEventAction
 
@@ -47,6 +48,7 @@ class HMolPolEventAction : public G4UserEventAction
     void Initialize();  ///< function Initialize
 
     HMolPolAnalysis* fAnalysis;  ///< the Analysis object
+    HMolPolStackingAction* fStacking;  ///< the StackingAction object
 
     G4int CollID;  ///< the colection Id number
 };

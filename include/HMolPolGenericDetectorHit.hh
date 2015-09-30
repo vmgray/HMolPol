@@ -138,6 +138,14 @@ class HMolPolGenericDetectorHit: public G4VHit {
       fDetectorID = detectorID;
     } ///< function to set the physical detector id number (int)
 
+    G4int GetParentID() const {
+      return fParentID;
+    } ///< function to get the Parent id number (int)
+
+    void SetParentID(G4int ParentID) {
+      fParentID = ParentID;
+    } ///< function to set the Parent id number (int)
+
   private:
     G4int fDetectorTypeID; ///< the Detector ID of the logical volume (internal only)
     G4int fTrackID; ///< Track ID number
@@ -154,6 +162,8 @@ class HMolPolGenericDetectorHit: public G4VHit {
 
     G4ThreeVector fPosition; ///< the position of the track
     G4ThreeVector fMomentum; ///< the momentum of the track
+
+    G4int fParentID;  ///< Parent Track ID
 
 };
 

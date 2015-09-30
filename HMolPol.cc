@@ -29,6 +29,7 @@
 #include "HMolPolDetectorConstruction.hh"
 #include "HMolPolEventAction.hh"
 #include "HMolPolSteppingAction.hh"
+#include "HMolPolStackingAction.hh"
 #include "HMolPolRunAction.hh"
 #include "HMolPolPrimaryGeneratorAction.hh"
 #include "HMolPolMessenger.hh"
@@ -104,7 +105,7 @@ int main (int argc, char** argv)
 
   // Add the Detector geometry
   //pass the geometry of the HMolPol to the Geant4 class G4VUserDetectorConstruction
-  G4VUserDetectorConstruction* myHMolPolDetector =
+  HMolPolDetectorConstruction* myHMolPolDetector =
       new HMolPolDetectorConstruction(myHMolPolAnalysis);
   // give the run manager the geometry
   runManager->SetUserInitialization(myHMolPolDetector);
@@ -112,10 +113,14 @@ int main (int argc, char** argv)
   // Register the Stepping Action (called at each step)
   runManager->SetUserAction( new HMolPolSteppingAction() );
 
+  // Register the Stacking Action (called at each new particle created)
+  HMolPolStackingAction *myHMolPolStacking = new HMolPolStackingAction();
+  runManager->SetUserAction(myHMolPolStacking);
+
   //Add the things that happen at each event
   //give run manager the stuff that is done at every event (write to rootfile)
   HMolPolEventAction* myHMolPolEventAction =
-      new HMolPolEventAction(myHMolPolAnalysis);
+      new HMolPolEventAction(myHMolPolAnalysis,myHMolPolStacking);
   runManager->SetUserAction(myHMolPolEventAction);
 
   // Add the thing that happen for each run (run==a full simulation of \BeamOn n)
@@ -150,7 +155,8 @@ int main (int argc, char** argv)
       myHMolPolPrimaryGeneratorAction,
       myHMolPolRunAction,
       myHMolPolEventAction,
-      myHMolPolAnalysis);
+      myHMolPolAnalysis,
+      myHMolPolDetector);
 
   /*******
    * Initialize Run manager

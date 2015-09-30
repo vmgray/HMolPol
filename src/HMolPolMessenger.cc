@@ -32,6 +32,7 @@
 #include "HMolPolPrimaryGeneratorAction.hh"
 #include "HMolPolAnalysis.hh"
 #include "HMolPolMessenger.hh"
+#include "HMolPolDetectorConstruction.hh"
 
 //standard includes
 #include <iostream>
@@ -57,11 +58,13 @@ HMolPolMessenger::HMolPolMessenger(
     HMolPolPrimaryGeneratorAction* primaryGeneratorAction,
     HMolPolRunAction* runAction,
     HMolPolEventAction* eventAction,
-    HMolPolAnalysis* analysis)
+    HMolPolAnalysis* analysis,
+    HMolPolDetectorConstruction* detectorConstruction)
 : fPrimaryGeneratorAction(primaryGeneratorAction),  //initialize variables
   fRunAction(runAction),
   fEventAction(eventAction),
-  fAnalysis(analysis)
+  fAnalysis(analysis),
+  fDetectorConstruction(detectorConstruction)
 {
   //------------------------------------------------------------------------------
   // create a new directory for all the analysis related stuff
@@ -102,6 +105,15 @@ HMolPolMessenger::HMolPolMessenger(
   fBeamECmd->SetGuidance("Beam Energy");
   fBeamECmd->SetParameterName("BeamEnergy", false);
 
+  // Directory for all Geometry related commands
+  fGeometryDir = new G4UIdirectory("/HMolPol/Geometry/");
+  fGeometryDir->SetGuidance("Geometry control");
+
+  // Set Geometry file name
+  fGeometryFileNameCmd =
+    new G4UIcmdWithAString("/HMolPol/Geometry/GeometryFileName",this);
+  fGeometryFileNameCmd->SetGuidance("File Name and path of Geometry GDML file");
+  fGeometryFileNameCmd->SetParameterName("GeometryFileName",false);
 }
 
 /********************************************
@@ -135,6 +147,9 @@ HMolPolMessenger::~HMolPolMessenger()
   //Delete beam energy info
   if(fBeamECmd)         delete fBeamECmd;
 
+  // Delete Geometry related variables
+  if(fGeometryDir) delete fGeometryDir;
+  if(fGeometryFileNameCmd) delete fGeometryFileNameCmd;
 }
 
 /********************************************
@@ -204,6 +219,14 @@ void HMolPolMessenger::SetNewValue(G4UIcommand* command, G4String newValue)
     G4cout << "#### Messenger: Setting Beam Energy to "
         << newValue << G4endl;
     fPrimaryGeneratorAction->SetBeamE(fBeamECmd->GetNewDoubleValue(newValue));
+  }
+
+  // Geometry file name
+  if( command == fGeometryFileNameCmd )
+  {
+    G4cout << "#### Messenger: Setting Geometry file to "
+        << newValue << G4endl;
+    fDetectorConstruction->SetGeometryFileName(newValue);
   }
 
   return;
