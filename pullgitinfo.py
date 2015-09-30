@@ -28,9 +28,9 @@ HMOLPOL_ROOT = os.popen("root-config --version").read().rstrip('\n')
 HMOLPOL_LAST_CHANGED_AUTHOR = os.popen("git log --pretty=format:'%an' -n 1").read().rstrip('\n')
 HMOLPOL_LAST_CHANGED_DATE = os.popen("git log --pretty=format:'%cd' -n 1").read().rstrip('\n')
 HMOLPOL_CURRENT_BRANCH = os.popen("git symbolic-ref -q --short HEAD").read().rstrip('\n')
-HMOLPOL_LAST_MASTER_REVISION = os.popen("git log master HEAD --pretty=format:'%H' -n 1").read().rstrip('\n')
-HMOLPOL_LAST_MASTER_CHANGED_AUTHOR = os.popen("git log master HEAD --pretty=format:'%an' -n 1").read().rstrip('\n')
-HMOLPOL_LAST_MASTER_CHANGED_DATE = os.popen("git log master HEAD --pretty=format:'%cd' -n 1").read().rstrip('\n')
+HMOLPOL_LAST_MASTER_REVISION = os.popen("git log master --pretty=format:'%H' -n 1").read().rstrip('\n')
+HMOLPOL_LAST_MASTER_CHANGED_AUTHOR = os.popen("git log master --pretty=format:'%an' -n 1").read().rstrip('\n')
+HMOLPOL_LAST_MASTER_CHANGED_DATE = os.popen("git log master --pretty=format:'%cd' -n 1").read().rstrip('\n')
 # HMOLPOL_URL =
 
 # create the lines for the file
