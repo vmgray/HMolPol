@@ -35,9 +35,11 @@
 
 //HMolPol includes
 #include "HMolPolDetectorConstruction.hh"
-#include "HMolPolHSolenoidMagField.hh"
 #include "HMolPolGenericDetector.hh"
 #include "HMolPolAnalysis.hh"
+
+#include "HMolPolHSolenoidMagFieldWithFringe.hh"
+//#include "HMolPolHSolenoidMagField.hh"
 
 /********************************************
  * Programmer: Valerie Gray
@@ -483,6 +485,10 @@ G4VPhysicalVolume* HMolPolDetectorConstruction::Construct()
   /// TODO \bug this is for the *simple* magnetic field - need to be updated to
   /// something realistic and that might effect the following code
   //get the field??
+
+  /* IDEAL MAG FIELD */
+
+/*
   //create a new magnetic field HMolPolSolenoidMagField
   //for the  HTargetSolenoid, and store the pointer to it
   HMolPolSolenoidMagField* HTargetSolenoidMagField =
@@ -499,6 +505,26 @@ G4VPhysicalVolume* HMolPolDetectorConstruction::Construct()
   //create the Chord finder (this is responsible for moving
   // the particles through the field)
   HTargetSolenoidMagFieldMgr->CreateChordFinder(HTargetSolenoidMagField);
+*/
+
+  /* MAG FIELD WITH FRINGE */
+  //create a new magnetic field HMolPolSolenoidMagField
+  //for the  HTargetSolenoid, and store the pointer to it
+  HMolPolHSolenoidMagFieldWithFringe* HTargetSolenoidMagFieldWithFringe =
+  new HMolPolHSolenoidMagFieldWithFringe;
+
+  //Make a MagFeildMaanager for this field
+  G4FieldManager* HTargetSolenoidMagFieldWithFringeMgr =
+  G4TransportationManager :: GetTransportationManager()->GetFieldManager();
+
+  //add the field (HTargetSolenoidMagField) to the HTargetSolenoidFieldMgr
+  //Allows the feild to get used
+  HTargetSolenoidMagFieldWithFringeMgr->SetDetectorField(HTargetSolenoidMagFieldWithFringe);
+
+  //create the Chord finder (this is responsible for moving
+  // the particles through the field)
+  HTargetSolenoidMagFieldWithFringeMgr->CreateChordFinder(HTargetSolenoidMagFieldWithFringe);
+
 
   //Return world volume
   return worldVolume;
