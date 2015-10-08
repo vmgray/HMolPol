@@ -46,5 +46,9 @@
     <fraction n="1.00" ref="G4_Ar" />
   </material>
 
+  <material name="AirVacuum" Z="1" >
+    <D unit="mg/cm3" value="1e-25" />
+    <fraction n="1.00" ref="G4_AIR" />
+  </material>
 
 </materials>
