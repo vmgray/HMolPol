@@ -47,6 +47,7 @@ class HMolPolRunInformation;
 class HMolPolMessenger;
 class HMolPolEventPrimary;
 class HMolPolEventUnits;
+class HMolPolEventPrimaryHit;
 
 class HMolPolAnalysis
 {
@@ -125,6 +126,12 @@ class HMolPolAnalysis
     /// will contain the strings 'Detector1' and 'Detector2'. That's all this
     /// vector does: store the name of the branches in the ROOT file.
     std::vector<G4String> fDetectorName;
+
+    /// Primary tracks get their own branch in the ROOT tree. This holds all
+    /// the associated hits (each corresponding to a step)
+    std::vector<HMolPolEventPrimaryHit> *fPrimaryHits;
+    /// And its corresponding branch in the ROOT tree
+    TBranch *fPrimaryHitsBranch;
 
   private:
 

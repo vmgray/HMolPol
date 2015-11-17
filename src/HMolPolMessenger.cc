@@ -33,6 +33,7 @@
 #include "HMolPolAnalysis.hh"
 #include "HMolPolMessenger.hh"
 #include "HMolPolDetectorConstruction.hh"
+#include "HMolPolSteppingAction.hh"
 
 //standard includes
 #include <iostream>
@@ -59,12 +60,14 @@ HMolPolMessenger::HMolPolMessenger(
     HMolPolRunAction* runAction,
     HMolPolEventAction* eventAction,
     HMolPolAnalysis* analysis,
-    HMolPolDetectorConstruction* detectorConstruction)
+    HMolPolDetectorConstruction* detectorConstruction,
+    HMolPolSteppingAction* steppingAction)
 : fPrimaryGeneratorAction(primaryGeneratorAction),  //initialize variables
   fRunAction(runAction),
   fEventAction(eventAction),
   fAnalysis(analysis),
-  fDetectorConstruction(detectorConstruction)
+  fDetectorConstruction(detectorConstruction),
+  fSteppingAction(steppingAction)
 {
   //------------------------------------------------------------------------------
   // create a new directory for all the analysis related stuff
@@ -114,6 +117,17 @@ HMolPolMessenger::HMolPolMessenger(
     new G4UIcmdWithAString("/HMolPol/Geometry/GeometryFileName",this);
   fGeometryFileNameCmd->SetGuidance("File Name and path of Geometry GDML file");
   fGeometryFileNameCmd->SetParameterName("GeometryFileName",false);
+
+  // Directory for all Tracking/Step related commands
+  fTrackingDir = new G4UIdirectory("/HMolPol/Tracking/");
+  fTrackingDir->SetGuidance("HMolPol Tracking control");
+
+  // Enable primary tracker? (tracks and stores all steps taken by a primary)
+  fTrackPrimariesCmd =
+    new G4UIcmdWithABool("/HMolPol/Tracking/TrackPrimaries",this);
+  fTrackPrimariesCmd->SetGuidance("Track and store all steps of primaries?");
+  fTrackPrimariesCmd->SetParameterName("TrackPrimaries",false);
+
 }
 
 /********************************************
@@ -227,6 +241,15 @@ void HMolPolMessenger::SetNewValue(G4UIcommand* command, G4String newValue)
     G4cout << "#### Messenger: Setting Geometry file to "
         << newValue << G4endl;
     fDetectorConstruction->SetGeometryFileName(newValue);
+  }
+
+  // Track Primaries command
+  if( command == fTrackPrimariesCmd )
+  {
+    G4cout << "#### Messenger: Setting Tracking Primaries to "
+        << newValue << G4endl;
+    fSteppingAction->SetTrackPrimaries(
+        fTrackPrimariesCmd->GetNewBoolValue(newValue));
   }
 
   return;

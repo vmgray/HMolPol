@@ -26,6 +26,8 @@
 
 #pragma link C++ class HMolPolEventUnits+;
 #pragma link C++ class HMolPolEventPrimary+;
+#pragma link C++ class HMolPolEventPrimaryHit+;
+#pragma link C++ class std::vector<HMolPolEventPrimaryHit>+;
 #pragma link C++ class HMolPolEventGenericDetector+;
 #pragma link C++ class HMolPolEventGenericDetectorHit+;
 

@@ -32,6 +32,7 @@ class HMolPolRunAction;
 class HMolPolEventAction;
 class HMolPolAnalysis;
 class HMolPolDetectorConstruction;
+class HMolPolSteppingAction;
 
 class HMolPolMessenger : public G4UImessenger
 {
@@ -42,7 +43,8 @@ class HMolPolMessenger : public G4UImessenger
         HMolPolRunAction*,
         HMolPolEventAction*,
         HMolPolAnalysis*,
-        HMolPolDetectorConstruction*);   ///< constructor of the HMolPolMessenger
+        HMolPolDetectorConstruction*,
+        HMolPolSteppingAction*);   ///< constructor of the HMolPolMessenger
     virtual ~HMolPolMessenger();   ///< destructor of the HMolPolMessenger
 
     void SetNewValue(G4UIcommand* cmd, G4String newValue);   ///< function to
@@ -61,6 +63,9 @@ class HMolPolMessenger : public G4UImessenger
       /// to the Analysis class
     HMolPolDetectorConstruction*        fDetectorConstruction; ///< pointer
       /// to the DetectorConstruction class
+
+    HMolPolSteppingAction*              fSteppingAction; ///< pointer to the
+     /// SteppingAction class
 
     //Create different directories
       //These directories are the
@@ -84,6 +89,10 @@ class HMolPolMessenger : public G4UImessenger
 /// Geometry related variables
     G4UIdirectory*        fGeometryDir;       ///< create the Geometry Directory
     G4UIcmdWithAString*   fGeometryFileNameCmd;  ///< Geometry File Name
+
+/// Tracking/Step related variables
+    G4UIdirectory*        fTrackingDir;      ///< create Tracking directory
+    G4UIcmdWithABool*     fTrackPrimariesCmd; ///< Should primaries be tracked?
 };
 
 #endif // HMOLPOLMESSENGER_HH_
