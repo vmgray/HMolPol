@@ -30,6 +30,7 @@
 #include "HMolPolStackingAction.hh"
 #include "HMolPolEventGenericDetector.hh"
 #include "HMolPolGenericDetectorHit.hh"
+#include "HMolPolEventPrimaryHit.hh"
 
 /********************************************
  * Programmer: Valerie Gray
@@ -92,6 +93,9 @@ void HMolPolEventAction::BeginOfEventAction(const G4Event* event)
 
   // Ask StackingAction to prepare for new event
   fStacking->InitNewEvent();
+
+  // Clean up old primary hits
+  fAnalysis->fPrimaryHits->clear();
 
 /*
 /// \bug not sure what this does at this point forward - it is unused!?!

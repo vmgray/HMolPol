@@ -111,7 +111,9 @@ int main (int argc, char** argv)
   runManager->SetUserInitialization(myHMolPolDetector);
 
   // Register the Stepping Action (called at each step)
-  runManager->SetUserAction( new HMolPolSteppingAction() );
+  HMolPolSteppingAction *myHMolPolStepping =
+    new HMolPolSteppingAction(myHMolPolAnalysis);
+  runManager->SetUserAction( myHMolPolStepping );
 
   // Register the Stacking Action (called at each new particle created)
   HMolPolStackingAction *myHMolPolStacking = new HMolPolStackingAction();
@@ -156,7 +158,8 @@ int main (int argc, char** argv)
       myHMolPolRunAction,
       myHMolPolEventAction,
       myHMolPolAnalysis,
-      myHMolPolDetector);
+      myHMolPolDetector,
+      myHMolPolStepping);
 
   /*******
    * Initialize Run manager

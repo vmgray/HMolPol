@@ -24,6 +24,7 @@
 #include "HMolPolEventPrimary.hh"
 #include "HMolPolEventGenericDetector.hh"
 #include "HMolPolRunInformation.hh"
+#include "HMolPolEventPrimaryHit.hh"
 
 /// \todo make this so the file names can change with things like generator etc
 /// ie HMolPol_eleastic HMolPol_Moller, etc
@@ -232,6 +233,11 @@ void HMolPolAnalysis::ConstructRootTree()
     fDetectorBranch[i] = fRootTree->Branch(TString("f") + TString(fDetectorName[i]),
         "HMolPolEventGenericDetector", &fDetector[i], bufsize, split);
   }
+
+  // Add the primary hits branch
+  fPrimaryHits = new std::vector<HMolPolEventPrimaryHit>();
+  fRootTree->Branch("PrimaryTracker","std::vector<HMolPolEventPrimaryHit>",
+      &fPrimaryHits, bufsize, split);
 
   // Write run data
   pRunInformation->Write();
