@@ -421,7 +421,7 @@ G4VPhysicalVolume* HMolPolDetectorConstruction::Construct()
     //Loop over auxiliary attributes for physical volumes. THis is all the things
     //that we have in a logical volume GDML file like:
     //<auxiliary auxtype="SensDet" auxvalue="DetectorDet" />
-    std::vector<G4GDMLAuxPairType>::const_iterator ipair = auxInfo.begin();
+    G4GDMLAuxListType::const_iterator ipair = auxInfo.begin();
     for( ipair = auxInfo.begin(); ipair != auxInfo.end(); ipair++ )
     {
       /*
