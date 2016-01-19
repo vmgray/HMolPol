@@ -8,11 +8,11 @@
 
 
 find_program(ROOT_CONFIG_EXECUTABLE root-config
-  PATHS $ENV{ROOTSYS}/bin)
+  PATHS $ENV{ROOTSYS}/bin NO_DEFAULT_PATH)
 
 if(NOT ROOT_CONFIG_EXECUTABLE)
   set(ROOT_FOUND FALSE)
-else()    
+else()
   set(ROOT_FOUND TRUE)
 
   execute_process(
