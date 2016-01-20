@@ -6,7 +6,7 @@
  * of the solenoid around the atomic hydrogen target.
  *
  * \date 0<b>Date:</b> 6-25-2013
- * \date <b>Modified:</b> 07-06-2013
+ * \date <b>Modified:</b> 01-20-2015
  *
  * \note <b>Entry Conditions:</b>
  ********************************************/
@@ -30,7 +30,7 @@
  * Entry Conditions: none
  * Return: nothing
  * Called By:
- * Date: 06-25-2013
+ * Date: 01-20-2015
  * Modified:
 ********************************************/
 HMolPolSolenoidMagField::HMolPolSolenoidMagField()
@@ -43,14 +43,19 @@ HMolPolSolenoidMagField::HMolPolSolenoidMagField()
   //debugging
   Bz = 3000.0*tesla;  // this is the strength of the magnetic
 */
-  Bz = 8.0*tesla;  // this is the strength of the magnetic
+  Bz = 8.0*CLHEP::tesla;  // this is the strength of the magnetic
   /** \ingroup see
    * /\brief Z B field value of 8 Tesla
    * as defined in Moller Polarimetry with Atomic Hydrogen Targets
    * by E.~Chudakov and V.~Luppov(long) pg 9
    */
-  rmax_sq = std::pow(3.0*cm,2); // square of the radius for the field
-  zmax = 25.0*cm;  // this is half of the z length that the field is in
+  rmax_sq = std::pow(3.0*CLHEP::cm,2); // square of the radius for the field
+  zmax = 20.0*CLHEP::cm;  // this is half of the z length that the field is in
+  /*******
+   * This value is from the proposal, Moller Polarimetry with Atomic
+   * Hydrogen Targets by E.~Chudakov and V.~Luppov (long paper)
+   * pg 7
+  *******/
 }
 
 // destuctor defined in the .hh file since it is simple so don't need to
