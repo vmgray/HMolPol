@@ -11,7 +11,7 @@
  * Also the passing of ariables
  *
  * \date 0<b>Date:</b> 6-25-2013
- * \date <b>Modified:</b> 07-15-2015
+ * \date <b>Modified:</b> 01-21-2016
  *
  * \note <b>Entry Conditions:</b>
  *
@@ -52,8 +52,8 @@
 // settings, and with an initial beam energy. Commands by the user could still
 // change these values from within geant4 through the messenger class.
 HMolPolPrimaryGeneratorAction::HMolPolPrimaryGeneratorAction(HMolPolAnalysis* a) :
-    fAnalysis(a), fRasterX(4.0 * CLHEP::mm), fRasterY(4.0 * CLHEP::mm),
-        fBeamE(200 * CLHEP::MeV)  // initialization
+    fAnalysis(a), fRasterX(0.0 * CLHEP::mm), fRasterY(0.0 * CLHEP::mm),
+    fBeamE(2 * CLHEP::GeV)  // initialization
 {
   //set number of particles getting fired at a time
   G4int NubofParticles = 1;
@@ -64,6 +64,7 @@ HMolPolPrimaryGeneratorAction::HMolPolPrimaryGeneratorAction(HMolPolAnalysis* a)
   /// set the min and max theta angles in the CM frame
   fTheta_com_min = 0.0 * CLHEP::degree;
   fTheta_com_max = 180.0 * CLHEP::degree;
+
   //set particle type
   // \todo *ADD* in functionality for other particles as incoming ones later
   //SetParticleType("e-");
@@ -106,7 +107,7 @@ HMolPolPrimaryGeneratorAction::~HMolPolPrimaryGeneratorAction()
  * Return:
  * Called By:
  * Date: 06-25-2013
- * Modified: 07-15-2015
+ * Modified: 01-21-2016
  ********************************************/
 void HMolPolPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 {
@@ -137,14 +138,14 @@ void HMolPolPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
    */
 
   //find the beta and gamma value in Center of Mass
-  double beta_com = std::sqrt((beamE - m_e) / (beamE + m_e)); //unitless
+  double beta_com = std::sqrt((beamE - m_e) / (beamE + m_e));  //unitless
   double gamma_com = 1.0 / std::sqrt(1.0 - beta_com * beta_com);  //unitless
 
   //CM energy and random theta, and phi angle
   double e_com = m_e * gamma_com;  //MeV
   double theta_com = acos(
       CLHEP::RandFlat::shoot(cos(fTheta_com_max), cos(fTheta_com_min)));  //rad
-  double phi_com = CLHEP::RandFlat::shoot(0.0, 2.0*pi);  //rad
+  double phi_com = CLHEP::RandFlat::shoot(0.0, 2.0 * pi);  //rad
   //debugging
   //double phi_com = 0;
 
@@ -167,11 +168,11 @@ void HMolPolPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
       * pow((1 + cos(theta_com)) * (3.0 + pow(cos(theta_com), 2.0)), 2.0)
                    / pow(sin(theta_com), 4.0);  // units of mbarns
 
-  /* get rid of unused parameter warning
-  //This is the Detla sigma one needs to get the delta_sigma (cross section)
-  // for a Certain range of theta covered
-  double Delta_Omega = 2.0*pi*(cos(fTheta_com_min) - cos(fTheta_com_max));
-  */
+                   /* get rid of unused parameter warning
+                    //This is the Detla sigma one needs to get the delta_sigma (cross section)
+                    // for a Certain range of theta covered
+                    double Delta_Omega = 2.0*pi*(cos(fTheta_com_min) - cos(fTheta_com_max));
+                    */
 
   //More of I have no idea what this is doing
   //  Multiply by Z because we have Z electrons
@@ -208,7 +209,7 @@ void HMolPolPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
   // Parallel (ppar) and perpendicular (pperp) momentum components
   // in the lab frame
   double pperp = e_com * sin(theta_com);  //MeV
-  double ppar = e_com * cos(theta_com);   //MeV
+  double ppar = e_com * cos(theta_com);  //MeV
 
   // \todo *CHANGE* this right now, right now it is HARDCODED which is BAD :(
 
@@ -257,7 +258,7 @@ void HMolPolPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
           interaction_vertex_mom_x1 * interaction_vertex_mom_x1 + interaction_vertex_mom_y1
               * interaction_vertex_mom_y1
           + interaction_vertex_mom_z1 * interaction_vertex_mom_z1 + m_e * m_e)
-      - m_e; //MeV
+      - m_e;  //MeV
   fParticleGun->SetParticleEnergy(E_kin1);
   // finally : fire in the hole!!!
   fParticleGun->GeneratePrimaryVertex(anEvent);
@@ -276,7 +277,7 @@ void HMolPolPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
           interaction_vertex_mom_x2 * interaction_vertex_mom_x2 + interaction_vertex_mom_y2
               * interaction_vertex_mom_y2
           + interaction_vertex_mom_z2 * interaction_vertex_mom_z2 + m_e * m_e)
-      - m_e; //MeV
+      - m_e;  //MeV
   fParticleGun->SetParticleEnergy(E_kin2);
 
   // finally : fire in the hole!!!
@@ -285,31 +286,55 @@ void HMolPolPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
   // Store cross section in ROOT file
 
   //Store the interaction point info to the ROOT file
-  fAnalysis->fPrimary->fInteractionVertexPositionX = interaction_vertex_x;
-  fAnalysis->fPrimary->fInteractionVertexPositionY = interaction_vertex_y;
-  fAnalysis->fPrimary->fInteractionVertexPositionZ = interaction_vertex_z;
-  fAnalysis->fPrimary->fInteractionVertexMomentumX = interaction_vertex_mom_x1;  //MeV
-  fAnalysis->fPrimary->fInteractionVertexMomentumY = interaction_vertex_mom_y1;  //MeV
-  fAnalysis->fPrimary->fInteractionVertexMomentumZ = interaction_vertex_mom_z1;  //MeV
-  fAnalysis->fPrimary->fInteractionVertexMomentumX = interaction_vertex_mom_x2;  //MeV
-  fAnalysis->fPrimary->fInteractionVertexMomentumY = interaction_vertex_mom_y2;  //MeV
-  fAnalysis->fPrimary->fInteractionVertexMomentumZ = interaction_vertex_mom_z2;  //Mev
+  fAnalysis->fPrimary->fInteractionVertexPosition.SetX(interaction_vertex_x);
+  fAnalysis->fPrimary->fInteractionVertexPosition.SetY(interaction_vertex_y);
+  fAnalysis->fPrimary->fInteractionVertexPosition.SetZ(interaction_vertex_z);
+
+  //Store the interaction momentum for particle 1 and 2 at the interaction vertex
+  fAnalysis->fPrimary->fInteractionVertexMomentum1.SetX(interaction_vertex_mom_x1);  //MeV
+  fAnalysis->fPrimary->fInteractionVertexMomentum1.SetY(interaction_vertex_mom_y1);  //MeV
+  fAnalysis->fPrimary->fInteractionVertexMomentum1.SetZ(interaction_vertex_mom_z1);  //MeV
+  fAnalysis->fPrimary->fInteractionVertexMomentum2.SetX(interaction_vertex_mom_x2);  //MeV
+  fAnalysis->fPrimary->fInteractionVertexMomentum2.SetY(interaction_vertex_mom_y2);  //MeV
+  fAnalysis->fPrimary->fInteractionVertexMomentum2.SetZ(interaction_vertex_mom_z2);  //MeV
 
   //Store the scattering angles for the interaction
-  //in CM and Lab frame in ROOT file
+  //in CM
+  //theta
   fAnalysis->fPrimary->fThetaCenterOfMass = theta_com;  //rad
+  /********
+   * The ThetaCenterOfMass 1 and 2 can figured out by looking at the difference in the
+   * interaction_momentum_zi where i = 1 or 2. The only difference is a negative
+   * sign in front of ppar. And -cos x = cos (x + pi*n) for n being an odd integer.
+   ********/
+  fAnalysis->fPrimary->fThetaCenterOfMass1 = theta_com;  //rad
+  fAnalysis->fPrimary->fThetaCenterOfMass2 = pi - theta_com;  //rad
+
+  //phi
   fAnalysis->fPrimary->fPhiCenterOfMass = phi_com;  //rad
+  /********
+   * The PhiCenterOfMass 1 and 2 can figured out by looking at the difference in the
+   * interaction_momentum_xi or yi where i = 1 or 2. The only difference is a negative
+   * sign. And -sin x = sin (x + pi*n) also -cos x = cos (x + pi*n) for n being an odd integer.
+   ********/
+  fAnalysis->fPrimary->fPhiCenterOfMass1 = phi_com;  //rad
+  fAnalysis->fPrimary->fPhiCenterOfMass2 =
+      (phi_com + pi < 2 * pi) ? (phi_com + pi) : (phi_com - pi);  //rad
+  //in the Lab frame
   fAnalysis->fPrimary->fThetaLab1 = theta_lab1;  //rad
   fAnalysis->fPrimary->fThetaLab2 = theta_lab2;  //rad
   fAnalysis->fPrimary->fPhiLab1 = phi_com;  //rad
-  fAnalysis->fPrimary->fPhiLab2 = (phi_com + pi < 2*pi) ? (phi_com + pi) : (phi_com - pi);  //rad
+  fAnalysis->fPrimary->fPhiLab2 =
+      (phi_com + pi < 2 * pi) ? (phi_com + pi) : (phi_com - pi);  //rad
 
   //store cross section info in the ROOT file
   /// \todo actually write the cross section
   fAnalysis->fPrimary->fCrossSection = D_sigma;
 
-  G4cout << "#### Leaving HMolPolPrimaryGeneratorAction::GeneratePrimaries ####"
-         << G4endl;
+  /*
+   G4cout << "#### Leaving HMolPolPrimaryGeneratorAction::GeneratePrimaries ####"
+   << G4endl;
+   */
 
   return;
 }

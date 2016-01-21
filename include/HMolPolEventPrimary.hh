@@ -5,7 +5,7 @@
  * \brief <b>Purpose:</b> This is header file for the Primary event.
  *
  * \date <b>Date:</b> 07-17-2013
- * \date <b>Modified:</b> 07-26-2013
+ * \date <b>Modified:</b> 01-21-2016
  *
  * \note <b>Entry Conditions:</b> none
  *
@@ -17,6 +17,7 @@
 
 // root include
 #include <TObject.h>
+#include <TVector3.h>
 
 class HMolPolEventPrimary: public TObject {
   public:
@@ -25,17 +26,22 @@ class HMolPolEventPrimary: public TObject {
 
     Double_t fCrossSection;  ///< the cross section
     Double_t fPhiLab1;        ///< the lab phi angle one particle(same as CM phi angle)
-    Double_t fPhiLab2;        ///< the lab phi angle one particle(same as CM phi angle) Labphi1 + 180 deg
-    Double_t fThetaLab1;     ///< the lab theta angle for one particle
-    Double_t fThetaLab2;     ///< the lab theta angle for one particle
+    Double_t fPhiLab2;        ///< the lab phi angle one particle(same as CM phi angle) Lab phi1 + 180 deg
+    Double_t fThetaLab1;     ///< the lab theta angle for particle 1
+    Double_t fThetaLab2;     ///< the lab theta angle for particle 2
+
     Double_t fPhiCenterOfMass;   ///< the CM phi angle
+    Double_t fPhiCenterOfMass1;   ///< the CM phi angle for particle 1, phi_com
+    Double_t fPhiCenterOfMass2;   ///< the CM phi angle for particle 2, phi_com + 180 deg
+
     Double_t fThetaCenterOfMass;        ///< the CM theta angle
-    Double_t fInteractionVertexPositionX; ///< Interaction vertex position in X
-    Double_t fInteractionVertexPositionY; ///< Interaction vertex position in Y
-    Double_t fInteractionVertexPositionZ; ///< Interaction vertex position in Z
-    Double_t fInteractionVertexMomentumX; ///< Interaction vertex momentum in X
-    Double_t fInteractionVertexMomentumY; ///< Interaction vertex momentum in Y
-    Double_t fInteractionVertexMomentumZ; ///< Interaction vertex momentum in Z
+    Double_t fThetaCenterOfMass1;   ///< the CM theta angle for particle 1, theta_com
+    Double_t fThetaCenterOfMass2;   ///< the CM theta angle for particle 2, pi - theta_com
+
+    //Have the interaction position and momentum (both particles in this case) as 3 vectors
+    TVector3 fInteractionVertexPosition; ///< Interaction vertex position
+    TVector3 fInteractionVertexMomentum1; ///< Interaction vertex momentum for particle 1
+    TVector3 fInteractionVertexMomentum2; ///< Interaction vertex momentum for particle 2
 
     /// Register this class with ROOT. This adds some standard ROOT functions to
     /// the class, and makes sure that on the command line in ROOT it can do
