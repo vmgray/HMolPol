@@ -48,7 +48,7 @@
 #
 /gui/addButton viewer "Qt viewer"            "/control/execute vis/Qt.mac"
 /gui/addButton viewer "Set style solid"      "/vis/viewer/set/style surface"
-/gui/addButton viewer "Set style wire"       "/vis/viewer/set/style wire"
+/gui/addButton viewer "Set style wire"       "/vis/viewer/set/style wireframe"
 /gui/addButton viewer "Hide tracks behind objects" "/vis/viewer/set/hiddenMarker true"
 /gui/addButton viewer "Show tracks behind objects" "/vis/viewer/set/hiddenMarker false"
 /gui/addButton viewer "Front view"           "/vis/viewer/set/viewpointThetaPhi 180 0 deg"
