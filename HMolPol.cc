@@ -60,6 +60,15 @@ int main (int argc, char** argv)
 {
   //< TODO: Need to put in random seed info... not the remoll way as it is not good
 
+  // Get a random seed every time a simulation is ran
+  // Initialize the CLHEP random engine used by
+  // "shoot" type functions
+
+  unsigned int seed = time(0);
+
+  CLHEP::HepRandom::createInstance();
+  CLHEP::HepRandom::setTheSeed(seed);
+
   /**********
    * Initialization of Run manager
    * This is need so that all the "events" are looped through in a run
