@@ -60,7 +60,8 @@
     <!-- implement the geometry - through logical volumes and physical volumes -->
     <volume name="logicalDummy">
       <!--  debugging -->
-      <materialref ref="BC-408_scint_dummy" />
+<!--      <materialref ref="BC-408_scint_dummy" />  -->
+      <materialref ref="G4_Pb" />
 <!--  <materialref ref="G4_AIR" /> -->
       <solidref ref="Dummy_tube" />
       <auxiliary auxtype="Color" auxvalue="yellow" />

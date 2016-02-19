@@ -33,13 +33,6 @@
     <!-- position of the Hydrogen gas target (and all its parts) in the "World" -->
     <position name="HGasTargetCenter" x="0" y="0" z="0" unit="m" />
 
-    <!-- position of the Dummy (and all its parts) in the "World" -->
-    <position name="DummyCenter" x="0" y="0" z="2.5" unit="m" />
-
-<!-- more debugging -->
-    <!-- position of the Dummy (and all its parts) in the "World" -->
-    <position name="DummyCenter2" x="0" y="0" z="4.5" unit="m" />
-
     <!-- position of the Right Detector (and all its parts) in the "World" -->
     <position name="RightDetectorCenter" x="0.1" y="0" z="4.5" unit="m" />
 
@@ -73,16 +66,6 @@
         <positionref ref="HGasTargetCenter" />
       </physvol>
 
-      <physvol name="Dummy">
-        <file name="geometry/dummy.gdml" />
-        <positionref ref="DummyCenter" />
-      </physvol>
-<!--
-      <physvol name="Dummy2">
-        <file name="geometry/dummy.gdml" />
-        <positionref ref="DummyCenter2" />
-      </physvol>
-
       <physvol name="RightDetector">
         <file name="geometry/detector.gdml" />
         <positionref ref="RightDetectorCenter" />
@@ -92,7 +75,7 @@
         <file name="geometry/detector.gdml" />
         <positionref ref="LeftDetectorCenter" />
       </physvol>
--->
+
     </volume>
   </structure>
 

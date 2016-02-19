@@ -22,10 +22,10 @@
       and these need to be constants... -->
 
     <!-- X length of the "World" or the experimental hall -->
-    <quantity name="Detector_X_length" value="15" unit="cm" />
+    <quantity name="Detector_X_length" value="0.02" unit="m" />
 
     <!-- Y length of the "World" or the experimental hall -->
-    <quantity name="Detector_Y_length" value="15" unit="cm" />
+    <quantity name="Detector_Y_length" value="0.02" unit="m" />
 
     <!-- X length of the "World" or the experimental hall -->
     <quantity name="Detector_Z_length" value="2" unit="cm" />
@@ -47,7 +47,8 @@
   <structure>
     <!-- implement the geometry - through logical volumes and physical volumes -->
     <volume name="LogicalDetector">
-      <materialref ref="BC-408_scint_dummy" />
+<!--      <materialref ref="BC-408_scint_dummy" /> -->
+      <materialref ref="G4_Pb" />
       <solidref ref="DetectorVolumeBox" />
       <auxiliary auxtype="Color" auxvalue="cyan" />
       <auxiliary auxtype="Alpha" auxvalue="0.7" />
