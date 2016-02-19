@@ -2,16 +2,32 @@
 #Purpose:  Example HMolPol simulaiton macro
 #
 #Date: 10-14-2013
-#Modified: 02-08-2015
+#Modified: 02-18-2015
 #Assisted By:
 #
+
+#FIRST THING ONE MUST DO: SET THE GEOMETRY!!
+#MUST BE BEFORE YOU INITIALIZE
+
+#chose geometry 
+#limitation: only specifly MotherVolume file 
+#path relative to running/working directory
+#/HMolPol/Geometry/GeometryFileName geometry/HMolPolMotherVolume_LeftRight.gdml
+/HMolPol/Geometry/GeometryFileName geometry/HMolPolMotherVolume_Dummy.gdml
 
 #This is to initialize the run manager. This is needed IFF the lines
 # runManager->Initialize(); is not in HMollerPol.cc
 /run/initialize
 
+#Change Beam Energy
+/HMolPol/Beam/SetBeamEnergy 2 GeV
+
+#Change Raster size
+/HMolPol/Beam/SetRasterSizeX 0 cm
+/HMolPol/Beam/SetRasterSizeY 0 cm
+
 #start the viewer
-/control/execute vis/Qt.mac
+#/control/execute vis/Qt.mac
 
 #set viewer to solid
 #/vis/viewer/set/style surface
@@ -32,10 +48,14 @@
 #/process/inactivate phot
 #/process/inactivate Cerenkov
 
+#Primary Tracker Turn off/on
+#false = off
+/HMolPol/Tracking/TrackPrimaries false
+
 #choose name out outpted rootfile
-#/HMolPol/Analysis/RootFileName HMolPol_DummyOnly_theDetector.root
+/HMolPol/Analysis/RootFileName HMolPol_Dummy_G4Pb_2GeV_Mag8T_NoRaster_98ec766.root
 
 #run beam
 #/run/beamOn 4500
-/run/beamOn 100
+/run/beamOn 678000
 
