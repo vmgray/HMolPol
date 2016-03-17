@@ -66,7 +66,9 @@ class HMolPolEventUnits : public TObject
     const Double_t deg;       /// \ingroup root Units of deg
     const Double_t sr;        /// \ingroup root Units of steradian
     // Cross Section
+    const Double_t barn;      /// \ingroup root Units of barn
     const Double_t mbarn;     /// \ingroup root Units of millibarn
+    const Double_t microbarn;  /// \ingroup root Units of microbarn
     // Time
     const Double_t nsec;      /// \ingroup root Units of nanosec
     const Double_t msec;      /// \ingroup root Units of millisec
