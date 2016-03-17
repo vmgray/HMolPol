@@ -11,7 +11,7 @@
  * Also the passing of ariables
  *
  * \date 0<b>Date:</b> 6-25-2013
- * \date <b>Modified:</b> 01-21-2016
+ * \date <b>Modified:</b> 03-21-2017
  *
  * \note <b>Entry Conditions:</b>
  *
@@ -62,8 +62,11 @@ HMolPolPrimaryGeneratorAction::HMolPolPrimaryGeneratorAction(HMolPolAnalysis* a)
   fParticleGun = new G4ParticleGun(NubofParticles);
 
   /// set the min and max theta angles in the CM frame
-  fTheta_com_min = 0.0 * CLHEP::degree;
-  fTheta_com_max = 180.0 * CLHEP::degree;
+  fTheta_com_min = 75.0 * CLHEP::degree;
+  fTheta_com_max = 105.0 * CLHEP::degree;
+
+  //fTheta_com_min = 0.0 * CLHEP::degree;
+  //fTheta_com_max = 180.0 * CLHEP::degree;
 
   //set particle type
   // \todo *ADD* in functionality for other particles as incoming ones later
@@ -107,7 +110,7 @@ HMolPolPrimaryGeneratorAction::~HMolPolPrimaryGeneratorAction()
  * Return:
  * Called By:
  * Date: 06-25-2013
- * Modified: 01-21-2016
+ * Modified: 03-17-2016
  ********************************************/
 void HMolPolPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 {
@@ -149,45 +152,23 @@ void HMolPolPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
   //debugging
   //double phi_com = 0;
 
-  /*******
-   * the cross section
-   * this is *NOT* the from
-   * (formula (2) and (7) in J. Arrington et al, 1992,
-   * A Moller Polarimeter for the MIT-Bates Storage Ring)
-   * double D_sigma = fine_structure_const*fine_structure_const *
-   *     pow(3.0+cos(theta_com)*cos(theta_com),2.0) *
-   *     hbarc*hbarc/pow(sin(theta_com),4.0)/(2.0*m_e*beamE); // units of mbarn
-   *
-   * This is more like Qweak... but they have a odd factor in it
-   * / \see Using the formula (2) from J. Arrington et al, 1992,
-   *   A Moller Polarimeter for the MIT-Bates Storage Ring
-   * This is the cross section in the lab fram not the CM frame
-   * This D_sigma is really d_sigma/d_omega
-   ********/
-  double D_sigma = pow(hbarc * fine_structure_const / (2 * m_e), 2)
-      * pow((1 + cos(theta_com)) * (3.0 + pow(cos(theta_com), 2.0)), 2.0)
-                   / pow(sin(theta_com), 4.0);  // units of mbarns
-
-                   /* get rid of unused parameter warning
-                    //This is the Detla sigma one needs to get the delta_sigma (cross section)
-                    // for a Certain range of theta covered
-                    double Delta_Omega = 2.0*pi*(cos(fTheta_com_min) - cos(fTheta_com_max));
-                    */
+  /* get rid of unused parameter warning
+   //This is the Detla sigma one needs to get the delta_sigma (cross section)
+   // for a Certain range of theta covered
+   double Delta_Omega = 2.0*pi*(cos(fTheta_com_min) - cos(fTheta_com_max));
+   */
 
   //More of I have no idea what this is doing
   //  Multiply by Z because we have Z electrons
   //  here we must also divide by two because we are double covering
   //  phasespace because of identical particles
-
   //evt->SetEffCrossSection(sigma*V*vert->GetMaterial()->GetZ()/2.0);
-
 //  if( vert->GetMaterial()->GetNumberOfElements() != 1 ){
 //    G4cerr << __FILE__ << " line " << __LINE__ <<
 //        ": Error!  Some lazy remoll programmer didn't account for "
 //        "complex materials in the moller process!" << G4endl;
 //    exit(1);
 //  }
-
   /*! Using the formula (3) from
    \see J. Arrington et al, 1992,
    //  A Moller Polarimeter for the MIT-Bates Storage Ring */
@@ -283,20 +264,169 @@ void HMolPolPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
   // finally : fire in the hole!!!
   fParticleGun->GeneratePrimaryVertex(anEvent);
 
-  // Store cross section in ROOT file
-
   //Store the interaction point info to the ROOT file
   fAnalysis->fPrimary->fInteractionVertexPosition.SetX(interaction_vertex_x);
   fAnalysis->fPrimary->fInteractionVertexPosition.SetY(interaction_vertex_y);
   fAnalysis->fPrimary->fInteractionVertexPosition.SetZ(interaction_vertex_z);
 
   //Store the interaction momentum for particle 1 and 2 at the interaction vertex
-  fAnalysis->fPrimary->fInteractionVertexMomentum1.SetX(interaction_vertex_mom_x1);  //MeV
-  fAnalysis->fPrimary->fInteractionVertexMomentum1.SetY(interaction_vertex_mom_y1);  //MeV
-  fAnalysis->fPrimary->fInteractionVertexMomentum1.SetZ(interaction_vertex_mom_z1);  //MeV
-  fAnalysis->fPrimary->fInteractionVertexMomentum2.SetX(interaction_vertex_mom_x2);  //MeV
-  fAnalysis->fPrimary->fInteractionVertexMomentum2.SetY(interaction_vertex_mom_y2);  //MeV
-  fAnalysis->fPrimary->fInteractionVertexMomentum2.SetZ(interaction_vertex_mom_z2);  //MeV
+  fAnalysis->fPrimary->fInteractionVertexMomentum1.SetX(
+      interaction_vertex_mom_x1);  //MeV
+  fAnalysis->fPrimary->fInteractionVertexMomentum1.SetY(
+      interaction_vertex_mom_y1);  //MeV
+  fAnalysis->fPrimary->fInteractionVertexMomentum1.SetZ(
+      interaction_vertex_mom_z1);  //MeV
+  fAnalysis->fPrimary->fInteractionVertexMomentum2.SetX(
+      interaction_vertex_mom_x2);  //MeV
+  fAnalysis->fPrimary->fInteractionVertexMomentum2.SetY(
+      interaction_vertex_mom_y2);  //MeV
+  fAnalysis->fPrimary->fInteractionVertexMomentum2.SetZ(
+      interaction_vertex_mom_z2);  //MeV
+
+  //Calculate Cross Section
+  /*******
+   * the cross section
+   *
+   * *********
+   * **Cross section in CM frame**
+   *
+   * From a high precision Moller polarimeter by M. Hauger,A. Honegger al et.
+   * arXiV:nucl-ex/9910013v1 18 Oct 1999
+   * double D_sigma_CM = pow((alpha (4 - pow(sin(theta_com),2.0)) /
+   *   (2 * m_e * gamma_com * pow(sin(theta_com),2.0)),2.0);
+   *
+   * to convert this into units of area:
+   * double D_sigma_CM = pow((alpha * hbarc (4 - pow(sin(theta_com),2.0)) /
+   *   (2 * m_e * gamma_com * pow(sin(theta_com),2.0)),2.0);
+   *
+   * ********
+   * **Convert form CM frame to Lab frame - non-relativistic**
+   * double mass_ratio = m_e/m_e;
+   *
+   * To go from CM frame to lab frame
+   *  See Introductory Nuclear Physics, Krane pg 820 power is 3/2 or 1.5.
+   *  Note this is ONLY valid in the limit of v << c or non-relativistic limit
+   * double D_sigma_Lab = D_sigma_CM * ((pow(1 + pow(mass_ratio,2.0) + 2 * mass_ratio * cos(theta_com)),1.5)/
+   *    ( + mass_ratio * cos(theta_com)));
+   *
+   * ********
+   * **Convert form CM frame to Lab frame - relativistic**
+   * To go from CM frame to lab frame
+   *  See Introductory Nuclear Physics, Wong pg 820 power is 3/2 or 1.5.
+   *
+   * momentum of scattered particle 1
+   * double mag_momentum1 = sqrt(pow(interaction_vertex_mom_x1,2) +
+   *   pow(interaction_vertex_mom_y1,2) + pow(interaction_vertex_mom_z1,2));
+   *
+   * energy of scattered particle 1: E^2 = m^2 + p^2
+   * double energy1 = sqrt(pow(m_e,2) + pow(mag_momentum1,2));
+   *
+   * beta(velocity) of scattered particle 1
+   * double beta1 = mag_momentum1 / energy1;
+   *
+   * ratio of beta of center of mass and scattered particle 1
+   * double beta_ratio = beta_com / beta1;
+   *
+   * double CM_To_Lab_Conversion_Rel= (pow(pow(sin(theta_com,2) +
+   *   pow(gamma_com,2)*pow(cos(theta_com) + beta_ratio,2) ,1.5))
+   *   / (gamma_com * (1 + beta_ratio*cos(theta_com)));
+   *
+   * double D_sigma_Lab_Rel = D_sigma_CM * CM_To_Lab_Conversion_Rel;
+   * *********
+   *
+   * this is *NOT* the from
+   * (formula (2) and (7) in J. Arrington et al, 1992,
+   * A Moller Polarimeter for the MIT-Bates Storage Ring)
+   * double D_sigma = fine_structure_const*fine_structure_const *
+   *     pow(3.0+cos(theta_com)*cos(theta_com),2.0) *
+   *     hbarc*hbarc/pow(sin(theta_com),4.0)/(2.0*m_e*beamE); // units of mbarn
+   *
+   * This is more like Qweak... but they have a odd factor in it
+   * / \see Using the formula (2) from J. Arrington et al, 1992,
+   *   A Moller Polarimeter for the MIT-Bates Storage Ring
+   * This is the cross section in the lab fram not the CM frame
+   * This D_sigma is really d_sigma/d_omega
+   ********/
+
+  //m_e is in MeV
+  //From High Precision Paper
+  double D_sigma_CM = pow(fine_structure_const * hbarc / (2 * e_com), 2.0)
+      * pow((4 - pow(sin(theta_com), 2)) / (pow((sin(theta_com)), 2.0)), 2.0);  //units mm^2
+
+/*
+  //From Krane
+  //Mass ratio as needed for the conversion, see Krane for Moller scattering, this is 1
+  double mass_ratio = m_e / m_e;  //unitless
+  //Unitless
+
+  double CM_To_Lab_Conversion_NonRel = pow(
+      (1 + pow(mass_ratio, 2.0) + 2 * mass_ratio * cos(theta_com)), 1.5)
+                                       / (1 + mass_ratio * cos(theta_com));
+
+  double D_sigma_Lab_NonRel = CM_To_Lab_Conversion_NonRel * D_sigma_CM;  //in mm^2
+*/
+
+/*
+  //From Wong
+  //momentum of scattered particle 1
+  double mag_momentum1 = sqrt(
+      pow(interaction_vertex_mom_x1, 2) + pow(interaction_vertex_mom_y1, 2)
+      + pow(interaction_vertex_mom_z1, 2) + pow(m_e, 2));
+  //energy of scattered particle 1: E^2 = m^2 + p^2
+  double energy1 = sqrt(pow(m_e, 2) + pow(mag_momentum1, 2));
+  //beta(velocity) of scattered particle 1
+  double beta1 = mag_momentum1 / energy1;
+  //ratio of beta of center of mass and scattered particle 1
+  double beta_ratio = beta_com / beta1;
+
+  double CM_To_Lab_Conversion_Rel = pow(
+      pow(sin(theta_com), 2) + pow(gamma_com, 2)
+          * pow((cos(theta_com) + beta_ratio), 2),
+      1.5)
+                                    / (gamma_com * (1
+                                        + beta_ratio * cos(theta_com)));
+
+  double D_sigma_Lab_Rel = CM_To_Lab_Conversion_NonRel * D_sigma_CM;  //in mm^2
+
+  double D_sigma_Lab_Bates = pow(hbarc * fine_structure_const / (2 * m_e), 2.0)
+      * pow((1 + cos(theta_com)) * (3.0 + pow(cos(theta_com), 2.0)), 2.0)
+                             / pow(sin(theta_com), 4.0);  // in mm^2
+*/
+
+ /**********
+  //Qweak - file src/QweakSimEPEvent.cc lines 1024 - 1056
+  //Same as Bates(But not with the odd conversion)
+  double D_sigma_Lab_Qweak = pow(
+  (1 + cos(theta_com)) * (3 + cos(theta_com) * cos(theta_com)), 2);
+  // Xsect = pow(alpha/2.0/M_electron,2)*Xsect/pow(sin(theta_CM),4); // alpha^2/(4m^2) = 0.199 b/Sr
+  D_sigma_Lab_Qweak = (1.99e4) * D_sigma_Lab_Qweak / pow(sin(theta_com), 4);
+  //ubarns - stored at mm^2... Qweak's odd conversion messes up storage
+
+  //Remoll - file src/remollGenMoller.cc
+  //Almost same as D_sigma_CM, give about the same value
+  double D_sigma_CM_Remoll = fine_structure_const * fine_structure_const
+  * pow(3.0 + cos(theta_com) * cos(theta_com), 2.0)
+  * hbarc * hbarc
+  / pow(sin(theta_com), 4.0) / (2.0 * m_e * beamE);  // units of area
+  *********/
+
+/*
+  //Debugging
+  std::cout << "New Event: " << std::endl << "CM Theta: " << theta_com
+  << std::endl << "gamma: " << gamma_com << std::endl << "m_e * gamma (MeV): "
+  << e_com << std::endl << "D_sigma_CM (ubarns/sr): "
+  << D_sigma_CM / CLHEP::microbarn << std::endl << "mass_ratio: " << mass_ratio
+  << std::endl << "CM_To_Lab_Conversion_NonRel: " << CM_To_Lab_Conversion_NonRel
+  << std::endl << "D_sigma_Lab_NonRel (ubarns/sr): "
+  << D_sigma_Lab_NonRel / CLHEP::microbarn << std::endl
+  << "CM_To_Lab_Conversion_Rel: " << CM_To_Lab_Conversion_Rel << std::endl
+  << "D_sigma_Lab_Rel (ubarns/sr): " << D_sigma_Lab_Rel << std::endl
+  << "D_sigma_Lab_Bates (ubarns/sr): " << D_sigma_Lab_Bates / CLHEP::microbarn
+  << std::endl << "D_sigma_Lab_Qweak (ubarns/sr stored as mm^2/sr): "
+  << D_sigma_Lab_Qweak << std::endl << "D_sigma_CM_Remoll (ubarns/sr): "
+  << D_sigma_CM_Remoll / CLHEP::microbarn
+  << std::endl << std::endl << std::endl;
+*/
 
   //Store the scattering angles for the interaction
   //in CM
@@ -328,9 +458,7 @@ void HMolPolPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
       (phi_com + pi < 2 * pi) ? (phi_com + pi) : (phi_com - pi);  //rad
 
   //store cross section info in the ROOT file
-  /// \todo actually write the cross section
-  fAnalysis->fPrimary->fCrossSection = D_sigma;
-
+  fAnalysis->fPrimary->fCrossSectionCM = D_sigma_CM;  //mm^2/sr
   /*
    G4cout << "#### Leaving HMolPolPrimaryGeneratorAction::GeneratePrimaries ####"
    << G4endl;
