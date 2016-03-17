@@ -24,7 +24,8 @@ class HMolPolEventPrimary: public TObject {
     HMolPolEventPrimary();  ///< constructor for the primary event
     virtual ~HMolPolEventPrimary();  ///< destuctor for the primary event
 
-    Double_t fCrossSection;  ///< the cross section
+    Double_t fCrossSectionCM;  ///< the cross section in CM frame
+
     Double_t fPhiLab1;        ///< the lab phi angle one particle(same as CM phi angle)
     Double_t fPhiLab2;        ///< the lab phi angle one particle(same as CM phi angle) Lab phi1 + 180 deg
     Double_t fThetaLab1;     ///< the lab theta angle for particle 1
