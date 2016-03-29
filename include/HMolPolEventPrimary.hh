@@ -5,7 +5,7 @@
  * \brief <b>Purpose:</b> This is header file for the Primary event.
  *
  * \date <b>Date:</b> 07-17-2013
- * \date <b>Modified:</b> 01-21-2016
+ * \date <b>Modified:</b> 03-28-2016
  *
  * \note <b>Entry Conditions:</b> none
  *
@@ -35,9 +35,18 @@ class HMolPolEventPrimary: public TObject {
     Double_t fPhiCenterOfMass1;   ///< the CM phi angle for particle 1, phi_com
     Double_t fPhiCenterOfMass2;   ///< the CM phi angle for particle 2, phi_com + 180 deg
 
-    Double_t fThetaCenterOfMass;        ///< the CM theta angle
+    Double_t fThetaCenterOfMass;    ///< the CM theta angle
     Double_t fThetaCenterOfMass1;   ///< the CM theta angle for particle 1, theta_com
     Double_t fThetaCenterOfMass2;   ///< the CM theta angle for particle 2, pi - theta_com
+
+    //Min Max theta and Phi angle thrown over
+    Double_t fThetaCenterOfMassMin;     ///< the min theta angle trowned over
+    Double_t fThetaCenterOfMassMax;     ///< the max theta angle trowned over
+    Double_t fPhiCenterOfMassMin;        ///< the min theta angle trowned over
+    Double_t fPhiCenterOfMassMax;        ///< the max theta angle trowned over
+
+    //beam energy
+    Double_t fBeamE; //Beam Energy
 
     //Have the interaction position and momentum (both particles in this case) as 3 vectors
     TVector3 fInteractionVertexPosition; ///< Interaction vertex position

@@ -48,20 +48,35 @@ class HMolPolPrimaryGeneratorAction : public G4VUserPrimaryGeneratorAction
     void SetBeamE(const G4double& BeamE) { fBeamE = BeamE; }   ///< set
     /// the Energy of the beam
 
+    ///<  Set Theta CM range size
+    void SetThetaComMax(const G4double& ThetaComMax) { fTheta_com_max = ThetaComMax; }  ///< set
+      /// the max Theta CM value
+    void SetThetaComMin(const G4double& ThetaComMin) { fTheta_com_min = ThetaComMin; }  ///< set
+    /// the min Theta CM value
+
+    ///<  Set phi CM range size
+    void SetPhiComMax(const G4double& PhiComMax) { fPhi_com_max = PhiComMax; }  ///< set
+      /// the max Phi CM value
+    void SetPhiComMin(const G4double& PhiComMin) { fPhi_com_min = PhiComMin; }  ///< set
+    /// the min Phi CM value
+
   private:
 
     HMolPolAnalysis* fAnalysis;  ///< the analysis class
 
-    // Center of mass angles to generate particles between
-    /// \todo make this so that they are passed and in the messenger
-    double fTheta_com_min; /// < this is the minimum Theta that electrons
-    /// will be generated over
-    double fTheta_com_max; /// < this is the minimum Theta that electrons
-    /// will be generated over
-
     G4double fRasterX;  ///< the total raster size in X
     G4double fRasterY;  ///< the total raser size in Y
     G4double fBeamE;    ///< the incoming electron beam energy
+
+    // Center of mass angles to generate particles between
+    G4double fTheta_com_min; /// < this is the minimum Theta that electrons
+    /// will be generated over
+    G4double fTheta_com_max; /// < this is the minimum Theta that electrons
+    /// will be generated over
+    G4double fPhi_com_min; /// < this is the minimum Theta that electrons
+    /// will be generated over
+    G4double fPhi_com_max; /// < this is the minimum Theta that electrons
+    /// will be generated over
 
     //the primary generation of the primary electrons
     /// \todo why does doxygen not want this documented?? and are these right?

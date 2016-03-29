@@ -53,7 +53,9 @@
 // change these values from within geant4 through the messenger class.
 HMolPolPrimaryGeneratorAction::HMolPolPrimaryGeneratorAction(HMolPolAnalysis* a) :
     fAnalysis(a), fRasterX(0.0 * CLHEP::mm), fRasterY(0.0 * CLHEP::mm),
-    fBeamE(2 * CLHEP::GeV)  // initialization
+    fBeamE(2 * CLHEP::GeV), fTheta_com_min(0.0 * CLHEP::degree),
+    fTheta_com_max(180.0 * CLHEP::degree), fPhi_com_min(0.0 * CLHEP::rad),
+    fPhi_com_max(2 * pi* CLHEP::rad)  // initialization
 {
   //set number of particles getting fired at a time
   G4int NubofParticles = 1;
@@ -61,12 +63,12 @@ HMolPolPrimaryGeneratorAction::HMolPolPrimaryGeneratorAction(HMolPolAnalysis* a)
   //set a particle gun with n number of particles
   fParticleGun = new G4ParticleGun(NubofParticles);
 
+/*
   /// set the min and max theta angles in the CM frame
-  fTheta_com_min = 75.0 * CLHEP::degree;
-  fTheta_com_max = 105.0 * CLHEP::degree;
+  fTheta_com_min = 0.0 * CLHEP::degree;
+  fTheta_com_max = 180.0 * CLHEP::degree;
+*/
 
-  //fTheta_com_min = 0.0 * CLHEP::degree;
-  //fTheta_com_max = 180.0 * CLHEP::degree;
 
   //set particle type
   // \todo *ADD* in functionality for other particles as incoming ones later
@@ -148,7 +150,8 @@ void HMolPolPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
   double e_com = m_e * gamma_com;  //MeV
   double theta_com = acos(
       CLHEP::RandFlat::shoot(cos(fTheta_com_max), cos(fTheta_com_min)));  //rad
-  double phi_com = CLHEP::RandFlat::shoot(0.0, 2.0 * pi);  //rad
+  double phi_com = CLHEP::RandFlat::shoot(fPhi_com_min, fPhi_com_max);  //rad
+  //double phi_com = CLHEP::RandFlat::shoot(0.0, 2.0 * pi);  //rad
   //debugging
   //double phi_com = 0;
 
@@ -353,80 +356,80 @@ void HMolPolPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
   double D_sigma_CM = pow(fine_structure_const * hbarc / (2 * e_com), 2.0)
       * pow((4 - pow(sin(theta_com), 2)) / (pow((sin(theta_com)), 2.0)), 2.0);  //units mm^2
 
-/*
-  //From Krane
-  //Mass ratio as needed for the conversion, see Krane for Moller scattering, this is 1
-  double mass_ratio = m_e / m_e;  //unitless
-  //Unitless
+      /*
+       //From Krane
+       //Mass ratio as needed for the conversion, see Krane for Moller scattering, this is 1
+       double mass_ratio = m_e / m_e;  //unitless
+       //Unitless
 
-  double CM_To_Lab_Conversion_NonRel = pow(
-      (1 + pow(mass_ratio, 2.0) + 2 * mass_ratio * cos(theta_com)), 1.5)
-                                       / (1 + mass_ratio * cos(theta_com));
+       double CM_To_Lab_Conversion_NonRel = pow(
+       (1 + pow(mass_ratio, 2.0) + 2 * mass_ratio * cos(theta_com)), 1.5)
+       / (1 + mass_ratio * cos(theta_com));
 
-  double D_sigma_Lab_NonRel = CM_To_Lab_Conversion_NonRel * D_sigma_CM;  //in mm^2
-*/
+       double D_sigma_Lab_NonRel = CM_To_Lab_Conversion_NonRel * D_sigma_CM;  //in mm^2
+       */
 
-/*
-  //From Wong
-  //momentum of scattered particle 1
-  double mag_momentum1 = sqrt(
-      pow(interaction_vertex_mom_x1, 2) + pow(interaction_vertex_mom_y1, 2)
-      + pow(interaction_vertex_mom_z1, 2) + pow(m_e, 2));
-  //energy of scattered particle 1: E^2 = m^2 + p^2
-  double energy1 = sqrt(pow(m_e, 2) + pow(mag_momentum1, 2));
-  //beta(velocity) of scattered particle 1
-  double beta1 = mag_momentum1 / energy1;
-  //ratio of beta of center of mass and scattered particle 1
-  double beta_ratio = beta_com / beta1;
+  /*
+   //From Wong
+   //momentum of scattered particle 1
+   double mag_momentum1 = sqrt(
+   pow(interaction_vertex_mom_x1, 2) + pow(interaction_vertex_mom_y1, 2)
+   + pow(interaction_vertex_mom_z1, 2) + pow(m_e, 2));
+   //energy of scattered particle 1: E^2 = m^2 + p^2
+   double energy1 = sqrt(pow(m_e, 2) + pow(mag_momentum1, 2));
+   //beta(velocity) of scattered particle 1
+   double beta1 = mag_momentum1 / energy1;
+   //ratio of beta of center of mass and scattered particle 1
+   double beta_ratio = beta_com / beta1;
 
-  double CM_To_Lab_Conversion_Rel = pow(
-      pow(sin(theta_com), 2) + pow(gamma_com, 2)
-          * pow((cos(theta_com) + beta_ratio), 2),
-      1.5)
-                                    / (gamma_com * (1
-                                        + beta_ratio * cos(theta_com)));
+   double CM_To_Lab_Conversion_Rel = pow(
+   pow(sin(theta_com), 2) + pow(gamma_com, 2)
+   * pow((cos(theta_com) + beta_ratio), 2),
+   1.5)
+   / (gamma_com * (1
+   + beta_ratio * cos(theta_com)));
 
-  double D_sigma_Lab_Rel = CM_To_Lab_Conversion_NonRel * D_sigma_CM;  //in mm^2
+   double D_sigma_Lab_Rel = CM_To_Lab_Conversion_NonRel * D_sigma_CM;  //in mm^2
 
-  double D_sigma_Lab_Bates = pow(hbarc * fine_structure_const / (2 * m_e), 2.0)
-      * pow((1 + cos(theta_com)) * (3.0 + pow(cos(theta_com), 2.0)), 2.0)
-                             / pow(sin(theta_com), 4.0);  // in mm^2
-*/
+   double D_sigma_Lab_Bates = pow(hbarc * fine_structure_const / (2 * m_e), 2.0)
+   * pow((1 + cos(theta_com)) * (3.0 + pow(cos(theta_com), 2.0)), 2.0)
+   / pow(sin(theta_com), 4.0);  // in mm^2
+   */
 
- /**********
-  //Qweak - file src/QweakSimEPEvent.cc lines 1024 - 1056
-  //Same as Bates(But not with the odd conversion)
-  double D_sigma_Lab_Qweak = pow(
-  (1 + cos(theta_com)) * (3 + cos(theta_com) * cos(theta_com)), 2);
-  // Xsect = pow(alpha/2.0/M_electron,2)*Xsect/pow(sin(theta_CM),4); // alpha^2/(4m^2) = 0.199 b/Sr
-  D_sigma_Lab_Qweak = (1.99e4) * D_sigma_Lab_Qweak / pow(sin(theta_com), 4);
-  //ubarns - stored at mm^2... Qweak's odd conversion messes up storage
+  /**********
+   //Qweak - file src/QweakSimEPEvent.cc lines 1024 - 1056
+   //Same as Bates(But not with the odd conversion)
+   double D_sigma_Lab_Qweak = pow(
+   (1 + cos(theta_com)) * (3 + cos(theta_com) * cos(theta_com)), 2);
+   // Xsect = pow(alpha/2.0/M_electron,2)*Xsect/pow(sin(theta_CM),4); // alpha^2/(4m^2) = 0.199 b/Sr
+   D_sigma_Lab_Qweak = (1.99e4) * D_sigma_Lab_Qweak / pow(sin(theta_com), 4);
+   //ubarns - stored at mm^2... Qweak's odd conversion messes up storage
 
-  //Remoll - file src/remollGenMoller.cc
-  //Almost same as D_sigma_CM, give about the same value
-  double D_sigma_CM_Remoll = fine_structure_const * fine_structure_const
-  * pow(3.0 + cos(theta_com) * cos(theta_com), 2.0)
-  * hbarc * hbarc
-  / pow(sin(theta_com), 4.0) / (2.0 * m_e * beamE);  // units of area
-  *********/
+   //Remoll - file src/remollGenMoller.cc
+   //Almost same as D_sigma_CM, give about the same value
+   double D_sigma_CM_Remoll = fine_structure_const * fine_structure_const
+   * pow(3.0 + cos(theta_com) * cos(theta_com), 2.0)
+   * hbarc * hbarc
+   / pow(sin(theta_com), 4.0) / (2.0 * m_e * beamE);  // units of area
+   *********/
 
-/*
-  //Debugging
-  std::cout << "New Event: " << std::endl << "CM Theta: " << theta_com
-  << std::endl << "gamma: " << gamma_com << std::endl << "m_e * gamma (MeV): "
-  << e_com << std::endl << "D_sigma_CM (ubarns/sr): "
-  << D_sigma_CM / CLHEP::microbarn << std::endl << "mass_ratio: " << mass_ratio
-  << std::endl << "CM_To_Lab_Conversion_NonRel: " << CM_To_Lab_Conversion_NonRel
-  << std::endl << "D_sigma_Lab_NonRel (ubarns/sr): "
-  << D_sigma_Lab_NonRel / CLHEP::microbarn << std::endl
-  << "CM_To_Lab_Conversion_Rel: " << CM_To_Lab_Conversion_Rel << std::endl
-  << "D_sigma_Lab_Rel (ubarns/sr): " << D_sigma_Lab_Rel << std::endl
-  << "D_sigma_Lab_Bates (ubarns/sr): " << D_sigma_Lab_Bates / CLHEP::microbarn
-  << std::endl << "D_sigma_Lab_Qweak (ubarns/sr stored as mm^2/sr): "
-  << D_sigma_Lab_Qweak << std::endl << "D_sigma_CM_Remoll (ubarns/sr): "
-  << D_sigma_CM_Remoll / CLHEP::microbarn
-  << std::endl << std::endl << std::endl;
-*/
+  /*
+   //Debugging
+   std::cout << "New Event: " << std::endl << "CM Theta: " << theta_com
+   << std::endl << "gamma: " << gamma_com << std::endl << "m_e * gamma (MeV): "
+   << e_com << std::endl << "D_sigma_CM (ubarns/sr): "
+   << D_sigma_CM / CLHEP::microbarn << std::endl << "mass_ratio: " << mass_ratio
+   << std::endl << "CM_To_Lab_Conversion_NonRel: " << CM_To_Lab_Conversion_NonRel
+   << std::endl << "D_sigma_Lab_NonRel (ubarns/sr): "
+   << D_sigma_Lab_NonRel / CLHEP::microbarn << std::endl
+   << "CM_To_Lab_Conversion_Rel: " << CM_To_Lab_Conversion_Rel << std::endl
+   << "D_sigma_Lab_Rel (ubarns/sr): " << D_sigma_Lab_Rel << std::endl
+   << "D_sigma_Lab_Bates (ubarns/sr): " << D_sigma_Lab_Bates / CLHEP::microbarn
+   << std::endl << "D_sigma_Lab_Qweak (ubarns/sr stored as mm^2/sr): "
+   << D_sigma_Lab_Qweak << std::endl << "D_sigma_CM_Remoll (ubarns/sr): "
+   << D_sigma_CM_Remoll / CLHEP::microbarn
+   << std::endl << std::endl << std::endl;
+   */
 
   //Store the scattering angles for the interaction
   //in CM
@@ -456,6 +459,16 @@ void HMolPolPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
   fAnalysis->fPrimary->fPhiLab1 = phi_com;  //rad
   fAnalysis->fPrimary->fPhiLab2 =
       (phi_com + pi < 2 * pi) ? (phi_com + pi) : (phi_com - pi);  //rad
+
+  //Store Min and Max and Theta & Phi CM values thrown over
+  fAnalysis->fPrimary->fThetaCenterOfMassMax = fTheta_com_max;  //deg
+  fAnalysis->fPrimary->fThetaCenterOfMassMin = fTheta_com_min;  //deg
+
+  fAnalysis->fPrimary->fPhiCenterOfMassMax = fPhi_com_max;  //deg or Rad
+  fAnalysis->fPrimary->fPhiCenterOfMassMax = fPhi_com_max;  //deg or Rad
+
+  //Store Beam Energy
+  fAnalysis->fPrimary->fBeamE = beamE;  //deg or Rad
 
   //store cross section info in the ROOT file
   fAnalysis->fPrimary->fCrossSectionCM = D_sigma_CM;  //mm^2/sr
