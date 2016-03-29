@@ -86,6 +86,14 @@ class HMolPolMessenger : public G4UImessenger
 
     G4UIcmdWithADoubleAndUnit* fBeamECmd; ///< beam energy
 
+    //create the Min and Max Theta angle thrown over
+    G4UIcmdWithADoubleAndUnit* fThetaComMinCmd; ///< Theta Min thrown over
+    G4UIcmdWithADoubleAndUnit* fThetaComMaxCmd; ///< Theta Max thrown over
+
+    //create the Min and Max Phi angle thrown over
+    G4UIcmdWithADoubleAndUnit* fPhiComMinCmd; ///< Phi Min thrown over
+    G4UIcmdWithADoubleAndUnit* fPhiComMaxCmd; ///< Phi Max thrown over
+
 /// Geometry related variables
     G4UIdirectory*        fGeometryDir;       ///< create the Geometry Directory
     G4UIcmdWithAString*   fGeometryFileNameCmd;  ///< Geometry File Name
