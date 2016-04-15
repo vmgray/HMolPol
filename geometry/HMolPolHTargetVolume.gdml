@@ -11,9 +11,9 @@
 
   <!-- /*********************************************************** Programmer: Valerie 
     Gray Purpose: To define the Hydrogen gas target of the simulation 
-      H gas target Al container which is around the H target 
+      H gas target container which is around the H target 
     Entry Conditions: Date:05-17-2013 
-    Modified: 02-18-2015 
+    Modified: 04-15-2016 
     Assisted By: Wouter Deconinck
   *********************************************************/ -->
 
@@ -50,19 +50,19 @@
 
     <!-- The above two values make the target a complete cylinder -->
 
-    <!-- Defining the minimum radius of the Al container around the H Target -->
-    <quantity name="HTarget_AlCell_MinRadius" value="HTarget_MaxRadius" />
+    <!-- Defining the minimum radius of the container around the H Target -->
+    <quantity name="HTarget_Cell_MinRadius" value="HTarget_MaxRadius" />
 
-    <!-- Defining the maximum radius of the Al container around the H Target -->
-    <quantity name="HTarget_AlCell_MaxRadius" type="length" value="3.0"
+    <!-- Defining the maximum radius of the container around the H Target -->
+    <quantity name="HTarget_Cell_MaxRadius" type="length" value="3.0"
       unit="cm" />
       
     <!-- Length of the Hydrogen Target /// as defined in Moller Polarimetry with 
       Atomic Hydrogen Targets by E.~Chudakov and V.~Luppov(long) length
-      is 40 cm pg 7--> 
-    <!-- Defining the maximum length of the Al container around the H Target -->
-    <quantity name="HTarget_AlCell_Z_Length" type="length" value="40"
-      unit="cm" />
+      is 45 cm on pg 7 and 40 cm on pg 33. Keeping the 40 cm 04/15/2016--> 
+    <!-- Defining the maximum length of the container around the H Target -->
+    <quantity name="HTarget_Cell_Z_Length" type="length" value="0.4"
+      unit="m" />
 
     <!-- define positions of the target in this file -->
     <position name="HTarget_Position" x="0.0" y="0.0" z="0.0" unit="m" />
@@ -79,9 +79,9 @@
     <tube name="Htarget_tube" rmin="HTarget_MinRadius" rmax="HTarget_MaxRadius"
       z="HTarget_Z_Length" startphi="HTarget_StartPhi" deltaphi="HTarget_EndPhi" />
 
-    <!-- Define the tube of the Al case around the H target -->
-    <tube name="Htarget_AlCase_tube" rmin="HTarget_AlCell_MinRadius" rmax="HTarget_AlCell_MaxRadius"
-      z="HTarget_AlCell_Z_Length" startphi="HTarget_StartPhi" deltaphi="HTarget_EndPhi" />
+    <!-- Define the tube of the cell around the H target -->
+    <tube name="Htarget_Case_tube" rmin="HTarget_Cell_MinRadius" rmax="HTarget_Cell_MaxRadius"
+      z="HTarget_Cell_Z_Length" startphi="HTarget_StartPhi" deltaphi="HTarget_EndPhi" />
 
   </solids>
 
@@ -99,7 +99,7 @@
     <!-- create the logical volume -->
     <volume name="logicalHTarget">
       <materialref ref="G4_Al" />
-      <solidref ref="Htarget_AlCase_tube" />
+      <solidref ref="Htarget_Case_tube" />
 
       <!-- Define the physical volume -->
       <physvol>

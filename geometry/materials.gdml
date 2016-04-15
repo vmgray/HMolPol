@@ -7,7 +7,7 @@
   
   Entry Conditions: none 
   Date: 05-21-2013
-  Modified: 07-15-2015
+  Modified: 04-15-2016
   Assisted By:
   ********************************************************* -->
 
@@ -26,6 +26,18 @@
       Density then is 5.022e-9 g/cm3  -->
     <atom unit="g/mole" value="1.01" />
   </material>
+
+  <!-- Copper cell as defined in /// as defined in Moller Polarimetry with 
+    Atomic Hydrogen Targets by E.~Chudakov and V.~Luppov(long)  Appendix A, pg 33
+    Can't add in the specific heat or the conductance -->
+  <!-- Change this to use NIST variables?? -->
+  <material name="Copper_Cell" Z="29">
+    <T unit="K" value="0.3" />               <!-- pg 33 -->
+    <!-- <P unit="pascal" value="1.33e-13" />  -->   <!-- 1e-15 Torr in paper pg 15 -->
+    <D unit="kg/m3" value="8960" />          <!-- pg 33 -->
+    <atom unit="g/mole" value="63.546" />  <!-- From the PDG -->
+  </material>
+
 
   <!-- Dummy Scintillator material I am using the BC-408 material from http://www.detectors.saint-gobain.com/Plastic-Scintillator.aspx 
     - this is just so that we have something to work with
