@@ -68,7 +68,7 @@ class HMolPolEventUnits : public TObject
     // Cross Section
     const Double_t barn;      /// \ingroup root Units of barn
     const Double_t mbarn;     /// \ingroup root Units of millibarn
-    const Double_t microbarn;  /// \ingroup root Units of microbarn
+    const Double_t ubarn;  /// \ingroup root Units of microbarn
     // Time
     const Double_t nsec;      /// \ingroup root Units of nanosec
     const Double_t msec;      /// \ingroup root Units of millisec

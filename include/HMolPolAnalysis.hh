@@ -19,7 +19,7 @@
  *   HMolPolEventGenericDetector objects.
  *
  * \date <b>Date:</b> 07-11-2013
- * \date <b>Modified:</b> 07-06-2015
+ * \date <b>Modified:</b> 04-18-2016
  *
  * \note <b>Entry Conditions:</b> none
  *
@@ -48,6 +48,7 @@ class HMolPolMessenger;
 class HMolPolEventPrimary;
 class HMolPolEventUnits;
 class HMolPolEventPrimaryHit;
+class HMolPolEventPrimaryConditions;
 
 class HMolPolAnalysis
 {
@@ -107,6 +108,12 @@ class HMolPolAnalysis
     HMolPolEventPrimary* fPrimary;      ///< Primary event structure
     TBranch* fPrimaryBranch;            ///< Primary event ROOT branch
 
+    /// Branch for the conditions of the primary generator
+    /// These are the thetas, and phi, and beam eneregy etc of the
+    /// simulation
+    HMolPolEventPrimaryConditions* fPrimaryConditions;      ///< Primary conditions structure
+    TBranch* fPrimaryConditionsBranch;            ///< Primary conditions ROOT branch
+
     /// Event structure for the branches in the ROOT tree corresponding to a
     /// particular detector. There could be several of them so they are stored
     /// in a vector: one element in the vector for each detector that is stored
@@ -132,6 +139,7 @@ class HMolPolAnalysis
     std::vector<HMolPolEventPrimaryHit> *fPrimaryHits;
     /// And its corresponding branch in the ROOT tree
     TBranch *fPrimaryHitsBranch;
+
 
   private:
 

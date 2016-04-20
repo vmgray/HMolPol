@@ -58,7 +58,7 @@ HMolPolEventUnits::HMolPolEventUnits()
   sr(CLHEP::sr),
   barn(CLHEP::barn),
   mbarn(CLHEP::millibarn),
-  microbarn(CLHEP::microbarn),
+  ubarn(CLHEP::microbarn),
   nsec(CLHEP::ns),
   msec(CLHEP::ms),
   sec(CLHEP::s),

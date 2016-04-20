@@ -31,6 +31,7 @@
 #include "HMolPolPrimaryGeneratorAction.hh"
 #include "HMolPolAnalysis.hh"
 #include "HMolPolEventPrimary.hh"
+#include "HMolPolEventPrimaryConditions.hh"
 
 /********************************************
  * Programmer: Valerie Gray
@@ -44,7 +45,7 @@
  * Return: Nothing
  * Called By:
  * Date: 06-25-2013
- * Modified: 07-15-2015
+ * Modified: 04-18-2016
  ********************************************/
 /// \todo have someone (Wouter) help me figure what this all does
 // Initialize the generator action with the pointer to the analysis object (so
@@ -52,10 +53,7 @@
 // settings, and with an initial beam energy. Commands by the user could still
 // change these values from within geant4 through the messenger class.
 HMolPolPrimaryGeneratorAction::HMolPolPrimaryGeneratorAction(HMolPolAnalysis* a) :
-    fAnalysis(a), fRasterX(0.0 * CLHEP::mm), fRasterY(0.0 * CLHEP::mm),
-    fBeamE(2 * CLHEP::GeV), fTheta_com_min(0.0 * CLHEP::degree),
-    fTheta_com_max(180.0 * CLHEP::degree), fPhi_com_min(0.0 * CLHEP::rad),
-    fPhi_com_max(2 * pi* CLHEP::rad)  // initialization
+    fAnalysis(a) // initialization
 {
   //set number of particles getting fired at a time
   G4int NubofParticles = 1;
@@ -69,12 +67,24 @@ HMolPolPrimaryGeneratorAction::HMolPolPrimaryGeneratorAction(HMolPolAnalysis* a)
   fTheta_com_max = 180.0 * CLHEP::degree;
 */
 
-
   //set particle type
   // \todo *ADD* in functionality for other particles as incoming ones later
   //SetParticleType("e-");
 
   //set the beam energy
+  SetBeamE(2 * CLHEP::GeV);
+
+  //set Raster Size
+  SetRasterX(0.0 * CLHEP::mm);
+  SetRasterY(0.0 * CLHEP::mm);
+
+  //Set Theta Angles
+  SetThetaComMin(0.0 * CLHEP::degree);
+  SetThetaComMax(180.0 * CLHEP::degree);
+
+  // Set the phi angle ranges
+  SetPhiComMin(0.0 * CLHEP::degree);
+  SetPhiComMax(360.0 * CLHEP::degree);
 
   return;
 }
@@ -112,7 +122,7 @@ HMolPolPrimaryGeneratorAction::~HMolPolPrimaryGeneratorAction()
  * Return:
  * Called By:
  * Date: 06-25-2013
- * Modified: 03-17-2016
+ * Modified: 04-18-2016
  ********************************************/
 void HMolPolPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 {
@@ -459,16 +469,6 @@ void HMolPolPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
   fAnalysis->fPrimary->fPhiLab1 = phi_com;  //rad
   fAnalysis->fPrimary->fPhiLab2 =
       (phi_com + pi < 2 * pi) ? (phi_com + pi) : (phi_com - pi);  //rad
-
-  //Store Min and Max and Theta & Phi CM values thrown over
-  fAnalysis->fPrimary->fThetaCenterOfMassMax = fTheta_com_max;  //deg
-  fAnalysis->fPrimary->fThetaCenterOfMassMin = fTheta_com_min;  //deg
-
-  fAnalysis->fPrimary->fPhiCenterOfMassMax = fPhi_com_max;  //deg or Rad
-  fAnalysis->fPrimary->fPhiCenterOfMassMax = fPhi_com_max;  //deg or Rad
-
-  //Store Beam Energy
-  fAnalysis->fPrimary->fBeamE = beamE;  //deg or Rad
 
   //store cross section info in the ROOT file
   fAnalysis->fPrimary->fCrossSectionCM = D_sigma_CM;  //mm^2/sr

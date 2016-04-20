@@ -7,7 +7,7 @@
  *      the ROOT tree
  *
  * \date <b>Date:</b> 07-16-2013
- * \date <b>Modified:</b> 07-20-2013
+ * \date <b>Modified:</b> 04-13-2016
  *
  * \note <b>Entry Conditions:</b> none
  *
@@ -30,6 +30,7 @@
 #pragma link C++ class std::vector<HMolPolEventPrimaryHit>+;
 #pragma link C++ class HMolPolEventGenericDetector+;
 #pragma link C++ class HMolPolEventGenericDetectorHit+;
+#pragma link C++ class HMolPolEventPrimaryConditions+;
 
 #endif
 

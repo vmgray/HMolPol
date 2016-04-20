@@ -14,7 +14,6 @@
  *
  ********************************************/
 
-
 // geant4 includes
 #include <G4Event.hh>
 #include <G4UserEventAction.hh>
@@ -46,9 +45,10 @@
  * Modified:
  ********************************************/
 
-HMolPolEventAction::HMolPolEventAction (HMolPolAnalysis* a,
-    HMolPolStackingAction* s)
-: fAnalysis(a),fStacking(s),CollID(-1)
+HMolPolEventAction::HMolPolEventAction(
+                                       HMolPolAnalysis* a,
+                                         HMolPolStackingAction* s) :
+    fAnalysis(a), fStacking(s), CollID(-1)
 {
 
 }
@@ -87,9 +87,12 @@ HMolPolEventAction::~HMolPolEventAction()
 void HMolPolEventAction::BeginOfEventAction(const G4Event* event)
 {
   //debugging
-  G4cout << G4endl << "####### In the HMolPolEventAction::BeginOfEventAction #######"<< G4endl;
+  //G4cout << G4endl<< "####### In the HMolPolEventAction::BeginOfEventAction #######"<< G4endl;
   //Say that an event is beginning
-  G4cout << "  At begin of event number: " << event->GetEventID() << G4endl;
+  if (event->GetEventID() % 1000 == 0)//if the event number is divided my zero what is it?
+  {
+    G4cout << "  At begin of event number: " << event->GetEventID() << G4endl;
+  }
 
   // Ask StackingAction to prepare for new event
   fStacking->InitNewEvent();
@@ -97,17 +100,16 @@ void HMolPolEventAction::BeginOfEventAction(const G4Event* event)
   // Clean up old primary hits
   fAnalysis->fPrimaryHits->clear();
 
-/*
-/// \bug not sure what this does at this point forward - it is unused!?!
-  G4SDManager* SDman = G4SDManager::GetSDMpointer();
-*/
+  /*
+   /// \bug not sure what this does at this point forward - it is unused!?!
+   G4SDManager* SDman = G4SDManager::GetSDMpointer();
+   */
 
   // check for existing Collection ID (if it's -1 it will be assigned)
   /// \todo reenable hit collection
 //  if (CollID == -1) {
 //      CollID = SDman->GetCollectionID("SD/Collection");
 //  }
-
   return;
 }
 
@@ -130,9 +132,9 @@ void HMolPolEventAction::BeginOfEventAction(const G4Event* event)
 void HMolPolEventAction::EndOfEventAction(const G4Event* event)
 {
   //debugging
-  G4cout << G4endl << "####### In the HMolPolEventAction::EndOfEventAction #######"<< G4endl;
+  //G4cout << G4endl << "####### In the HMolPolEventAction::EndOfEventAction #######"<< G4endl;
   //We are at the end of an event
-  G4cout << "  At end of event" << G4endl;
+  //G4cout << "  At end of event" << G4endl;
 
   // Get the event number
   /// \todo Event number should be branch in ROOT tree
@@ -153,7 +155,7 @@ void HMolPolEventAction::EndOfEventAction(const G4Event* event)
   G4VHitsCollection* thiscol;
 
   // Get a copy of the parent primary ids
-  std::map<G4int,G4int> parentPrimaries = fStacking->GetTrackParentPrimaries();
+  std::map<G4int, G4int> parentPrimaries = fStacking->GetTrackParentPrimaries();
 
   // Loop over all hit collections, sort by output type
   for (int hcidx = 0; hcidx < HCE->GetCapacity(); hcidx++)
@@ -164,32 +166,32 @@ void HMolPolEventAction::EndOfEventAction(const G4Event* event)
     //G4VHitsCollection* thiscol = HCE->GetHC(hcidx);
     thiscol = HCE->GetHC(hcidx);
 
-/*
-    //debugging
-    G4cout << G4endl << "  HC " << thiscol->GetName() << ": "
-           << thiscol->GetSize() << " hits" << G4endl;
-*/
+    /*
+     //debugging
+     G4cout << G4endl << "  HC " << thiscol->GetName() << ": "
+     << thiscol->GetSize() << " hits" << G4endl;
+     */
 
     // This is NULL if nothing is stored
     if (thiscol)
     {
-  //I do get in here.
+      //I do get in here.
       // Dynamic cast to test for types
       if (HMolPolGenericDetectorHitsCollection* thiscast =
           dynamic_cast<HMolPolGenericDetectorHitsCollection*>(thiscol))
       {
-/*
-        //debug line
-        G4cout << "  HMolPolGenericDetectorHitsCollection size: " <<
-            thiscast->GetSize() << G4endl;
-*/
+        /*
+         //debug line
+         G4cout << "  HMolPolGenericDetectorHitsCollection size: " <<
+         thiscast->GetSize() << G4endl;
+         */
         // Process all hits
         for (unsigned int hidx = 0; hidx < thiscast->GetSize(); hidx++)
         {
-/*
-          //debugging
-          G4cout << "made it too the loop to process all hits" << G4endl;
-*/
+          /*
+           //debugging
+           G4cout << "made it too the loop to process all hits" << G4endl;
+           */
 
           HMolPolGenericDetectorHit* thisHit =
               (HMolPolGenericDetectorHit*) thiscast->GetHit(hidx);
@@ -199,14 +201,12 @@ void HMolPolEventAction::EndOfEventAction(const G4Event* event)
           hit.fTrackID = thisHit->GetTrackID();
           hit.fDetectorID = thisHit->GetDetectorID();
           hit.fDetectorName = thisHit->GetDetectorName();
-          hit.fPosition = TVector3(
-                            thisHit->GetPosition().x(),
-                            thisHit->GetPosition().y(),
-                            thisHit->GetPosition().z());
-          hit.fMomentum = TVector3(
-                            thisHit->GetMomentum().x(),
-                            thisHit->GetMomentum().y(),
-                            thisHit->GetMomentum().z());
+          hit.fPosition = TVector3(thisHit->GetPosition().x(),
+                                   thisHit->GetPosition().y(),
+                                   thisHit->GetPosition().z());
+          hit.fMomentum = TVector3(thisHit->GetMomentum().x(),
+                                   thisHit->GetMomentum().y(),
+                                   thisHit->GetMomentum().z());
           hit.fParticleName = thisHit->GetParticleName();
           hit.fParticleType = thisHit->GetParticleType();
           hit.fTotalEnergy = thisHit->GetTotalEnergy();
@@ -214,37 +214,37 @@ void HMolPolEventAction::EndOfEventAction(const G4Event* event)
           hit.fParentID = thisHit->GetParentID();
 
           // Identify its parent primary ID
-          if(hit.fParentID == 0)
+          if (hit.fParentID == 0)
           {
             hit.fPrimaryID = hit.fTrackID;
-          }
-          else
+          } else
           {
             hit.fPrimaryID = parentPrimaries[hit.fTrackID];
           }
 
           // Add hit
-/*
-          //debugging
-          G4cout << "  Adding hit to branch " << hit.fDetectorID << G4endl;
-*/
+          /*
+           //debugging
+           G4cout << "  Adding hit to branch " << hit.fDetectorID << G4endl;
+           */
           //logical volumes  are branches. This adds the hit to the correct
           //branch
-          fAnalysis->fDetector[thisHit->GetDetectorTypeID()]->fHits.push_back(hit);
+          fAnalysis->fDetector[thisHit->GetDetectorTypeID()]->fHits.push_back(
+              hit);
         }
       }
     }
   }
 
   //Debugging
-  G4cout << "  At end of event number " << event->GetEventID() << G4endl;
+  //G4cout << "  At end of event number " << event->GetEventID() << G4endl;
 
   // Fill the tree
   fAnalysis->FillRootTree();
 
   // Print some progress information
   if (event->GetEventID() % 1000 == 0)
-      fAnalysis->AutoSaveRootTree();
+    fAnalysis->AutoSaveRootTree();
 
   return;
 }

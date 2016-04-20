@@ -7,7 +7,7 @@
  *      simulation will have results in a ROOT file.
  *
  * \date <b>Date:</b> 07-11-2013
- * \date <b>Modified:</b> 07-15-2015
+ * \date <b>Modified:</b> 04-18-2016
  *
  * \note <b>Entry Conditions:</b>
  *
@@ -25,11 +25,10 @@
 #include "HMolPolEventGenericDetector.hh"
 #include "HMolPolRunInformation.hh"
 #include "HMolPolEventPrimaryHit.hh"
+#include "HMolPolEventPrimaryConditions.hh"
 
 /// \todo make this so the file names can change with things like generator etc
 /// ie HMolPol_eleastic HMolPol_Moller, etc
-
-/// \todo get the Github information to print to the ROOT file via HMolPolRunInformation
 
 /********************************************
  * Programmer: Valerie Gray
@@ -48,15 +47,13 @@
  * Return:
  * Called By:
  * Date: 07-11-2013
- * Modified: 09-03-2014
+ * Modified: 04-18-2016
  ********************************************/
-HMolPolAnalysis::HMolPolAnalysis()
-: fRootTree(0),fRootFile(0),
-  fRootFileStem("HMolPol"),
-  fRootFileName(""),
-  fRunNumber(0),fBeamEnergy(0),
-  fUnits(0),fUnitsBranch(0),
-  fPrimary(0),fPrimaryBranch(0)
+HMolPolAnalysis::HMolPolAnalysis() :
+    fRootTree(0), fRootFile(0), fRootFileStem("HMolPol"), fRootFileName(""),
+    fRunNumber(0), fBeamEnergy(0), fUnits(0), fUnitsBranch(0), fPrimary(0),
+    fPrimaryBranch(0), fPrimaryConditions(0), fPrimaryConditionsBranch(0),
+    fPrimaryHits(0), fPrimaryHitsBranch(0)
 {
   // starting the anaylsis
   G4cout << "###### Calling HMolPolAnalysis::HMolPolAnalysis() ######" << G4endl;
@@ -64,6 +61,9 @@ HMolPolAnalysis::HMolPolAnalysis()
   //Create the user information
   pRunInformation = new HMolPolRunInformation();
 
+  fUnits = new HMolPolEventUnits();
+  fPrimary = new HMolPolEventPrimary();
+  fPrimaryConditions = new HMolPolEventPrimaryConditions();
 }
 
 /********************************************
@@ -78,13 +78,21 @@ HMolPolAnalysis::HMolPolAnalysis()
  * Return:
  * Called By:
  * Date: 07-11-2013
- * Modified: 07-15-2015
+ * Modified: 04-18-2016
  ********************************************/
 HMolPolAnalysis::~HMolPolAnalysis()
 {
   // Delete ROOT objects
-  if (fPrimary)        delete fPrimary;
-  if (fRootFile)     delete fRootFile;
+  if (fUnits)
+    delete fUnits;
+  if (fPrimary)
+    delete fPrimary;
+  if (fPrimaryConditions)
+    delete fPrimaryConditions;
+  if (fPrimaryHits)
+    delete fPrimaryHits;
+  if (fRootFile)
+    delete fRootFile;
   //These don't get deleted they are with delete fRootFile
   //if (fRootTree)     delete fRootTree;
   //if (fPrimaryBranch)   delete fPrimaryBranch;
@@ -114,7 +122,7 @@ HMolPolAnalysis::~HMolPolAnalysis()
 void HMolPolAnalysis::BeginOfRun(const G4Run* aRun)
 {
   //debugging
-  G4cout << G4endl << "###### HMolPolAnalysis::BeginOfRun ######" << G4endl;
+  G4cout << G4endl<< "###### HMolPolAnalysis::BeginOfRun ######" << G4endl;
 
   G4cout << "  At begin of run" << G4endl;
 
@@ -124,13 +132,13 @@ void HMolPolAnalysis::BeginOfRun(const G4Run* aRun)
   // Construct file name if not set explicitly
   // This is from the default name and the number of times one had
   // simulated a run in the present session of HMolPol (starting with 0)
-  if (fRootFileName.size() == 0) //if no name is set the size of it is 0
-    fRootFileName = fRootFileStem + "_" + Form("%d",runID) + ".root";
+  if (fRootFileName.size() == 0)//if no name is set the size of it is 0
+  fRootFileName = fRootFileStem + "_" + Form("%d",runID) + ".root";
 
   // Create  NEW ROOT file
   G4cout << "###### Analysis: creating ROOT file " << fRootFileName << " ######" << G4endl;
   fRootFile = new TFile(fRootFileName,"RECREATE","HMolPol ROOT file");
-  ConstructRootTree();  //calls the function that constructs the ROOT tree
+  ConstructRootTree();//calls the function that constructs the ROOT tree
 
   return;
 }
@@ -149,10 +157,10 @@ void HMolPolAnalysis::BeginOfRun(const G4Run* aRun)
  * Date: 07-11-2013
  * Modified: 07-15-2015
  ********************************************/
-void HMolPolAnalysis::EndOfRun(const G4Run* /* aRun */) //get rid of unused parameter warning
+void HMolPolAnalysis::EndOfRun(const G4Run* /* aRun */)  //get rid of unused parameter warning
 {
   //debugging
-  G4cout << G4endl << "###### HMolPolAnalysis::EndOfRun ######" << G4endl;
+  G4cout << G4endl<< "###### HMolPolAnalysis::EndOfRun ######" << G4endl;
 
   G4cout << "  At end of run" << G4endl;
 
@@ -161,7 +169,7 @@ void HMolPolAnalysis::EndOfRun(const G4Run* /* aRun */) //get rid of unused para
 
   // Write the data to the ROOT file, closes the file safely
   G4cout << "###### Analysis: closing ROOT file "
-      << fRootFileName << " ######" << G4endl;
+  << fRootFileName << " ######" << G4endl;
   fRootFile->Write(0,TObject::kOverwrite);
   fRootFile->Close();
   fRootFileName = "";
@@ -192,6 +200,9 @@ void HMolPolAnalysis::EndOfRun(const G4Run* /* aRun */) //get rid of unused para
  *                      the hits in the detectors.
  *                      Each detector is in its own
  *                      sub-branch of this branch
+ *              - the Primary Condition branch - connected to the
+ *                      HMolPolEventPrimaryConditions. Has all the
+ *                      information about the primary trowing infomation
  *
  *
  * Global:
@@ -199,35 +210,40 @@ void HMolPolAnalysis::EndOfRun(const G4Run* /* aRun */) //get rid of unused para
  * Return: none
  * Called By:
  * Date: 07-11-2013
- * Modified:
+ * Modified: 04-18-2016
  ********************************************/
 void HMolPolAnalysis::ConstructRootTree()
 {
   //debugging
-  G4cout << G4endl << "###### HMolPolAnalysis::ConstructRootTree ######" << G4endl;
+  //G4cout << G4endl << "###### HMolPolAnalysis::ConstructRootTree ######" << G4endl;
 
   // Create ROOT tree and give it a name
   // the tree name will be HMolPol_Tree in the ROOT file
-  fRootTree = new TTree("HMolPol_Tree","HMolPol Simulation Tree");
+  fRootTree = new TTree("HMolPol_Tree", "HMolPol Simulation Tree");
 
   // Create a branch with the data structure defined by fRootEvent
   int bufsize = 64000;  //64 kbytes
-  int split   = 99;
+  int split = 99;
 
   // Add units - the units branch
-  fUnits = new HMolPolEventUnits();
-  fUnitsBranch = fRootTree->Branch("fUnits",
-      "HMolPolEventUnits", &fUnits, bufsize, split);
+  fUnitsBranch = fRootTree->Branch("fUnits", "HMolPolEventUnits", &fUnits,
+                                   bufsize, split);
 
   // Add global event structure - the primary branch
-  fPrimary = new HMolPolEventPrimary();
-  fPrimaryBranch = fRootTree->Branch("fPrimary",
-      "HMolPolEventPrimary", &fPrimary, bufsize, split);
+  fPrimaryBranch = fRootTree->Branch("fPrimary", "HMolPolEventPrimary",
+                                     &fPrimary, bufsize, split);
+
+  // Add primary conditions branch, contain the
+  fPrimaryConditionsBranch = fRootTree->Branch("fPrimaryConditions",
+                                               " HMolPolEventPrimaryConditions",
+                                               &fPrimaryConditions, bufsize,
+                                               split);
 
   // Add individual detectors - the Detector branch
   fDetector.resize(fDetectorName.size());
   fDetectorBranch.resize(fDetectorName.size());
-  for (size_t i = 0; i < fDetectorName.size(); i++) {
+  for (size_t i = 0; i < fDetectorName.size(); i++)
+  {
     G4cout << "  Adding " << fDetectorName[i] << " to ROOT tree." << G4endl;
     fDetector[i] = new HMolPolEventGenericDetector();
     fDetectorBranch[i] = fRootTree->Branch(TString("f") + TString(fDetectorName[i]),
@@ -236,8 +252,8 @@ void HMolPolAnalysis::ConstructRootTree()
 
   // Add the primary hits branch
   fPrimaryHits = new std::vector<HMolPolEventPrimaryHit>();
-  fRootTree->Branch("PrimaryTracker","std::vector<HMolPolEventPrimaryHit>",
-      &fPrimaryHits, bufsize, split);
+  fRootTree->Branch("PrimaryTracker", "std::vector<HMolPolEventPrimaryHit>",
+                    &fPrimaryHits, bufsize, split);
 
   // Write run data
   pRunInformation->Write();
@@ -262,7 +278,7 @@ void HMolPolAnalysis::ConstructRootTree()
 void HMolPolAnalysis::AutoSaveRootTree()
 {
   //debugging
-  G4cout << G4endl << "###### HMolPolAnalysis::AutoSaveRootTree ######" << G4endl;
+  G4cout << G4endl<< "###### HMolPolAnalysis::AutoSaveRootTree ######" << G4endl;
   /**********
    * save the current ROOT Tree:
    * In case your program crashes before closing the file holding this tree,
@@ -273,10 +289,10 @@ void HMolPolAnalysis::AutoSaveRootTree()
    * if option contains "SaveSelf", gDirectory->SaveSelf() is called.
    * This allows another process to analyze the Tree while the Tree is being filled.
    * \see http://root.cern.ch/root/html/TTree.html#TTree:AutoSave
-  **********/
+   **********/
   // fRootTree -> AutoSave("SaveSelf");
-  fRootTree -> AutoSave();
-  gDirectory -> Purge(); //Purge old trees
+      fRootTree -> AutoSave();
+      gDirectory -> Purge();//Purge old trees
 
-  return;
-}
+      return;
+    }
