@@ -73,6 +73,8 @@ class HMolPolMessenger : public G4UImessenger
       /// all analysis related variables (ROOT file names)
     G4UIdirectory*        fBeamDir;       ///< create the Beam Directory
       /// - all beam related variables
+    G4UIdirectory*        fAngleDir;       ///< create the Angle Directory
+      /// - all angle related variables
 
 /// Analysis related
     //create unique ROOT file names in Macro/interactively

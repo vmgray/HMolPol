@@ -117,9 +117,9 @@ HMolPolMessenger::HMolPolMessenger(
    * create a new directory for all the CM Angle related properties
    * & commands to set them
   **********/
-  fBeamDir = new G4UIdirectory("/HMolPol/CMAngles/");
+  fAngleDir = new G4UIdirectory("/HMolPol/CMAngles/");
   //What is this directory for
-  fBeamDir->SetGuidance("Center of Mass Angle range");
+  fAngleDir->SetGuidance("Center of Mass Angle range");
   // Theta CM trowen range
   //Min
   fThetaComMinCmd = new G4UIcmdWithADoubleAndUnit("/HMolPol/CMAngles/SetThetaComMin",
@@ -203,6 +203,10 @@ HMolPolMessenger::~HMolPolMessenger()
     delete fAnalysisDir;
   if (fBeamDir)
     delete fBeamDir;
+  if (fTrackingDir)
+    delete fTrackingDir;
+  if (fAngleDir)
+    delete fAngleDir;
 
   //delete the raster info
   if (fRasXCmd)
@@ -213,6 +217,21 @@ HMolPolMessenger::~HMolPolMessenger()
   //Delete beam energy info
   if (fBeamECmd)
     delete fBeamECmd;
+
+  //delete the angle info
+  if (fThetaComMinCmd)
+    delete fThetaComMinCmd;
+  if (fThetaComMaxCmd)
+    delete fThetaComMaxCmd;
+
+  if (fPhiComMinCmd)
+    delete fPhiComMinCmd;
+  if (fPhiComMaxCmd)
+    delete fPhiComMaxCmd;
+
+  //delete the Primary Tracker info
+  if (fTrackPrimariesCmd)
+    delete fTrackPrimariesCmd;
 
   // Delete Geometry related variables
   if (fGeometryDir)
@@ -249,7 +268,7 @@ void HMolPolMessenger::SetNewValue(G4UIcommand* command, G4String newValue)
 
 // change the different possible variables allowed in the messenger
 
-  //------------------------------------------------------------------------------
+  //-----------------------------------------------------------
   //change name of ROOT file stuff - if given
   if (command == fRootFileStemCmd)
   {
@@ -257,21 +276,21 @@ void HMolPolMessenger::SetNewValue(G4UIcommand* command, G4String newValue)
            "ROOT file stem to "
            << newValue << G4endl;
            fAnalysis->SetRootFileStem(newValue);
-         }
-         if (command == fRootFileNameCmd)
-         {
-           G4cout << "#### Messenger: Setting Analysis "
-           "ROOT file name to " << newValue << G4endl;
-           fAnalysis->SetRootFileName(newValue);
-         }
+  }
+  if (command == fRootFileNameCmd)
+  {
+    G4cout << "#### Messenger: Setting Analysis "
+    "ROOT file name to " << newValue << G4endl;
+    fAnalysis->SetRootFileName(newValue);
+  }
 
-         //------------------------------------------------------------------------------
-         //raster size
-        if( command == fRasXCmd )
-        {
-          G4cout << "#### Messenger: Setting Beam X Raster Size to "
-          << newValue << G4endl;
-          fPrimaryGeneratorAction->SetRasterX(fRasXCmd->GetNewDoubleValue(newValue));
+  //-----------------------------------------------------------
+  //raster size
+  if( command == fRasXCmd )
+  {
+    G4cout << "#### Messenger: Setting Beam X Raster Size to "
+    << newValue << G4endl;
+    fPrimaryGeneratorAction->SetRasterX(fRasXCmd->GetNewDoubleValue(newValue));
   }
 
   if( command == fRasYCmd )
@@ -281,6 +300,7 @@ void HMolPolMessenger::SetNewValue(G4UIcommand* command, G4String newValue)
     fPrimaryGeneratorAction->SetRasterY(fRasYCmd->GetNewDoubleValue(newValue));
   }
 
+  //-----------------------------------------------------------
   //beam Energy
   if( command == fBeamECmd )
   {
@@ -289,6 +309,7 @@ void HMolPolMessenger::SetNewValue(G4UIcommand* command, G4String newValue)
     fPrimaryGeneratorAction->SetBeamE(fBeamECmd->GetNewDoubleValue(newValue));
   }
 
+  //-----------------------------------------------------------
   // Geometry file name
   if( command == fGeometryFileNameCmd )
   {
@@ -297,6 +318,7 @@ void HMolPolMessenger::SetNewValue(G4UIcommand* command, G4String newValue)
     fDetectorConstruction->SetGeometryFileName(newValue);
   }
 
+  //-----------------------------------------------------------
   // Track Primaries command
   if( command == fTrackPrimariesCmd )
   {
@@ -306,6 +328,7 @@ void HMolPolMessenger::SetNewValue(G4UIcommand* command, G4String newValue)
         fTrackPrimariesCmd->GetNewBoolValue(newValue));
   }
 
+  //-----------------------------------------------------------
   //Theta CM values
   if( command == fThetaComMinCmd )
   {
@@ -321,7 +344,7 @@ void HMolPolMessenger::SetNewValue(G4UIcommand* command, G4String newValue)
     fPrimaryGeneratorAction->SetThetaComMax(fThetaComMaxCmd->GetNewDoubleValue(newValue));
   }
 
-
+  //-----------------------------------------------------------
   //Phi CM values
   if( command == fPhiComMinCmd )
   {
