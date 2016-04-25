@@ -37,6 +37,7 @@ include_directories(${ROOT_INCLUDE_DIR})
 ROOT_GENERATE_DICTIONARY(${CMAKE_CURRENT_BINARY_DIR}/HMolPolDict
   ${CMAKE_CURRENT_SOURCE_DIR}/include/HMolPolEventUnits.hh
   ${CMAKE_CURRENT_SOURCE_DIR}/include/HMolPolEventPrimary.hh
+  ${CMAKE_CURRENT_SOURCE_DIR}/include/HMolPolEventPrimaryConditions.hh
   ${CMAKE_CURRENT_SOURCE_DIR}/include/HMolPolEventPrimaryHit.hh
   ${CMAKE_CURRENT_SOURCE_DIR}/include/HMolPolEventGenericDetector.hh
   ${CMAKE_CURRENT_SOURCE_DIR}/include/HMolPolEventGenericDetectorHit.hh
