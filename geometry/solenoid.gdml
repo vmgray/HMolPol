@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE gdml[
+<!ENTITY materials SYSTEM "materials.gdml">
+]>
+
+<gdml xmlns:gdml="http://cern.ch/2001/Schemas/GDML" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="schema/gdml.xsd">
+  <!-- include GDML namespace -->
+  <!-- XML Schema instance Namespace -->
+  <!-- GDML Schema Location -->
+
+  <define>
+
+    <!-- R length of the Solenoid -->
+    <quantity name="Solenoid_R_length" value="0.2" unit="m" />
+
+    <!-- Z length of the Solenoid -->
+    <quantity name="Solenoid_Z_length" value="0.4" unit="m" />
+
+    <!-- position of the magnetic field -->
+    <position name="SolenoidCenter" x="0" y="0" z="0" unit="m" />
+
+  </define>
+  
+  &materials;
+
+  <solids>
+
+    <tube name="SolenoidTube" rmax="Solenoid_R_length" z="Solenoid_Z_length" deltaphi="2.0*pi" />
+
+  </solids>
+
+  <structure>
+
+    <volume name="logicalSolenoid">
+      <materialref ref="AirVacuum" />
+      <solidref ref="SolenoidTube" />
+      <auxiliary auxtype="Color" auxvalue="blue" />
+      <auxiliary auxtype="Alpha" auxvalue="0.3" />
+      <auxiliary auxtype="MagFieldType" auxvalue="Solenoid" />
+      <auxiliary auxtype="MagFieldValue" auxvalue="1.0" />
+    </volume>
+
+  </structure>
+
+  <!-- I am not sure what all this does, sets up something for the implementation 
+    to the World -->
+
+  <setup name="SolenoidSetup" version="1.0">
+    <world ref="logicalSolenoid" />
+  </setup>
+
+</gdml>
+  

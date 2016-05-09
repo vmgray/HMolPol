@@ -1,12 +1,12 @@
 /*
- * HMolPolFieldMap.hh
+ * HMolPolFieldMapBasic.hh
  *
  *  Created on: Oct 17, 2013
  *      Author: vmgray
  */
 
-#ifndef HMOLPOLFIELDMAP_HH_
-#define HMOLPOLFIELDMAP_HH_
+#ifndef HMolPolFieldMapBasic_HH_
+#define HMolPolFieldMapBasic_HH_
 
 // System headers
 #include <vector>
@@ -35,7 +35,7 @@ typedef double coord_t;
 
 /////// WHAT - comments - doxygen
 /**
- *  \class HMolPolFieldMap
+ *  \class HMolPolFieldMapBasic
  *  \ingroup HMolPolAnalysis
  *  \brief A multi-dimensional grid of values with interpolation methods
  *
@@ -49,14 +49,14 @@ typedef double coord_t;
  * To describe a double vector field with 5 components on a 3-dimensional grid,
  * you would write
  * \code
- * HMolPolInterpolate<float,5> *field = new HMolPolFieldMap<float,5>(3);
+ * HMolPolInterpolate<float,5> *field = new HMolPolFieldMapBasic<float,5>(3);
  * \endcode
  *
  * The minimum, maximum, and step size of the grid have to be known before
  * the values are filled.
  */
 template <class value_t = float, unsigned int value_n = 1>
-class HMolPolFieldMap {
+class HMolPolFieldMapBasic {
 
   public: // constructors and destructor
 
@@ -64,12 +64,12 @@ class HMolPolFieldMap {
     // Come back to this
 
     /// Constructor with number of dimensions
-    HMolPolFieldMap(const unsigned int ndim = 1) {
+    HMolPolFieldMapBasic(const unsigned int ndim = 1) {
       SetDimensions(ndim);
       SetInterpolationMethod(kMultiLinear);
     };
     /// Constructor with minimum, maximum, and step size
-    HMolPolFieldMap(const std::vector<coord_t>& min,
+    HMolPolFieldMapBasic(const std::vector<coord_t>& min,
         const std::vector<coord_t>& max,
         const std::vector<coord_t>& step) {
       SetDimensions(min.size());
@@ -77,12 +77,12 @@ class HMolPolFieldMap {
       SetMinimumMaximumStep(min,max,step);
     };
     /// Constructor with file name
-    HMolPolFieldMap(const std::string& filename) {
+    HMolPolFieldMapBasic(const std::string& filename) {
       ReadBinaryFile(filename);
       SetInterpolationMethod(kMultiLinear);
     };
     /// Destructor
-    virtual ~HMolPolFieldMap() { };
+    virtual ~HMolPolFieldMapBasic() { };
 
 // What all does this debug_t do?  enum?
     /// Debug level
@@ -133,7 +133,7 @@ class HMolPolFieldMap {
     /// Set the number of coordinate dimensions and resize vectors
     void SetDimensions(const unsigned int ndim) {
       if (ndim == 0) {
-        mycerr << "HMolPolFieldMap::SetDimensions: "
+        mycerr << "HMolPolFieldMapBasic::SetDimensions: "
                << "Dimensions of the grid should be strictly positive!" << myendl;
         return;
       }
@@ -169,7 +169,7 @@ class HMolPolFieldMap {
         try {
           fValues[i].resize(fMaximumEntries,0);
         } catch (std::bad_alloc) {
-          mycerr << "HMolPolFieldMap:SetMinimumMaximumStep: "
+          mycerr << "HMolPolFieldMapBasic:SetMinimumMaximumStep: "
                  << "could not allocate memory for values!" << myendl;
         }
       }
@@ -262,12 +262,12 @@ class HMolPolFieldMap {
     /// Set a single value at a coordinate (false if not possible)
     bool Set(const coord_t& coord, const value_t& value) {
       if (value_n != 1) {
-        mycerr << "HMolPolFieldMap::Set(coord_t&,value_t&): "
+        mycerr << "HMolPolFieldMapBasic::Set(coord_t&,value_t&): "
                << "only valid for one-dimensional values." << myendl;
         return false;
       }
       if (fNDim != 1) {
-        mycerr << "HMolPolFieldMap::Set(coord_t&,value_t&): "
+        mycerr << "HMolPolFieldMapBasic::Set(coord_t&,value_t&): "
                << "only valid for one-dimensional grids." << myendl;
         return false;
       }
@@ -276,7 +276,7 @@ class HMolPolFieldMap {
     /// Set a single value at a coordinate (false if not possible)
     bool Set(const coord_t* coord, const value_t& value) {
       if (value_n != 1) {
-        mycerr << "HMolPolFieldMap::Set(coord_t*,value_t&): "
+        mycerr << "HMolPolFieldMapBasic::Set(coord_t*,value_t&): "
                << "only valid for one-dimensional values." << myendl;
         return false;
       }
@@ -323,7 +323,7 @@ class HMolPolFieldMap {
     /// Set a single value at a linearized index (false if not possible)
     bool Set(const unsigned int linear_index, const value_t& value) {
       if (value_n != 1) {
-        mycerr << "HMolPolFieldMap::Set(unsigned int,value_t&): "
+        mycerr << "HMolPolFieldMapBasic::Set(unsigned int,value_t&): "
                << "only valid for one-dimensional values." << myendl;
         return false;
       }
@@ -341,7 +341,7 @@ class HMolPolFieldMap {
     /// Set a single value at a grid point (false if out of bounds)
     bool Set(const unsigned int* cell_index, const value_t& value) {
       if (value_n != 1) {
-        mycerr << "HMolPolFieldMap::Set(unsigned int*,value_t&): "
+        mycerr << "HMolPolFieldMapBasic::Set(unsigned int*,value_t&): "
                << "only valid for one-dimensional values." << myendl;
         return false;
       }
@@ -360,12 +360,12 @@ class HMolPolFieldMap {
     /// Get the interpolated value at coordinate (zero if out of bounds)
     value_t GetValue(const coord_t& coord) const {
       if (value_n != 1) {
-        mycerr << "HMolPolFieldMap::GetValue(coord_t&): "
+        mycerr << "HMolPolFieldMapBasic::GetValue(coord_t&): "
                << "only valid for one-dimensional fields." << myendl;
         return false;
       }
       if (fNDim != 1) {
-        mycerr << "HMolPolFieldMap::GetValue(coord_t&): "
+        mycerr << "HMolPolFieldMapBasic::GetValue(coord_t&): "
                << "only valid for one-dimensional grids." << myendl;
         return false;
       }
@@ -376,7 +376,7 @@ class HMolPolFieldMap {
     /// Get the interpolated value at coordinate (zero if out of bounds)
     value_t GetValue(const coord_t* coord) const {
       if (value_n != 1) {
-        mycerr << "HMolPolFieldMap::GetValue(coord_t*): "
+        mycerr << "HMolPolFieldMapBasic::GetValue(coord_t*): "
                << "only valid for one-dimensional fields." << myendl;
         return false;
       }
@@ -387,7 +387,7 @@ class HMolPolFieldMap {
     /// Get the interpolated value at coordinate (zero if out of bounds)
     bool GetValue(const coord_t* coord, double& value) const {
       if (value_n != 1) {
-        mycerr << "HMolPolFieldMap::GetValue(coord_t*,value_t&): "
+        mycerr << "HMolPolFieldMapBasic::GetValue(coord_t*,value_t&): "
                << "only valid for one-dimensional fields." << myendl;
         return false;
       }
@@ -398,7 +398,7 @@ class HMolPolFieldMap {
       for (unsigned int i = 0; i < value_n; i++) value[i] = 0.0; // zero
       if (! Check(coord)) {
         if (fDebug >= kDebug) {
-          mycerr << "HMolPolFieldMap::GetValue(coord_t*,value_t*): "
+          mycerr << "HMolPolFieldMapBasic::GetValue(coord_t*,value_t*): "
                  << "coordinate is out of boundary." << myendl;
         }
         return false; // out of bounds
@@ -409,7 +409,7 @@ class HMolPolFieldMap {
         case kMultiLinear:
           if (! Linear(coord, result)) {
             if (fDebug >= kDebug) {
-              mycerr << "HMolPolFieldMap::GetValue(coord_t*,value_t*): "
+              mycerr << "HMolPolFieldMapBasic::GetValue(coord_t*,value_t*): "
                      << "linear interpolation failed." << myendl;
             }
             return false;
@@ -418,14 +418,14 @@ class HMolPolFieldMap {
         case kNearestNeighbor:
           if (! NearestNeighbor(coord, result)) {
             if (fDebug >= kDebug) {
-              mycerr << "HMolPolFieldMap::GetValue(coord_t*,value_t*): "
+              mycerr << "HMolPolFieldMapBasic::GetValue(coord_t*,value_t*): "
                      << "nearest-neighbor interpolation failed." << myendl;
             }
             return false;
           }
           break;
         default:
-          mycerr << "HMolPolFieldMap::GetValue(coord_t*,value_t*): "
+          mycerr << "HMolPolFieldMapBasic::GetValue(coord_t*,value_t*): "
                  << "unknown interpolation method." << myendl;
           return false;
       }
@@ -443,7 +443,7 @@ class HMolPolFieldMap {
     bool WriteTextFile(const std::string& filename) const {
       std::ofstream file(filename.c_str());
       if (! file.is_open()) {
-        mycerr << "HMolPolFieldMap::WriteTextFile(string&): "
+        mycerr << "HMolPolFieldMapBasic::WriteTextFile(string&): "
                << "unable to open file " << filename << "." << myendl;
         return false;
       }
@@ -462,12 +462,12 @@ class HMolPolFieldMap {
     bool ReadTextFile(const std::string& filename) {
       std::ifstream file(filename.c_str());
       if (! file.is_open()) {
-        mycerr << "HMolPolFieldMap::ReadTextFile(string&): "
+        mycerr << "HMolPolFieldMapBasic::ReadTextFile(string&): "
                << "unable to open file " << filename << "." << myendl;
         return false;
       }
       if (! ReadText(file)) {
-        mycerr << "HMolPolFieldMap::ReadTextFile(string&): "
+        mycerr << "HMolPolFieldMapBasic::ReadTextFile(string&): "
                << "unable to read text stream." << myendl;
         return false;
       }
@@ -539,7 +539,7 @@ class HMolPolFieldMap {
     /// Get a single value by cell index (unchecked)
     value_t Get(const unsigned int* cell_index) const {
       if (value_n != 1) {
-        mycerr << "HMolPolFieldMap::Get(unsigned int*): "
+        mycerr << "HMolPolFieldMapBasic::Get(unsigned int*): "
                << "only valid for one-dimensional fields." << myendl;
         return 0;
       }
@@ -549,7 +549,7 @@ class HMolPolFieldMap {
     /// Get a single value by linearized index (unchecked)
     value_t Get(const unsigned int index) const {
       if (value_n != 1) {
-        mycerr << "HMolPolFieldMap::Get(unsigned int): "
+        mycerr << "HMolPolFieldMapBasic::Get(unsigned int): "
                << "only valid for one-dimensional fields." << myendl;
         return 0;
       }
@@ -562,7 +562,7 @@ class HMolPolFieldMap {
       return true;
     };
 
-}; // class HMolPolFieldMap
+}; // class HMolPolFieldMapBasic
 
 
 
@@ -572,7 +572,7 @@ class HMolPolFieldMap {
  * @param value Interpolated value (reference)
  */
 template <class value_t, unsigned int value_n>
-inline bool HMolPolFieldMap<value_t,value_n>::Linear(
+inline bool HMolPolFieldMapBasic<value_t,value_n>::Linear(
         const coord_t* coord,
         value_t* value) const
 {
@@ -588,7 +588,7 @@ inline bool HMolPolFieldMap<value_t,value_n>::Linear(
     value_t neighbor[value_n];
     if (! Get(Index(cell_index,offset), neighbor)) {
       if (fDebug >= kDebug) {
-        mycout << "HMolPolFieldMap::Linear(coord_t*,value_t*): "
+        mycout << "HMolPolFieldMapBasic::Linear(coord_t*,value_t*): "
                << "neighbor " << offset << " could not be found " << myendl;
       }
       return false;
@@ -612,7 +612,7 @@ inline bool HMolPolFieldMap<value_t,value_n>::Linear(
  * @param value Interpolated value (reference)
  */
 template <class value_t, unsigned int value_n>
-inline bool HMolPolFieldMap<value_t,value_n>::NearestNeighbor(
+inline bool HMolPolFieldMapBasic<value_t,value_n>::NearestNeighbor(
         const coord_t* coord,
         value_t* value) const
 {
@@ -630,12 +630,12 @@ inline bool HMolPolFieldMap<value_t,value_n>::NearestNeighbor(
  * @return True if the coordinates are in the valid region
  */
 template <class value_t, unsigned int value_n>
-inline bool HMolPolFieldMap<value_t,value_n>::Check(const coord_t* coord) const
+inline bool HMolPolFieldMapBasic<value_t,value_n>::Check(const coord_t* coord) const
 {
   for (unsigned int dim = 0; dim < fNDim; dim++) {
     if (fWrap[dim] == 0 && (coord[dim] < fMin[dim] || coord[dim] > fMax[dim])) {
       if (fDebug >= kDebug) {
-        mycout << "HMolPolFieldMap::Check(coord_t*): "
+        mycout << "HMolPolFieldMapBasic::Check(coord_t*): "
                << "coord[" << dim << "] out of bounds "
                << fMin[dim] << "-" << fMax[dim] << "." << myendl;
       }
@@ -652,12 +652,12 @@ inline bool HMolPolFieldMap<value_t,value_n>::Check(const coord_t* coord) const
  * @return True if the cell index is in the valid region
  */
 template <class value_t, unsigned int value_n>
-inline bool HMolPolFieldMap<value_t,value_n>::Check(const unsigned int* cell_index) const
+inline bool HMolPolFieldMapBasic<value_t,value_n>::Check(const unsigned int* cell_index) const
 {
   for (unsigned int dim = 0; dim < fNDim; dim++) {
     if (cell_index[dim] >= fSize[dim]) {
       if (fDebug >= kDebug) {
-        mycout << "HMolPolFieldMap::Check(unsigned int*): "
+        mycout << "HMolPolFieldMapBasic::Check(unsigned int*): "
                << "cell index[" << dim << "] " << cell_index[dim] << " larger "
                << "than maximum " << fSize[dim] << "." << myendl;
       }
@@ -674,11 +674,11 @@ inline bool HMolPolFieldMap<value_t,value_n>::Check(const unsigned int* cell_ind
  * @return True if the cell index is in the valid region
  */
 template <class value_t, unsigned int value_n>
-inline bool HMolPolFieldMap<value_t,value_n>::Check(const unsigned int linear_index) const
+inline bool HMolPolFieldMapBasic<value_t,value_n>::Check(const unsigned int linear_index) const
 {
   if (linear_index >= fMaximumEntries) {
     if (fDebug >= kDebug) {
-      mycout << "HMolPolFieldMap::Check(unsigned int): "
+      mycout << "HMolPolFieldMapBasic::Check(unsigned int): "
              << "linear index " << linear_index << " larger "
              << "than maximum " << fMaximumEntries << "." << myendl;
     }
@@ -694,7 +694,7 @@ inline bool HMolPolFieldMap<value_t,value_n>::Check(const unsigned int linear_in
  * @return Linearized index
  */
 template <class value_t, unsigned int value_n>
-inline unsigned int HMolPolFieldMap<value_t,value_n>::Index(
+inline unsigned int HMolPolFieldMapBasic<value_t,value_n>::Index(
         const unsigned int* cell_index) const
 {
   unsigned int linear_index = 0;
@@ -712,7 +712,7 @@ inline unsigned int HMolPolFieldMap<value_t,value_n>::Index(
  * @return Linearized index
  */
 template <class value_t, unsigned int value_n>
-inline unsigned int HMolPolFieldMap<value_t,value_n>::Index(
+inline unsigned int HMolPolFieldMapBasic<value_t,value_n>::Index(
         const unsigned int* cell_index,
         const unsigned int pattern) const
 {
@@ -734,7 +734,7 @@ inline unsigned int HMolPolFieldMap<value_t,value_n>::Index(
  * @param dim Dimension
  */
 template <class value_t, unsigned int value_n>
-inline void HMolPolFieldMap<value_t,value_n>::Cell(
+inline void HMolPolFieldMapBasic<value_t,value_n>::Cell(
         const coord_t coord,
         unsigned int &cell_index,
         double &cell_local,
@@ -758,7 +758,7 @@ inline void HMolPolFieldMap<value_t,value_n>::Cell(
  * @param cell_local Local coordinates in cell (reference)
  */
 template <class value_t, unsigned int value_n>
-inline void HMolPolFieldMap<value_t,value_n>::Cell(
+inline void HMolPolFieldMapBasic<value_t,value_n>::Cell(
         const coord_t* coord,
         unsigned int* cell_index,
         double* cell_local) const
@@ -774,7 +774,7 @@ inline void HMolPolFieldMap<value_t,value_n>::Cell(
  * @param cell_index Cell index of the point (reference)
  */
 template <class value_t, unsigned int value_n>
-inline void HMolPolFieldMap<value_t,value_n>::Cell(
+inline void HMolPolFieldMapBasic<value_t,value_n>::Cell(
         const coord_t* coord,
         unsigned int* cell_index) const
 {
@@ -790,7 +790,7 @@ inline void HMolPolFieldMap<value_t,value_n>::Cell(
  * @param cell_index Cell index (reference)
  */
 template <class value_t, unsigned int value_n>
-inline void HMolPolFieldMap<value_t,value_n>::Cell(
+inline void HMolPolFieldMapBasic<value_t,value_n>::Cell(
         unsigned int linear_index,
         unsigned int* cell_index) const
 {
@@ -807,7 +807,7 @@ inline void HMolPolFieldMap<value_t,value_n>::Cell(
  * @param coord Point coordinates (reference)
  */
 template <class value_t, unsigned int value_n>
-inline void HMolPolFieldMap<value_t,value_n>::Coord(
+inline void HMolPolFieldMapBasic<value_t,value_n>::Coord(
         const unsigned int* cell_index,
         coord_t* coord) const
 {
@@ -821,7 +821,7 @@ inline void HMolPolFieldMap<value_t,value_n>::Coord(
  * @param coord Point coordinates (reference)
  */
 template <class value_t, unsigned int value_n>
-inline void HMolPolFieldMap<value_t,value_n>::Coord(
+inline void HMolPolFieldMapBasic<value_t,value_n>::Coord(
         const unsigned int linear_index,
         coord_t* coord) const
 {
@@ -836,7 +836,7 @@ inline void HMolPolFieldMap<value_t,value_n>::Coord(
  * @param stream Output stream
  */
 template <class value_t, unsigned int value_n>
-inline bool HMolPolFieldMap<value_t,value_n>::WriteText(std::ostream& stream) const
+inline bool HMolPolFieldMapBasic<value_t,value_n>::WriteText(std::ostream& stream) const
 {
   // Informational message
   mycout << "Writing text stream: ";
@@ -872,7 +872,7 @@ inline bool HMolPolFieldMap<value_t,value_n>::WriteText(std::ostream& stream) co
  * @return True if successfully read all values
  */
 template <class value_t, unsigned int value_n>
-inline bool HMolPolFieldMap<value_t,value_n>::ReadText(std::istream& stream)
+inline bool HMolPolFieldMapBasic<value_t,value_n>::ReadText(std::istream& stream)
 {
   // Informational message
   mycout << "Reading text stream: ";
@@ -880,7 +880,7 @@ inline bool HMolPolFieldMap<value_t,value_n>::ReadText(std::istream& stream)
   unsigned int n;
   stream >> fNDim >> n;
   if (n != value_n) {
-    mycerr << "HMolPolFieldMap::ReadText(istream&): "
+    mycerr << "HMolPolFieldMapBasic::ReadText(istream&): "
            << "incompatible field dimension in stream." << myendl;
     return false;
   }
@@ -911,7 +911,7 @@ inline bool HMolPolFieldMap<value_t,value_n>::ReadText(std::istream& stream)
   mycout << myendl;
   if (end == "end") return true;
   else {
-    mycerr << "HMolPolFieldMap::ReadText(istream&): "
+    mycerr << "HMolPolFieldMapBasic::ReadText(istream&): "
            << "stream did not end with keyword 'end'." << myendl;
     return false;
   }
@@ -929,11 +929,11 @@ inline bool HMolPolFieldMap<value_t,value_n>::ReadText(std::istream& stream)
  * @return True if written successfully
  */
 template <class value_t, unsigned int value_n>
-inline bool HMolPolFieldMap<value_t,value_n>::WriteBinaryFile(const std::string& filename) const
+inline bool HMolPolFieldMapBasic<value_t,value_n>::WriteBinaryFile(const std::string& filename) const
 {
   std::ofstream file(filename.c_str(), std::ios::binary);
   if (! file.is_open()) {
-    mycerr << "HMolPolFieldMap::WriteBinaryFile(string&): "
+    mycerr << "HMolPolFieldMapBasic::WriteBinaryFile(string&): "
            << "unable to open file " << filename << "." << myendl;
     return false;
   }
@@ -978,11 +978,11 @@ inline bool HMolPolFieldMap<value_t,value_n>::WriteBinaryFile(const std::string&
  * @return True if read successfully
  */
 template <class value_t, unsigned int value_n>
-inline bool HMolPolFieldMap<value_t,value_n>::ReadBinaryFile(const std::string& filename)
+inline bool HMolPolFieldMapBasic<value_t,value_n>::ReadBinaryFile(const std::string& filename)
 {
   std::ifstream file(filename.c_str(), std::ios::binary);
   if (! file.is_open()) {
-    mycerr << "HMolPolFieldMap::ReadBinaryFile(string&): "
+    mycerr << "HMolPolFieldMapBasic::ReadBinaryFile(string&): "
            << "unable to open file " << filename << "." << myendl;
     return false;
   }
@@ -996,12 +996,12 @@ inline bool HMolPolFieldMap<value_t,value_n>::ReadBinaryFile(const std::string& 
   file.read(reinterpret_cast<char*>(&n), sizeof(n));
   file.read(reinterpret_cast<char*>(&size), sizeof(size));
   if (n != value_n) {
-    mycerr << "HMolPolFieldMap::ReadBinaryFile(string&): "
+    mycerr << "HMolPolFieldMapBasic::ReadBinaryFile(string&): "
            << "incompatible field dimension in stream." << myendl;
     return false;
   }
   if (size != sizeof(value_t)) {
-    mycerr << "HMolPolFieldMap::ReadBinaryFile(string&): "
+    mycerr << "HMolPolFieldMapBasic::ReadBinaryFile(string&): "
            << "incompatible precision of field values.." << myendl;
     return false;
   }
@@ -1020,7 +1020,7 @@ inline bool HMolPolFieldMap<value_t,value_n>::ReadBinaryFile(const std::string& 
   uint32_t maximum_entries;
   file.read(reinterpret_cast<char*>(&maximum_entries),sizeof(maximum_entries));
   if (maximum_entries != fMaximumEntries) {
-    mycerr << "HMolPolFieldMap::ReadBinaryFile(string&): "
+    mycerr << "HMolPolFieldMapBasic::ReadBinaryFile(string&): "
            << "expected number of entries." << myendl;
     return false;
   }
@@ -1044,4 +1044,4 @@ inline bool HMolPolFieldMap<value_t,value_n>::ReadBinaryFile(const std::string& 
 }
 
 
-#endif /* HMOLPOLFIELDMAP_HH_ */
+#endif /* HMolPolFieldMapBasic_HH_ */

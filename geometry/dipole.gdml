@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE gdml[
+<!ENTITY materials SYSTEM "materials.gdml">
+]>
+
+<gdml xmlns:gdml="http://cern.ch/2001/Schemas/GDML" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="schema/gdml.xsd">
+  <!-- include GDML namespace -->
+  <!-- XML Schema instance Namespace -->
+  <!-- GDML Schema Location -->
+
+  <define>
+
+    <!-- X length of the Dipole -->
+    <quantity name="Dipole_X_length" value="0.5" unit="m" />
+
+    <!-- Y length of the Dipole -->
+    <quantity name="Dipole_Y_length" value="0.5" unit="m" />
+
+    <!-- X length of the Dipole -->
+    <quantity name="Dipole_Z_length" value="0.5" unit="m" />
+
+    <!-- position of the magnetic field -->
+    <position name="DipoleCenter" x="0" y="0" z="1" unit="m" />
+
+  </define>
+  
+  &materials;
+
+  <solids>
+
+    <box name="DipoleBox" x="Dipole_X_length" y="Dipole_Y_length" z="Dipole_Z_length" />
+
+  </solids>
+
+  <structure>
+
+    <volume name="logicalDipole">
+      <materialref ref="AirVacuum" />
+      <solidref ref="DipoleBox" />
+      <auxiliary auxtype="Color" auxvalue="blue" />
+      <auxiliary auxtype="Alpha" auxvalue="0.3" />
+      <auxiliary auxtype="MagFieldType" auxvalue="Dipole" />
+      <auxiliary auxtype="MagFieldValue" auxvalue="1.0" />
+    </volume>
+
+  </structure>
+
+  <!-- I am not sure what all this does, sets up something for the implementation 
+    to the World -->
+
+  <setup name="DipoleSetup" version="1.0">
+    <world ref="logicalDipole" />
+  </setup>
+
+</gdml>
+  
