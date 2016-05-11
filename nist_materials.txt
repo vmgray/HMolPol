@@ -4,3 +4,4 @@ G4_C
 G4_AIR
 G4_Galactic
 G4_Ar
+G4_Pb
