@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE gdml[
+<!ENTITY materials SYSTEM "materials.gdml">
+]>
+
+<gdml xmlns:gdml="http://cern.ch/2001/Schemas/GDML" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="schema/gdml.xsd">
+  <!-- include GDML namespace -->
+  <!-- XML Schema instance Namespace -->
+  <!-- GDML Schema Location -->
+  
+  <!-- /*********************************************************** 
+   Programmer: Valerie Gray 
+   Purpose: To define the dimension of the Hall A Dipoles 
+
+   Entry Conditions: 
+   Date:05-10-2016
+   Modified: 05-11-2016 
+   Assisted By:
+  *********************************************************/ -->
+  
+  <!-- Add the materials -->
+  &materials;
+  
+  <define>
+    <!-- Define the quantities that will be used in this file This might be wrong 
+      and these need to be constants... -->
+
+    <!-- These ESTIMATED values come from http://hallaweb.jlab.org/equipment/moller/pictures/2016/layout.png  -->
+
+    <!-- Using Y = X for distance. -->
+
+    <!-- X length of the Dipole -->
+    <quantity name="HallA_Dipole_X_length" value="80" unit="cm" />
+
+    <!-- Y length of the Dipole -->
+    <quantity name="HallA_Dipole_Y_length" value="80" unit="cm" />
+
+    <!-- X length of the Dipole -->
+    <quantity name="HallA_Dipole_Z_length" value="150" unit="cm" />
+
+    <!-- define positions of the Dipole in this file -->
+    <position name="HallA_Dipole_Position" x="0.0" y="0.0" z="0.0" unit="m" />
+    
+  </define>
+  
+    <solids>
+    <!-- Define the tube of the Detectors -->
+    <box name="HallA_Dipole_VolumeBox" x="HallA_Dipole_X_length" y="HallA_Dipole_Y_length"
+      z="HallA_Dipole_Z_length" />
+
+  </solids>
+  
+    <structure>
+    <!-- implement the geometry - through logical volumes and physical volumes -->
+    <volume name="Logical_HallA_Dipole">
+      <materialref ref="AirVacuum" />
+      <solidref ref="HallA_Dipole_VolumeBox" />
+      <auxiliary auxtype="Color" auxvalue="blue" />
+      <auxiliary auxtype="Alpha" auxvalue="0.5" />
+    </volume>
+
+  </structure>
+
+  <!-- I am not sure what all this does, sets up something for the implementation 
+    to the World -->
+
+  <setup name="HallA_Dipole_Setup" version="1.0">
+    <world ref="Logical_HallA_Dipole" />
+  </setup>
+  
+</gdml>

@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE gdml[
+<!ENTITY materials SYSTEM "materials.gdml">
+]>
+
+<gdml xmlns:gdml="http://cern.ch/2001/Schemas/GDML" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="schema/gdml.xsd">
+  <!-- include GDML namespace -->
+  <!-- XML Schema instance Namespace -->
+  <!-- GDML Schema Location -->
+
+  <!-- /*********************************************************** 
+    Programmer: Valerie Gray 
+    Purpose: To define the construction of mother volume an simulation. They include: 
+    World H gas target dummy sensitive detector, along with the hall A optics
+    
+    The hall A optic information is set in 2 surveys # A1496 
+    https://www.jlab.org/accel/survalign/documents/dthalla/A1496.pdf and # A1686 
+    https://www.jlab.org/accel/survalign/documents/dthalla/A1686.pdf
+    
+    Entry Conditions: 
+    Date:05-10-2016
+    Modified: 05-11-2016
+    Assisted By:  
+  *********************************************************/ -->
+
+  <!-- All definitions: constants, positions, rotations, scales etc. that will be 
+    used in this GDML file -->
+  <define>
+
+    <!-- Define the quantities that will be used in this file This might be wrong 
+      and these need to be constants... -->
+
+    <!-- X length of the "World" or the experimental hall -->
+    <quantity name="World_X_length" value="5" unit="m" />
+
+    <!-- Y length of the "World" or the experimental hall -->
+    <quantity name="World_Y_length" value="5" unit="m" />
+
+    <!-- X length of the "World" or the experimental hall -->
+    <quantity name="World_Z_length" value="30" unit="m" />
+
+    <!-- position of the Hydrogen gas target (and all its parts) in the "World" -->
+    <position name="HGasTargetCenter" x="0" y="0" z="0" unit="m" />
+
+    <!-- position of the Hall A Optics (and all its parts) in the "World" -->
+    <!-- This is the sum of the distance between the target center and Q1 center AND 
+    the difference from the Hall A optics box center and Q1 center -->
+    <position name="HallAOpticsCenter" x="0" y="0" z="2.93302" unit="m" />
+
+    <!-- position of the Dummy (and all its parts) in the "World" -->
+    <!-- This is the distance as given by the survey #A1496 -->
+    <position name="DummyCenter" x="0" y="0" z="7.47332" unit="m" />
+
+<!-- more debugging -->
+
+    <!-- position of the Right Detector (and all its parts) in the "World" -->
+    <position name="RightDetectorCenter" x="0.1" y="0" z="4.5" unit="m" />
+
+    <!-- position of the Left Detector (and all its parts) in the "World" -->
+     <position name="LeftDetectorCenter" x="-0.1" y="0" z="4.5" unit="m" />
+
+
+  </define>
+
+  <!-- define materials here - this with the ENTITY up top pass the materials from 
+    the materials.gdml file -->
+  &materials;
+
+  <solids>
+
+    <box name="MotherVolumeBox" x="World_X_length" y="World_Y_length" z="World_Z_length" />
+
+  </solids>
+
+  <structure>
+
+    <!-- Define the logical mother volume -->
+    <volume name="logicalMotherVol">
+      <materialref ref="AirVacuum" />
+      <solidref ref="MotherVolumeBox" />
+
+      <!-- Add in all the daughter geometries, these are all written in different 
+        files, so reference the files. -->
+      <physvol>
+        <file name="geometry/HMolPolHTargetVolume.gdml" />
+        <positionref ref="HGasTargetCenter" />
+      </physvol>
+
+      <!-- Hall A optics -->
+      <physvol>
+        <file name="geometry/HallA_Optics.gdml" />
+        <positionref ref="HallAOpticsCenter" />
+      </physvol>
+
+      <physvol name="Dummy">
+        <file name="geometry/dummy.gdml" />
+        <positionref ref="DummyCenter" />
+      </physvol>
+<!--
+      <physvol name="RightDetector">
+        <file name="geometry/detector.gdml" />
+        <positionref ref="RightDetectorCenter" />
+      </physvol>
+
+      <physvol name="LeftDetector">
+        <file name="geometry/detector.gdml" />
+        <positionref ref="LeftDetectorCenter" />
+      </physvol>
+-->
+    </volume>
+  </structure>
+
+  <!-- I am not sure what all this does, sets up something for the implementation 
+    to the World -->
+  <setup name="ExperimentalHall" version="1.0">
+    <world ref="logicalMotherVol" />
+  </setup>
+
+</gdml>
