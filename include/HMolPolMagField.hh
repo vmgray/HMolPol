@@ -11,6 +11,9 @@
  *
 ********************************************/
 
+#ifndef HMOLPOLMAGFIELD_HH_
+#define HMOLPOLMAGFIELD_HH_
+
 //Geant4 specific includes
 #include <G4MagneticField.hh>
 
@@ -19,13 +22,15 @@ class HMolPolMagField: public G4MagneticField {
   public:
 
     /// constructor for the HMolPolMagField
-    HMolPolMagField();
+    HMolPolMagField() { };
 
     /// destructor for the HMolPolMagField
-    virtual ~HMolPolMagField();
+    virtual ~HMolPolMagField() { };
 
     /// pure virtual function to get the field value
     virtual void  GetFieldValue( const G4double Point[4],
                                        G4double *Bfield ) const = 0;
 
 };
+
+#endif // HMOLPOLMAGFIELD_HH_
