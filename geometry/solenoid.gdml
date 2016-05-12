@@ -37,8 +37,8 @@
       <solidref ref="SolenoidTube" />
       <auxiliary auxtype="Color" auxvalue="blue" />
       <auxiliary auxtype="Alpha" auxvalue="0.3" />
-      <auxiliary auxtype="MagFieldType" auxvalue="Solenoid" />
-      <auxiliary auxtype="MagFieldValue" auxvalue="1.0" />
+      <auxiliary auxtype="MagFieldType" auxvalue="Uniform" />
+      <auxiliary auxtype="MagFieldValue" auxvalue="(0.0,0.0,8.0)" />
     </volume>
 
   </structure>

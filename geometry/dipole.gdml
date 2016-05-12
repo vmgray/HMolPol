@@ -40,8 +40,8 @@
       <solidref ref="DipoleBox" />
       <auxiliary auxtype="Color" auxvalue="blue" />
       <auxiliary auxtype="Alpha" auxvalue="0.3" />
-      <auxiliary auxtype="MagFieldType" auxvalue="Dipole" />
-      <auxiliary auxtype="MagFieldValue" auxvalue="1.0" />
+      <auxiliary auxtype="MagFieldType" auxvalue="Uniform" />
+      <auxiliary auxtype="MagFieldValue" auxvalue="(1.0,0.0,0.0)" />
     </volume>
 
   </structure>
