@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE gdml[
+<!ENTITY materials SYSTEM "materials.gdml">
+]>
+
+<gdml xmlns:gdml="http://cern.ch/2001/Schemas/GDML" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="schema/gdml.xsd">
+  <!-- include GDML namespace -->
+  <!-- XML Schema instance Namespace -->
+  <!-- GDML Schema Location -->
+
+  <!-- /*********************************************************** 
+   Programmer: Valerie Gray 
+   Purpose: The hall A magnetics geometry
+   
+   http://hallaweb.jlab.org/equipment/moller/pictures/2016/layout.png
+   
+   General info http://hallaweb.jlab.org/equipment/moller/magnets/Moller_quads2.pdf
+   http://hallaweb.jlab.org/equipment/moller/pictures/2016/layout.png
+   
+   Distances between the magnitcs are figured from the survey # A1496 
+   https://www.jlab.org/accel/survalign/documents/dthalla/A1496.pdf
+   
+   NOTE: That height is the y commponet
+   
+   For positions ONLY the Z value is being used.
+   
+   in general Roll is around X, Pitch is around Y and Yaw is around Z. Then for 
+   our corrdinates it would follow that Roll is around Z, Pitch is around X 
+   and Yaw is around Y
+   
+    Entry Conditions: 
+    Date:05-10-2016
+    Modified: 05-11-2016 
+    Assisted By:
+  *********************************************************/ -->
+
+  <!-- All definitions: constants, positions, rotations, scales etc. that will be 
+    used in this GDML file -->
+  <define>
+
+    <!-- Define the quantities that will be used in this file This might be wrong 
+      and these need to be constants... -->
+
+    <!-- X length of the "World" or the experimental hall -->
+    <quantity name="HallAOptics_X_length" value="1" unit="m" />
+
+    <!-- Y length of the "World" or the experimental hall -->
+    <quantity name="HallAOptics_Y_length" value="1" unit="m" />
+
+    <!-- X length of the "World" or the experimental hall -->
+    <quantity name="HallAOptics_Z_length" value="5" unit="m" />
+    
+    <!-- Setting the center of Q1 to -2.25 m and adjusting all of the others off of this -->
+    
+    <!-- Roll == Z axis rotation? -->
+    <!-- position of the Q1 in the magntics logical world, and rotation. -->
+    <position name="HallA_Q1_center" x="0" y="0" z="-2.25" unit="m" />
+    <rotation name="HallA_Q1_ROLL" z="-44.980" unit="deg" />
+    <rotation name="HallA_Q1_YAW" y="0.033" unit="deg" />
+    <rotation name="HallA_Q1_PITCH" x="-0.010" unit="deg" />
+    <rotation name="HallA_Q1_ROTATION_ALL" x="-0.010" y="0.033" z="-44.980" unit="deg" />
+    
+    <!-- position of the Dummy (and all its parts) in the "World" -->
+    <position name="HallA_Q2_center" x="0" y="0" z="-1.5973" unit="m" />
+    <rotation name="HallA_Q2_ROLL" z="-44.957" unit="deg" />
+    <rotation name="HallA_Q2_YAW" y="0.038" unit="deg" />
+    <rotation name="HallA_Q2_PITCH" x="-0.024" unit="deg" />
+    <rotation name="HallA_Q2_ROTATION_ALL" x="-0.024" y="0.038" z="-44.957" unit="deg" />
+    
+    <!-- position of the Dummy (and all its parts) in the "World" -->
+    <position name="HallA_Q3_center" x="0" y="0" z="-0.9111" unit="m" />
+    <rotation name="HallA_Q3_ROLL" z="-44.996" unit="deg" />
+    <rotation name="HallA_Q3_YAW" y="-0.015" unit="deg" />
+    <rotation name="HallA_Q3_PITCH" x="0.011" unit="deg" />
+    <rotation name="HallA_Q3_ROTATION_ALL" x="0.011" y="-0.015" z="-44.996" unit="deg" />
+
+    <!-- position of the Right Detector (and all its parts) in the "World" -->
+    <position name="HallA_Q4_center" x="0" y="0" z="-0.256" unit="m" />
+    <rotation name="HallA_Q4_ROLL" z="-45.023" unit="deg" />
+    <rotation name="HallA_Q4_YAW" y="-0.067" unit="deg" />
+    <rotation name="HallA_Q4_PITCH" x="0.019" unit="deg" />
+    <rotation name="HallA_Q4_ROTATION_ALL" x="0.019" y="-0.067" z="-45.023" unit="deg" />
+    
+    <!-- position of the dipole (and all its parts) in the "World" -->
+    <position name="HallA_Dipole_center" x="0" y="0" z="1.2321" unit="m" />
+    <rotation name="HallA_Dipole_ROLL" z="0.035" unit="deg" />
+    <rotation name="HallA_Dipole_YAW" y="-0.007" unit="deg" />
+    <rotation name="HallA_Dipole_PITCH" x="0.025" unit="deg" />
+    <rotation name="HallA_Dipole_ROTATION_ALL" x="-0.025" y="-0.007" z="0.035" unit="deg" />
+    
+  </define>
+
+  <!-- define materials here - this with the ENTITY up top pass the materials from 
+    the materials.gdml file -->
+  &materials;
+
+  <solids>
+
+    <box name="HallA_OpticsVolumeBox" x="HallAOptics_X_length" y="HallAOptics_Y_length" 
+      z="HallAOptics_Z_length" />
+
+  </solids>
+
+  <structure>
+
+    <!-- Define the logical mother volume -->
+    <volume name="logicalHallA_Optics_Vol">
+      <materialref ref="AirVacuum" />
+      <solidref ref="HallA_OpticsVolumeBox" />
+      <auxiliary auxtype="Alpha" auxvalue="0.0" />
+
+      <!-- Add in all the daughter geometries, these are all written in different 
+        files, so reference the files. -->
+      <physvol name="HallA_Q1">
+        <file name="geometry/HallA_Q1Q4.gdml" />
+        <positionref ref="HallA_Q1_center" />
+<!--         <rotationref ref="HallA_Q1_ROLL" /> -->
+        <rotationref ref="HallA_Q1_ROTATION_ALL" />
+      </physvol>
+
+      <physvol name="HallA_Q2">
+        <file name="geometry/HallA_Q2Q3.gdml" />
+        <positionref ref="HallA_Q2_center" />
+<!--         <rotationref ref="HallA_Q2_ROLL" /> -->
+        <rotationref ref="HallA_Q2_ROTATION_ALL" />
+      </physvol>
+   
+      <physvol name="HallA_Q3">
+        <file name="geometry/HallA_Q2Q3.gdml" />
+        <positionref ref="HallA_Q3_center" />
+<!--         <rotationref ref="HallA_Q3_ROLL" /> -->
+        <rotationref ref="HallA_Q3_ROTATION_ALL" />
+      </physvol>
+      
+      <physvol name="HallA_Q4">
+        <file name="geometry/HallA_Q1Q4.gdml" />
+        <positionref ref="HallA_Q4_center" />
+<!--         <rotationref ref="HallA_Q4_ROLL" /> -->
+        <rotationref ref="HallA_Q4_ROTATION_ALL" />
+      </physvol>
+             
+      <physvol name="HallA_Dipole">
+        <file name="geometry/HallA_Dipole.gdml" />
+        <positionref ref="HallA_Dipole_center" />
+<!--         <rotationref ref="HallA_Dipole_ROLL" /> --> 
+        <rotationref ref="HallA_Dipole_ROTATION_ALL" />
+      </physvol>
+    
+    </volume>
+  </structure>
+
+  <!-- I am not sure what all this does, sets up something for the implementation 
+    to the World -->
+  <setup name="HallA_Optics" version="1.0">
+    <world ref="logicalHallA_Optics_Vol" />
+  </setup>
+
+</gdml>
