@@ -39,7 +39,7 @@
 #
 # Set surface
 #
-/vis/viewer/set/style wire
+/vis/viewer/set/style s
 
 #
 # Create style
