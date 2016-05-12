@@ -11,15 +11,21 @@
  *
 ********************************************/
 
+#ifndef HMOLPOLMAGFIELDMAP_HH_
+#define HMOLPOLMAGFIELDMAP_HH_
+
 //HMolPol specific includes
 #include <HMolPolMagField.hh>
+#include <HMolPolMagFieldMapBasic.hh>
 
 class HMolPolMagFieldMap: public HMolPolMagField {
 
   public:
 
     /// constructor for the HMolPolMagFieldMap
-    HMolPolMagFieldMap(): fieldmap(0) { };
+    HMolPolMagFieldMap(const std::string& filename) {
+      fieldmap = new HMolPolMagFieldMapBasic<float,3>(filename);
+    };
 
     /// destructor for the HMolPolMagFieldMap
     virtual ~HMolPolMagFieldMap() {
@@ -27,9 +33,14 @@ class HMolPolMagFieldMap: public HMolPolMagField {
     };
 
     /// function to get the field value
-    void GetFieldValue(const G4double Point[4], G4double* Bfield) const;
+    void GetFieldValue(const G4double four_point[4], G4double* bfield) const {
+      G4double three_point[3] = {four_point[0],four_point[1],four_point[2]};
+      if (fieldmap) fieldmap->GetValue(three_point, bfield);
+    }
 
   private:
-    HMolPolMagFieldMapBasic *fieldmap; ///< magnetic field map
+    HMolPolMagFieldMapBasic<float,3> *fieldmap; ///< magnetic field map
 
 };
+
+#endif // HMOLPOLMAGFIELDMAP_HH_
