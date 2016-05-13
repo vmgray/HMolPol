@@ -12,6 +12,9 @@
  *
 ********************************************/
 
+#ifndef HMOLPOLDETECTORCONSTRUCTION_HH_
+#define HMOLPOLDETECTORCONSTRUCTION_HH_
+
 //Geant4 includes
 #include <G4VUserDetectorConstruction.hh>
 #include <G4VPhysicalVolume.hh>
@@ -62,3 +65,5 @@ class HMolPolDetectorConstruction: public G4VUserDetectorConstruction
     G4String fGeometryFileName;
 
 };
+
+#endif // HMOLPOLDETECTORCONSTRUCTION_HH_
