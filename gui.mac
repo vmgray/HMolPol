@@ -16,6 +16,11 @@
 # It has no effect with G4UIterminal.
 
 
+# Add icons of general interest
+#
+/control/execute icons.mac
+#
+
 # File :
 /gui/addMenu   file File
 /gui/addButton file Initialize "/run/initialize"
@@ -40,11 +45,6 @@
 
 # Viewer menu :
 /gui/addMenu   viewer Viewer
-#
-# the only viewer in HMolPol is the Qt viewer
-#/gui/addButton viewer "My viewer"            "/control/execute vis/myVis.mac"
-#/gui/addButton viewer "OIX viewer"           "/control/execute vis/OIX.mac"
-#/gui/addButton viewer "X viewer"             "/control/execute vis/X.mac"
 #
 /gui/addButton viewer "Qt viewer"            "/control/execute vis/Qt.mac"
 /gui/addButton viewer "Set style solid"      "/vis/viewer/set/style surface"

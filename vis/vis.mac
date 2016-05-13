@@ -6,7 +6,7 @@
 #
 # Add axis (has to be after /vis/scene/create )
 #
-#/vis/scene/add/axes
+/vis/scene/add/axes 0 0 0 1 m
 
 #
 # Declare that the world volume should be added to the scene

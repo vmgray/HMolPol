@@ -1,2 +1,2 @@
-/vis/open OGLSQt
+/vis/open OGL 600x600-0+0
 /control/execute vis/vis.mac
