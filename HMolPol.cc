@@ -19,11 +19,11 @@
 
 //load the multithreaded run manager if available
 //so the GUI doesn't freeze while running
-#ifdef G4MULTITHREADED
-#include "G4MTRunManager.hh"
-#else
+//#ifdef G4MULTITHREADED
+//#include "G4MTRunManager.hh"
+//#else
 #include "G4RunManager.hh"
-#endif
+//#endif
 
 #include <G4VisManager.hh>
 #include <G4UImanager.hh>
@@ -81,11 +81,11 @@ int main (int argc, char** argv)
    * This is need so that all the "events" are looped through in a run
   ***********/
   G4cout << "RunManager construction starting...." << G4endl;
-#ifdef G4MULTITHREADED
-  G4MTRunManager* runManager = new G4MTRunManager;
-#else
+//#ifdef G4MULTITHREADED
+//  G4MTRunManager* runManager = new G4MTRunManager;
+//#else
   G4RunManager* runManager = new G4RunManager;
-#endif
+//#endif
 
   // Physics we want to use
   // How much output we want to see - 0 is the most
