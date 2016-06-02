@@ -18,6 +18,8 @@
 //Geant4 includes
 #include <G4VUserDetectorConstruction.hh>
 #include <G4VPhysicalVolume.hh>
+#include <G4MagneticField.hh>
+#include <G4FieldManager.hh>
 #include <G4GDMLParser.hh>
 
 // HMolPol classes
@@ -63,6 +65,10 @@ class HMolPolDetectorConstruction: public G4VUserDetectorConstruction
 
     // Geometry File name
     G4String fGeometryFileName;
+
+    // List of magnetic fields and managers
+    static G4ThreadLocal std::vector<G4MagneticField*> fMagneticFields;
+    static G4ThreadLocal std::vector<G4FieldManager*> fFieldManagers;
 
 };
 
