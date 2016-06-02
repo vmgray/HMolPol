@@ -43,6 +43,8 @@
 #include "HMolPolGenericDetector.hh"
 #include "HMolPolAnalysis.hh"
 #include "HMolPolMagFieldMap.hh"
+//
+#include "HMolPolSolenoidMagField.hh"
 
 // Helper functions for find_if
 bool hasMagFieldType(const G4GDMLAuxStructType& tag) {
