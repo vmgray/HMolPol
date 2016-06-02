@@ -311,12 +311,12 @@ void Define_Histograms_Dummy()
     //cross section
     h_CROSS_SECTION_CM_DUMMY[i] = new TH1D(
         Form("h_CROSS_SECTION_CM_DUMMY[%d]", i),
-        Form("Differntal cross section for %s on the Dummy detector",
+        Form("Differential cross section for %s on the Dummy detector",
              INDEX_TO_NUM_PRIMARIES_TO_NAME[i].c_str()),
         160, 80, 120);
 
     h_CROSS_SECTION_CM_DUMMY[i]->GetXaxis()->SetTitle(
-        Form("differental cross section of %s (%s)",
+        Form("differential cross section of %s (%s)",
              INDEX_TO_NUM_PRIMARIES_TO_NAME[i].c_str(),
              DIFF_CROSS_SECTION_UNIT_NAME.c_str()));
 
@@ -678,6 +678,9 @@ void Plot_Dummy()
     c_Cross_Section_CM->SaveAs(
         Form("%s/Dummy_Differental_Cross_Section_CM_primary_%d.png",
              OUTPUT_PREFIX.c_str(), i));
+    c_Cross_Section_CM->SaveAs(
+        Form("%s/Dummy_Differental_Cross_Section_CM_primary_%d.C",
+             OUTPUT_PREFIX.c_str(), i));
 
     //theta
     TCanvas* c_Theta_CM = new TCanvas(
@@ -689,7 +692,9 @@ void Plot_Dummy()
     c_Theta_CM->SaveAs(
         Form("%s/Dummy_Interaction_Theta_CM_primary_%d.png",
              OUTPUT_PREFIX.c_str(), i));
-
+    c_Theta_CM->SaveAs(
+        Form("%s/Dummy_Interaction_Theta_CM_primary_%d.C",
+             OUTPUT_PREFIX.c_str(), i));
     //phi
     TCanvas* c_Phi_CM = new TCanvas(
         "c_Phi_CM",
@@ -699,6 +704,9 @@ void Plot_Dummy()
 
     c_Phi_CM->SaveAs(
         Form("%s/Dummy_Interaction_Phi_CM_primary_%d.png",
+             OUTPUT_PREFIX.c_str(), i));
+    c_Phi_CM->SaveAs(
+        Form("%s/Dummy_Interaction_Phi_CM_primary_%d.C",
              OUTPUT_PREFIX.c_str(), i));
   }
 
@@ -750,12 +758,12 @@ void Define_Histograms_LeftRight()
     //cross section
     h_CROSS_SECTION_CM_LEFTRIGHT[i] = new TH1D(
         Form("h_CROSS_SECTION_CM_LEFTRIGHT[%d]", i),
-        Form("Differntal cross section for %s on the Left/Right detector",
+        Form("Differential cross section for %s on the Left/Right detector",
              INDEX_TO_NUM_PRIMARIES_TO_NAME[i].c_str()),
         160, 80, 120);
 
     h_CROSS_SECTION_CM_LEFTRIGHT[i]->GetXaxis()->SetTitle(
-        Form("Differental cross section of primary %s (%s)",
+        Form("Differential cross section of primary %s (%s)",
              INDEX_TO_NUM_PRIMARIES_TO_NAME[i].c_str(),
              DIFF_CROSS_SECTION_UNIT_NAME.c_str()));
 
@@ -1117,6 +1125,9 @@ void Plot_LeftRight()
     c_Cross_Section_CM->SaveAs(
         Form("%s/Left_Right_Differental_Cross_Section_CM_primary_%d.png",
              OUTPUT_PREFIX.c_str(), i));
+    c_Cross_Section_CM->SaveAs(
+        Form("%s/Left_Right_Differental_Cross_Section_CM_primary_%d.C",
+             OUTPUT_PREFIX.c_str(), i));
 
     //theta
     TCanvas* c_Theta_CM = new TCanvas(
@@ -1129,6 +1140,9 @@ void Plot_LeftRight()
     c_Theta_CM->SaveAs(
         Form("%s/Left_Right_Interaction_Theta_CM_primary_%d.png",
              OUTPUT_PREFIX.c_str(), i));
+    c_Theta_CM->SaveAs(
+        Form("%s/Left_Right_Interaction_Theta_CM_primary_%d.C",
+             OUTPUT_PREFIX.c_str(), i));
 
     //phi
     TCanvas* c_Phi_CM = new TCanvas(
@@ -1140,6 +1154,9 @@ void Plot_LeftRight()
 
     c_Phi_CM->SaveAs(
         Form("%s/Left_Right_Interaction_Phi_CM_primary_%d.png",
+             OUTPUT_PREFIX.c_str(), i));
+    c_Phi_CM->SaveAs(
+        Form("%s/Left_Right_Interaction_Phi_CM_primary_%d.C",
              OUTPUT_PREFIX.c_str(), i));
   }
 
