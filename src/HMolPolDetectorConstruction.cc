@@ -18,26 +18,45 @@
 //Geant4 specific includes
 #include <G4Color.hh>
 #include <G4VisAttributes.hh>
-
 #include <G4NistManager.hh>
-
-//Magnetic Field related stuff
-#include <G4FieldManager.hh>
-#include <G4TransportationManager.hh>
-
 #include <G4PhysicalVolumeStore.hh>
+
+//Magnetic field related stuff
+#include <G4UniformMagField.hh>
+#include <G4QuadrupoleMagField.hh>
+#include <G4TransportationManager.hh>
+#include <G4Mag_UsualEqRhs.hh>
+#include <G4FieldManager.hh>
+#include <G4UserLimits.hh>
+#include <G4AutoDelete.hh>
 
 // Sensitive detector stuff
 #include <G4SDManager.hh>
 
 //system includes
 #include <fstream>
+#include <sstream>
+#include <algorithm>
 
 //HMolPol includes
 #include "HMolPolDetectorConstruction.hh"
-#include "HMolPolHSolenoidMagField.hh"
 #include "HMolPolGenericDetector.hh"
 #include "HMolPolAnalysis.hh"
+#include "HMolPolMagFieldMap.hh"
+//
+#include "HMolPolSolenoidMagField.hh"
+
+// Helper functions for find_if
+bool hasMagFieldType(const G4GDMLAuxStructType& tag) {
+  return (tag.type == "MagFieldType");
+}
+bool hasMagFieldValue(const G4GDMLAuxStructType& tag) {
+  return (tag.type == "MagFieldValue");
+}
+
+// Create static elements
+G4ThreadLocal std::vector<G4MagneticField*> HMolPolDetectorConstruction::fMagneticFields;
+G4ThreadLocal std::vector<G4FieldManager*> HMolPolDetectorConstruction::fFieldManagers;
 
 /********************************************
  * Programmer: Valerie Gray
@@ -68,7 +87,7 @@ G4VPhysicalVolume* HMolPolDetectorConstruction::Construct()
 {
   G4cout << "##### In HMollerPolDetectorConstruction::Construct()... #####" << G4endl;
 
-  //define a world volume
+  // define a world volume
   G4VPhysicalVolume* worldVolume;
 
   /*****************
@@ -179,23 +198,27 @@ G4VPhysicalVolume* HMolPolDetectorConstruction::Construct()
       iter != auxmap->end();
       iter++)//This is over the volumes
   {
-    //Start with this volume (first component of the map)
-    //tells us how many entries there are for this volume
-    G4cout << G4endl << "Volume " << ((*iter).first)->GetName()
-    << " has " << (*iter).second.size()
-    << " items of of auxiliary information."
-    << G4endl;
+    // Get the logical volume which has auxiliary tags
+    G4LogicalVolume* logicalVolume = (*iter).first;
+    const G4GDMLAuxListType& auxiliaryList = (*iter).second;
+
+    // Start with this volume (first component of the map)
+    // tells us how many entries there are for this volume
+    G4cout << G4endl << "Volume " << logicalVolume->GetName()
+        << " has " << auxiliaryList.size()
+        << " items of of auxiliary information."
+        << G4endl;
     /*********
      * auxmap.second is the auxiliary information
      * which is a vector of pairs, <type, value>
-     * so (*iter).second.size() gives us the number
+     * so auxiliaryList.size() gives us the number
      * of entries in this vector.
      *********/
 
     //get the standard Geant4 visibility attributes for the volume, we will change then to
     //to the ones we define in the GDML files when looping over the properties
     const G4VisAttributes* visAttribute_original =
-    ((*iter).first)->GetVisAttributes();
+        logicalVolume->GetVisAttributes();
     //define a color
     G4Color color_original;
     //if there are original visibility attributes get them
@@ -214,7 +237,7 @@ G4VPhysicalVolume* HMolPolDetectorConstruction::Construct()
     G4VisAttributes visAttribute_new(color_original);
 
     /********
-     * for that volume ((*iter).first)->GetName() loop over the properties
+     * for that volume logicalVolume->GetName() loop over the properties
      * the properties are in the form (type, value) from the auxmap.second
      *
      * vit is the iterator over the properties of that volume or auxmap.second
@@ -223,8 +246,8 @@ G4VPhysicalVolume* HMolPolDetectorConstruction::Construct()
      * ie (color, green), (alpha, 0.5) etc)
     *********/
     //loop over all properties
-    for (G4GDMLAuxListType::const_iterator vit = (*iter).second.begin();
-        vit != (*iter).second.end();
+    for (G4GDMLAuxListType::const_iterator vit = auxiliaryList.begin();
+        vit != auxiliaryList.end();
         vit++)//This is over the attributes for said Volume
     {
       //Print what the property is and is value
@@ -338,7 +361,7 @@ G4VPhysicalVolume* HMolPolDetectorConstruction::Construct()
 
       //Sets the volumes visiablity attribute with both the COLOR and the APLHA
       //As was set (or not) in the last 2 if statements.
-      ((*iter).first)->SetVisAttributes(visAttribute_new);
+      logicalVolume->SetVisAttributes(visAttribute_new);
 
       // Support for the auxiliary tag "SensDet" to set sensitive detector type
       if ((*vit).type == "SensDet")
@@ -369,11 +392,11 @@ G4VPhysicalVolume* HMolPolDetectorConstruction::Construct()
 
           //give that newly created HMolPolGenericDetector, genericdetector
           //the name if the volume
-          genericdetector->SetVolumeName(((*iter).first)->GetName());
+          genericdetector->SetVolumeName(logicalVolume->GetName());
 
           //write out the name if the sensitive detector and the volume
           G4cout << "    Creating sensitive detector " << detectortype
-          << " for volume " << ((*iter).first)->GetName()
+          << " for volume " << logicalVolume->GetName()
           << G4endl;
 
           // Add sensitive detector to analysis
@@ -389,18 +412,120 @@ G4VPhysicalVolume* HMolPolDetectorConstruction::Construct()
         }
 
         //debugging
-        G4cout << "    Volume Name: " << ((*iter).first)->GetName() << G4endl;
+        G4cout << "    Volume Name: " << logicalVolume->GetName() << G4endl;
 
         // Set sensitive detector for the logical volume
-        ((*iter).first)->SetSensitiveDetector(sensitivedetector);
+        logicalVolume->SetSensitiveDetector(sensitivedetector);
       }
+
+    } // end of loop over the auxiliary tags themselves
+
+
+    // Find if there is a magnetic field type tag for this volume
+    // (see http://www.cplusplus.com/reference/algorithm/find_if for details)
+    G4GDMLAuxListType::const_iterator magFieldTypeEntry =
+        std::find_if(auxiliaryList.begin(), auxiliaryList.end(), hasMagFieldType);
+    // If no magnetic field type tag is found, magFieldEntry will be equal to end()
+    if (magFieldTypeEntry != auxiliaryList.end()) {
+
+      // Create a magnetic field pointer for this volume (this is null until
+      // there is an actual magnetic field created based on the gdml file content)
+      G4MagneticField* localMagneticField = 0;
+
+      // Figure out which type of field this is
+      if (magFieldTypeEntry->value == "Uniform") {
+        G4cout << "    Creating uniform magnetic field" << G4endl;
+
+        // Find if there is a magnetic field value tag for this volume
+        // (see http://www.cplusplus.com/reference/algorithm/find_if for details)
+        G4GDMLAuxListType::const_iterator magFieldValueEntry =
+            std::find_if(auxiliaryList.begin(), auxiliaryList.end(), hasMagFieldValue);
+
+        // If no magnetic field value tag is found, just leave at zero field
+        G4ThreeVector vector(0.0, 0.0, 0.0);
+        try {
+          // Read the vector from the input string
+          std::stringstream(magFieldValueEntry->value) >> vector;
+          // Assume this is in units of tesla
+          vector *= CLHEP::tesla;
+          G4cout << "    Field vector " << vector / CLHEP::tesla << " T" << G4endl;
+        } catch (const std::exception& ex) {
+          G4cout << "    Could not parse " << magFieldValueEntry->value << G4endl;
+        }
+
+        // Create uniform magnetic field with the given field vector
+        localMagneticField = new G4UniformMagField(vector);
+
+      } else if (magFieldTypeEntry->value == "Quadrupole") {
+        G4cout << "    Creating quadrupole magnetic field" << G4endl;
+
+        // Find if there is a magnetic field value tag for this volume
+        // (see http://www.cplusplus.com/reference/algorithm/find_if for details)
+        G4GDMLAuxListType::const_iterator magFieldValueEntry =
+            std::find_if(auxiliaryList.begin(), auxiliaryList.end(), hasMagFieldValue);
+
+        // If no magnetic field value tag is found, just leave at zero field
+        G4double gradient = 0.0;
+        try {
+          // Read the gradient value from the input string
+          std::stringstream(magFieldValueEntry->value) >> gradient;
+          // Assume this is in units of tesla/m
+          gradient *= CLHEP::tesla / CLHEP::m;
+          G4cout << "    Field gradient " << gradient / (CLHEP::tesla / CLHEP::m) << " T/m" << G4endl;
+        } catch (const std::exception& ex) {
+          G4cout << "    Could not parse " << magFieldValueEntry->value << G4endl;
+        }
+
+        // Create uniform magnetic field with the given field vector
+        localMagneticField = new G4QuadrupoleMagField(gradient);
+
+      } else if (magFieldTypeEntry->value == "Map") {
+        G4cout << "    Creating mapped magnetic field" << G4endl;
+
+        // Find if there is a magnetic field value tag for this volume
+        // (see http://www.cplusplus.com/reference/algorithm/find_if for details)
+        G4GDMLAuxListType::const_iterator magFieldValueEntry =
+            std::find_if(auxiliaryList.begin(), auxiliaryList.end(), hasMagFieldValue);
+
+        // Read the filename from the input string
+        std::string filename = magFieldValueEntry->value;
+        G4cout << "    Map file " << filename << G4endl;
+
+        // Create uniform magnetic field with the given field vector
+        localMagneticField = new HMolPolMagFieldMap(filename);
+
+      } else {
+        G4cout << "    Magnetic field type not recognized" << G4endl;
+      }
+
+      // Add a field manager to this logical volume
+      // Ref: https://geant4.web.cern.ch/geant4/UserDocumentation/UsersGuides/ForApplicationDeveloper/html/ch04s03.html
+      G4FieldManager* localFieldManager = new G4FieldManager();
+      localFieldManager->SetDetectorField(localMagneticField);
+      localFieldManager->CreateChordFinder(localMagneticField);
+      fMagneticFields.push_back(localMagneticField);
+      fFieldManagers.push_back(localFieldManager);
+
+      // Register the field and its manager for deleting when done
+      G4AutoDelete::Register(localMagneticField);
+      G4AutoDelete::Register(localFieldManager);
+
+      // Connect field manager to this logical volume and its daughters
+      G4bool forceToAllDaughters = true;
+      logicalVolume->SetFieldManager(localFieldManager,forceToAllDaughters);
+
+      // Set step limit in volume with magnetic field
+      G4UserLimits* userLimits = new G4UserLimits(1.0 * CLHEP::mm);
+      logicalVolume->SetUserLimits(userLimits);
+
     }
-  }
+
+  } // end of loop over volumes with auxiliary tags
   G4cout << G4endl << G4endl;
 
   /*
    * Now we want to loop over the physical volumes and use there names in the
-   * Generaic Detector (and ROOT Tree). Physical are all 100% seperate intities
+   * Generic Detector (and ROOT Tree). Physical are all 100% separate entities
    * were the logical volumes are not as they can and are reused.
    */
   G4cout << "  Parsing through physical volumes" << G4endl;
@@ -500,6 +625,6 @@ G4VPhysicalVolume* HMolPolDetectorConstruction::Construct()
   // the particles through the field)
   HTargetSolenoidMagFieldMgr->CreateChordFinder(HTargetSolenoidMagField);
 
-  //Return world volume
+  // Return world volume
   return worldVolume;
 }

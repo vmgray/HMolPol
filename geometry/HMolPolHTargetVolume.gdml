@@ -94,6 +94,8 @@
       <solidref ref="Htarget_tube" />
       <auxiliary auxtype="Color" auxvalue="green" />
       <auxiliary auxtype="Alpha" auxvalue="0.3" />
+      <auxiliary auxtype="MagFieldType" auxvalue="Uniform" />
+      <auxiliary auxtype="MagFieldValue" auxvalue="(0.0,0.0,8.0)" />
     </volume>
 
     <!-- create the logical volume -->
