@@ -15,7 +15,7 @@
 #include <G4SystemOfUnits.hh>
 
 //HMolPol specific includes
-#include "HMolPolHSolenoidMagField.hh"
+#include "HMolPolSolenoidMagField.hh"
 
 /********************************************
  * Programmer: Valerie Gray

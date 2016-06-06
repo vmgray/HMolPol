@@ -14,9 +14,16 @@
 #include <iostream>
 
 //all the Geant4 includes
-#include <G4RunManager.hh>
 #include <G4PhysListFactory.hh>
 #include <G4VModularPhysicsList.hh>
+
+//load the multithreaded run manager if available
+//so the GUI doesn't freeze while running
+//#ifdef G4MULTITHREADED
+//#include "G4MTRunManager.hh"
+//#else
+#include "G4RunManager.hh"
+//#endif
 
 #include <G4VisManager.hh>
 #include <G4UImanager.hh>
@@ -64,7 +71,7 @@ int main (int argc, char** argv)
   // Initialize the CLHEP random engine used by
   // "shoot" type functions
 
-  unsigned int seed = time(0);
+  unsigned int seed = 0; // time(0);
 
   CLHEP::HepRandom::createInstance();
   CLHEP::HepRandom::setTheSeed(seed);
@@ -74,7 +81,11 @@ int main (int argc, char** argv)
    * This is need so that all the "events" are looped through in a run
   ***********/
   G4cout << "RunManager construction starting...." << G4endl;
+//#ifdef G4MULTITHREADED
+//  G4MTRunManager* runManager = new G4MTRunManager;
+//#else
   G4RunManager* runManager = new G4RunManager;
+//#endif
 
   // Physics we want to use
   // How much output we want to see - 0 is the most

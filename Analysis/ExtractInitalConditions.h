@@ -70,5 +70,8 @@ void ExtractInitalConditions(HMolPolEventUnits* Units, HMolPolEventPrimaryCondit
 
   fout << "Nb (Hz/muA): " << PrimaryConditions->fNb << std::endl;
 
+  fout << "Number of Entries:" << std::endl;
+  fout << "nevents: " << HMOLPOL_CHAIN->GetEntries() << std::endl;
+
   return;
 }
