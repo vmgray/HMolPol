@@ -241,7 +241,7 @@ void HMolPolPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
   double interaction_vertex_mom_x1 = pperp * cos(phi_com);  //MeV
   double interaction_vertex_mom_y1 = pperp * sin(phi_com);  //MeV
   double interaction_vertex_mom_z1 = gamma_com * (ppar + e_com * beta_com);  // boosted MeV
-  double theta_lab1 = std::atan2(interaction_vertex_mom_z1, pperp);  //rad
+  double theta_lab1 = std::atan2(pperp, interaction_vertex_mom_z1);  //rad
   fParticleGun->SetParticleMomentumDirection(
       G4ThreeVector(interaction_vertex_mom_x1, interaction_vertex_mom_y1,
                     interaction_vertex_mom_z1));
@@ -261,7 +261,7 @@ void HMolPolPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
   double interaction_vertex_mom_x2 = -pperp * cos(phi_com);  //MeV
   double interaction_vertex_mom_y2 = -pperp * sin(phi_com);  //MeV
   double interaction_vertex_mom_z2 = gamma_com * (-ppar + e_com * beta_com);  // boosted MeV
-  double theta_lab2 = std::atan2(interaction_vertex_mom_z2, pperp);  //rad
+  double theta_lab2 = std::atan2(pperp, interaction_vertex_mom_z2);  //rad
   fParticleGun->SetParticleMomentumDirection(
       G4ThreeVector(interaction_vertex_mom_x2, interaction_vertex_mom_y2,
                     interaction_vertex_mom_z2));
