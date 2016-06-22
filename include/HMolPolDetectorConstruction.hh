@@ -37,34 +37,43 @@ class HMolPolDetectorConstruction: public G4VUserDetectorConstruction
 
     /// Constructor for the Detector construction
     HMolPolDetectorConstruction(HMolPolAnalysis* analysis)
+    : fAnalysis(analysis), fWorldVolume(0)
     {
-      fAnalysis = analysis;
+      // Create new GDML parser
       fGDMLParser = new G4GDMLParser();
 
       // Set a default geometry file name
       fGeometryFileName = "geometry/HMolPolMotherVolume.gdml";
     };
+
     /// Destructor of the Detector construction
     virtual ~HMolPolDetectorConstruction()
     {
       delete fGDMLParser;
     };
 
+    /// Set the geometry file name
     void SetGeometryFileName(G4String fileName)
     {
       fGeometryFileName = fileName;
     }
 
-  public:
+    /// Construct the physical volumes
+    G4VPhysicalVolume* Construct();
 
-    // Analysis
-    HMolPolAnalysis* fAnalysis;  ///< the Analysis object
+    /// Dump the geometry tree
+    void DumpGeometry(G4bool surfchk, G4VPhysicalVolume* volume, G4int depth);
 
-    /// Construct the volume??
-    G4VPhysicalVolume* Construct();  ///< construct the physical volume
+  private:
+
+    // Store pointer to the analysis object
+    HMolPolAnalysis* fAnalysis;
 
     // Geometry File name
     G4String fGeometryFileName;
+
+    // World volume
+    G4VPhysicalVolume* fWorldVolume;
 
     // List of magnetic fields and managers
     static G4ThreadLocal std::vector<G4MagneticField*> fMagneticFields;
