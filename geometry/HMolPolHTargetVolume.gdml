@@ -75,11 +75,15 @@
 
   <solids>
 
-    <!-- Define the tube of the Hydrogen target -->
+    <!-- Define the target mother volume -->
+    <tube name="Htarget_mother" rmin="0.0" rmax="1.1*HTarget_Cell_MaxRadius"
+      z="1.1*HTarget_Cell_Z_Length" startphi="HTarget_StartPhi" deltaphi="HTarget_EndPhi" />
+
+    <!-- Define the volume of the Hydrogen gas target -->
     <tube name="Htarget_tube" rmin="HTarget_MinRadius" rmax="HTarget_MaxRadius"
       z="HTarget_Z_Length" startphi="HTarget_StartPhi" deltaphi="HTarget_EndPhi" />
 
-    <!-- Define the tube of the cell around the H target -->
+    <!-- Define the volume of the Al cell around the H target -->
     <tube name="Htarget_Case_tube" rmin="HTarget_Cell_MinRadius" rmax="HTarget_Cell_MaxRadius"
       z="HTarget_Cell_Z_Length" startphi="HTarget_StartPhi" deltaphi="HTarget_EndPhi" />
 
@@ -89,27 +93,40 @@
     <!-- implement the geometry - through logical volumes and physical volumes -->
 
     <!-- Define the Target -->
-    <volume name="HTarget">
+    <volume name="HTarget_Gas">
       <materialref ref="Cold_Atomic_HGas" />
       <solidref ref="Htarget_tube" />
       <auxiliary auxtype="Color" auxvalue="green" />
       <auxiliary auxtype="Alpha" auxvalue="0.3" />
+
       <auxiliary auxtype="MagFieldType" auxvalue="Uniform" />
       <auxiliary auxtype="MagFieldValue" auxvalue="(0.0,0.0,8.0)" />
     </volume>
 
-    <!-- create the logical volume -->
-    <volume name="logicalHTarget">
+    <volume name="HTarget_Cell">
       <materialref ref="G4_Al" />
       <solidref ref="Htarget_Case_tube" />
+      <auxiliary auxtype="Color" auxvalue="gray" />
+    </volume>
+
+    <!-- create the logical volume -->
+    <volume name="logicalHTarget">
+      <materialref ref="AirVacuum" />
+      <solidref ref="Htarget_mother" />
 
       <!-- Define the physical volume -->
       <physvol>
-        <volumeref ref="HTarget" />
+        <volumeref ref="HTarget_Gas" />
+        <positionref ref="HTarget_Position" />
+      </physvol>
+
+      <physvol>
+        <volumeref ref="HTarget_Cell" />
         <positionref ref="HTarget_Position" />
       </physvol>
 
       <auxiliary auxtype="Color" auxvalue="gray" />
+      <auxiliary auxtype="Alpha" auxvalue="0.1" />
     </volume>
 
   </structure>
