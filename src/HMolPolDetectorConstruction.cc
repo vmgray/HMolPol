@@ -85,9 +85,6 @@ G4VPhysicalVolume* HMolPolDetectorConstruction::Construct()
 {
   G4cout << "##### In HMollerPolDetectorConstruction::Construct()... #####" << G4endl;
 
-  // define a world volume
-  G4VPhysicalVolume* worldVolume;
-
   /*****************
    * NIST Materials set up
   *****************/
@@ -156,7 +153,7 @@ G4VPhysicalVolume* HMolPolDetectorConstruction::Construct()
 
   //function to take the GDML it read in (the experiment)
   //and make it the "World"
-  worldVolume = fGDMLParser->GetWorldVolume();
+  fWorldVolume = fGDMLParser->GetWorldVolume();
 
   /*****************
    * Read in the auxiliary information.
@@ -363,7 +360,7 @@ G4VPhysicalVolume* HMolPolDetectorConstruction::Construct()
   G4cout << G4endl << G4endl;
 
   // Return world volume
-  return worldVolume;
+  return fWorldVolume;
 }
 
 
@@ -629,5 +626,40 @@ void HMolPolDetectorConstruction::ConstructSDandField()
       userLimits->SetMaxAllowedStep(max_step_size);
       logicalVolume->SetUserLimits(userLimits);
     }
+  }
+}
+
+
+void HMolPolDetectorConstruction::DumpGeometry(
+    G4bool overlap_check,
+    G4VPhysicalVolume* volume,
+    G4int depth)
+{
+  // Null volume
+  if (volume == 0) volume = fWorldVolume;
+
+  // Print spaces
+  for (int isp = 0; isp < depth; isp++) { G4cout << "  "; }
+  // Print name
+  G4cout << volume->GetName() << "[" << volume->GetCopyNo() << "] "
+         << volume->GetLogicalVolume()->GetName() << " "
+         << volume->GetLogicalVolume()->GetNoDaughters() << " "
+         << volume->GetLogicalVolume()->GetMaterial()->GetName();
+  // Print sensitive detector
+  if (volume->GetLogicalVolume()->GetSensitiveDetector())
+  {
+    G4cout << " " << volume->GetLogicalVolume()->GetSensitiveDetector()
+                            ->GetFullPathName();
+  }
+  // Print end of line
+  G4cout << G4endl;
+
+  // Check overlapping volumes
+  if (overlap_check) volume->CheckOverlaps();
+
+  // Descend down the tree
+  for (int i = 0; i < volume->GetLogicalVolume()->GetNoDaughters(); i++)
+  {
+    DumpGeometry(overlap_check, volume->GetLogicalVolume()->GetDaughter(i), depth+1);
   }
 }
