@@ -62,7 +62,10 @@ class HMolPolDetectorConstruction: public G4VUserDetectorConstruction
     G4VPhysicalVolume* Construct();
 
     /// Dump the geometry tree
-    void DumpGeometry(G4bool surfchk, G4VPhysicalVolume* volume, G4int depth);
+    void DumpGeometry(
+        G4bool overlap_check = false,
+        G4VPhysicalVolume* volume = 0,
+        G4int depth = 0);
 
   private:
 

@@ -626,7 +626,10 @@ G4VPhysicalVolume* HMolPolDetectorConstruction::Construct()
   return fWorldVolume;
 }
 
-void HMolPolDetectorConstruction::DumpGeometry(G4bool surfchk, G4VPhysicalVolume* volume, G4int depth)
+void HMolPolDetectorConstruction::DumpGeometry(
+    G4bool overlap_check,
+    G4VPhysicalVolume* volume,
+    G4int depth)
 {
   // Null volume
   if (volume == 0) volume = fWorldVolume;
@@ -648,11 +651,11 @@ void HMolPolDetectorConstruction::DumpGeometry(G4bool surfchk, G4VPhysicalVolume
   G4cout << G4endl;
 
   // Check overlapping volumes
-  if (surfchk) volume->CheckOverlaps();
+  if (overlap_check) volume->CheckOverlaps();
 
   // Descend down the tree
   for (int i = 0; i < volume->GetLogicalVolume()->GetNoDaughters(); i++)
   {
-    DumpGeometry(surfchk, volume->GetLogicalVolume()->GetDaughter(i), depth+1);
+    DumpGeometry(overlap_check, volume->GetLogicalVolume()->GetDaughter(i), depth+1);
   }
 }
