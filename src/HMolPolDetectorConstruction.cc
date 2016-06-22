@@ -20,6 +20,7 @@
 #include <G4VisAttributes.hh>
 #include <G4NistManager.hh>
 #include <G4PhysicalVolumeStore.hh>
+#include <G4UIcmdWith3Vector.hh>
 
 //Magnetic field related stuff
 #include <G4UniformMagField.hh>
@@ -43,8 +44,6 @@
 #include "HMolPolGenericDetector.hh"
 #include "HMolPolAnalysis.hh"
 #include "HMolPolMagFieldMap.hh"
-//
-#include "HMolPolSolenoidMagField.hh"
 
 // Helper functions for find_if
 bool hasMagFieldType(const G4GDMLAuxStructType& tag) {
@@ -55,8 +54,9 @@ bool hasMagFieldValue(const G4GDMLAuxStructType& tag) {
 }
 
 // Create static elements
-G4ThreadLocal std::vector<G4MagneticField*> HMolPolDetectorConstruction::fMagneticFields;
-G4ThreadLocal std::vector<G4FieldManager*> HMolPolDetectorConstruction::fFieldManagers;
+G4ThreadLocal std::vector<G4MagneticField*>    HMolPolDetectorConstruction::fFields;
+G4ThreadLocal std::vector<G4FieldManager*>     HMolPolDetectorConstruction::fFieldManagers;
+G4ThreadLocal std::vector<G4GenericMessenger*> HMolPolDetectorConstruction::fFieldMessengers;
 
 /********************************************
  * Programmer: Valerie Gray
@@ -72,8 +72,6 @@ G4ThreadLocal std::vector<G4FieldManager*> HMolPolDetectorConstruction::fFieldMa
  * Define the NIST materials
  *
  * Take any auxiliary information form the GDML files and make apply it
- *
- * Read in and apply the magnetic field
  *
  * Global:
  * Entry Conditions: none
@@ -160,10 +158,6 @@ G4VPhysicalVolume* HMolPolDetectorConstruction::Construct()
   //and make it the "World"
   worldVolume = fGDMLParser->GetWorldVolume();
 
-  // Get pointer to sensitive detector manager
-  //This can be useful and used throughout all scopes :)
-  G4SDManager* SDman = G4SDManager::GetSDMpointer();
-
   /*****************
    * Read in the auxiliary information.
    *
@@ -186,8 +180,8 @@ G4VPhysicalVolume* HMolPolDetectorConstruction::Construct()
   //if we find a detector with auxiliary info, count them
   //tell us how many detectors have that have auxiliary info
   G4cout << G4endl << G4endl << "Found " << auxmap->size()
-  << " volume(s) with auxiliary information."
-  << G4endl << G4endl;
+      << " volume(s) with auxiliary information."
+      << G4endl << G4endl;
 
   //this for loop iterates over all of the auxiliary info.  Starting at the
   //first one defined till there are no more.
@@ -223,7 +217,7 @@ G4VPhysicalVolume* HMolPolDetectorConstruction::Construct()
     G4Color color_original;
     //if there are original visibility attributes get them
     if (visAttribute_original)
-    color_original = visAttribute_original->GetColor();
+      color_original = visAttribute_original->GetColor();
 
     /*********
      * create new visibility attributes with the old color
@@ -359,23 +353,100 @@ G4VPhysicalVolume* HMolPolDetectorConstruction::Construct()
         }
       }
 
-      //Sets the volumes visiablity attribute with both the COLOR and the APLHA
+      //Sets the volumes visibility attribute with both the COLOR and the APLHA
       //As was set (or not) in the last 2 if statements.
       logicalVolume->SetVisAttributes(visAttribute_new);
 
-      // Support for the auxiliary tag "SensDet" to set sensitive detector type
-      if ((*vit).type == "SensDet")
+    } // end of loop over the auxiliary tags themselves
+
+  } // end of loop over volumes with auxiliary tags
+  G4cout << G4endl << G4endl;
+
+  // Return world volume
+  return worldVolume;
+}
+
+
+/********************************************
+ * Programmer: Wouter Deconinck
+ * Function: ConstructSDandField
+ *
+ * Purpose:
+ *
+ * Take any auxiliary information from the GDML files to construct
+ * sensitive detectors
+ *
+ * Read in and apply the magnetic field
+ *
+ * Global:
+ * Entry Conditions: none
+ * Return:
+ * Called By:
+ * Date: 06-22-2016
+ * Modified:
+ ********************************************/
+
+void HMolPolDetectorConstruction::ConstructSDandField()
+{
+  /*
+   * Now we want to loop over the physical volumes and use there names in the
+   * Generic Detector (and ROOT Tree). Physical are all 100% separate entities
+   * were the logical volumes are not as they can and are reused.
+   */
+  G4cout << "  Parsing through physical volumes" << G4endl;
+
+  // Get pointer to sensitive detector manager
+  // This can be useful and used throughout all scopes :)
+  G4SDManager* SDman = G4SDManager::GetSDMpointer();
+
+  // Get a list of all physical volumes read.
+  const G4PhysicalVolumeStore* pvs = G4PhysicalVolumeStore::GetInstance();
+  // Defining a new iterator for the physical volumes
+  std::vector<G4VPhysicalVolume*>::const_iterator pvciter;
+  for (pvciter = pvs->begin(); pvciter != pvs->end(); pvciter++)
+  {
+    G4cout << "Physical Volume: " << (*pvciter)->GetName() << " \tHash ID: "
+        << (*pvciter)->GetName().hash(G4String::exact) << G4endl;
+
+    // Gets the auxiliary info for this physical volume
+    G4GDMLAuxListType auxInfo =
+        fGDMLParser->GetVolumeAuxiliaryInformation((*pvciter)->GetLogicalVolume());
+
+    // Gets the logical volume for this physical volume
+    G4LogicalVolume* logicalVolume = (*pvciter)->GetLogicalVolume();
+
+    // Loop over auxiliary attributes for physical volumes. This is all the things
+    // that we have in a logical volume GDML file like:
+    //   <auxiliary auxtype="SensDet" auxvalue="DetectorDet" />
+    G4GDMLAuxListType::const_iterator ipair = auxInfo.begin();
+    for (ipair = auxInfo.begin(); ipair != auxInfo.end(); ipair++)
+    {
+      /*
+       * Only interested in attributes of sensitive detectors.
+       * ipair is the GDML attributes,
+       *
+       * This is showen in the GDML by:
+       * <auxiliary auxtype="SensDet" auxvalue="DetectorDet" />
+       *
+       * ipair.type = "SensDet" means we go in the if
+       */
+      if (ipair->type == "SensDet")
       {
         // Get specified sensitive detector type: essentially the name
-        G4String detectortype = (*vit).value;
+        // Using this GDML example:
+        //  <auxiliary auxtype="SensDet" auxvalue="DetectorDet" />
+        // ipair->value is DetectorDet
+        G4String detectortype = ipair->value;
 
         // Form name of sensitive detector (convention is to prefix this with hmolpol/ )
         G4String detectorname = "hmolpol/" + detectortype;
 
         // Find pointer to current sensitive detector of that name
         // in the SDmanager
+        // Casting this, because it spits out the parent class,
+        // G4SensitiveDetector and we need a HMolPolGenericDetector
         G4VSensitiveDetector* sensitivedetector =
-        SDman->FindSensitiveDetector(detectorname);
+            SDman->FindSensitiveDetector(detectorname);
 
         // Check whether the sensitive detector was found
         if (sensitivedetector == 0)
@@ -385,19 +456,18 @@ G4VPhysicalVolume* HMolPolDetectorConstruction::Construct()
           /// \todo let HMolPolGenericDetector keep track of number using static
           /// (ask wdc for help if necessary)
 
-          //crates a HMolPolGenericDetector with the detector name
-          //(has the hmolpol/ in front)
+          // Creates a HMolPolGenericDetector with the detector name
+          // (has the hmolpol/ in front)
           HMolPolGenericDetector* genericdetector =
-          new HMolPolGenericDetector(detectorname);
+              new HMolPolGenericDetector(detectorname);
 
-          //give that newly created HMolPolGenericDetector, genericdetector
-          //the name if the volume
+          // Give that newly created HMolPolGenericDetector, genericdetector
+          // the name of the volume
           genericdetector->SetVolumeName(logicalVolume->GetName());
 
-          //write out the name if the sensitive detector and the volume
+          // Write out the name if the sensitive detector and the volume
           G4cout << "    Creating sensitive detector " << detectortype
-          << " for volume " << logicalVolume->GetName()
-          << G4endl;
+              << " for volume " << logicalVolume->GetName() << G4endl;
 
           // Add sensitive detector to analysis
           //therefore adding it to the ROOT file
@@ -407,30 +477,44 @@ G4VPhysicalVolume* HMolPolDetectorConstruction::Construct()
           // so we can finds and use it
           SDman->AddNewDetector(genericdetector);
 
+          // Register this physical volume with sensitivedetector (the
+          // HMolPolGenericDetector defined above
+          // This is different then the standard Geant4 way, because we want
+          // our detector to know the name of ALL physical volumes of this type.
+          //
+          // Our sensitivedetector is associated to a logical volume. We want
+          // this sensitivedetector to know all daughter physical volumes
+          // A logical volume could have many daughter physical volumes, and
+          // when we write to the ROOT file we want them to be (easily) distinguishable
+          // i.e. Logical volume DetectorDet has 2 physical volume daughter,
+          // Right and Left. So we are telling sensitivedetector that logical volume
+          // DetectorDet has 2 daughters and their names
+          genericdetector->RegisterPhysicalVolume((*pvciter)->GetName());
+
           // Lastly, set sensitive detector to this and proceed
           sensitivedetector = genericdetector;
         }
 
-        //debugging
+        // Debugging
         G4cout << "    Volume Name: " << logicalVolume->GetName() << G4endl;
 
         // Set sensitive detector for the logical volume
         logicalVolume->SetSensitiveDetector(sensitivedetector);
       }
+    }
 
-    } // end of loop over the auxiliary tags themselves
 
 
     // Find if there is a magnetic field type tag for this volume
     // (see http://www.cplusplus.com/reference/algorithm/find_if for details)
     G4GDMLAuxListType::const_iterator magFieldTypeEntry =
-        std::find_if(auxiliaryList.begin(), auxiliaryList.end(), hasMagFieldType);
+        std::find_if(auxInfo.begin(), auxInfo.end(), hasMagFieldType);
     // If no magnetic field type tag is found, magFieldEntry will be equal to end()
-    if (magFieldTypeEntry != auxiliaryList.end()) {
+    if (magFieldTypeEntry != auxInfo.end()) {
 
       // Create a magnetic field pointer for this volume (this is null until
       // there is an actual magnetic field created based on the gdml file content)
-      G4MagneticField* localMagneticField = 0;
+      G4MagneticField* localField = 0;
 
       // Figure out which type of field this is
       if (magFieldTypeEntry->value == "Uniform") {
@@ -439,7 +523,8 @@ G4VPhysicalVolume* HMolPolDetectorConstruction::Construct()
         // Find if there is a magnetic field value tag for this volume
         // (see http://www.cplusplus.com/reference/algorithm/find_if for details)
         G4GDMLAuxListType::const_iterator magFieldValueEntry =
-            std::find_if(auxiliaryList.begin(), auxiliaryList.end(), hasMagFieldValue);
+            std::find_if(auxInfo.begin(), auxInfo.end(), hasMagFieldValue);
+        if (magFieldValueEntry == auxInfo.end()) continue;
 
         // If no magnetic field value tag is found, just leave at zero field
         G4ThreeVector vector(0.0, 0.0, 0.0);
@@ -451,10 +536,11 @@ G4VPhysicalVolume* HMolPolDetectorConstruction::Construct()
           G4cout << "    Field vector " << vector / CLHEP::tesla << " T" << G4endl;
         } catch (const std::exception& ex) {
           G4cout << "    Could not parse " << magFieldValueEntry->value << G4endl;
+          continue;
         }
 
         // Create uniform magnetic field with the given field vector
-        localMagneticField = new G4UniformMagField(vector);
+        localField = new G4UniformMagField(vector);
 
       } else if (magFieldTypeEntry->value == "Quadrupole") {
         G4cout << "    Creating quadrupole magnetic field" << G4endl;
@@ -462,7 +548,8 @@ G4VPhysicalVolume* HMolPolDetectorConstruction::Construct()
         // Find if there is a magnetic field value tag for this volume
         // (see http://www.cplusplus.com/reference/algorithm/find_if for details)
         G4GDMLAuxListType::const_iterator magFieldValueEntry =
-            std::find_if(auxiliaryList.begin(), auxiliaryList.end(), hasMagFieldValue);
+            std::find_if(auxInfo.begin(), auxInfo.end(), hasMagFieldValue);
+        if (magFieldValueEntry == auxInfo.end()) continue;
 
         // If no magnetic field value tag is found, just leave at zero field
         G4double gradient = 0.0;
@@ -477,7 +564,7 @@ G4VPhysicalVolume* HMolPolDetectorConstruction::Construct()
         }
 
         // Create uniform magnetic field with the given field vector
-        localMagneticField = new G4QuadrupoleMagField(gradient);
+        localField = new G4QuadrupoleMagField(gradient);
 
       } else if (magFieldTypeEntry->value == "Map") {
         G4cout << "    Creating mapped magnetic field" << G4endl;
@@ -485,146 +572,62 @@ G4VPhysicalVolume* HMolPolDetectorConstruction::Construct()
         // Find if there is a magnetic field value tag for this volume
         // (see http://www.cplusplus.com/reference/algorithm/find_if for details)
         G4GDMLAuxListType::const_iterator magFieldValueEntry =
-            std::find_if(auxiliaryList.begin(), auxiliaryList.end(), hasMagFieldValue);
+            std::find_if(auxInfo.begin(), auxInfo.end(), hasMagFieldValue);
+        if (magFieldValueEntry == auxInfo.end()) continue;
 
         // Read the filename from the input string
         std::string filename = magFieldValueEntry->value;
         G4cout << "    Map file " << filename << G4endl;
 
         // Create uniform magnetic field with the given field vector
-        localMagneticField = new HMolPolMagFieldMap(filename);
+        localField = new HMolPolMagFieldMap(filename);
 
       } else {
         G4cout << "    Magnetic field type not recognized" << G4endl;
+        continue;
       }
 
       // Add a field manager to this logical volume
       // Ref: https://geant4.web.cern.ch/geant4/UserDocumentation/UsersGuides/ForApplicationDeveloper/html/ch04s03.html
       G4FieldManager* localFieldManager = new G4FieldManager();
-      localFieldManager->SetDetectorField(localMagneticField);
-      localFieldManager->CreateChordFinder(localMagneticField);
-      fMagneticFields.push_back(localMagneticField);
+      localFieldManager->SetDetectorField(localField);
+      localFieldManager->CreateChordFinder(localField);
+      fFields.push_back(localField);
       fFieldManagers.push_back(localFieldManager);
 
+      // Create messenger for this field
+      G4String name = "/HMolPol/Fields/" + logicalVolume->GetName() + "/";
+      G4String desc = "Field control for " + logicalVolume->GetName();
+      G4GenericMessenger* localFieldMessenger =
+          new G4GenericMessenger(this, name, desc);
+      fFieldMessengers.push_back(localFieldMessenger);
+
+      // Create command for this field
+      name = "/HMolPol/Fields/" + logicalVolume->GetName() + "/set";
+      desc = "Set field strength for " + logicalVolume->GetName();
+      G4UIcmdWith3Vector* localFieldCommand =
+          new G4UIcmdWith3Vector(name, localFieldMessenger);
+      localFieldCommand->SetGuidance(desc);
+      localFieldCommand->SetDefaultValue(G4ThreeVector(0.0,0.0,0.0));
+
       // Register the field and its manager for deleting when done
-      G4AutoDelete::Register(localMagneticField);
+      G4AutoDelete::Register(localField);
       G4AutoDelete::Register(localFieldManager);
+      G4AutoDelete::Register(localFieldMessenger);
+      G4AutoDelete::Register(localFieldCommand);
 
       // Connect field manager to this logical volume and its daughters
       G4bool forceToAllDaughters = true;
       logicalVolume->SetFieldManager(localFieldManager,forceToAllDaughters);
 
       // Set step limit in volume with magnetic field
-      G4UserLimits* userLimits = new G4UserLimits(1.0 * CLHEP::mm);
+      G4double volume = logicalVolume->GetSolid()->GetCubicVolume();
+      G4double area = logicalVolume->GetSolid()->GetSurfaceArea();
+      G4double max_step_size = 0.1 * volume / area;
+      G4cout << "    Limiting step size to " << max_step_size / CLHEP::mm << " mm" << G4endl;
+      G4UserLimits* userLimits = new G4UserLimits();
+      userLimits->SetMaxAllowedStep(max_step_size);
       logicalVolume->SetUserLimits(userLimits);
-
-    }
-
-  } // end of loop over volumes with auxiliary tags
-  G4cout << G4endl << G4endl;
-
-  /*
-   * Now we want to loop over the physical volumes and use there names in the
-   * Generic Detector (and ROOT Tree). Physical are all 100% separate entities
-   * were the logical volumes are not as they can and are reused.
-   */
-  G4cout << "  Parsing through physical volumes" << G4endl;
-
-  //Get a list of all physical volumes read.
-  const G4PhysicalVolumeStore* pvs = G4PhysicalVolumeStore::GetInstance();
-  //defining a new iterator for the physical volumes
-  std::vector<G4VPhysicalVolume*>::const_iterator pvciter;
-  for( pvciter = pvs->begin(); pvciter != pvs->end(); pvciter++ )
-  {
-    G4cout << "Physical Volume: " << (*pvciter)->GetName() << " \tHash ID: "
-      << (*pvciter)->GetName().hash(G4String::exact) << G4endl;
-
-    //Gets the auxerly info for this physical volume
-    G4GDMLAuxListType auxInfo = fGDMLParser->GetVolumeAuxiliaryInformation(
-      (*pvciter)->GetLogicalVolume());
-
-    //Loop over auxiliary attributes for physical volumes. THis is all the things
-    //that we have in a logical volume GDML file like:
-    //<auxiliary auxtype="SensDet" auxvalue="DetectorDet" />
-    G4GDMLAuxListType::const_iterator ipair = auxInfo.begin();
-    for( ipair = auxInfo.begin(); ipair != auxInfo.end(); ipair++ )
-    {
-      /*
-       * Only intersted in attributes of sensitive detectors.
-       * ipair is the GDML attiributes,
-       *
-       * This is showen in the GDML by:
-       * <auxiliary auxtype="SensDet" auxvalue="DetectorDet" />
-       *
-       * ipar.type = "SensDet" means we go in the if
-       */
-      if( ipair->type == "SensDet" )
-      {
-        // Get specified sensitive detector type: essentially the name
-        //Using this GDML example:
-        //<auxiliary auxtype="SensDet" auxvalue="DetectorDet" />
-        // ipar->valu is DetectorDet
-         G4String detectortype = ipair->value;
-
-         // Form name of sensitive detector (convention is to prefix this with hmolpol/ )
-         G4String detectorname = "hmolpol/" + detectortype;
-
-         // This is a copy of the sensitive detector we defined and
-         //gave attributes before
-         //casting this, because it spits out the parent class,
-         //G4SensitiveDetector and we need a HMolPolGenericDetector
-         HMolPolGenericDetector* sensitivedetector =
-             (HMolPolGenericDetector*) SDman->FindSensitiveDetector(detectorname);
-
-         //Make sure this is it is defined
-         if(sensitivedetector)
-         {
-           //register this phyiscal volume with sensitivedetector (the
-           //HMolPolGenericDetector defined above
-           //This is different then the standard Geant4 way, because we want
-           //our detector to know the name of ALL physical volumes of this type.
-           //
-           // our sensitivedetector is associated to a logical volume. We want
-           // this sensitivedetector to know all daughter physical volumes
-           // A logical volume could have many daughter physical volumes, and
-           //when we write to the ROOT file we want them to be (easily) distigusable
-           //ie. Logial volume DetectorDet has 2 phyical volume daughter,
-           //Right and Left. So we are telling sensitivedetector that logical volume
-           //DetectorDet has 2 daughters and their names
-           sensitivedetector->RegisterPhysicalVolume((*pvciter)->GetName());
-         }else
-         {
-           G4cerr << "Sensitive Detector not found: " << detectorname << G4endl;
-         }
-      }
     }
   }
-
-
-  /*****************
-   * Add in the Magnetic field to world volume
-   *****************/
-
-  /// TODO \bug this is for the *simple* magnetic field - need to be updated to
-  /// something realistic and that might effect the following code
-  //get the field??
-  //create a new magnetic field HMolPolSolenoidMagField
-  //for the  HTargetSolenoid, and store the pointer to it
-  HMolPolSolenoidMagField* HTargetSolenoidMagField =
-  new HMolPolSolenoidMagField;
-
-  //Make a MagFeildMaanager for this field
-  G4FieldManager* HTargetSolenoidMagFieldMgr =
-  G4TransportationManager :: GetTransportationManager()->GetFieldManager();
-
-  //add the field (HTargetSolenoidMagField) to the HTargetSolenoidFieldMgr
-  //Allows the feild to get used
-  HTargetSolenoidMagFieldMgr->SetDetectorField(HTargetSolenoidMagField);
-
-  //create the Chord finder (this is responsible for moving
-  // the particles through the field)
-  HTargetSolenoidMagFieldMgr->CreateChordFinder(HTargetSolenoidMagField);
-
-  // Return world volume
-  return worldVolume;
 }

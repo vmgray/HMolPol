@@ -18,6 +18,7 @@
 //Geant4 includes
 #include <G4VUserDetectorConstruction.hh>
 #include <G4VPhysicalVolume.hh>
+#include <G4GenericMessenger.hh>
 #include <G4MagneticField.hh>
 #include <G4FieldManager.hh>
 #include <G4GDMLParser.hh>
@@ -61,14 +62,16 @@ class HMolPolDetectorConstruction: public G4VUserDetectorConstruction
     HMolPolAnalysis* fAnalysis;  ///< the Analysis object
 
     /// Construct the volume??
-    G4VPhysicalVolume* Construct();  ///< construct the physical volume
+    G4VPhysicalVolume* Construct();     ///< construct the physical volume
+    void ConstructSDandField();         ///< construct the sensitive detectors and field
 
     // Geometry File name
     G4String fGeometryFileName;
 
     // List of magnetic fields and managers
-    static G4ThreadLocal std::vector<G4MagneticField*> fMagneticFields;
+    static G4ThreadLocal std::vector<G4MagneticField*> fFields;
     static G4ThreadLocal std::vector<G4FieldManager*> fFieldManagers;
+    static G4ThreadLocal std::vector<G4GenericMessenger*> fFieldMessengers;
 
 };
 
