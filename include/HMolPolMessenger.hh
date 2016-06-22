@@ -96,9 +96,10 @@ class HMolPolMessenger : public G4UImessenger
     G4UIcmdWithADoubleAndUnit* fPhiComMinCmd; ///< Phi Min thrown over
     G4UIcmdWithADoubleAndUnit* fPhiComMaxCmd; ///< Phi Max thrown over
 
-/// Geometry related variables
-    G4UIdirectory*        fGeometryDir;       ///< create the Geometry Directory
-    G4UIcmdWithAString*   fGeometryFileNameCmd;  ///< Geometry File Name
+    /// Geometry related variables
+    G4UIdirectory*        fGeometryDir;         ///< Create the geometry directory
+    G4UIcmdWithAString*   fGeometryFileNameCmd; ///< Set geometry file name
+    G4UIcmdWithABool*     fGeometryDumpCmd;     ///< Dump geometry tree
 
 /// Tracking/Step related variables
     G4UIdirectory*        fTrackingDir;      ///< create Tracking directory

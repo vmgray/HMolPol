@@ -160,6 +160,13 @@ HMolPolMessenger::HMolPolMessenger(
   fGeometryFileNameCmd->SetGuidance("File Name and path of Geometry GDML file");
   fGeometryFileNameCmd->SetParameterName("GeometryFileName", false);
 
+  // Dump geometry tree
+  fGeometryDumpCmd = new G4UIcmdWithABool(
+      "/HMolPol/Geometry/Dump", this);
+  fGeometryDumpCmd->SetGuidance("Dump geometry tree with optional surface overlap check");
+  fGeometryDumpCmd->SetParameterName("overlap_check", true);
+  fGeometryDumpCmd->SetDefaultValue(false);
+
   /**********
    * create a new directory for all the Tracking/step related properties
    * & commands to set them
@@ -238,6 +245,8 @@ HMolPolMessenger::~HMolPolMessenger()
     delete fGeometryDir;
   if (fGeometryFileNameCmd)
     delete fGeometryFileNameCmd;
+  if (fGeometryDumpCmd)
+    delete fGeometryDumpCmd;
 }
 
 /********************************************
@@ -253,7 +262,7 @@ HMolPolMessenger::~HMolPolMessenger()
  * Return: Nothing
  * Called By:
  * Date: 06-27-2013
- * Modified:
+ * Modified: 06-22-2016
  ********************************************/
 /// \todo have someone (Wouter) help me figure what this all does
 // Whenever a command from this messenger is called, for example the command
@@ -272,15 +281,14 @@ void HMolPolMessenger::SetNewValue(G4UIcommand* command, G4String newValue)
   //change name of ROOT file stuff - if given
   if (command == fRootFileStemCmd)
   {
-    G4cout << "#### Messenger: Setting Analysis "
-           "ROOT file stem to "
-           << newValue << G4endl;
-           fAnalysis->SetRootFileStem(newValue);
+    G4cout << "#### Messenger: Setting Analysis ROOT file stem to "
+        << newValue << G4endl;
+    fAnalysis->SetRootFileStem(newValue);
   }
   if (command == fRootFileNameCmd)
   {
-    G4cout << "#### Messenger: Setting Analysis "
-    "ROOT file name to " << newValue << G4endl;
+    G4cout << "#### Messenger: Setting Analysis ROOT file name to "
+        << newValue << G4endl;
     fAnalysis->SetRootFileName(newValue);
   }
 
@@ -289,7 +297,7 @@ void HMolPolMessenger::SetNewValue(G4UIcommand* command, G4String newValue)
   if( command == fRasXCmd )
   {
     G4cout << "#### Messenger: Setting Beam X Raster Size to "
-    << newValue << G4endl;
+        << newValue << G4endl;
     fPrimaryGeneratorAction->SetRasterX(fRasXCmd->GetNewDoubleValue(newValue));
   }
 
@@ -316,6 +324,16 @@ void HMolPolMessenger::SetNewValue(G4UIcommand* command, G4String newValue)
     G4cout << "#### Messenger: Setting Geometry file to "
         << newValue << G4endl;
     fDetectorConstruction->SetGeometryFileName(newValue);
+  }
+
+  //-----------------------------------------------------------
+  // Dump geometry tree
+  if( command == fGeometryDumpCmd )
+  {
+    G4cout << "#### Messenger: Dumping geometry"
+        << G4endl;
+    fDetectorConstruction->DumpGeometry(
+        fGeometryDumpCmd->GetNewBoolValue(newValue));
   }
 
   //-----------------------------------------------------------
