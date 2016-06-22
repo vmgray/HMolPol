@@ -16,6 +16,7 @@
 //all the Geant4 includes
 #include <G4PhysListFactory.hh>
 #include <G4VModularPhysicsList.hh>
+#include <G4StepLimiterPhysics.hh>
 
 //load the multithreaded run manager if available
 //so the GUI doesn't freeze while running
@@ -105,6 +106,7 @@ int main (int argc, char** argv)
    *  \TODO: check to see if these are right and have one for each place
   *********/
   G4VModularPhysicsList* physlist = factory->GetReferencePhysList("FTFP_BERT");
+  physlist->RegisterPhysics(new G4StepLimiterPhysics());
   physlist->SetVerboseLevel(verbose);
   // give the run manager the physics list
   runManager->SetUserInitialization(physlist);
