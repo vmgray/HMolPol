@@ -63,4 +63,21 @@
     <fraction n="1.00" ref="G4_AIR" />
   </material>
 
+  <!-- Lead Glass  -->
+  <!-- Specifically Schott SF-5 
+  - http://www.us.schott.com/advanced_optics/english/products/optical-materials/optical-glass/optical-glass/index.html
+  - http://www.us.schott.com/advanced_optics/english/download/schott_optical_glass_catalogue_excel_may_2016.xls
+  -->
+  <!-- This is noted in various papers as common, it can also be seen in 
+  Instrumentation of High Energy Physics Edited by: Fabio Sauli pg 301 -->
+  <!-- The index of refaction is 1.67270, however I can't figure out how to add it -->
+   <material name="Lead_Glass_SF5" formula="PbGl" >
+    <D unit="g/cm3" value="4.07" />
+    <!-- These fraction values I got from http://home.fnal.gov/~para/geant4/myDetectorConstruction.cc
+    As they are not on any data sheet -->
+    <fraction n="0.5316" ref="G4_Pb" />
+    <fraction n="0.4684" ref="G4_SILICON_DIOXIDE" />
+  </material> 
+
+
 </materials>
