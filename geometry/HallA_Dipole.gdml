@@ -58,6 +58,8 @@
       <solidref ref="HallA_Dipole_VolumeBox" />
       <auxiliary auxtype="Color" auxvalue="blue" />
       <auxiliary auxtype="Alpha" auxvalue="0.5" />
+      <auxiliary auxtype="MagFieldType" auxvalue="Uniform" />
+      <auxiliary auxtype="MagFieldVector" auxvalue="(0.0,0.0,0.0)" />
     </volume>
 
   </structure>
