@@ -30,6 +30,8 @@
 #include <G4FieldManager.hh>
 #include <G4UserLimits.hh>
 #include <G4AutoDelete.hh>
+// Local magnetic field line tracer
+#include "G4BlineTracer.hh"
 
 // Sensitive detector stuff
 #include <G4SDManager.hh>
@@ -500,6 +502,9 @@ void HMolPolDetectorConstruction::ConstructSDandField()
       }
     }
 
+
+    // Create magnetic field line tracer
+    fBlineTracer = new G4BlineTracer();
 
 
     // Find if there is a magnetic field type tag for this volume

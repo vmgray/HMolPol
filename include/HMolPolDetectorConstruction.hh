@@ -15,13 +15,16 @@
 #ifndef HMOLPOLDETECTORCONSTRUCTION_HH_
 #define HMOLPOLDETECTORCONSTRUCTION_HH_
 
-//Geant4 includes
+// Geant4 includes
 #include <G4VUserDetectorConstruction.hh>
 #include <G4VPhysicalVolume.hh>
 #include <G4GenericMessenger.hh>
 #include <G4MagneticField.hh>
 #include <G4FieldManager.hh>
 #include <G4GDMLParser.hh>
+
+// Local geant4 includes
+#include "G4BlineTracer.hh"
 
 // HMolPol classes
 class HMolPolAnalysis;
@@ -38,7 +41,7 @@ class HMolPolDetectorConstruction: public G4VUserDetectorConstruction
 
     /// Constructor for the Detector construction
     HMolPolDetectorConstruction(HMolPolAnalysis* analysis)
-    : fAnalysis(analysis), fWorldVolume(0)
+    : fAnalysis(analysis), fWorldVolume(0), fBlineTracer(0)
     {
       // Create new GDML parser
       fGDMLParser = new G4GDMLParser();
@@ -50,6 +53,7 @@ class HMolPolDetectorConstruction: public G4VUserDetectorConstruction
     /// Destructor of the Detector construction
     virtual ~HMolPolDetectorConstruction()
     {
+      delete fBlineTracer;
       delete fGDMLParser;
     };
 
@@ -79,6 +83,9 @@ class HMolPolDetectorConstruction: public G4VUserDetectorConstruction
 
     // World volume
     G4VPhysicalVolume* fWorldVolume;
+
+    // Magnetic field line tracer
+    G4BlineTracer* fBlineTracer;
 
     // List of magnetic fields and managers
     static G4ThreadLocal std::vector<G4MagneticField*> fFields;
