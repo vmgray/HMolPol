@@ -14,7 +14,7 @@
     into a dummy detector just so that we can get events out, this will be replaced by 
     real detectors soon. Entry Conditions: Date:05-17-2013 Modified: 07-10-2013 Assisted 
     By: Wouter Deconinck *********************************************************/ -->
-    
+
   <define>
 
     <!-- NOTICE: all of these values have been pulled out of thin error, they will 
@@ -48,6 +48,8 @@
 
   </define>
   
+  <!-- define materials here - this with the ENTITY up top pass the materials from 
+    the materials.gdml file -->
   &materials;
 
   <solids>
@@ -59,10 +61,14 @@
   <structure>
     <!-- implement the geometry - through logical volumes and physical volumes -->
     <volume name="logicalDummy">
-      <!--  debugging -->
-<!--      <materialref ref="BC-408_scint_dummy" />  -->
-      <materialref ref="G4_Pb" />
-<!--  <materialref ref="G4_AIR" /> -->
+      <!-- debugging -->
+      <!-- <materialref ref="BC-408_scint_dummy" /> -->
+      <!-- <materialref ref="G4_Pb" /> -->
+      <!-- <materialref ref="G4_AIR" /> -->
+      <!-- Geant4 defined: 
+      http://geant4.web.cern.ch/geant4/workAreaUserDocKA/Backup/Docbook_UsersGuides_beta/ForApplicationDeveloper/html/apas08.html -->
+<!--      <materialref ref="G4_GLASS_LEAD" />  -->
+      <materialref ref="Lead_Glass_SF5" />
       <solidref ref="Dummy_tube" />
       <auxiliary auxtype="Color" auxvalue="yellow" />
       <auxiliary auxtype="Alpha" auxvalue="0.1" />
