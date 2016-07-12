@@ -229,8 +229,9 @@ void HMolPolPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
       + (interaction_vertex_y_max - interaction_vertex_y_min) * G4UniformRand();
 
   // determine z position of event
-  G4double interaction_vertex_z_min = -22.5 * CLHEP::cm;  //half length of H target - *MAKE GLOBAL*
-  G4double interaction_vertex_z_max = +22.5 * CLHEP::cm;  //half length of H target - *MAKE GLOBAL*
+  //Originally -22.5 to 22.5 cm but the gas is only from -10 to 10 cm
+  G4double interaction_vertex_z_min = -10 * CLHEP::cm;  //half length of H target - *MAKE GLOBAL*
+  G4double interaction_vertex_z_max = +10 * CLHEP::cm;  //half length of H target - *MAKE GLOBAL*
   G4double interaction_vertex_z = interaction_vertex_z_min
       + (interaction_vertex_z_max - interaction_vertex_z_min) * G4UniformRand();
   fParticleGun->SetParticlePosition(
