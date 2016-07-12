@@ -68,7 +68,7 @@ void ExtractInitalConditions(HMolPolEventUnits* Units, HMolPolEventPrimaryCondit
   fout << "Delta Omega (sr): " << PrimaryConditions->fDelta_Omega / Units->sr
   << std::endl << std::endl;
 
-  fout << "Nb (Hz/muA): " << PrimaryConditions->fNb << std::endl;
+  fout << "Nb (Hz/muA): " << PrimaryConditions->fNb << std::endl << std::endl;
 
   fout << "Number of Entries:" << std::endl;
   fout << "nevents: " << HMOLPOL_CHAIN->GetEntries() << std::endl;
