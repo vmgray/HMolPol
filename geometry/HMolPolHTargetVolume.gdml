@@ -13,7 +13,7 @@
     Gray Purpose: To define the Hydrogen gas target of the simulation 
       H gas target container which is around the H target 
     Entry Conditions: Date:05-17-2013 
-    Modified: 04-15-2016 
+    Modified: 07-01-2016 
     Assisted By: Wouter Deconinck
   *********************************************************/ -->
 
@@ -83,7 +83,7 @@
     <tube name="Htarget_tube" rmin="HTarget_MinRadius" rmax="HTarget_MaxRadius"
       z="HTarget_Z_Length" startphi="HTarget_StartPhi" deltaphi="HTarget_EndPhi" />
 
-    <!-- Define the volume of the Al cell around the H target -->
+    <!-- Define the volume of the Copper cell around the H target -->
     <tube name="Htarget_Case_tube" rmin="HTarget_Cell_MinRadius" rmax="HTarget_Cell_MaxRadius"
       z="HTarget_Cell_Z_Length" startphi="HTarget_StartPhi" deltaphi="HTarget_EndPhi" />
 
@@ -104,7 +104,7 @@
     </volume>
 
     <volume name="HTarget_Cell">
-      <materialref ref="G4_Al" />
+      <materialref ref="Copper_Cell" />
       <solidref ref="Htarget_Case_tube" />
       <auxiliary auxtype="Color" auxvalue="gray" />
     </volume>
