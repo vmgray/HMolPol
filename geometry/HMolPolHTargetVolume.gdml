@@ -100,7 +100,7 @@
       <auxiliary auxtype="Alpha" auxvalue="0.3" />
 
       <auxiliary auxtype="MagFieldType" auxvalue="Uniform" />
-      <auxiliary auxtype="MagFieldValue" auxvalue="(0.0,0.0,8.0)" />
+      <auxiliary auxtype="MagFieldVector" auxvalue="(0.0,0.0,8.0)" />
     </volume>
 
     <volume name="HTarget_Cell">
