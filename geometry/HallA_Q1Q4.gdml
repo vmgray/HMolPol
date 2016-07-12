@@ -64,6 +64,8 @@
       <solidref ref="HallA_Q1Q4_VolumeBox" />
       <auxiliary auxtype="Color" auxvalue="magenta" />
       <auxiliary auxtype="Alpha" auxvalue="0.6" />
+      <auxiliary auxtype="MagFieldType" auxvalue="Quadrupole" />
+      <auxiliary auxtype="MagFieldGradient" auxvalue="1.0" />
     </volume>
 
   </structure>
