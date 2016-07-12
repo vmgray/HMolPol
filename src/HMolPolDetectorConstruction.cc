@@ -47,13 +47,20 @@
 #include "HMolPolAnalysis.hh"
 #include "HMolPolMagFieldMap.hh"
 
-// Helper functions for find_if
-bool hasMagFieldType(const G4GDMLAuxStructType& tag) {
-  return (tag.type == "MagFieldType");
-}
-bool hasMagFieldValue(const G4GDMLAuxStructType& tag) {
-  return (tag.type == "MagFieldValue");
-}
+// Helper class to use for find_if statement
+class containsTagType {
+  private:
+    // Name of the tag type that should be matched
+    G4String fType;
+  public:
+    // Constructor with name of the tag type
+    containsTagType(G4String type)
+    : fType(type) { }
+    // Operator() that takes a tag as argument and returns true if the tag has
+    // the type stored in this object
+    bool operator()(const G4GDMLAuxStructType& tag)
+    { return tag.type.contains(fType); }
+};
 
 // Create static elements
 G4ThreadLocal std::vector<G4MagneticField*>    HMolPolDetectorConstruction::fFields;
@@ -507,78 +514,117 @@ void HMolPolDetectorConstruction::ConstructSDandField()
     fBlineTracer = new G4BlineTracer();
 
 
+    // Create a map with all types of magnetic field tags for this volume
+    std::map<G4String,G4String> magFieldEntryMap;
+    // Loop over all auxiliary tag names
+    for (G4GDMLAuxListType::const_iterator
+        aux = auxInfo.begin();
+        aux != auxInfo.end(); aux++) {
+      // If the type contains "MagField" then add to map
+      if (containsTagType("MagField")(*aux))
+        magFieldEntryMap[aux->type] = aux->value;
+    }
+
+
     // Find if there is a magnetic field type tag for this volume
-    // (see http://www.cplusplus.com/reference/algorithm/find_if for details)
-    G4GDMLAuxListType::const_iterator magFieldTypeEntry =
-        std::find_if(auxInfo.begin(), auxInfo.end(), hasMagFieldType);
-    // If no magnetic field type tag is found, magFieldEntry will be equal to end()
-    if (magFieldTypeEntry != auxInfo.end()) {
+    if (magFieldEntryMap.count("MagFieldType")) {
 
       // Create a magnetic field pointer for this volume (this is null until
       // there is an actual magnetic field created based on the gdml file content)
       G4MagneticField* localField = 0;
 
       // Figure out which type of field this is
-      if (magFieldTypeEntry->value == "Uniform") {
+      if (magFieldEntryMap["MagFieldType"] == "Uniform") {
         G4cout << "    Creating uniform magnetic field" << G4endl;
-
-        // Find if there is a magnetic field value tag for this volume
-        // (see http://www.cplusplus.com/reference/algorithm/find_if for details)
-        G4GDMLAuxListType::const_iterator magFieldValueEntry =
-            std::find_if(auxInfo.begin(), auxInfo.end(), hasMagFieldValue);
-        if (magFieldValueEntry == auxInfo.end()) continue;
 
         // If no magnetic field value tag is found, just leave at zero field
         G4ThreeVector vector(0.0, 0.0, 0.0);
         try {
           // Read the vector from the input string
-          std::stringstream(magFieldValueEntry->value) >> vector;
+          if (magFieldEntryMap.count("MagFieldVector")) {
+            std::stringstream(magFieldEntryMap["MagFieldVector"]) >> vector;
+          }
+          else
+            G4cout << "    Warning: Specify MagFieldVector as vector (Bx,By,Bz) in units of Tesla" << G4endl;
           // Assume this is in units of tesla
           vector *= CLHEP::tesla;
           G4cout << "    Field vector " << vector / CLHEP::tesla << " T" << G4endl;
         } catch (const std::exception& ex) {
-          G4cout << "    Could not parse " << magFieldValueEntry->value << G4endl;
+          G4cout << "    Could not parse " << magFieldEntryMap["MagVieldVector"] << G4endl;
           continue;
         }
 
         // Create uniform magnetic field with the given field vector
         localField = new G4UniformMagField(vector);
 
-      } else if (magFieldTypeEntry->value == "Quadrupole") {
+      } else if (magFieldEntryMap["MagFieldType"] == "Quadrupole") {
         G4cout << "    Creating quadrupole magnetic field" << G4endl;
-
-        // Find if there is a magnetic field value tag for this volume
-        // (see http://www.cplusplus.com/reference/algorithm/find_if for details)
-        G4GDMLAuxListType::const_iterator magFieldValueEntry =
-            std::find_if(auxInfo.begin(), auxInfo.end(), hasMagFieldValue);
-        if (magFieldValueEntry == auxInfo.end()) continue;
 
         // If no magnetic field value tag is found, just leave at zero field
         G4double gradient = 0.0;
         try {
           // Read the gradient value from the input string
-          std::stringstream(magFieldValueEntry->value) >> gradient;
+          if (magFieldEntryMap.count("MagFieldGradient"))
+            std::stringstream(magFieldEntryMap["MagFieldGradient"]) >> gradient;
+          else
+            G4cout << "    Warning: Specify MagFieldGradient in units of Tesla/m" << G4endl;
           // Assume this is in units of tesla/m
           gradient *= CLHEP::tesla / CLHEP::m;
           G4cout << "    Field gradient " << gradient / (CLHEP::tesla / CLHEP::m) << " T/m" << G4endl;
         } catch (const std::exception& ex) {
-          G4cout << "    Could not parse " << magFieldValueEntry->value << G4endl;
+          G4cout << "    Could not parse " << magFieldEntryMap["MagFieldGradient"] << G4endl;
+        }
+
+        // If no magnetic field value tag is found, just leave at zero field
+        G4ThreeVector origin = (*pvciter)->GetObjectTranslation();
+        try {
+          // Read the origin value from the input string
+          G4ThreeVector relative_origin;
+          if (magFieldEntryMap.count("MagFieldOrigin"))
+            std::stringstream(magFieldEntryMap["MagFieldOrigin"]) >> relative_origin;
+          else
+            G4cout << "    Warning: Specify MagFieldOrigin as vector (x,y,z) "
+              << "in units of m relative to physical volume position" << G4endl;
+          // Assume this is in units of tesla/m
+          relative_origin *= CLHEP::m;
+          G4cout << "    Relative origin " << relative_origin / CLHEP::m << " m" << G4endl;
+          // Add relative origin to origin of volume
+          origin += relative_origin;
+        } catch (const std::exception& ex) {
+          G4cout << "    Could not parse " << magFieldEntryMap["MagFieldOrigin"] << G4endl;
+        }
+
+        // If no magnetic field value tag is found, just leave at zero field
+        G4RotationMatrix rotation((*pvciter)->GetObjectRotationValue());
+        try {
+          // Read the Euler angles from the input string
+          G4ThreeVector euler_angles;
+          if (magFieldEntryMap.count("MagFieldEulerAngles"))
+            std::stringstream(magFieldEntryMap["MagFieldEulerAngles"]) >> euler_angles;
+          else
+            G4cout << "    Warning: Specify MagFieldEulerAngles as vector (phi,theta,psi) "
+            << "in units of degrees relative to the physical volume orientation" << G4endl;
+          euler_angles *= CLHEP::degree;
+          G4cout << "    Euler angles " << euler_angles / CLHEP::degree << " deg" << G4endl;
+          G4RotationMatrix euler_rotation(euler_angles.x(), euler_angles.y(), euler_angles.z());
+          // Multiply Euler angle rotation with object rotation
+          rotation *= euler_rotation;
+        } catch (const std::exception& ex) {
+          G4cout << "    Could not parse " << magFieldEntryMap["MagFieldRotation"] << G4endl;
         }
 
         // Create uniform magnetic field with the given field vector
-        localField = new G4QuadrupoleMagField(gradient);
+        localField = new G4QuadrupoleMagField(gradient,origin,new G4RotationMatrix(rotation));
 
-      } else if (magFieldTypeEntry->value == "Map") {
+      } else if (magFieldEntryMap["MagFieldType"] == "Map") {
         G4cout << "    Creating mapped magnetic field" << G4endl;
 
-        // Find if there is a magnetic field value tag for this volume
-        // (see http://www.cplusplus.com/reference/algorithm/find_if for details)
-        G4GDMLAuxListType::const_iterator magFieldValueEntry =
-            std::find_if(auxInfo.begin(), auxInfo.end(), hasMagFieldValue);
-        if (magFieldValueEntry == auxInfo.end()) continue;
-
         // Read the filename from the input string
-        std::string filename = magFieldValueEntry->value;
+        std::string filename;
+        if (magFieldEntryMap.count("MagFieldMapFile"))
+          filename = magFieldEntryMap["MagFieldMapFile"];
+        else
+          G4cout << "    Warning: Specify tag MagFieldMapFile with path to file" << G4endl;
         G4cout << "    Map file " << filename << G4endl;
 
         // Create uniform magnetic field with the given field vector
