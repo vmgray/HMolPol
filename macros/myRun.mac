@@ -52,6 +52,11 @@
 #false = off
 /HMolPol/Tracking/TrackPrimaries false
 
+# Print entire geometry tree without overlap check
+/HMolPol/Geometry/Dump false
+# Print entire geometry tree with overlap check (WARNING can be slow!)
+#/HMolPol/Geometry/Dump true
+
 #choose name out outpted rootfile
 /HMolPol/Analysis/RootFileName HMolPol_Dummy_G4Pb_2GeV_Mag8T_NoRaster_98ec766.root
 

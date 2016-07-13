@@ -651,8 +651,8 @@ void HMolPolDetectorConstruction::ConstructSDandField()
       fFieldMessengers.push_back(localFieldMessenger);
 
       // Create command for this field
-      name = "/HMolPol/Fields/" + logicalVolume->GetName() + "/set";
-      desc = "Set field strength for " + logicalVolume->GetName();
+      name = "/HMolPol/Fields/" + (*pvciter)->GetName() + "/set";
+      desc = "Set field strength for " + (*pvciter)->GetName();
       G4UIcmdWith3Vector* localFieldCommand =
           new G4UIcmdWith3Vector(name, localFieldMessenger);
       localFieldCommand->SetGuidance(desc);
