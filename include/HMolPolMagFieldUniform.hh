@@ -60,7 +60,8 @@ class HMolPolMagFieldUniform: public HMolPolMagField {
 
     /// Print info
     void Print() {
-      G4cout << "Uniform magnetic field with field vector " << fFieldVector / CLHEP::tesla << " T" << G4endl;
+      G4cout << "Uniform magnetic field " << fVolume->GetName() << G4endl;
+      G4cout << "Field vector " << fFieldVector / CLHEP::tesla << " T" << G4endl;
       HMolPolMagField::Print();
     }
 

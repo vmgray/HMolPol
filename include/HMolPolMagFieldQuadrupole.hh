@@ -87,7 +87,8 @@ class HMolPolMagFieldQuadrupole: public HMolPolMagField {
 
     /// Print info
     void Print() {
-      G4cout << "Quadrupole magnetic field with gradient " << fGradient / (CLHEP::tesla/CLHEP::m) << " T/m"<< G4endl;
+      G4cout << "Quadrupole magnetic field " << fVolume->GetName() << G4endl;
+      G4cout << "Field gradient " << fGradient / (CLHEP::tesla/CLHEP::m) << " T/m"<< G4endl;
       HMolPolMagField::Print();
     }
 

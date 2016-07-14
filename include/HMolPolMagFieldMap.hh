@@ -56,7 +56,8 @@ class HMolPolMagFieldMap: public HMolPolMagField {
     };
 
     void Print() {
-      G4cout << "Mapped magnetic field with filename " << fFileName << G4endl;
+      G4cout << "Mapped magnetic field " << fVolume->GetName() << G4endl;
+      G4cout << "Filename " << fFileName << G4endl;
       HMolPolMagField::Print();
     }
 
