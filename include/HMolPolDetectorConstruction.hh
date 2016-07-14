@@ -87,11 +87,6 @@ class HMolPolDetectorConstruction: public G4VUserDetectorConstruction
     // Magnetic field line tracer
     G4BlineTracer* fBlineTracer;
 
-    // List of magnetic fields and managers
-    static G4ThreadLocal std::vector<G4MagneticField*> fFields;
-    static G4ThreadLocal std::vector<G4FieldManager*> fFieldManagers;
-    static G4ThreadLocal std::vector<G4GenericMessenger*> fFieldMessengers;
-
 };
 
 #endif // HMOLPOLDETECTORCONSTRUCTION_HH_

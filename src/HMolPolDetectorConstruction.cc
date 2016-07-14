@@ -45,7 +45,10 @@
 #include "HMolPolDetectorConstruction.hh"
 #include "HMolPolGenericDetector.hh"
 #include "HMolPolAnalysis.hh"
+#include "HMolPolMagField.hh"
 #include "HMolPolMagFieldMap.hh"
+#include "HMolPolMagFieldUniform.hh"
+#include "HMolPolMagFieldQuadrupole.hh"
 
 // Helper class to use for find_if statement
 class containsTagType {
@@ -61,11 +64,6 @@ class containsTagType {
     bool operator()(const G4GDMLAuxStructType& tag)
     { return tag.type.contains(fType); }
 };
-
-// Create static elements
-G4ThreadLocal std::vector<G4MagneticField*>    HMolPolDetectorConstruction::fFields;
-G4ThreadLocal std::vector<G4FieldManager*>     HMolPolDetectorConstruction::fFieldManagers;
-G4ThreadLocal std::vector<G4GenericMessenger*> HMolPolDetectorConstruction::fFieldMessengers;
 
 /********************************************
  * Programmer: Valerie Gray
@@ -515,154 +513,47 @@ void HMolPolDetectorConstruction::ConstructSDandField()
 
 
     // Create a map with all types of magnetic field tags for this volume
-    std::map<G4String,G4String> magFieldEntryMap;
+    std::map<G4String,G4String> gdml;
     // Loop over all auxiliary tag names
     for (G4GDMLAuxListType::const_iterator
         aux = auxInfo.begin();
         aux != auxInfo.end(); aux++) {
       // If the type contains "MagField" then add to map
       if (containsTagType("MagField")(*aux))
-        magFieldEntryMap[aux->type] = aux->value;
+        gdml[aux->type] = aux->value;
     }
 
 
     // Find if there is a magnetic field type tag for this volume
-    if (magFieldEntryMap.count("MagFieldType")) {
+    if (gdml.count("MagFieldType")) {
 
       // Create a magnetic field pointer for this volume (this is null until
       // there is an actual magnetic field created based on the gdml file content)
-      G4MagneticField* localField = 0;
+      HMolPolMagField* field = 0;
 
-      // Figure out which type of field this is
-      if (magFieldEntryMap["MagFieldType"] == "Uniform") {
+      if (gdml["MagFieldType"] == "Uniform") {
         G4cout << "    Creating uniform magnetic field" << G4endl;
-
-        // If no magnetic field value tag is found, just leave at zero field
-        G4ThreeVector vector(0.0, 0.0, 0.0);
-        try {
-          // Read the vector from the input string
-          if (magFieldEntryMap.count("MagFieldVector")) {
-            std::stringstream(magFieldEntryMap["MagFieldVector"]) >> vector;
-          }
-          else
-            G4cout << "    Warning: Specify MagFieldVector as vector (Bx,By,Bz) in units of Tesla" << G4endl;
-          // Assume this is in units of tesla
-          vector *= CLHEP::tesla;
-          G4cout << "    Field vector " << vector / CLHEP::tesla << " T" << G4endl;
-        } catch (const std::exception& ex) {
-          G4cout << "    Could not parse " << magFieldEntryMap["MagVieldVector"] << G4endl;
-          continue;
-        }
-
-        // Create uniform magnetic field with the given field vector
-        localField = new G4UniformMagField(vector);
-
-      } else if (magFieldEntryMap["MagFieldType"] == "Quadrupole") {
+        field = new HMolPolMagFieldUniform(logicalVolume, gdml);
+      } else if (gdml["MagFieldType"] == "Quadrupole") {
         G4cout << "    Creating quadrupole magnetic field" << G4endl;
-
-        // If no magnetic field value tag is found, just leave at zero field
-        G4double gradient = 0.0;
-        try {
-          // Read the gradient value from the input string
-          if (magFieldEntryMap.count("MagFieldGradient"))
-            std::stringstream(magFieldEntryMap["MagFieldGradient"]) >> gradient;
-          else
-            G4cout << "    Warning: Specify MagFieldGradient in units of Tesla/m" << G4endl;
-          // Assume this is in units of tesla/m
-          gradient *= CLHEP::tesla / CLHEP::m;
-          G4cout << "    Field gradient " << gradient / (CLHEP::tesla / CLHEP::m) << " T/m" << G4endl;
-        } catch (const std::exception& ex) {
-          G4cout << "    Could not parse " << magFieldEntryMap["MagFieldGradient"] << G4endl;
-        }
-
-        // If no magnetic field value tag is found, just leave at zero field
-        G4ThreeVector origin = (*pvciter)->GetObjectTranslation();
-        try {
-          // Read the origin value from the input string
-          G4ThreeVector relative_origin;
-          if (magFieldEntryMap.count("MagFieldOrigin"))
-            std::stringstream(magFieldEntryMap["MagFieldOrigin"]) >> relative_origin;
-          else
-            G4cout << "    Warning: Specify MagFieldOrigin as vector (x,y,z) "
-              << "in units of m relative to physical volume position" << G4endl;
-          // Assume this is in units of tesla/m
-          relative_origin *= CLHEP::m;
-          G4cout << "    Relative origin " << relative_origin / CLHEP::m << " m" << G4endl;
-          // Add relative origin to origin of volume
-          origin += relative_origin;
-        } catch (const std::exception& ex) {
-          G4cout << "    Could not parse " << magFieldEntryMap["MagFieldOrigin"] << G4endl;
-        }
-
-        // If no magnetic field value tag is found, just leave at zero field
-        G4RotationMatrix rotation((*pvciter)->GetObjectRotationValue());
-        try {
-          // Read the Euler angles from the input string
-          G4ThreeVector euler_angles;
-          if (magFieldEntryMap.count("MagFieldEulerAngles"))
-            std::stringstream(magFieldEntryMap["MagFieldEulerAngles"]) >> euler_angles;
-          else
-            G4cout << "    Warning: Specify MagFieldEulerAngles as vector (phi,theta,psi) "
-            << "in units of degrees relative to the physical volume orientation" << G4endl;
-          euler_angles *= CLHEP::degree;
-          G4cout << "    Euler angles " << euler_angles / CLHEP::degree << " deg" << G4endl;
-          G4RotationMatrix euler_rotation(euler_angles.x(), euler_angles.y(), euler_angles.z());
-          // Multiply Euler angle rotation with object rotation
-          rotation *= euler_rotation;
-        } catch (const std::exception& ex) {
-          G4cout << "    Could not parse " << magFieldEntryMap["MagFieldRotation"] << G4endl;
-        }
-
-        // Create uniform magnetic field with the given field vector
-        localField = new G4QuadrupoleMagField(gradient,origin,new G4RotationMatrix(rotation));
-
-      } else if (magFieldEntryMap["MagFieldType"] == "Map") {
+        field = new HMolPolMagFieldQuadrupole(logicalVolume, gdml);
+      } else if (gdml["MagFieldType"] == "Map") {
         G4cout << "    Creating mapped magnetic field" << G4endl;
-
-        // Read the filename from the input string
-        std::string filename;
-        if (magFieldEntryMap.count("MagFieldMapFile"))
-          filename = magFieldEntryMap["MagFieldMapFile"];
-        else
-          G4cout << "    Warning: Specify tag MagFieldMapFile with path to file" << G4endl;
-        G4cout << "    Map file " << filename << G4endl;
-
-        // Create uniform magnetic field with the given field vector
-        localField = new HMolPolMagFieldMap(filename);
-
+        field = new HMolPolMagFieldMap(logicalVolume, gdml);
       } else {
         G4cout << "    Magnetic field type not recognized" << G4endl;
-        continue;
       }
+
+      // Create local field which is identical to the specific field created
+      HMolPolMagField* localField = field;
+      G4AutoDelete::Register(localField);
 
       // Add a field manager to this logical volume
       // Ref: https://geant4.web.cern.ch/geant4/UserDocumentation/UsersGuides/ForApplicationDeveloper/html/ch04s03.html
       G4FieldManager* localFieldManager = new G4FieldManager();
       localFieldManager->SetDetectorField(localField);
       localFieldManager->CreateChordFinder(localField);
-      fFields.push_back(localField);
-      fFieldManagers.push_back(localFieldManager);
-
-      // Create messenger for this field
-      G4String name = "/HMolPol/Fields/" + logicalVolume->GetName() + "/";
-      G4String desc = "Field control for " + logicalVolume->GetName();
-      G4GenericMessenger* localFieldMessenger =
-          new G4GenericMessenger(this, name, desc);
-      fFieldMessengers.push_back(localFieldMessenger);
-
-      // Create command for this field
-      name = "/HMolPol/Fields/" + (*pvciter)->GetName() + "/set";
-      desc = "Set field strength for " + (*pvciter)->GetName();
-      G4UIcmdWith3Vector* localFieldCommand =
-          new G4UIcmdWith3Vector(name, localFieldMessenger);
-      localFieldCommand->SetGuidance(desc);
-      localFieldCommand->SetDefaultValue(G4ThreeVector(0.0,0.0,0.0));
-
-      // Register the field and its manager for deleting when done
-      G4AutoDelete::Register(localField);
       G4AutoDelete::Register(localFieldManager);
-      G4AutoDelete::Register(localFieldMessenger);
-      G4AutoDelete::Register(localFieldCommand);
 
       // Connect field manager to this logical volume and its daughters
       G4bool forceToAllDaughters = true;

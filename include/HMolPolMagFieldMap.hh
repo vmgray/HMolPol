@@ -14,32 +14,71 @@
 #ifndef HMOLPOLMAGFIELDMAP_HH_
 #define HMOLPOLMAGFIELDMAP_HH_
 
-//HMolPol specific includes
-#include <HMolPolMagField.hh>
+//Geant4 specific includes
+#include <G4MagneticField.hh>
+
+//HMolPol includes
 #include <HMolPolMagFieldMapBasic.hh>
 
 class HMolPolMagFieldMap: public HMolPolMagField {
 
   public:
 
-    /// constructor for the HMolPolMagFieldMap
-    HMolPolMagFieldMap(const std::string& filename) {
-      fieldmap = new HMolPolMagFieldMapBasic<float,3>(filename);
+    // Constructor with logical volume and gdml settings
+    HMolPolMagFieldMap(G4LogicalVolume* volume, std::map<G4String,G4String> gdml)
+    : HMolPolMagField(volume,gdml)
+    {
+      // Read the filename from the input string
+      if (gdml.count("MagFieldMapFile"))
+        fFileName = gdml["MagFieldMapFile"];
+      else
+        G4cout << "    Warning: Specify tag MagFieldMapFile with path to file" << G4endl;
+      G4cout << "    Map file " << fFileName << G4endl;
+
+      // Create field
+      CreateField();
+
+      // Create print command
+      fMessenger->DeclareMethod("print",&HMolPolMagFieldMap::Print,
+          "Print information on the magnetic field " + volume->GetName());
+
+      // Create file name commands
+      fMessenger->DeclareProperty("setFileName",fFileName,
+          "Set the file name for mapped magnetic field " + volume->GetName());
+      fMessenger->DeclareMethod("load",&HMolPolMagFieldMap::CreateField,
+          "Load the mapped magnetic field " + volume->GetName());
     };
 
-    /// destructor for the HMolPolMagFieldMap
+    /// Destructor for the HMolPolMagFieldMap
     virtual ~HMolPolMagFieldMap() {
-      if (fieldmap) delete fieldmap;
+      // Delete existing field
+      if (fField) delete fField;
     };
 
-    /// function to get the field value
-    void GetFieldValue(const G4double four_point[4], G4double* bfield) const {
-      G4double three_point[3] = {four_point[0],four_point[1],four_point[2]};
-      if (fieldmap) fieldmap->GetValue(three_point, bfield);
+    void Print() {
+      G4cout << "Mapped magnetic field with filename " << fFileName << G4endl;
+      HMolPolMagField::Print();
     }
 
+    /// Create or recreate the field
+    void CreateField() {
+      // Delete existing field
+      if (fField) delete fField;
+
+      // Create uniform magnetic field with the given field vector
+      fField = new HMolPolMagFieldMapBasic<float,3>(fFileName);
+    }
+
+    /// Set the filename
+    void SetFileName(const G4String& filename) { fFileName = filename; }
+
   private:
-    HMolPolMagFieldMapBasic<float,3> *fieldmap; ///< magnetic field map
+
+    /// Magnetic field map
+    HMolPolMagFieldMapBasic<float,3> *fField;
+
+    /// File name
+    G4String fFileName;
 
 };
 

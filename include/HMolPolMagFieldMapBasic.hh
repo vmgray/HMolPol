@@ -168,7 +168,7 @@ class HMolPolMagFieldMapBasic {
       for (unsigned int i = 0; i < value_n; i++) {
         try {
           fValues[i].resize(fMaximumEntries,0);
-        } catch (std::bad_alloc) {
+        } catch (std::bad_alloc&) {
           mycerr << "HMolPolMagFieldMapBasic:SetMinimumMaximumStep: "
                  << "could not allocate memory for values!" << myendl;
         }
