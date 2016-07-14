@@ -1,0 +1,72 @@
+# Load geometry
+/HMolPol/Geometry/GeometryFileName geometry/HMolPolMotherVolume_HallA_Optics.gdml
+
+# Initialize run manager
+/run/initialize
+
+# Initialize visualization
+/control/execute vis/Qt.mac
+/vis/viewer/set/viewpointThetaPhi 90 180 deg
+
+# Set energy to 11 GeV
+/HMolPol/Beam/SetBeamEnergy 11 GeV
+# Set COM theta to 90 +/- 1 degrees
+/HMolPol/CMAngles/SetThetaComMin 80 degree
+/HMolPol/CMAngles/SetThetaComMax 100 degree
+
+# Magnetic field optics (requires the HallA_Optics GDML file to be loaded first)
+#
+# Set the pole tip field for example at 300 A per table 1 in the annual report
+# http://hallaweb.jlab.org/equipment/moller/docs/AnnualReport2012_Moller.pdf
+/HMolPol/Fields/Logical_HallA_Q1/setPoleTipField 6.39 kG
+# Aperture radius should be half of the bore diameter, I think (wdc)
+/HMolPol/Fields/Logical_HallA_Q1/setApertureRadius 5.08 cm
+#
+# To rotate the magnetic field along the beam axis, you can use the Euler angles
+# The following rotates the field 90 degrees around the z axis and swaps the
+# focussing and defocussing aspects for two consecutive identical dipoles
+#/HMolPol/Fields/Logical_HallA_Q1/setRotationPhi 90 degree
+# Because the Euler angle theta is zero, only the sum of phi and psi is constrained
+# to 90 degrees now
+#
+# Print the information; the gradient should have updated to 12.5787 T/m = 6.39 kG/5.08 cm
+#/HMolPol/Fields/Logical_HallA_Q1/print
+
+# Set all quadrupoles to their 300 A setting (these are NOT necessarily good focus settings)
+/HMolPol/Fields/Logical_HallA_Q1/setPoleTipField 6.39 kG
+/HMolPol/Fields/Logical_HallA_Q1/setApertureRadius 5.08 cm
+/HMolPol/Fields/Logical_HallA_Q2/setPoleTipField 5.94 kG
+/HMolPol/Fields/Logical_HallA_Q2/setApertureRadius 5.08 cm
+/HMolPol/Fields/Logical_HallA_Q3/setPoleTipField 6.03 kG
+/HMolPol/Fields/Logical_HallA_Q3/setApertureRadius 5.08 cm
+/HMolPol/Fields/Logical_HallA_Q4/setPoleTipField 6.14 kG
+/HMolPol/Fields/Logical_HallA_Q4/setApertureRadius 5.08 cm
+# Print all quadrupoles
+/HMolPol/Fields/Logical_HallA_Q1/print
+/HMolPol/Fields/Logical_HallA_Q2/print
+/HMolPol/Fields/Logical_HallA_Q3/print
+/HMolPol/Fields/Logical_HallA_Q4/print
+
+
+# Set the dipole field to 19.2 kG in the X direction (to bend 11 GeV electrons by 10 degrees)
+# http://hallaweb.jlab.org/equipment/moller/docs/AnnualReport2012_Moller.pdf
+/HMolPol/Fields/Logical_HallA_Dipole/setFieldX 19.2 kG
+/HMolPol/Fields/Logical_HallA_Dipole/print
+
+# Generate events
+/run/beamOn 100
+
+
+# Initialize visualization
+/control/execute vis/Qt.mac
+/vis/viewer/set/viewpointThetaPhi 90 180 deg
+
+# Turn all quadrupoles off (scale them down to zero)
+/HMolPol/Fields/Logical_HallA_Q1/scale 0.0
+/HMolPol/Fields/Logical_HallA_Q2/scale 0.0
+/HMolPol/Fields/Logical_HallA_Q3/scale 0.0
+/HMolPol/Fields/Logical_HallA_Q4/scale 0.0
+
+# Generate events
+/run/beamOn 100
+
