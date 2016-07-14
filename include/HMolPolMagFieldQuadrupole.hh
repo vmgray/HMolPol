@@ -21,18 +21,46 @@ class HMolPolMagFieldQuadrupole: public HMolPolMagField {
     : HMolPolMagField(volume,gdml),
       fGradient(0.0),fPoleTipField(0.0),fApertureRadius(0.0)
     {
-      // If no magnetic field value tag is found, just leave at zero field
+      // If no magnetic field gradient tag is found, just leave at zero field
       try {
         // Read the gradient value from the input string
         if (gdml.count("MagFieldGradient"))
           std::stringstream(gdml["MagFieldGradient"]) >> fGradient;
         else
           G4cout << "    Warning: Specify MagFieldGradient in units of Tesla/m" << G4endl;
-        // Assume this is in units of tesla/m
+        // Assume this is in units of Tesla/m
         fGradient *= CLHEP::tesla / CLHEP::m;
         G4cout << "    Field gradient " << fGradient / (CLHEP::tesla / CLHEP::m) << " T/m" << G4endl;
       } catch (const std::exception& ex) {
         G4cout << "    Could not parse " << gdml["MagFieldGradient"] << G4endl;
+      }
+
+      // If no pole tip magnetic field tag is found, just leave at zero
+      try {
+        // Read the gradient value from the input string
+        if (gdml.count("MagFieldPoleTipField"))
+          std::stringstream(gdml["MagFieldPoleTipField"]) >> fPoleTipField;
+        else
+          G4cout << "    Warning: Specify MagFieldPoleTipField in units of Tesla" << G4endl;
+        // Assume this is in units of Tesla
+        fPoleTipField *= CLHEP::tesla;
+        G4cout << "    Field gradient " << fPoleTipField / CLHEP::tesla << " T" << G4endl;
+      } catch (const std::exception& ex) {
+        G4cout << "    Could not parse " << gdml["MagFieldPoleTipField"] << G4endl;
+      }
+
+      // If no aperture radius tag is found, just leave at zero
+      try {
+        // Read the gradient value from the input string
+        if (gdml.count("MagFieldApertureRadius"))
+          std::stringstream(gdml["MagFieldApertureRadius"]) >> fApertureRadius;
+        else
+          G4cout << "    Warning: Specify MagFieldApertureRadius in units of m" << G4endl;
+        // Assume this is in units of m
+        fApertureRadius *= CLHEP::m;
+        G4cout << "    Aperture radius " << fApertureRadius / CLHEP::m << " m" << G4endl;
+      } catch (const std::exception& ex) {
+        G4cout << "    Could not parse " << gdml["MagFieldApertureRadius"] << G4endl;
       }
 
       // Create field
@@ -59,7 +87,7 @@ class HMolPolMagFieldQuadrupole: public HMolPolMagField {
 
     /// Print info
     void Print() {
-      G4cout << "Quadrupole magnetic field with gradient " << fGradient << G4endl;
+      G4cout << "Quadrupole magnetic field with gradient " << fGradient / (CLHEP::tesla/CLHEP::m) << " T/m"<< G4endl;
       HMolPolMagField::Print();
     }
 
@@ -72,12 +100,15 @@ class HMolPolMagFieldQuadrupole: public HMolPolMagField {
 
     // Create or recreate the field
     void CreateField() {
+      // Override gradient if specified as pole tip field and aperture radius
+      if (fPoleTipField * fApertureRadius != 0.0) {
+        fGradient = fPoleTipField / fApertureRadius;
+      }
+
       // Delete existing field
       if (fField) delete fField;
 
       // Create uniform magnetic field with the given field vector
-      if (fPoleTipField * fApertureRadius != 0.0)
-        fGradient = fPoleTipField / fApertureRadius;
       fField = new G4QuadrupoleMagField(fGradient);
     }
 
