@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE gdml[
+    <!ENTITY materials SYSTEM "materials.gdml">
+]>
+
+<gdml xmlns:gdml="http://cern.ch/2001/Schemas/GDML" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="schema/gdml.xsd">
+  <!-- include GDML namespace -->
+  <!-- XML Schema instance Namespace -->
+  <!-- GDML Schema Location -->
+
+  <!-- /*********************************************************** 
+   Programmer: Valerie Gray 
+   Purpose: To define the dimension of the Hall A Quadroploes 3, Felicia 
+   
+   http://hallaweb.jlab.org/equipment/moller/pictures/2016/layout.png
+   
+   General info http://hallaweb.jlab.org/equipment/moller/magnets/Moller_quads2.pdf
+   NOTE: That height is the y commponet
+   
+    Entry Conditions: 
+    Date:07-14-2016
+    Modified:  
+    Assisted By:
+  *********************************************************/ -->
+
+  <!-- Add the materials -->
+  &materials;
+
+  <define>
+    <!-- Define the quantities that will be used in this file This might be wrong 
+      and these need to be constants... -->
+
+    <!-- These values come from http://hallaweb.jlab.org/equipment/moller/magnets/Moller_quads2.pdf  
+    X = 22.125 in or 56.1975 cm
+    Y = 12 in or 30.48 cm
+    Z = 22.125 in or 56.1975 cm -->
+
+    <!-- X length of the "World" or the experimental hall -->
+    <quantity name="HallA_Q3_X_length" value="56.1975" unit="cm" />
+
+    <!-- Y length of the "World" or the experimental hall -->
+    <quantity name="HallA_Q3_Y_length" value="30.48" unit="cm" />
+
+    <!-- Z length of the "World" or the experimental hall -->
+    <quantity name="HallA_Q3_Z_length" value="56.1975" unit="cm" />
+
+    <!-- define positions of the Quadropole in this file -->
+    <position name="HallA_Q3_Position" x="0.0" y="0.0" z="0.0" unit="m" />
+
+  </define>
+  
+  <solids>
+    <!-- Define the tube of the Detectors -->
+    <box name="HallA_Q3_VolumeBox" x="HallA_Q3_X_length" y="HallA_Q3_Y_length"
+      z="HallA_Q3_Z_length" />
+
+  </solids>
+
+  <structure>
+    <!-- implement the geometry - through logical volumes and physical volumes -->
+    <volume name="Logical_HallA_Q3">
+      <materialref ref="AirVacuum" />
+      <solidref ref="HallA_Q3_VolumeBox" />
+      <auxiliary auxtype="Color" auxvalue="magenta" />
+      <auxiliary auxtype="Alpha" auxvalue="0.4" />
+      <auxiliary auxtype="MagFieldType" auxvalue="Quadrupole" />
+      <auxiliary auxtype="MagFieldGradient" auxvalue="1.0" />
+    </volume>
+
+  </structure>
+
+  <!-- I am not sure what all this does, sets up something for the implementation 
+    to the World -->
+
+  <setup name="HallA_Q3_Setup" version="1.0">
+    <world ref="Logical_HallA_Q3" />
+  </setup>
+
+</gdml>

@@ -113,28 +113,28 @@
       <!-- Add in all the daughter geometries, these are all written in different 
         files, so reference the files. -->
       <physvol name="HallA_Q1">
-        <file name="geometry/HallA_Q1Q4.gdml" />
+        <file name="geometry/HallA_Q1.gdml" />
         <positionref ref="HallA_Q1_center" />
 <!--         <rotationref ref="HallA_Q1_ROLL" /> -->
         <rotationref ref="HallA_Q1_ROTATION_ALL" />
       </physvol>
 
       <physvol name="HallA_Q2">
-        <file name="geometry/HallA_Q2Q3.gdml" />
+        <file name="geometry/HallA_Q2.gdml" />
         <positionref ref="HallA_Q2_center" />
 <!--         <rotationref ref="HallA_Q2_ROLL" /> -->
         <rotationref ref="HallA_Q2_ROTATION_ALL" />
       </physvol>
    
       <physvol name="HallA_Q3">
-        <file name="geometry/HallA_Q2Q3.gdml" />
+        <file name="geometry/HallA_Q3.gdml" />
         <positionref ref="HallA_Q3_center" />
 <!--         <rotationref ref="HallA_Q3_ROLL" /> -->
         <rotationref ref="HallA_Q3_ROTATION_ALL" />
       </physvol>
       
       <physvol name="HallA_Q4">
-        <file name="geometry/HallA_Q1Q4.gdml" />
+        <file name="geometry/HallA_Q4.gdml" />
         <positionref ref="HallA_Q4_center" />
 <!--         <rotationref ref="HallA_Q4_ROLL" /> -->
         <rotationref ref="HallA_Q4_ROTATION_ALL" />
