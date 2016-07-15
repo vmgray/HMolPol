@@ -34,11 +34,12 @@
     <position name="HGasTargetCenter" x="0" y="0" z="0" unit="m" />
 
     <!-- position of the Dummy (and all its parts) in the "World" -->
-    <position name="DummyCenter" x="0" y="0" z="4.5" unit="m" />
+    <!-- This is the distance as given by the Hall A survey #A1496 -->
+    <position name="DummyCenter" x="0" y="0" z="7.47332" unit="m" />
 
 <!-- more debugging -->
     <!-- position of the Dummy (and all its parts) in the "World" -->
-    <position name="DummyCenter2" x="0" y="0" z="4.5" unit="m" />
+<!--     <position name="DummyCenter2" x="0" y="0" z="4.5" unit="m" /> -->
 
   </define>
 
