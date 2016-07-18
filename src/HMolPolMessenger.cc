@@ -8,7 +8,7 @@
  * simulation
  *
  * \date 0<b>Date:</b> 6-27-2013
- * \date <b>Modified:</b> 07-06-2013
+ * \date <b>Modified:</b> 07-18-2016
  *
  * \note <b>Entry Conditions:</b>
  ********************************************/
@@ -106,6 +106,17 @@ HMolPolMessenger::HMolPolMessenger(
                                            this);
   fRasYCmd->SetGuidance("Square raster width y (vertical)");
   fRasYCmd->SetParameterName("RasterY", false);
+
+  //Z Gen location information
+  fZGenMinCmd = new G4UIcmdWithADoubleAndUnit("/HMolPol/Beam/SetZGenMin",
+                                           this);
+  fZGenMinCmd->SetGuidance("Set the minimum Z location for the primary generator");
+  fZGenMinCmd->SetParameterName("ZGenMin", false);
+
+  fZGenMaxCmd = new G4UIcmdWithADoubleAndUnit("/HMolPol/Beam/SetZGenMax",
+                                           this);
+  fZGenMaxCmd->SetGuidance("Set the maximum Z location for the primary generator");
+  fZGenMaxCmd->SetParameterName("ZGenMax", false);
 
   // Beam Energy
   fBeamECmd = new G4UIcmdWithADoubleAndUnit("/HMolPol/Beam/SetBeamEnergy",
@@ -221,6 +232,12 @@ HMolPolMessenger::~HMolPolMessenger()
   if (fRasYCmd)
     delete fRasYCmd;
 
+  //delete the Z gen info
+  if (fZGenMinCmd)
+    delete fZGenMinCmd;
+  if (fZGenMaxCmd)
+    delete fZGenMaxCmd;
+
   //Delete beam energy info
   if (fBeamECmd)
     delete fBeamECmd;
@@ -306,6 +323,22 @@ void HMolPolMessenger::SetNewValue(G4UIcommand* command, G4String newValue)
     G4cout << "#### Messenger: Setting Beam Y Raster Size to "
         << newValue << G4endl;
     fPrimaryGeneratorAction->SetRasterY(fRasYCmd->GetNewDoubleValue(newValue));
+  }
+
+  //-----------------------------------------------------------
+  //Z Gen size
+  if( command == fZGenMinCmd )
+  {
+    G4cout << "#### Messenger: Setting Min Z generator location to "
+        << newValue << G4endl;
+    fPrimaryGeneratorAction->SetZGenMin(fZGenMinCmd->GetNewDoubleValue(newValue));
+  }
+
+  if( command == fZGenMaxCmd )
+  {
+    G4cout << "#### Messenger: Setting max Z generator location to "
+        << newValue << G4endl;
+    fPrimaryGeneratorAction->SetZGenMax(fZGenMaxCmd->GetNewDoubleValue(newValue));
   }
 
   //-----------------------------------------------------------

@@ -50,6 +50,20 @@ class HMolPolEventPrimaryConditions:
     }  ///< set the y raster of the beam
 
     //--------------------------------------------------
+    ///<  Set Z generator location
+    void SetZGenMin(const Double_t& ZGenMin)
+    {
+      fZGenMin = ZGenMin;
+      return;
+    }  ///< set the min Z generator location
+
+    void SetZGenMax(const Double_t& ZGenMax)
+    {
+      fZGenMax = ZGenMax;
+      return;
+    }  ///< set the max generator location
+
+    //--------------------------------------------------
     //<  Beam Energy
     void SetBeamE(const Double_t& BeamE)
     {
@@ -118,6 +132,9 @@ class HMolPolEventPrimaryConditions:
 
     Double_t fRasterX;  //< Raster size in X
     Double_t fRasterY;  //< MRaster size in Y
+
+    Double_t fZGenMin;  //< Min Z value of generator
+    Double_t fZGenMax;  //< Max Z value of generator
 
     /*
      Double_t fSoilMagFeild;

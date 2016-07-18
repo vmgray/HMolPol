@@ -9,7 +9,7 @@
  * PrimaryConditions branch.
  *
  * \date <b>Date:</b> 06-25-2013
- * \date <b>Modified:</b> 07-14-2015
+ * \date <b>Modified:</b> 07-18-2016
  *
  * \note <b>Entry Conditions:</b> none
  *
@@ -68,6 +68,22 @@ class HMolPolPrimaryGeneratorAction:
     /// the YRaster size of beam
 
     //--------------------------------------------------
+    //Z Gen location
+    ///<  Set Z generator location
+    void SetZGenMin(const G4double& ZGenMin)
+    {
+      fZGenMin = ZGenMin;
+      fAnalysis->fPrimaryConditions->SetZGenMin(ZGenMin);
+    }  ///< set
+    /// the min Z location of the generatior
+    void SetZGenMax(const G4double& ZGenMax)
+    {
+      fZGenMax = ZGenMax;
+      fAnalysis->fPrimaryConditions->SetZGenMax(ZGenMax);
+    }  ///< set
+    /// the max Z location of the generator
+
+    //--------------------------------------------------
     //Beam Energy
     void SetBeamE(const G4double& BeamE)
     {
@@ -108,6 +124,8 @@ class HMolPolPrimaryGeneratorAction:
   private: //< Valriable
     G4double fRasterX;  ///< the total raster size in X
     G4double fRasterY;  ///< the total raser size in Y
+    G4double fZGenMin;  ///< the min Z generator value
+    G4double fZGenMax;  ///< the max Z generator value
     G4double fBeamE;  ///< the incoming electron beam energy
 
     // Center of mass angles to generate particles between

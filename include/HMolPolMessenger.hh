@@ -7,7 +7,7 @@
  *      of the simulation
  *
  * \date <b>Date:</b> 07-06-2013
- * \date <b>Modified:</b> 07-25-2013
+ * \date <b>Modified:</b> 07-18-2016
  *
  * \note <b>Entry Conditions:</b> none
  *
@@ -87,6 +87,10 @@ class HMolPolMessenger : public G4UImessenger
     G4UIcmdWithADoubleAndUnit* fRasYCmd; ///< raster x size
 
     G4UIcmdWithADoubleAndUnit* fBeamECmd; ///< beam energy
+
+    //create the raster size for the beam
+    G4UIcmdWithADoubleAndUnit* fZGenMinCmd; ///< Min Z generator location
+    G4UIcmdWithADoubleAndUnit* fZGenMaxCmd; ///< Max Z generator location=
 
     //create the Min and Max Theta angle thrown over
     G4UIcmdWithADoubleAndUnit* fThetaComMinCmd; ///< Theta Min thrown over

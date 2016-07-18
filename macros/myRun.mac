@@ -26,6 +26,19 @@
 /HMolPol/Beam/SetRasterSizeX 0 cm
 /HMolPol/Beam/SetRasterSizeY 0 cm
 
+#Set the Z Generatior location
+/HMolPol/Beam/SetZGenMin -10.0 cm
+/HMolPol/Beam/SetZGenMax 10.0 cm
+
+#Set Limits on Theta throwen over
+/HMolPol/CMAngles/SetThetaComMin 75 deg
+/HMolPol/CMAngles/SetThetaComMax 105 deg
+
+#Set Limits on Phi throwen over
+#You can't use pi as part of the set command
+/HMolPol/CMAngles/SetPhiComMin -5 deg
+/HMolPol/CMAngles/SetPhiComMax 5 deg
+
 #start the viewer
 #/control/execute vis/Qt.mac
 
@@ -58,9 +71,10 @@
 #/HMolPol/Geometry/Dump true
 
 #choose name out outpted rootfile
-/HMolPol/Analysis/RootFileName HMolPol_Dummy_G4Pb_2GeV_Mag8T_NoRaster_98ec766.root
+#/HMolPol/Analysis/RootFileName HMolPol_Dummy_Lead_Glass_SF5_2GeV_Mag8T_-10GenZ-20_-5Phi5_75Theta105_NoRaster_0631bc6_0.root
 
 #run beam
-#/run/beamOn 4500
-/run/beamOn 678000
+/run/beamOn 2
+#/run/beamOn 200000
+#/run/beamOn 678000
 

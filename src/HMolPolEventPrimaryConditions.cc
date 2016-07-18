@@ -6,7 +6,7 @@
  * Or the generator of the primary particle
  *
  * \date <b>Date:</b> 03-29-2016
- * \date <b>Modified:</b> 04-18-2016
+ * \date <b>Modified:</b> 07-18-2016
  *
  * \note <b>Entry Conditions:</b>
  *
@@ -27,15 +27,16 @@
 /// of the class definition in the .hh file.
 ClassImp(HMolPolEventPrimaryConditions)
 
-HMolPolEventPrimaryConditions::HMolPolEventPrimaryConditions() :
-    fBeamE(0 * CLHEP::GeV), fThetaCM_Min(0 * CLHEP::deg),
+HMolPolEventPrimaryConditions::HMolPolEventPrimaryConditions() :    fBeamE(0 * CLHEP::GeV), fThetaCM_Min(0 * CLHEP::deg),
     fThetaCM_Max(0 * CLHEP::deg), fDelta_Theta(0 * CLHEP::deg),
     fDelta_CosTheta(0), fPhiCM_Min(0 * CLHEP::rad), fPhiCM_Max(0 * CLHEP::rad),
     fDelta_Phi(0 * CLHEP::rad), fDelta_Omega(0 * CLHEP::steradian),
-    fRasterX(0 * CLHEP::mm), fRasterY(0 * CLHEP::mm), fNb(6.241e18 * CLHEP::hertz / CLHEP::ampere)
+    fRasterX(0 * CLHEP::mm), fRasterY(0 * CLHEP::mm), fZGenMin(-10 * CLHEP::cm),
+    fZGenMax(10 * CLHEP::cm), fNb(6.241e18 * CLHEP::hertz / CLHEP::ampere)
+
 {
   //fNb will only fill if there is no units
-  fNb = 6.241e12; //Hz/muA Found via definition of Coulumb
+  fNb = 6.241e12;  //Hz/muA Found via definition of Coulumb
 //  fNb = 6.241e18 * CLHEP::hertz / CLHEP::ampere; // Found via definition of Coulumb
 
   return;

@@ -11,7 +11,7 @@
  * Also the passing of ariables
  *
  * \date 0<b>Date:</b> 6-25-2013
- * \date <b>Modified:</b> 03-21-2017
+ * \date <b>Modified:</b> 07-18-2016
  *
  * \note <b>Entry Conditions:</b>
  *
@@ -77,6 +77,10 @@ HMolPolPrimaryGeneratorAction::HMolPolPrimaryGeneratorAction(HMolPolAnalysis* a)
   //set Raster Size
   SetRasterX(0.0 * CLHEP::mm);
   SetRasterY(0.0 * CLHEP::mm);
+
+  //set Z generator locations
+  SetZGenMin(-10.0 * CLHEP::cm);
+  SetZGenMax(10.0 * CLHEP::cm);
 
   //Set Theta Angles
   SetThetaComMin(0.0 * CLHEP::degree);
@@ -230,8 +234,9 @@ void HMolPolPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 
   // determine z position of event
   //Originally -22.5 to 22.5 cm but the gas is only from -10 to 10 cm
-  G4double interaction_vertex_z_min = -10 * CLHEP::cm;  //half length of H target - *MAKE GLOBAL*
-  G4double interaction_vertex_z_max = +10 * CLHEP::cm;  //half length of H target - *MAKE GLOBAL*
+  //Added it in as part of the messenger
+  G4double interaction_vertex_z_min = fZGenMin;  //half length of H target - *MAKE GLOBAL*
+  G4double interaction_vertex_z_max = fZGenMax;  //half length of H target - *MAKE GLOBAL*
   G4double interaction_vertex_z = interaction_vertex_z_min
       + (interaction_vertex_z_max - interaction_vertex_z_min) * G4UniformRand();
   fParticleGun->SetParticlePosition(
