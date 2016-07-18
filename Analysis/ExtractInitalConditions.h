@@ -45,7 +45,9 @@ void ExtractInitalConditions(HMolPolEventUnits* Units, HMolPolEventPrimaryCondit
   fout << "Beam Energy (GeV): " << PrimaryConditions->fBeamE / Units->GeV
   << std::endl;
   fout << "Raster size (x,y) (mm): " << PrimaryConditions->fRasterX / Units->mm
-  << "," << PrimaryConditions->fRasterY / Units->mm << std::endl << std::endl;
+  << "," << PrimaryConditions->fRasterY / Units->mm << std::endl;
+  fout << "Z gen location (min, max) (cm): " << PrimaryConditions->fZGenMin / Units->cm
+  << "," << PrimaryConditions->fZGenMax / Units->cm << std::endl << std::endl;
 
   //Angles
   fout << "Angles:" << std::endl;
