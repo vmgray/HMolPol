@@ -346,7 +346,7 @@ void Define_Histograms_Dummy()
             200, -2.5, 22.5, 72, -0.2, 7.0);
 
     h_TOTAL_ANGLE_ROTATED_VS_ZPOS_THROUGH_DUMMY[i]->GetXaxis()->SetTitle(
-        Form("Z Interaction Position in Target (%s)",
+        Form("Z Distance traveled in Target (%s)",
              LENGTH_UNIT_NAME.c_str()));
 
     h_TOTAL_ANGLE_ROTATED_VS_ZPOS_THROUGH_DUMMY[i]->GetYaxis()->SetTitle(
