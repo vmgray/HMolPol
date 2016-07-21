@@ -10,7 +10,7 @@
 
  Entry Conditions: Root files name, Detector
  Date: 07-18-2016
- Modified: 07-20-2016
+ Modified: 07-21-2016
  Assisted By: Me!
  *********************************************************/
 
@@ -121,7 +121,7 @@ static Double_t ELECTRIC_CHARGE = 1.602e-19;  //Coulumb
 static Double_t GEV_TO_QBR = 5.344e-17;  // (kg * cm)/s
 //or 1 GeV = 5.344e-19 (kg * m)/s
 static Double_t MEV_TO_QBR = 5.344e-20;  // (kg * cm)/s
-//or 1GeV = 5.344e-22 (kg * m)/s
+//or 1MeV = 5.344e-22 (kg * m)/s
 
 //string for the root flle name to be shared with 2 functions
 static std::string FILENAME;
@@ -343,7 +343,7 @@ void Define_Histograms_Dummy()
             Form(
                 "Angle of rotation through the magnetic field lines vs Z interaction position for %s on the Dummy Detector",
                 INDEX_TO_NUM_PRIMARIES_TO_NAME[i].c_str()),
-            200, -2.5, 22.5, 72, -0.2, 7.0);
+            200, -2.0, 1.1 * TARGET_LENGTH, 72, -0.2, 7.0);
 
     h_TOTAL_ANGLE_ROTATED_VS_ZPOS_THROUGH_DUMMY[i]->GetXaxis()->SetTitle(
         Form("Z Distance traveled in Target (%s)",
@@ -411,7 +411,7 @@ void Define_Histograms_Dummy()
  Exit Conditions: none
  Called By: Helix_Path_Info
  Date: 07-19-2016
- Modified: 07-20-2016
+ Modified: 07-21-2016
  *********************************************************/
 void Loop_Through_Tree_Dummy()
 {
@@ -679,7 +679,7 @@ void Loop_Through_Tree_Dummy()
           z_dist_in_B,
           ((z_dist_in_B * MAG_FIELD * ELECTRIC_CHARGE) / (2
               * TMath::Pi()
-              * (Primary->fInteractionVertexMomentum1.Z() / MOMENTUM_UNIT)))
+              * (Primary->fInteractionVertexMomentum2.Z() / MOMENTUM_UNIT)))
           * (1 / GEV_TO_QBR) * (180 / TMath::Pi()));
 
       //angle rotated through vs. momentum
