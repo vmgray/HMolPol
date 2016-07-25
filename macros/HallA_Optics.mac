@@ -1,0 +1,83 @@
+#Programmer: Valerie Gray
+#Purpose:  Macro for setting up the magnetics for the hall A optics
+#
+# This should get used (executed) after the geometry is set and initialize
+#
+#Date: 07-21-2016
+#Modified: 07-25-2016
+#Assisted By: optics_demo.mac
+
+# Set the pole tip field for example at 300 A per table 1 in the annual report
+# http://hallaweb.jlab.org/equipment/moller/docs/AnnualReport2012_Moller.pdf
+/HMolPol/Fields/Logical_HallA_Q1/setPoleTipField 6.39 kG
+
+# Aperture radius should be half of the bore diameter, I think (wdc)
+/HMolPol/Fields/Logical_HallA_Q1/setApertureRadius 5.08 cm
+
+
+# To rotate the magnetic field along the beam axis, you can use the Euler angles
+# The following rotates the field 90 degrees around the z axis and swaps the
+# focussing and defocussing aspects for two consecutive identical dipoles
+#/HMolPol/Fields/Logical_HallA_Q1/setRotationPhi 90 degree
+# Because the Euler angle theta is zero, only the sum of phi and psi is constrained
+# to 90 degrees now
+
+######################
+
+##########
+# Quadruples
+##########
+# Set the pole tip field for example at 300 A per table 1 in the annual report
+# http://hallaweb.jlab.org/equipment/moller/docs/AnnualReport2012_Moller.pdf
+# The following link has the same info along with some more. Pg 7 has a plot of Quad field vs Beam E
+# https://hallaweb.jlab.org/tech/Detectors/public_html//hall_a/beamline/moller/Moeller_upgrade.pdf
+# also http://hallaweb.jlab.org/equipment/moller/magnets/Moller_quads2.pdf
+
+# The pole tip strength is different in all 3 sources. These are from the first one.
+
+# Set all quadrupoles to their "standard" 2 GeV beam energy strength 
+/HMolPol/Fields/Logical_HallA_Q1/setPoleTipField 6.39 kG
+/HMolPol/Fields/Logical_HallA_Q1/setApertureRadius 5.08 cm
+
+/HMolPol/Fields/Logical_HallA_Q2/setPoleTipField 5.94 kG
+/HMolPol/Fields/Logical_HallA_Q2/setApertureRadius 5.08 cm
+
+/HMolPol/Fields/Logical_HallA_Q3/setPoleTipField 6.03 kG
+/HMolPol/Fields/Logical_HallA_Q3/setApertureRadius 5.08 cm
+
+/HMolPol/Fields/Logical_HallA_Q4/setPoleTipField 6.14 kG
+/HMolPol/Fields/Logical_HallA_Q4/setApertureRadius 5.08 cm
+
+#########
+# Scaling the Quad strength if needed
+#########
+# Turn all quadrupoles off (scale them down to zero)
+#/HMolPol/Fields/Logical_HallA_Q1/scale 0.0
+#/HMolPol/Fields/Logical_HallA_Q2/scale 0.0
+#/HMolPol/Fields/Logical_HallA_Q3/scale 0.0
+#/HMolPol/Fields/Logical_HallA_Q4/scale 0.0
+
+# Print all quadrupoles information
+#For for Hall A the gradient should have updated to 12.5787 T/m = 6.39 kG/5.08 cm
+/HMolPol/Fields/Logical_HallA_Q1/print
+/HMolPol/Fields/Logical_HallA_Q2/print
+/HMolPol/Fields/Logical_HallA_Q3/print
+/HMolPol/Fields/Logical_HallA_Q4/print
+
+#######################
+
+##########
+# Dipole
+##########
+# Set the dipole field to 19.2 kG in the X direction (to bend 11 GeV electrons by 10 degrees)
+# http://hallaweb.jlab.org/equipment/moller/docs/AnnualReport2012_Moller.pdf
+/HMolPol/Fields/Logical_HallA_Dipole/setFieldX 19.2 kG
+
+#########
+# Scaling the strength if needed
+#########
+#/HMolPol/Fields/Logical_HallA_Dipole/scale 0.0
+
+# Print all Dipole information
+/HMolPol/Fields/Logical_HallA_Dipole/print
+

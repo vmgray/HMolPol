@@ -1,8 +1,8 @@
 #Programmer: Valerie Gray
-#Purpose:  Example HMolPol simulaiton macro
+#Purpose:  Example HMolPol simulation macro
 #
 #Date: 10-14-2013
-#Modified: 02-18-2015
+#Modified: 07-20-2016
 #Assisted By:
 #
 
@@ -14,10 +14,19 @@
 #path relative to running/working directory
 #/HMolPol/Geometry/GeometryFileName geometry/HMolPolMotherVolume_LeftRight.gdml
 /HMolPol/Geometry/GeometryFileName geometry/HMolPolMotherVolume_Dummy.gdml
+#/HMolPol/Geometry/GeometryFileName geometry/HMolPolMotherVolume_HallA_Optics.gdml
 
 #This is to initialize the run manager. This is needed IFF the lines
 # runManager->Initialize(); is not in HMollerPol.cc
 /run/initialize
+
+#load Hall A optics (defined in a separate macro)
+#Must be done after the geometry is loaded and initialized
+#/control/execute macros/HallA_Optics.mac
+#/control/execute macros/HallA_Optics_2GeV_Standard.mac
+#/control/execute macros/HallA_Optics_11GeV_Standard.mac
+
+/vis/viewer/addCutawayPlane 0 0 35 cm 0 0 -1
 
 #Change Beam Energy
 /HMolPol/Beam/SetBeamEnergy 2 GeV
@@ -40,10 +49,10 @@
 /HMolPol/CMAngles/SetPhiComMax 5 deg
 
 #start the viewer
-#/control/execute vis/Qt.mac
+/control/execute vis/Qt.mac
 
 #set viewer to solid
-#/vis/viewer/set/style surface
+/vis/viewer/set/style surface
 
 #set viewer to wire
 #/vis/viewer/set/style wireframe
