@@ -206,10 +206,15 @@ G4bool HMolPolGenericDetector::ProcessHits(G4Step* step, G4TouchableHistory* )
 
   G4ParticleDefinition*  particleDefinition = step->GetTrack()->GetDefinition();
 
-  //TODO THIS IS WRONG FIX.
+  //TODO: If need energy Deposited, this will have to be investgated and
+  //probably changed
   // We're just going to record primary particles and things
   // that have just entered our boundary
+  //Set all hits to be bat
   G4bool badhit = true;
+  //If the hit was created in the Primary Generator set badhit to false (its good)
+  //OR if the hit is from any process and crosses a boundry record set badhit to 
+  //false (it's good)
   if (track->GetCreatorProcess() == 0 ||
       (prestep->GetStepStatus() == fGeomBoundary))
   {
@@ -218,6 +223,8 @@ G4bool HMolPolGenericDetector::ProcessHits(G4Step* step, G4TouchableHistory* )
 
   //  Make pointer to new hit if it's a valid track
   HMolPolGenericDetectorHit *thisHit;
+  //If above we have a hit where badhit = false (it is a good hit ie. !badhit)
+  //store information on that hit.
   if (!badhit)
   {
     thisHit = new HMolPolGenericDetectorHit();
