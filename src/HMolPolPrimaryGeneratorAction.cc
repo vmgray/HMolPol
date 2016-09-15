@@ -488,6 +488,10 @@ void HMolPolPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
   double Analyzing_Power = - pow(sin(theta_com),2) * (( 8 - pow(sin(theta_com),2) )/ pow((4 - pow(sin(theta_com),2)),2));
   fAnalysis->fPrimary->fA_zz =  Analyzing_Power;
 
+
+  //Store m*gamma or e_com in the Primary Branch
+  fAnalysis->fPrimaryConditions->fMass_Gamma = e_com;
+
   /*
    G4cout << "#### Leaving HMolPolPrimaryGeneratorAction::GeneratePrimaries ####"
    << G4endl;

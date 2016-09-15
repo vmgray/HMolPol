@@ -32,7 +32,7 @@ HMolPolEventPrimaryConditions::HMolPolEventPrimaryConditions() :    fBeamE(0 * C
     fDelta_CosTheta(0), fPhiCM_Min(0 * CLHEP::rad), fPhiCM_Max(0 * CLHEP::rad),
     fDelta_Phi(0 * CLHEP::rad), fDelta_Omega(0 * CLHEP::steradian),
     fRasterX(0 * CLHEP::mm), fRasterY(0 * CLHEP::mm), fZGenMin(-10 * CLHEP::cm),
-    fZGenMax(10 * CLHEP::cm), fNb(6.241e18 * CLHEP::hertz / CLHEP::ampere)
+    fZGenMax(10 * CLHEP::cm), fNb(6.241e18 * CLHEP::hertz / CLHEP::ampere), fMass_Gamma(0.0 * CLHEP::MeV)
 
 {
   //fNb will only fill if there is no units

@@ -150,6 +150,8 @@ class HMolPolEventPrimaryConditions:
     //> fNb = 6.241e12 Hz/uA
     //Double_t fNb;  //< N_b // really Hz/uA Can't get that in G4/Root
 
+    Double_t fMass_Gamma;  ///< mass * gamma or e_com for the simulation
+
   private:
     //functions for calculations
     /********
