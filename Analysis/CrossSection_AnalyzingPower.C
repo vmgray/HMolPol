@@ -5,12 +5,14 @@
  - this is ideal, but not possible right now
  - It will work for BOTH dummy and left right detectors :)
 
+ - Also calculates the Analyzing Power
+
  - Also will write out the initial conditions via the ExtractInitalConditions.h
  file
 
  Entry Conditions: Root files name, Detector
  Date: 03-24-2016
- Modified: 04-28-2016
+ Modified: 09-15-2016
  Assisted By: Me!
  *********************************************************/
 
@@ -86,6 +88,9 @@ std::vector<TH1D*> h_CROSS_SECTION_CALC_CM_DUMMY;  //[primary e]
 //This fill is with 1 weighted by the solid angel tossed over * differental cross section / nentries
 //Have to take the integral to get the value
 
+std::vector<Double_t> d_ANALYZING_POWER_DUMMY;  //[primary e]
+// To store the analyzing power for each event
+
 //LEFT RIGHT DET
 std::vector<TH1D*> h_CROSS_SECTION_CM_LEFTRIGHT;  //[primary e]
 //Differential cross section in CM frame for each primary left Right Det
@@ -110,6 +115,9 @@ std::vector<Double_t> d_CROSS_SECTION_CALC_CM_LEFTRIGHT;  //[primary e]
 //This add up is with differental cross section / nentries * change in phi * change in cos theta
 //the sum will be the value
 
+std::vector<Double_t> d_ANALYZING_POWER_LEFTRIGHT;  //[primary e]
+// To store the analyzing power for each event
+
 static const Int_t NUM_PRIMARIES = 3;  //number of primary electrons + 1
 
 std::string INDEX_TO_NUM_PRIMARIES_TO_NAME[NUM_PRIMARIES] = {
@@ -121,19 +129,17 @@ static std::string FILENAME;
 //string for the where the input file is stored.
 /*static std::string INPUT_PREFIX =
  "/home/vmgray/workspace/HMolPol/Simulation_Analysis/commit_06d91f8";*/
-static std::string INPUT_PREFIX =
-    "/home/vmgray/workspace/HMolPol/Simulation_Analysis/commit_dbaceca";
+static std::string INPUT_PREFIX = "/home/vmgray/workspace/HMolPol";
 
 //string for the where the output will go.
 /*static std::string OUTPUT_PREFIX =
  "/home/vmgray/workspace/HMolPol/Simulation_Analysis/commit_06d91f8";*/
-static std::string OUTPUT_PREFIX =
-    "/home/vmgray/workspace/HMolPol/Simulation_Analysis/commit_dbaceca";
+static std::string OUTPUT_PREFIX = "/home/vmgray/workspace/HMolPol";
 
 //HMolPol include - Must be here as it needs to know about OUTPUT_PREFIX
 #include "ExtractInitalConditions.h"
 
-void CrossSection(std::string filename, std::string DetectorType)
+void CrossSection_AnalyzingPower(std::string filename, std::string DetectorType)
 {
   FILENAME = Form("%s/%s", INPUT_PREFIX.c_str(), filename.c_str());
 
@@ -144,10 +150,8 @@ void CrossSection(std::string filename, std::string DetectorType)
   HMOLPOL_CHAIN = new TChain("HMolPol_Tree");
   //add the file
 
-  /*
-   HMOLPOL_CHAIN->Add(
-   "~/workspace/HMolPol/HMolPol_Left_Right_2GeV_MagField8T.root");
-   */
+//   HMOLPOL_CHAIN->Add(
+//   "~/workspace/HMolPol_dbaceca/Simulation_Analysis/commit_dbaceca/BeamE_2GeV/Phi0to360/Rootfiles/*.root");
 
   HMOLPOL_CHAIN->Add(Form("%s", FILENAME.c_str()));
 
@@ -185,7 +189,7 @@ void CrossSection(std::string filename, std::string DetectorType)
  None
 
  Exit Conditions: none
- Called By: CrossSection
+ Called By: CrossSection_AnalyzingPower
  Date: 03-24-2016
  Modified:
  Brilliance By: Juan Carlos Cornejo
@@ -287,14 +291,16 @@ void GetGitInfo()
  - h_THETA_CM_DUMMY - Theta center of mass for each primary Dummy Detector
  - h_CROSS_SECTION_CALC_CM_DUMMY
 
+ - d_ANALYZING_POWER_DUMMY - the analyzing power
+
  - CROSS_SECTION_UNIT_NAME - units for angle
  - ANGLE_UNIT_NAME - units for angle
  - NUM_PRIMARIES - Number of the Primaries e-
 
  Exit Conditions: none
- Called By: CrossSection
+ Called By: CrossSection_AnalyzingPower
  Date: 03-24-2016
- Modified: 03-28-2016
+ Modified: 09-15-2016
  *********************************************************/
 void Define_Histograms_Dummy()
 {
@@ -304,6 +310,8 @@ void Define_Histograms_Dummy()
   h_PHI_CM_DUMMY.resize(NUM_PRIMARIES);
   h_THETA_CM_DUMMY.resize(NUM_PRIMARIES);
   h_CROSS_SECTION_CALC_CM_DUMMY.resize(NUM_PRIMARIES);
+
+  d_ANALYZING_POWER_DUMMY.resize(NUM_PRIMARIES);
 
   //finish defining historgrams
   for (int i = 0; i < NUM_PRIMARIES; i++)
@@ -382,14 +390,15 @@ void Define_Histograms_Dummy()
  - h_CROSS_SECTION_CALC_CM_DUMMY
  - d_CROSS_SECTION_CALC_CM_DUMMY
 
+ - d_ANALYZING_POWER_DUMMY - the Analyzing Power
+
  - CROSS_SECTION_UNIT - units for angle
  - ANGLE_UNIT - units for angle
 
-
  Exit Conditions: none
- Called By: CrossSection
+ Called By: CrossSection_AnalyzingPower
  Date: 03-24-2016
- Modified: 04-20-2016
+ Modified: 09-15-2016
  *********************************************************/
 void Loop_Through_Tree_Dummy()
 {
@@ -422,7 +431,6 @@ void Loop_Through_Tree_Dummy()
    *******************************/
   HMolPolEventGenericDetector* Dummy_Det = 0;
   HMOLPOL_CHAIN->SetBranchAddress("fDummyDet", &Dummy_Det);
-
 
   //loop over all the events in the tree
   for (int i_entry = 0; i_entry < nentries; i_entry++)
@@ -557,6 +565,9 @@ void Loop_Through_Tree_Dummy()
           (PrimaryConditions->fDelta_Phi / ANGLE_UNIT) * (PrimaryConditions->fDelta_CosTheta
               / nentries)
           * (Primary->fCrossSectionCM / CROSS_SECTION_UNIT);
+
+      //Add the Analyzing Power up
+      d_ANALYZING_POWER_DUMMY[1] += Primary->fA_zz;
     }
     //fill historgrams for primary 2
     if (Primary_2_Hit_Num != -1000)
@@ -574,6 +585,9 @@ void Loop_Through_Tree_Dummy()
           (PrimaryConditions->fDelta_Phi / ANGLE_UNIT) * (PrimaryConditions->fDelta_CosTheta
               / nentries)
           * (Primary->fCrossSectionCM / CROSS_SECTION_UNIT);
+
+      //Add the Analyzing Power up
+      d_ANALYZING_POWER_DUMMY[2] += Primary->fA_zz;
     }
     //FIll hitogram for coincidence
     if (Primary_1_Hit_Num != -1000 && Primary_2_Hit_Num != -1000)
@@ -593,6 +607,8 @@ void Loop_Through_Tree_Dummy()
               / nentries)
           * (Primary->fCrossSectionCM / CROSS_SECTION_UNIT);
 
+      //Add the Analyzing Power up
+      d_ANALYZING_POWER_DUMMY[0] += Primary->fA_zz;
     }
   }  //end of loop over the entries
 
@@ -605,7 +621,7 @@ void Loop_Through_Tree_Dummy()
 
   //get the output file name.
   std::string output_filename = OUTPUT_PREFIX
-      + std::string("/TotalCrossSection_Dummy.txt");
+      + std::string("/TotalCrossSection_AnalyzingPower_Dummy.txt");
 
   //open a file
   fout.open(output_filename.c_str());
@@ -613,6 +629,7 @@ void Loop_Through_Tree_Dummy()
   if (!fout.is_open())
     std::cout << "File not opened" << std::endl;
 
+  fout << "Total Unpolarized Cross Section" << std::endl << std::endl;
   for (int i = 0; i < NUM_PRIMARIES; i++)
   {
     /*
@@ -632,7 +649,22 @@ void Loop_Through_Tree_Dummy()
          << d_CROSS_SECTION_CALC_CM_DUMMY[i] << " "
          << CROSS_SECTION_UNIT_NAME.c_str() << std::endl;
 
-    fout << std::endl << "-----------------" << std::endl << std::endl;
+    fout << std::endl << "-------" << std::endl << std::endl;
+  }
+
+  fout << std::endl << "-----------------" << std::endl << std::endl << std::endl;
+
+  fout << "Analyzing Power" << std::endl << std::endl;
+  for (int i = 0; i < NUM_PRIMARIES; i++)
+  {
+
+    fout
+        << INDEX_TO_NUM_PRIMARIES_TO_NAME[i].c_str()
+        << " A_zz: "
+        << d_ANALYZING_POWER_DUMMY[i] / h_CROSS_SECTION_CALC_CM_DUMMY[i]->GetEntries()
+        << std::endl;
+
+    fout << std::endl << "-------" << std::endl << std::endl;
   }
 
   return;
@@ -654,7 +686,7 @@ void Loop_Through_Tree_Dummy()
  - NUM_PRIMARIES - Number of Primaries
 
  Exit Conditions: none
- Called By: CrossSection
+ Called By: CrossSection_AnalyzingPower
  Date: 03-24-2016
  Modified:
  *********************************************************/
@@ -706,8 +738,8 @@ void Plot_Dummy()
         Form("%s/Dummy_Interaction_Phi_CM_primary_%d.png",
              OUTPUT_PREFIX.c_str(), i));
     c_Phi_CM->SaveAs(
-        Form("%s/Dummy_Interaction_Phi_CM_primary_%d.C",
-             OUTPUT_PREFIX.c_str(), i));
+        Form("%s/Dummy_Interaction_Phi_CM_primary_%d.C", OUTPUT_PREFIX.c_str(),
+             i));
   }
 
   return;
@@ -732,6 +764,8 @@ void Plot_Dummy()
  - h_THETA_CM_LEFTRIGHT - Theta center of mass for each primary Left Right Detector
  - h_CROSS_SECTION_CALC_CM_LEFTRIGHT
 
+ - d_ANALYZING_POWER_LEFTRIGHT
+
  - CROSS_SECTION_UNIT_NAME - units for angle
  - ANGLE_UNIT_NAME - units for angle
  - NUM_PRIMARIES - Number of the Primaries e-
@@ -739,7 +773,7 @@ void Plot_Dummy()
  Exit Conditions: none
  Called By: CrossSection
  Date: 03-24-2016
- Modified: 03-28-2016
+ Modified: 09-15-2016
  *********************************************************/
 void Define_Histograms_LeftRight()
 {
@@ -751,6 +785,9 @@ void Define_Histograms_LeftRight()
   h_PHI_CM_LEFTRIGHT.resize(NUM_PRIMARIES);
   h_THETA_CM_LEFTRIGHT.resize(NUM_PRIMARIES);
   h_CROSS_SECTION_CALC_CM_LEFTRIGHT.resize(NUM_PRIMARIES);
+
+  // Analyzing Power
+  d_ANALYZING_POWER_LEFTRIGHT.resize(NUM_PRIMARIES);
 
   //finish defining historgrams
   for (int i = 0; i < NUM_PRIMARIES; i++)
@@ -832,15 +869,17 @@ void Define_Histograms_LeftRight()
  - h_THETA_CM_LEFTRIGHT - Theta center of mass for each primary Left Right Detector
  - h_CROSS_SECTION_CALC_CM_LEFTRIGHT
 
+ - d_ANALYZING_POWER_LEFTRIGHT - Analyzing power
+
  - CROSS_SECTION_UNIT - units for angle
  - ANGLE_UNIT - units for angle
  - DIFF_CROSS_SECTION_UNIT_NAME
 
 
  Exit Conditions: none
- Called By: CrossSection
+ Called By: CrossSection_AnalyzingPower
  Date: 03-28-2016
- Modified: 04-28-2016
+ Modified: 09-15-2016
  *********************************************************/
 void Loop_Through_Tree_LeftRight()
 {
@@ -1010,6 +1049,9 @@ void Loop_Through_Tree_LeftRight()
           +(PrimaryConditions->fDelta_Phi / ANGLE_UNIT) * (PrimaryConditions->fDelta_CosTheta
               / nentries)
           * (Primary->fCrossSectionCM / CROSS_SECTION_UNIT);
+
+      //Add the Analyzing Power up
+      d_ANALYZING_POWER_LEFTRIGHT[1] += Primary->fA_zz;
     }
     //fill historgrams for primary 2
     if (Primary_2_Hit_Num != -1000)
@@ -1028,6 +1070,9 @@ void Loop_Through_Tree_LeftRight()
           +(PrimaryConditions->fDelta_Phi / ANGLE_UNIT) * (PrimaryConditions->fDelta_CosTheta
               / nentries)
           * (Primary->fCrossSectionCM / CROSS_SECTION_UNIT);
+
+      //Add the Analyzing Power up
+      d_ANALYZING_POWER_LEFTRIGHT[2] += Primary->fA_zz;
     }
     //FIll hitogram for coincidence
     if (Primary_1_Hit_Num != -1000 && Primary_2_Hit_Num != -1000)
@@ -1044,6 +1089,9 @@ void Loop_Through_Tree_LeftRight()
           +(PrimaryConditions->fDelta_Phi / ANGLE_UNIT) * (PrimaryConditions->fDelta_CosTheta
               / nentries)
           * (Primary->fCrossSectionCM / CROSS_SECTION_UNIT);
+
+      //Add the Analyzing Power up
+      d_ANALYZING_POWER_LEFTRIGHT[0] += Primary->fA_zz;
     }
   }  //end of loop over entries
 
@@ -1064,6 +1112,7 @@ void Loop_Through_Tree_LeftRight()
   if (!fout.is_open())
     std::cout << "File not opened" << std::endl;
 
+  fout << "Total Unpolarized Cross Section" << std::endl << std::endl;
   for (int i = 0; i < NUM_PRIMARIES; i++)
   {
 
@@ -1077,7 +1126,22 @@ void Loop_Through_Tree_LeftRight()
          << d_CROSS_SECTION_CALC_CM_LEFTRIGHT[i] << " "
          << CROSS_SECTION_UNIT_NAME.c_str() << std::endl;
 
-    fout << std::endl << "-----------------" << std::endl << std::endl;
+    fout << std::endl << "-------" << std::endl << std::endl;
+  }
+
+  fout << std::endl << "-----------------" << std::endl << std::endl << std::endl;
+
+  fout << "Analyzing Power" << std::endl << std::endl;
+  for (int i = 0; i < NUM_PRIMARIES; i++)
+  {
+
+    fout
+        << INDEX_TO_NUM_PRIMARIES_TO_NAME[i].c_str()
+        << " A_zz: "
+        << d_ANALYZING_POWER_LEFTRIGHT[i] / h_CROSS_SECTION_CALC_CM_LEFTRIGHT[i]->GetEntries()
+        << std::endl;
+
+    fout << std::endl << "-------" << std::endl << std::endl;
   }
 
   return;
@@ -1099,7 +1163,7 @@ void Loop_Through_Tree_LeftRight()
  - NUM_PRIMARIES - Number of Primaries
 
  Exit Conditions: none
- Called By: CrossSection
+ Called By: CrossSection_AnalyzingPower
  Date: 03-24-2016
  Modified:
  *********************************************************/
