@@ -44,6 +44,9 @@ class HMolPolEventPrimary: public TObject {
     TVector3 fInteractionVertexMomentum1; ///< Interaction vertex momentum for particle 1
     TVector3 fInteractionVertexMomentum2; ///< Interaction vertex momentum for particle 2
 
+    Double_t fA_zz; ///< Analyzing Power for this interaction where
+    /// both particles polarized in the ZZ direction - this is a unitless quantity
+
     /// Register this class with ROOT. This adds some standard ROOT functions to
     /// the class, and makes sure that on the command line in ROOT it can do
     /// tab-completion. This is associated with the ClassImp() line at the top

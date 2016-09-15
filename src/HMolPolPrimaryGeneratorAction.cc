@@ -478,6 +478,16 @@ void HMolPolPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 
   //store cross section info in the ROOT file
   fAnalysis->fPrimary->fCrossSectionCM = D_sigma_CM;  //mm^2/sr
+
+  /***************
+  * Calculating and storing the Analyzing power for this event to the ROOT tree
+  * This is a unitless value
+  *
+  * A_zz = -sin^2(theta_com) * [( 8 - sin^2(theta_com) )/ (4 - sin^2(theta_com))^2 ]
+  ****************/
+  double Analyzing_Power = - pow(sin(theta_com),2) * (( 8 - pow(sin(theta_com),2) )/ pow((4 - pow(sin(theta_com),2)),2));
+  fAnalysis->fPrimary->fA_zz =  Analyzing_Power;
+
   /*
    G4cout << "#### Leaving HMolPolPrimaryGeneratorAction::GeneratePrimaries ####"
    << G4endl;
