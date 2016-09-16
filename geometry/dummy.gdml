@@ -35,7 +35,7 @@
 
     <!-- Length of the dummy detector -->
     <!-- Changed unit from mm to m more material maybe more hits?? -->
-    <quantity name="Dummy_Z_Length" type="length" value="0.5" unit="cm" />
+    <quantity name="Dummy_Z_Length" type="length" value="0.1" unit="cm" />
 
     <!-- Define the starting Phi angle of the dummy detector -->
     <quantity name="Dummy_StartPhi" type="angle" value="0" unit="rad" />
