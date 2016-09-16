@@ -35,7 +35,7 @@
 
     <!-- Length of the dummy detector -->
     <!-- Changed unit from mm to m more material maybe more hits?? -->
-    <quantity name="Dummy_Z_Length" type="length" value="0.5" unit="m" />
+    <quantity name="Dummy_Z_Length" type="length" value="0.5" unit="cm" />
 
     <!-- Define the starting Phi angle of the dummy detector -->
     <quantity name="Dummy_StartPhi" type="angle" value="0" unit="rad" />
@@ -61,6 +61,7 @@
   <structure>
     <!-- implement the geometry - through logical volumes and physical volumes -->
     <volume name="logicalDummy">
+      <materialref ref="Kryptonite" />
       <!-- debugging -->
       <!-- <materialref ref="BC-408_scint_dummy" /> -->
       <!-- <materialref ref="G4_Pb" /> -->
@@ -68,7 +69,7 @@
       <!-- Geant4 defined: 
       http://geant4.web.cern.ch/geant4/workAreaUserDocKA/Backup/Docbook_UsersGuides_beta/ForApplicationDeveloper/html/apas08.html -->
 <!--      <materialref ref="G4_GLASS_LEAD" />  -->
-      <materialref ref="Lead_Glass_SF5" />
+<!--       <materialref ref="Lead_Glass_SF5" /> -->
       <solidref ref="Dummy_tube" />
       <auxiliary auxtype="Color" auxvalue="yellow" />
       <auxiliary auxtype="Alpha" auxvalue="0.1" />

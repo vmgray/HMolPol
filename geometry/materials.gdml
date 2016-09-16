@@ -53,7 +53,7 @@
     as follows: // this material will kill every tracks that touch it G4Material *Kryptonite 
     = new G4Material("Kryptonite", density= 0.00000001*mg/cm3, nel=1); Kryptonite->AddElement(Ar, 
     100.*perCent); -->
-  <material name="Kryptonite_dummy" formula="Kryptonite">
+  <material name="Kryptonite" formula="Kryptonite">
     <D unit="mg/cm3" value="0.00000001" />
     <fraction n="1.00" ref="G4_Ar" />
   </material>
