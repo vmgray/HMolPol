@@ -9,6 +9,7 @@
 #define INCLUDE_HMOLPOLMAGFIELDQUADRUPOLE_HH_
 
 #include <G4QuadrupoleMagField.hh>
+#include <G4UnitsTable.hh>
 
 #include "HMolPolMagField.hh"
 
@@ -71,6 +72,9 @@ class HMolPolMagFieldQuadrupole: public HMolPolMagField {
           "Print information on the magnetic field " + volume->GetName());
 
       // Create field gradient commands
+      new G4UnitDefinition("kilogauss/m", "kilogauss/m", "Gradient", CLHEP::kilogauss/CLHEP::m);
+      new G4UnitDefinition("gauss/m", "gauss/m", "Gradient", CLHEP::gauss/CLHEP::m);
+      new G4UnitDefinition("tesla/m", "tesla/m", "Gradient", CLHEP::tesla/CLHEP::m);
       fMessenger->DeclareMethodWithUnit("setGradient","tesla/m",&HMolPolMagFieldQuadrupole::SetGradient,
           "Set the gradient of quadrupole magnetic field " + volume->GetName());
       fMessenger->DeclareMethodWithUnit("setPoleTipField","tesla",&HMolPolMagFieldQuadrupole::SetPoleTipField,
