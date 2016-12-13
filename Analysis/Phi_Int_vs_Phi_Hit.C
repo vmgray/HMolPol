@@ -105,17 +105,17 @@ Int_t CM_ANGLES[NUM_CM_ANGLES + 1];
 static std::string FILENAME;
 
 //string for the where the input file is stored.
-static std::string INPUT_PREFIX =
-    "/home/vmgray/workspace/HMolPol/Simulation_Analysis/commit_90fe353";
+static std::string INPUT_PREFIX = "/home/vmgray/workspace/HMolPol/";
 
 //string for the where the output will go.
 static std::string OUTPUT_PREFIX =
-    "/home/vmgray/workspace/HMolPol/Simulation_Analysis/commit_90fe353";
+    "/home/vmgray/workspace/HMolPol/Simulation_Analysis/commit_5a398bd_Thesis/11GeV_Mag8T_HallAOpticsStandard_NoDipole/Phi_Int_vs_Phi_Hit";
+// 11GeV_Mag8T_HallAOpticsStandard_NoDipole   11GeV_Mag8T_NoOptics
 
 //HMolPol include - Must be here as it needs to know about OUTPUT_PREFIX
 #include "ExtractInitalConditions.h"
 
-void Phi_int_vs_Phi_Hit(std::string filename)
+void Phi_Int_vs_Phi_Hit(std::string filename)
 {
   FILENAME = Form("%s/%s", INPUT_PREFIX.c_str(), filename.c_str());
 
@@ -132,7 +132,7 @@ void Phi_int_vs_Phi_Hit(std::string filename)
    */
 
   HMOLPOL_CHAIN->Add(
-      "/home/vmgray/workspace/HMolPol/Simulation_Analysis/commit_90fe353/*.root");
+      "~/workspace/HMolPol/Simulation_Analysis/commit_5a398bd_Thesis/11GeV_Mag8T_HallAOpticsStandard_NoDipole/Rootfiles/*.root");
 
   //HMOLPOL_CHAIN->Add(Form("%s", FILENAME.c_str()));
 
@@ -264,7 +264,7 @@ void GetGitInfo()
  the phi hit for particle 1 and 2 vs the center of mass theta angle
  - h_PHI_HIT_1_2_DIFFERECE_VS_THETA_CM_ZOOM - histogram of the difference between
  the phi hit for particle 1 and 2 vs the center of mass theta angle
-  - h_PHI_HIT_1_2_DIFFERECE_VS_ENERGY_INT - histogram of the difference between
+ - h_PHI_HIT_1_2_DIFFERECE_VS_ENERGY_INT - histogram of the difference between
  the phi hit for particle 1 and 2 vs the interaction
  - h_PHI_HIT_1_2_DIFFERECE_VS_ENERGY_INT_ZOOM - histogram of the difference between
  the phi hit for particle 1 and 2 vs the interaction energy
@@ -299,10 +299,15 @@ void Define_Histograms()
             365);
 
     h_PHI_HIT_1_2_DIFFERECE_VS_THETA_CM[i]->GetXaxis()->SetTitle(
-        Form("#theta_{CM} of primary %d (%s)", i, ANGLE_UNIT_NAME.c_str()));
+        Form("#theta_{CM} of primary %d [#circ]", i));
 
     h_PHI_HIT_1_2_DIFFERECE_VS_THETA_CM[i]->GetYaxis()->SetTitle(
-        Form("#phi_{1} -  #phi_{2} (%s)", ANGLE_UNIT_NAME.c_str()));
+        "#phi_{1} -  #phi_{2} [#circ]");
+
+    //Standard: CM_THETA_RANGE + 6, CM_THETA_MIN - 3, CM_THETA_MAX + 3, 140, 145, 215);
+
+    // For the 11 GeV plots: Solenoid on or off, No Dipole, Quad on or off Combo
+    // 160, 70.0, 110.0, 300, 175, 185);
 
     //fill in the names of the h_PHI_HIT_1_2_DIFFERECE_VS_THETA_CM histograms
     h_PHI_HIT_1_2_DIFFERECE_VS_THETA_CM_ZOOM[i] =
@@ -311,14 +316,13 @@ void Define_Histograms()
             Form(
                 "Difference in the #phi angle at the detector hit for the primary electron 1 and 2 vs #theta_{CM} for primary %d",
                 i),
-            CM_THETA_RANGE + 6, CM_THETA_MIN - 3, CM_THETA_MAX + 3, 140, 145,
-            215);
+            160, 70.0, 110.0, 300, 175, 185);
 
     h_PHI_HIT_1_2_DIFFERECE_VS_THETA_CM_ZOOM[i]->GetXaxis()->SetTitle(
-        Form("#theta_{CM} of primary %d (%s)", i, ANGLE_UNIT_NAME.c_str()));
+        Form("#theta_{CM} of primary %d [#circ]", i));
 
     h_PHI_HIT_1_2_DIFFERECE_VS_THETA_CM_ZOOM[i]->GetYaxis()->SetTitle(
-        Form("#phi_{1} -  #phi_{2} (%s)", ANGLE_UNIT_NAME.c_str()));
+        "#phi_{1} -  #phi_{2} [#circ]");
 
     //fill in the names of the h_PHI_HIT_1_2_DIFFERECE_VS_ENERGY_INT histograms
     h_PHI_HIT_1_2_DIFFERECE_VS_ENERGY_INT[i] =
@@ -327,10 +331,11 @@ void Define_Histograms()
             Form(
                 "Difference in the #phi angle at the detector hit for the primary electron 1 and 2 vs interaction energy for primary %d",
                 i),
-                600, 0.7, 1.3, 370, -5, 365);
+            600, 0.7, 1.3, 370, -5, 365);
 
     h_PHI_HIT_1_2_DIFFERECE_VS_ENERGY_INT[i]->GetXaxis()->SetTitle(
-        Form("Interaction energy of primary %d (%s)", i, ENERGY_UNIT_NAME.c_str()));
+        Form("Interaction energy of primary %d (%s)", i,
+             ENERGY_UNIT_NAME.c_str()));
 
     h_PHI_HIT_1_2_DIFFERECE_VS_ENERGY_INT[i]->GetYaxis()->SetTitle(
         Form("#phi_{1} -  #phi_{2} (%s)", ANGLE_UNIT_NAME.c_str()));
@@ -342,10 +347,11 @@ void Define_Histograms()
             Form(
                 "Difference in the #phi angle at the detector hit for the primary electron 1 and 2 vs Interaction energy for primary %d",
                 i),
-                600, 0.7, 1.3, 140, 145, 215);
+            600, 0.7, 1.3, 140, 145, 215);
 
     h_PHI_HIT_1_2_DIFFERECE_VS_ENERGY_INT_ZOOM[i]->GetXaxis()->SetTitle(
-        Form("Interaction energy of primary %d (%s)", i, ENERGY_UNIT_NAME.c_str()));
+        Form("Interaction energy of primary %d (%s)", i,
+             ENERGY_UNIT_NAME.c_str()));
 
     h_PHI_HIT_1_2_DIFFERECE_VS_ENERGY_INT_ZOOM[i]->GetYaxis()->SetTitle(
         Form("#phi_{1} -  #phi_{2} (%s)", ANGLE_UNIT_NAME.c_str()));
@@ -871,10 +877,12 @@ void Loop_Through_Tree()
 
       //energy plots
       h_PHI_HIT_1_2_DIFFERECE_VS_ENERGY_INT[1]->Fill(
-          Primary->fInteractionVertexMomentum1.Mag() / ENERGY_UNIT, phi_hit_Diff_Val);
+          Primary->fInteractionVertexMomentum1.Mag() / ENERGY_UNIT,
+          phi_hit_Diff_Val);
 
       h_PHI_HIT_1_2_DIFFERECE_VS_ENERGY_INT_ZOOM[1]->Fill(
-          Primary->fInteractionVertexMomentum1.Mag() / ENERGY_UNIT, phi_hit_Diff_Val);
+          Primary->fInteractionVertexMomentum1.Mag() / ENERGY_UNIT,
+          phi_hit_Diff_Val);
 
       //Now for the histogram of just the differences vs theta CM for particle 2
       h_PHI_HIT_1_2_DIFFERECE_VS_THETA_CM[2]->Fill(
@@ -891,10 +899,12 @@ void Loop_Through_Tree()
 
       //energy plots
       h_PHI_HIT_1_2_DIFFERECE_VS_ENERGY_INT[2]->Fill(
-          Primary->fInteractionVertexMomentum2.Mag() / ENERGY_UNIT, phi_hit_Diff_Val);
+          Primary->fInteractionVertexMomentum2.Mag() / ENERGY_UNIT,
+          phi_hit_Diff_Val);
 
       h_PHI_HIT_1_2_DIFFERECE_VS_ENERGY_INT_ZOOM[2]->Fill(
-          Primary->fInteractionVertexMomentum2.Mag() / ENERGY_UNIT, phi_hit_Diff_Val);
+          Primary->fInteractionVertexMomentum2.Mag() / ENERGY_UNIT,
+          phi_hit_Diff_Val);
 
     }  // end of the do we have info for both primaries
   }  //end loop over entries in the tree
@@ -948,6 +958,9 @@ void Plot()
 
     h_PHI_HIT_1_2_DIFFERECE_VS_THETA_CM[i]->Draw();
 
+    //removes the histogram title in stat box
+    gStyle->SetOptStat("emr");  //1110);
+
     c_Phi_Hit_1_2_Diff_ThetaCM->SaveAs(
         Form("%s/Phi_Hit_1_2_Diff_vs_Theta_CM_primary_%d.png",
              OUTPUT_PREFIX.c_str(), i));
@@ -964,65 +977,74 @@ void Plot()
 
     h_PHI_HIT_1_2_DIFFERECE_VS_THETA_CM_ZOOM[i]->Draw();
 
+    //removes the histogram title in stat box
+    gStyle->SetOptStat("mr");  //mean and RMS only
+
     c_Phi_Hit_1_2_Diff_ThetaCM_Zoom->SaveAs(
         Form("%s/Phi_Hit_1_2_Diff_vs_Theta_CM_primary_%d_Zoom.png",
              OUTPUT_PREFIX.c_str(), i));
     c_Phi_Hit_1_2_Diff_ThetaCM_Zoom->SaveAs(
         Form("%s/Phi_Hit_1_2_Diff_vs_Theta_CM_primary_%d_Zoom.C",
              OUTPUT_PREFIX.c_str(), i));
-    //ENERGY
-    //phi 1 2 diff vs EnergyInt
-    TCanvas* c_Phi_Hit_1_2_Diff_EnergyInt = new TCanvas(
-        "c_Phi_Hit_1_2_Diff_EnergyInt",
-        Form("Difference in the #phi angle at the detector hit for the "
-             "primary electron 1 and 2 vs interaction energy for Primary electron %d",
-             i));
 
-    h_PHI_HIT_1_2_DIFFERECE_VS_ENERGY_INT[i]->Draw();
+    /*
+     //ENERGY
+     //phi 1 2 diff vs EnergyInt
+     TCanvas* c_Phi_Hit_1_2_Diff_EnergyInt = new TCanvas(
+     "c_Phi_Hit_1_2_Diff_EnergyInt",
+     Form("Difference in the #phi angle at the detector hit for the "
+     "primary electron 1 and 2 vs interaction energy for Primary electron %d",
+     i));
 
-    c_Phi_Hit_1_2_Diff_EnergyInt->SaveAs(
-        Form("%s/Phi_Hit_1_2_Diff_vs_int_energy_primary_%d.png",
-             OUTPUT_PREFIX.c_str(), i));
-    c_Phi_Hit_1_2_Diff_EnergyInt->SaveAs(
-        Form("%s/Phi_Hit_1_2_Diff_vs_int_energy_primary_%d.C",
-             OUTPUT_PREFIX.c_str(), i));
+     h_PHI_HIT_1_2_DIFFERECE_VS_ENERGY_INT[i]->Draw();
 
-    //phi 1 2 diff vs EnergyInt Zoom
-    TCanvas* c_Phi_Hit_1_2_Diff_EnergyInt_Zoom = new TCanvas(
-        "c_Phi_Hit_1_2_Diff_EnergyInt_Zoom",
-        Form("Difference in the #phi angle at the detector hit for the "
-             "primary electron 1 and 2 vs Interaction energy for Primary electron %d",
-             i));
+     c_Phi_Hit_1_2_Diff_EnergyInt->SaveAs(
+     Form("%s/Phi_Hit_1_2_Diff_vs_int_energy_primary_%d.png",
+     OUTPUT_PREFIX.c_str(), i));
+     c_Phi_Hit_1_2_Diff_EnergyInt->SaveAs(
+     Form("%s/Phi_Hit_1_2_Diff_vs_int_energy_primary_%d.C",
+     OUTPUT_PREFIX.c_str(), i));
 
-    h_PHI_HIT_1_2_DIFFERECE_VS_ENERGY_INT_ZOOM[i]->Draw();
+     //phi 1 2 diff vs EnergyInt Zoom
+     TCanvas* c_Phi_Hit_1_2_Diff_EnergyInt_Zoom = new TCanvas(
+     "c_Phi_Hit_1_2_Diff_EnergyInt_Zoom",
+     Form("Difference in the #phi angle at the detector hit for the "
+     "primary electron 1 and 2 vs Interaction energy for Primary electron %d",
+     i));
 
-    c_Phi_Hit_1_2_Diff_EnergyInt_Zoom->SaveAs(
-        Form("%s/Phi_Hit_1_2_Diff_vs_int_energy_primary_%d_Zoom.png",
-             OUTPUT_PREFIX.c_str(), i));
-    c_Phi_Hit_1_2_Diff_EnergyInt_Zoom->SaveAs(
-        Form("%s/Phi_Hit_1_2_Diff_vs_int_energy_primary_%d_Zoom.C",
-             OUTPUT_PREFIX.c_str(), i));
+     h_PHI_HIT_1_2_DIFFERECE_VS_ENERGY_INT_ZOOM[i]->Draw();
 
-    //loop over CM angles
-    //Start with the snap shots
-    for (int j = 0; j < NUM_CM_ANGLES + 1; j++)
-    {
-      //Phi 1 2 Difference
-      TCanvas* c_Phi_Hit_1_2_Diff = new TCanvas(
-          "c_Phi_Hit_1_2_Diff",
-          Form("Difference in the #phi angle for a hit at the detector for the "
-               "primary electron 1 and 2 (%s)",
-               ANGLE_UNIT_NAME.c_str()));
+     c_Phi_Hit_1_2_Diff_EnergyInt_Zoom->SaveAs(
+     Form("%s/Phi_Hit_1_2_Diff_vs_int_energy_primary_%d_Zoom.png",
+     OUTPUT_PREFIX.c_str(), i));
+     c_Phi_Hit_1_2_Diff_EnergyInt_Zoom->SaveAs(
+     Form("%s/Phi_Hit_1_2_Diff_vs_int_energy_primary_%d_Zoom.C",
+     OUTPUT_PREFIX.c_str(), i));
+     */
 
-      h_PHI_HIT_1_2_DIFFERECE[i][j]->Draw();
+    /*
+     //loop over CM angles
+     //Start with the snap shots
+     for (int j = 0; j < NUM_CM_ANGLES + 1; j++)
+     {
+     //Phi 1 2 Difference
+     TCanvas* c_Phi_Hit_1_2_Diff = new TCanvas(
+     "c_Phi_Hit_1_2_Diff",
+     Form("Difference in the #phi angle for a hit at the detector for the "
+     "primary electron 1 and 2 (%s)",
+     ANGLE_UNIT_NAME.c_str()));
 
-      c_Phi_Hit_1_2_Diff->SaveAs(
-          Form("%s/Phi_Hit_1_2_Diff_for_Theta_CM_Primary%d_%d.png",
-               OUTPUT_PREFIX.c_str(), i, CM_ANGLES[j]));
-      c_Phi_Hit_1_2_Diff->SaveAs(
-          Form("%s/Phi_Hit_1_2_Diff_for_Theta_CM_Primary%d_%d.C",
-               OUTPUT_PREFIX.c_str(), i, CM_ANGLES[j]));
-    }  //end of the snap shot loop
+     h_PHI_HIT_1_2_DIFFERECE[i][j]->Draw();
+
+     c_Phi_Hit_1_2_Diff->SaveAs(
+     Form("%s/Phi_Hit_1_2_Diff_for_Theta_CM_Primary%d_%d.png",
+     OUTPUT_PREFIX.c_str(), i, CM_ANGLES[j]));
+     c_Phi_Hit_1_2_Diff->SaveAs(
+     Form("%s/Phi_Hit_1_2_Diff_for_Theta_CM_Primary%d_%d.C",
+     OUTPUT_PREFIX.c_str(), i, CM_ANGLES[j]));
+     }  //end of the snap shot loop
+     */
+
   }
   return;
 }
