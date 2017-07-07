@@ -61,28 +61,28 @@
     <rotation name="HallA_Q1_PITCH" x="-0.010" unit="deg" />
     <rotation name="HallA_Q1_ROTATION_ALL" x="-0.010" y="0.033" z="-44.980" unit="deg" />
     
-    <!-- position of the Dummy (and all its parts) in the "World" -->
+    <!-- position of the Q2 in the magntics logical world, and rotation. -->
     <position name="HallA_Q2_center" x="0" y="0" z="-1.5973" unit="m" />
     <rotation name="HallA_Q2_ROLL" z="-44.957" unit="deg" />
     <rotation name="HallA_Q2_YAW" y="0.038" unit="deg" />
     <rotation name="HallA_Q2_PITCH" x="-0.024" unit="deg" />
     <rotation name="HallA_Q2_ROTATION_ALL" x="-0.024" y="0.038" z="-44.957" unit="deg" />
     
-    <!-- position of the Dummy (and all its parts) in the "World" -->
+    <!-- position of the Q3 in the magntics logical world, and rotation. -->
     <position name="HallA_Q3_center" x="0" y="0" z="-0.9111" unit="m" />
     <rotation name="HallA_Q3_ROLL" z="-44.996" unit="deg" />
     <rotation name="HallA_Q3_YAW" y="-0.015" unit="deg" />
     <rotation name="HallA_Q3_PITCH" x="0.011" unit="deg" />
     <rotation name="HallA_Q3_ROTATION_ALL" x="0.011" y="-0.015" z="-44.996" unit="deg" />
 
-    <!-- position of the Right Detector (and all its parts) in the "World" -->
+    <!-- position of the Q4 in the magntics logical world, and rotation. -->
     <position name="HallA_Q4_center" x="0" y="0" z="-0.256" unit="m" />
     <rotation name="HallA_Q4_ROLL" z="-45.023" unit="deg" />
     <rotation name="HallA_Q4_YAW" y="-0.067" unit="deg" />
     <rotation name="HallA_Q4_PITCH" x="0.019" unit="deg" />
     <rotation name="HallA_Q4_ROTATION_ALL" x="0.019" y="-0.067" z="-45.023" unit="deg" />
     
-    <!-- position of the dipole (and all its parts) in the "World" -->
+    <!-- position of the dipole in the magntics logical world, and rotation. -->
     <position name="HallA_Dipole_center" x="0" y="0" z="1.2321" unit="m" />
     <rotation name="HallA_Dipole_ROLL" z="0.035" unit="deg" />
     <rotation name="HallA_Dipole_YAW" y="-0.007" unit="deg" />
