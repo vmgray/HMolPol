@@ -87,7 +87,7 @@
     <rotation name="HallA_Dipole_ROLL" z="0.035" unit="deg" />
     <rotation name="HallA_Dipole_YAW" y="-0.007" unit="deg" />
     <rotation name="HallA_Dipole_PITCH" x="0.025" unit="deg" />
-    <rotation name="HallA_Dipole_ROTATION_ALL" x="-0.025" y="-0.007" z="0.035" unit="deg" />
+    <rotation name="HallA_Dipole_ROTATION_ALL" x="0.025" y="-0.007" z="0.035" unit="deg" />
     
   </define>
 
