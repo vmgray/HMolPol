@@ -3,7 +3,7 @@
 # import (includes)
 import os  # OS stuff
 import sys  # System
-from html5lib.treewalkers.lxmletree import Root
+from html5lib.treewalkers.etree_lxml import Root
 
 # Get working directory (build directory)
 presentcwd = os.getcwd()
