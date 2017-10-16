@@ -21,13 +21,13 @@
 //Geant4 includes
 #include <G4ParticleTable.hh>
 #include <G4VUserPrimaryGeneratorAction.hh>
-#include <CLHEP/Units/SystemOfUnits.h>
+#include <G4SystemOfUnits.hh>
 
 // HMolPol includes
-#include "HMolPolAnalysis.hh"
 #include "HMolPolEventPrimaryConditions.hh"
+#include "HMolPolAnalysis.hh"
 
-//Geant4 classes
+// Geant4 classes
 class G4ParticleGun;
 
 class HMolPolPrimaryGeneratorAction:

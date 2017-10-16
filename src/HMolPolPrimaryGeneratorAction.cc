@@ -24,8 +24,9 @@
 #include <G4PhysicalConstants.hh>
 #include <G4ParticleGun.hh>
 #include <G4ThreeVector.hh>
+#include <G4SystemOfUnits.hh>
+
 #include <Randomize.hh>
-#include <CLHEP/Units/SystemOfUnits.h>
 
 //HMolPol includes
 #include "HMolPolPrimaryGeneratorAction.hh"
@@ -163,8 +164,8 @@ void HMolPolPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
   //CM energy and random theta, and phi angle
   double e_com = m_e * gamma_com;  //MeV
   double theta_com = acos(
-      CLHEP::RandFlat::shoot(cos(fTheta_com_max), cos(fTheta_com_min)));  //rad
-  double phi_com = CLHEP::RandFlat::shoot(fPhi_com_min, fPhi_com_max);  //rad
+      G4RandFlat::shoot(cos(fTheta_com_max), cos(fTheta_com_min)));  //rad
+  double phi_com = G4RandFlat::shoot(fPhi_com_min, fPhi_com_max);  //rad
   //double phi_com = CLHEP::RandFlat::shoot(0.0, 2.0 * pi);  //rad
   //debugging
   //double phi_com = 0;
