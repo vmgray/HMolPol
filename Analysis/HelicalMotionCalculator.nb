@@ -1,0 +1,581 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 10.4' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     20877,        573]
+NotebookOptionsPosition[     19318,        520]
+NotebookOutlinePosition[     19653,        535]
+CellTagsIndexPosition[     19610,        532]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell["\<\
+Calculation of the LAB scattering angle from the COM scattering angle for a \
+2-body interaction \
+\>", "Text",
+ CellChangeTimes->{{3.6780916116202583`*^9, 3.6780916390270844`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   SubscriptBox["p", "1"], "=", 
+   RowBox[{"Quantity", "[", "11000", "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   SubscriptBox["p", "2"], "=", "0"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   SubscriptBox["m", "2"], "=", 
+   RowBox[{
+    SubscriptBox["m", "1"], "=", 
+    RowBox[{"UnitConvert", "[", 
+     RowBox[{"Quantity", "[", "\"\<ElectronMass\>\"", "]"}], "]"}]}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"c", "=", 
+   RowBox[{"UnitConvert", "[", 
+    RowBox[{"Quantity", "[", "\"\<SpeedOfLight\>\"", "]"}], "]"}]}], 
+  ";"}]}], "Input",
+ CellChangeTimes->{{3.678059649768787*^9, 3.678059689382266*^9}, {
+   3.678059863393322*^9, 3.678059917059889*^9}, {3.678060175312151*^9, 
+   3.678060180878415*^9}, {3.678060541751194*^9, 3.678060559823041*^9}, {
+   3.678060633687166*^9, 3.678060667899626*^9}, {3.678060745408326*^9, 
+   3.678060789303691*^9}, {3.6780608531633244`*^9, 3.678060880061153*^9}, {
+   3.678061240057332*^9, 3.6780613619400806`*^9}, {3.678061432015936*^9, 
+   3.678061447028262*^9}, {3.678061576013358*^9, 3.6780615830055237`*^9}, {
+   3.6780616223298607`*^9, 3.6780616226537*^9}, {3.678090301011338*^9, 
+   3.678090331222474*^9}, {3.678091216632592*^9, 3.678091217945582*^9}, 
+   3.678091654255904*^9, {3.678092045196862*^9, 3.678092053067048*^9}, {
+   3.678092392491609*^9, 3.678092397408523*^9}, {3.678092445289246*^9, 
+   3.6780924844579678`*^9}, {3.678092561119039*^9, 3.678092573021235*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"Quantity", "::", "unkunit"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"Unable to interpret unit specification \
+\[NoBreak]\\!\\(\\*RowBox[{\\\"11000\\\"}]\\)\[NoBreak]. \
+\\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", ButtonStyle->\\\"Link\\\", \
+ButtonFrame->None, ButtonData:>\\\"paclet:ref/Quantity\\\", ButtonNote -> \
+\\\"Quantity::unkunit\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{{3.678092566424169*^9, 3.6780925744944477`*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   SubscriptBox["E", "1"], "=", 
+   RowBox[{"Sqrt", "[", 
+    RowBox[{
+     RowBox[{
+      SubscriptBox["p", "1"], "^", "2"}], "+", 
+     RowBox[{
+      SubscriptBox["m", "1"], "^", "2"}]}], "]"}]}], ";", 
+  RowBox[{
+   SubscriptBox["\[Beta]", "1"], "=", 
+   RowBox[{
+    SubscriptBox["p", "1"], "/", 
+    SubscriptBox["E", "1"]}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   SubscriptBox["E", "2"], "=", 
+   RowBox[{"Sqrt", "[", 
+    RowBox[{
+     RowBox[{
+      SubscriptBox["p", "2"], "^", "2"}], "+", 
+     RowBox[{
+      SubscriptBox["m", "2"], "^", "2"}]}], "]"}]}], ";", 
+  RowBox[{
+   SubscriptBox["\[Beta]", "2"], "=", 
+   RowBox[{
+    SubscriptBox["p", "2"], "/", 
+    SubscriptBox["E", "2"]}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   SubscriptBox["E", "tot"], "=", 
+   RowBox[{
+    SubscriptBox["E", "1"], "+", 
+    SubscriptBox["E", "2"]}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   SubscriptBox["p", "tot"], "=", 
+   RowBox[{
+    SubscriptBox["p", "1"], "+", 
+    SubscriptBox["p", "2"]}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"\[Beta]", "=", 
+   RowBox[{
+    SubscriptBox["p", "tot"], "/", 
+    SubscriptBox["E", "tot"]}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{"\[Gamma]", "=", 
+  RowBox[{"1", "/", 
+   RowBox[{"Sqrt", "[", 
+    RowBox[{"1", "-", 
+     RowBox[{"\[Beta]", "^", "2"}]}], "]"}]}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"\[Eta]", "=", 
+   RowBox[{"ArcTanh", "[", "\[Beta]", "]"}]}], ";"}]}], "Input",
+ CellChangeTimes->{{3.6780597911497717`*^9, 3.678059931929147*^9}, {
+  3.6780601868198023`*^9, 3.678060220333921*^9}, {3.6780610733430557`*^9, 
+  3.678061090297103*^9}, {3.6780611636893377`*^9, 3.678061175554448*^9}, {
+  3.67806137226298*^9, 3.678061545563384*^9}, {3.67806161220829*^9, 
+  3.6780616160795727`*^9}, {3.678090256100397*^9, 3.6780902691912327`*^9}, {
+  3.678090339867921*^9, 3.6780903411521597`*^9}, {3.678090503960884*^9, 
+  3.678090571040751*^9}, {3.678091132279203*^9, 3.678091135641841*^9}, {
+  3.678091210790524*^9, 3.6780912115355053`*^9}, {3.6780913692875633`*^9, 
+  3.6780913930247173`*^9}, {3.6780914243694143`*^9, 3.6780914817459717`*^9}, {
+  3.678092248036805*^9, 3.6780922634415817`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"Quantity", "::", "compat"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], \
+"\<\"\[NoBreak]\\!\\(\\*SuperscriptBox[\\\"\\\\\\\"Megaelectronvolts\\\\\\\"\\\
+\", \\\"2\\\"]\\)\[NoBreak] and \
+\[NoBreak]\\!\\(\\*SuperscriptBox[\\\"\\\\\\\"Kilograms\\\\\\\"\\\", \
+\\\"2\\\"]\\)\[NoBreak] are incompatible units \\!\\(\\*ButtonBox[\\\"\
+\[RightSkeleton]\\\", ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
+ButtonData:>\\\"paclet:ref/Quantity\\\", ButtonNote -> \\\"Quantity::compat\\\
+\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{{3.678092470120446*^9, 3.67809248743373*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"Quantity", "::", "compat"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], \
+"\<\"\[NoBreak]\\!\\(\\*SuperscriptBox[\\\"\\\\\\\"Megaelectronvolts\\\\\\\"\\\
+\", \\\"2\\\"]\\)\[NoBreak] and \
+\[NoBreak]\\!\\(\\*SuperscriptBox[\\\"\\\\\\\"Kilograms\\\\\\\"\\\", \
+\\\"2\\\"]\\)\[NoBreak] are incompatible units \\!\\(\\*ButtonBox[\\\"\
+\[RightSkeleton]\\\", ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
+ButtonData:>\\\"paclet:ref/Quantity\\\", ButtonNote -> \\\"Quantity::compat\\\
+\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{{3.678092470120446*^9, 3.678092487520709*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"Quantity", "::", "compat"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], \
+"\<\"\[NoBreak]\\!\\(\\*SuperscriptBox[\\\"\\\\\\\"Megaelectronvolts\\\\\\\"\\\
+\", \\\"2\\\"]\\)\[NoBreak] and \
+\[NoBreak]\\!\\(\\*SuperscriptBox[\\\"\\\\\\\"ElectronMass\\\\\\\"\\\", \\\"2\
+\\\"]\\)\[NoBreak] are incompatible units \\!\\(\\*ButtonBox[\\\"\
+\[RightSkeleton]\\\", ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
+ButtonData:>\\\"paclet:ref/Quantity\\\", ButtonNote -> \\\"Quantity::compat\\\
+\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{{3.678092470120446*^9, 3.678092487613448*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"General", "::", "stop"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"Further output of \
+\[NoBreak]\\!\\(\\*StyleBox[RowBox[{\\\"Quantity\\\", \\\"::\\\", \
+\\\"compat\\\"}], \\\"MessageName\\\"]\\)\[NoBreak] will be suppressed during \
+this calculation. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", \
+ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
+ButtonData:>\\\"paclet:ref/message/General/stop\\\", ButtonNote -> \
+\\\"General::stop\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{{3.678092470120446*^9, 3.678092487645808*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"Quantity", "::", "compat"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], \
+"\<\"\[NoBreak]\\!\\(\\*SuperscriptBox[\\\"\\\\\\\"Megaelectronvolts\\\\\\\"\\\
+\", \\\"2\\\"]\\)\[NoBreak] and \
+\[NoBreak]\\!\\(\\*SuperscriptBox[\\\"\\\\\\\"ElectronMass\\\\\\\"\\\", \\\"2\
+\\\"]\\)\[NoBreak] are incompatible units \\!\\(\\*ButtonBox[\\\"\
+\[RightSkeleton]\\\", ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
+ButtonData:>\\\"paclet:ref/Quantity\\\", ButtonNote -> \\\"Quantity::compat\\\
+\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{{3.678092470120446*^9, 3.678092487793947*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"Quantity", "::", "compat"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], \
+"\<\"\[NoBreak]\\!\\(\\*SuperscriptBox[\\\"\\\\\\\"Megaelectronvolts\\\\\\\"\\\
+\", \\\"2\\\"]\\)\[NoBreak] and \
+\[NoBreak]\\!\\(\\*SuperscriptBox[\\\"\\\\\\\"ElectronMass\\\\\\\"\\\", \\\"2\
+\\\"]\\)\[NoBreak] are incompatible units \\!\\(\\*ButtonBox[\\\"\
+\[RightSkeleton]\\\", ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
+ButtonData:>\\\"paclet:ref/Quantity\\\", ButtonNote -> \\\"Quantity::compat\\\
+\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{{3.678092470120446*^9, 3.678092487881653*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"Quantity", "::", "compat"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], \
+"\<\"\[NoBreak]\\!\\(\\*SuperscriptBox[\\\"\\\\\\\"Megaelectronvolts\\\\\\\"\\\
+\", \\\"2\\\"]\\)\[NoBreak] and \
+\[NoBreak]\\!\\(\\*SuperscriptBox[\\\"\\\\\\\"Kilograms\\\\\\\"\\\", \
+\\\"2\\\"]\\)\[NoBreak] are incompatible units \\!\\(\\*ButtonBox[\\\"\
+\[RightSkeleton]\\\", ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
+ButtonData:>\\\"paclet:ref/Quantity\\\", ButtonNote -> \\\"Quantity::compat\\\
+\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{{3.678092470120446*^9, 3.678092487972169*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"Quantity", "::", "compat"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], \
+"\<\"\[NoBreak]\\!\\(\\*SuperscriptBox[\\\"\\\\\\\"Megaelectronvolts\\\\\\\"\\\
+\", \\\"2\\\"]\\)\[NoBreak] and \
+\[NoBreak]\\!\\(\\*SuperscriptBox[\\\"\\\\\\\"Kilograms\\\\\\\"\\\", \
+\\\"2\\\"]\\)\[NoBreak] are incompatible units \\!\\(\\*ButtonBox[\\\"\
+\[RightSkeleton]\\\", ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
+ButtonData:>\\\"paclet:ref/Quantity\\\", ButtonNote -> \\\"Quantity::compat\\\
+\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{{3.678092470120446*^9, 3.678092488051564*^9}}],
+
+Cell[BoxData[
+ FractionBox["1", 
+  SqrtBox[
+   RowBox[{"1", "+", 
+    FractionBox[
+     TemplateBox[{RowBox[{"-", "121000000"}],RowBox[{
+         SuperscriptBox["\"MeV\"", "2"]}],"megaelectronvolts squared",
+       SuperscriptBox["\"Megaelectronvolts\"", "2"]},
+      "Quantity"], 
+     SuperscriptBox[
+      RowBox[{"(", 
+       RowBox[{
+        TemplateBox[{
+         "9.109382917074297695420817658`7.0617630921243855*^-31","\"kg\"",
+          "kilograms","\"Kilograms\""},
+         "Quantity"], "+", 
+        SqrtBox[
+         RowBox[{
+          
+          TemplateBox[{
+           "8.29808571298850412038832511452991714`6.760733096460404*^-61",
+            RowBox[{
+              SuperscriptBox["\"kg\"", "2"]}],"kilograms squared",
+            SuperscriptBox["\"Kilograms\"", "2"]},
+           "Quantity"], "+", 
+          TemplateBox[{"121000000",RowBox[{
+              SuperscriptBox["\"MeV\"", "2"]}],"megaelectronvolts squared",
+            SuperscriptBox["\"Megaelectronvolts\"", "2"]},
+           "Quantity"]}]]}], ")"}], "2"]]}]]]], "Output",
+ CellChangeTimes->{
+  3.6780921369519253`*^9, 3.678092264695094*^9, {3.6780924609793987`*^9, 
+   3.678092488079153*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"Quantity", "::", "compat"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], \
+"\<\"\[NoBreak]\\!\\(\\*SuperscriptBox[\\\"\\\\\\\"Megaelectronvolts\\\\\\\"\\\
+\", \\\"2\\\"]\\)\[NoBreak] and \
+\[NoBreak]\\!\\(\\*SuperscriptBox[\\\"\\\\\\\"Kilograms\\\\\\\"\\\", \
+\\\"2\\\"]\\)\[NoBreak] are incompatible units \\!\\(\\*ButtonBox[\\\"\
+\[RightSkeleton]\\\", ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
+ButtonData:>\\\"paclet:ref/Quantity\\\", ButtonNote -> \\\"Quantity::compat\\\
+\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{{3.678092470120446*^9, 3.6780924881558313`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"Quantity", "::", "compat"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], \
+"\<\"\[NoBreak]\\!\\(\\*SuperscriptBox[\\\"\\\\\\\"Megaelectronvolts\\\\\\\"\\\
+\", \\\"2\\\"]\\)\[NoBreak] and \
+\[NoBreak]\\!\\(\\*SuperscriptBox[\\\"\\\\\\\"Kilograms\\\\\\\"\\\", \
+\\\"2\\\"]\\)\[NoBreak] are incompatible units \\!\\(\\*ButtonBox[\\\"\
+\[RightSkeleton]\\\", ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
+ButtonData:>\\\"paclet:ref/Quantity\\\", ButtonNote -> \\\"Quantity::compat\\\
+\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{{3.678092470120446*^9, 3.6780924882354183`*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"\[CapitalLambda]", "=", 
+  RowBox[{"{", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"Cosh", "[", "\[Eta]", "]"}], ",", "0", ",", "0", ",", 
+      RowBox[{"Sinh", "[", "\[Eta]", "]"}]}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"0", ",", "1", ",", "0", ",", "0"}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"0", ",", "0", ",", "1", ",", "0"}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"Sinh", "[", "\[Eta]", "]"}], ",", "0", ",", "0", ",", 
+      RowBox[{"Cosh", "[", "\[Eta]", "]"}]}], "}"}]}], "}"}]}]], "Input",
+ CellChangeTimes->{{3.678061059918317*^9, 3.6780610624632807`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{
+    "103.7482983230606`", ",", "0", ",", "0", ",", "103.74347885496601`"}], 
+    "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"0", ",", "1", ",", "0", ",", "0"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"0", ",", "0", ",", "1", ",", "0"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+    "103.74347885496601`", ",", "0", ",", "0", ",", "103.7482983230606`"}], 
+    "}"}]}], "}"}]], "Output",
+ CellChangeTimes->{3.678092139452368*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  SubscriptBox["\[Theta]", "COM"], "=", 
+  RowBox[{"Quantity", "[", 
+   RowBox[{"90", ",", "\"\<Degrees\>\""}], "]"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   SubscriptBox["p", "COM"], "=", 
+   RowBox[{"{", 
+    RowBox[{
+     SubscriptBox["E", "1"], ",", 
+     RowBox[{
+      SubscriptBox["p", "1"], " ", 
+      RowBox[{"Sin", "[", 
+       SubscriptBox["\[Theta]", "COM"], "]"}]}], ",", "0", ",", 
+     RowBox[{
+      SubscriptBox["p", "1"], " ", 
+      RowBox[{"Cos", "[", 
+       SubscriptBox["\[Theta]", "COM"], "]"}]}]}], "}"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   SubscriptBox["p", "LAB"], "=", 
+   RowBox[{"\[CapitalLambda]", ".", 
+    SubscriptBox["p", "COM"]}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  SubscriptBox["\[Theta]", "LAB"], "=", 
+  RowBox[{"ArcTan", "[", 
+   RowBox[{
+    RowBox[{
+     SubscriptBox["p", "LAB"], "[", 
+     RowBox[{"[", "2", "]"}], "]"}], "/", 
+    RowBox[{
+     SubscriptBox["p", "LAB"], "[", 
+     RowBox[{"[", "4", "]"}], "]"}]}], "]"}]}]}], "Input",
+ CellChangeTimes->{{3.678060017650358*^9, 3.678060112784832*^9}, {
+   3.678060191134902*^9, 3.678060193070373*^9}, {3.67806024355937*^9, 
+   3.678060246638945*^9}, {3.678060916269149*^9, 3.678060937424988*^9}, {
+   3.678090274182925*^9, 3.6780902746140013`*^9}, {3.678090609892733*^9, 
+   3.678090626248515*^9}, {3.678090661388898*^9, 3.67809066286481*^9}, {
+   3.6780907172612543`*^9, 3.678090844660881*^9}, {3.678090879158914*^9, 
+   3.678090892211184*^9}, {3.678090998503654*^9, 3.6780910874958344`*^9}, {
+   3.678091143114748*^9, 3.678091167705233*^9}, {3.678091271792308*^9, 
+   3.6780913031952953`*^9}, 3.678092164240451*^9}],
+
+Cell[BoxData[
+ TemplateBox[{
+  "90",RowBox[{"\[InvisibleSpace]", "\"\[Degree]\""}],"degrees",
+   "\"AngularDegrees\""},
+  "QuantityPostfix"]], "Output",
+ CellChangeTimes->{{3.678092142121029*^9, 3.678092165629981*^9}}],
+
+Cell[BoxData["0.009638861551094016`"], "Output",
+ CellChangeTimes->{{3.678092142121029*^9, 3.678092165631699*^9}}]
+}, Open  ]],
+
+Cell["\<\
+Calculation of the pitch of the helical trajectory described by an electron \
+in a magnetic field\
+\>", "Text",
+ CellChangeTimes->{{3.678091704155414*^9, 3.678091732825573*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{"e", "=", 
+  RowBox[{"UnitConvert", "[", 
+   RowBox[{"Quantity", "[", "\"\<ElementaryCharge\>\"", "]"}], 
+   "]"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"B", "=", 
+   RowBox[{"Quantity", "[", 
+    RowBox[{"8", ",", "\"\<Tesla\>\""}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{"\[Omega]", "=", 
+  RowBox[{"B", " ", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"Quantity", "[", "\"\<ElementaryCharge\>\"", "]"}], "/", 
+     RowBox[{"Quantity", "[", "\"\<ElectronMass\>\"", "]"}]}], "/", 
+    "\[Gamma]"}]}]}], "\[IndentingNewLine]", 
+ RowBox[{"UnitConvert", "[", "\[Omega]", "]"}]}], "Input",
+ CellChangeTimes->{
+  3.678091659797298*^9, {3.6780917444080467`*^9, 3.678091861508531*^9}, {
+   3.678091959424526*^9, 3.678091971524851*^9}, {3.6780924049071913`*^9, 
+   3.678092438843418*^9}}],
+
+Cell[BoxData[
+ TemplateBox[{"0.07710969846551666`",RowBox[{
+     StyleBox["\"e\"", Italic, StripOnInput -> False], "\[ThinSpace]", 
+     "\"T\"", "\[InvisibleSpace]", "\"/\"", "\[InvisibleSpace]", 
+     SubscriptBox[
+      StyleBox["\"m\"", Italic, StripOnInput -> False], 
+      StyleBox["\"e\"", Plain, StripOnInput -> False]]}],
+   "elementary charge teslas per electron mass",FractionBox[
+    RowBox[{"\"ElementaryCharge\"", " ", "\"Teslas\""}], "\"ElectronMass\""]},
+  
+  "Quantity"]], "Output",
+ CellChangeTimes->{{3.678091821792804*^9, 3.678091866522088*^9}, 
+   3.678091966648107*^9, 3.678092143917234*^9}],
+
+Cell[BoxData[
+ TemplateBox[{
+  "1.3562208652366787`*^10",
+   RowBox[{"\"per \"", "\[InvisibleSpace]", "\"second\""}],
+   "reciprocal seconds",FractionBox["1", "\"Seconds\""]},
+  "Quantity"]], "Output",
+ CellChangeTimes->{{3.678091821792804*^9, 3.678091866522088*^9}, 
+   3.678091966648107*^9, 3.678092143938816*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{"UnitConvert", "[", "c", "]"}], "\[IndentingNewLine]", 
+ SubscriptBox["\[Beta]", "1"], "\[IndentingNewLine]", 
+ RowBox[{"Sin", "[", 
+  SubscriptBox["\[Theta]", "LAB"], "]"}]}], "Input",
+ CellChangeTimes->{{3.678092004773818*^9, 3.678092116314106*^9}, {
+  3.6780921931355133`*^9, 3.67809222771096*^9}, {3.678092269828896*^9, 
+  3.678092310059846*^9}}],
+
+Cell[BoxData[
+ TemplateBox[{
+  "299792458",
+   RowBox[{"\"m\"", "\[InvisibleSpace]", "\"/\"", "\[InvisibleSpace]", 
+     "\"s\""}],"meters per second",FractionBox["\"Meters\"", "\"Seconds\""]},
+  "Quantity"]], "Output",
+ CellChangeTimes->{3.678092314412838*^9}],
+
+Cell[BoxData["0.9999999989209875`"], "Output",
+ CellChangeTimes->{3.678092314414481*^9}],
+
+Cell[BoxData["0.009638712297788244`"], "Output",
+ CellChangeTimes->{3.678092314416038*^9}]
+}, Open  ]],
+
+Cell[BoxData[{
+ RowBox[{
+  SubscriptBox["v", "\[UpTee]"], "=", 
+  RowBox[{"UnitConvert", "[", 
+   RowBox[{"c", " ", "\[Beta]", " ", 
+    RowBox[{"Sin", "[", 
+     SubscriptBox["\[Theta]", "LAB"], "]"}]}], "]"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  SubscriptBox["v", "\[DoubleVerticalBar]"], "=", 
+  RowBox[{"UnitConvert", "[", 
+   RowBox[{"c", " ", "\[Beta]", " ", 
+    RowBox[{"Cos", "[", 
+     SubscriptBox["\[Theta]", "LAB"], "]"}]}], "]"}]}]}], "Input",
+ CellChangeTimes->{{3.678092004773818*^9, 3.678092116314106*^9}, {
+  3.6780921931355133`*^9, 3.67809222771096*^9}, {3.678092269828896*^9, 
+  3.678092310059846*^9}, {3.678092351253674*^9, 3.6780923795755873`*^9}},
+ EmphasizeSyntaxErrors->True]
+},
+WindowSize->{808, 621},
+WindowMargins->{{44, Automatic}, {Automatic, 33}},
+FrontEndVersion->"10.4 for Linux x86 (64-bit) (April 11, 2016)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 191, 4, 31, "Text"],
+Cell[CellGroupData[{
+Cell[774, 28, 1504, 32, 156, "Input"],
+Cell[2281, 62, 499, 10, 23, "Message"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[2817, 77, 2251, 63, 165, "Input"],
+Cell[5071, 142, 625, 13, 28, "Message"],
+Cell[5699, 157, 626, 13, 28, "Message"],
+Cell[6328, 172, 629, 13, 28, "Message"],
+Cell[6960, 187, 589, 12, 23, "Message"],
+Cell[7552, 201, 629, 13, 28, "Message"],
+Cell[8184, 216, 629, 13, 28, "Message"],
+Cell[8816, 231, 626, 13, 28, "Message"],
+Cell[9445, 246, 626, 13, 28, "Message"],
+Cell[10074, 261, 1175, 31, 108, "Output"],
+Cell[11252, 294, 628, 13, 28, "Message"],
+Cell[11883, 309, 628, 13, 28, "Message"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[12548, 327, 643, 16, 32, "Input"],
+Cell[13194, 345, 501, 15, 32, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[13732, 365, 1684, 43, 99, "Input"],
+Cell[15419, 410, 218, 5, 34, "Output"],
+Cell[15640, 417, 114, 1, 32, "Output"]
+}, Open  ]],
+Cell[15769, 421, 187, 4, 31, "Text"],
+Cell[CellGroupData[{
+Cell[15981, 429, 822, 21, 99, "Input"],
+Cell[16806, 452, 614, 12, 38, "Output"],
+Cell[17423, 466, 315, 7, 41, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[17775, 478, 374, 7, 77, "Input"],
+Cell[18152, 487, 261, 6, 37, "Output"],
+Cell[18416, 495, 88, 1, 32, "Output"],
+Cell[18507, 498, 90, 1, 32, "Output"]
+}, Open  ]],
+Cell[18612, 502, 702, 16, 55, "Input"]
+}
+]
+*)
+
